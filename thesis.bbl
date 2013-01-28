@@ -1,3 +1,48 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{himberg2001time}
+{\sc J.~Himberg, K.~Korpiaho, H.~Mannila, J.~Tikanmaki, and H.T.T. Toivonen}.
+\newblock {\bf Time series segmentation for context recognition in mobile
+  devices}.
+\newblock In {\em Data Mining, 2001. ICDM 2001, Proceedings IEEE International
+  Conference on}, pages 203--210. IEEE, 2001.
+
+\bibitem{barbivc2004segmenting}
+{\sc J.~Barbi{\v{c}}, A.~Safonova, J.Y. Pan, C.~Faloutsos, J.K. Hodgins, and
+  N.S. Pollard}.
+\newblock {\bf Segmenting motion capture data into distinct behaviors}.
+\newblock In {\em Proceedings of Graphics Interface 2004}, pages 185--194.
+  Canadian Human-Computer Communications Society, 2004.
+
+\bibitem{pelleg2000x}
+{\sc D.~Pelleg, A.~Moore, et~al.}
+\newblock {\bf X-means: Extending k-means with efficient estimation of the
+  number of clusters}.
+\newblock In {\em Proceedings of the Seventeenth International Conference on
+  Machine Learning}, ~{\bf 1}, pages 727--734. San Francisco, 2000.
+
+\bibitem{krause2003unsupervised}
+{\sc A.~Krause, D.P. Siewiorek, A.~Smailagic, and J.~Farringdon}.
+\newblock {\bf Unsupervised, dynamic identification of physiological and
+  activity context in wearable computing}.
+\newblock In {\em Proceedings of the 7th IEEE International Symposium on
+  Wearable Computers}, page~88. IEEE Computer Society, 2003.
+
+\bibitem{zhou2008aligned}
+{\sc F.~Zhou, F.~Torre, and J.K. Hodgins}.
+\newblock {\bf Aligned cluster analysis for temporal segmentation of human
+  motion}.
+\newblock In {\em Automatic Face \& Gesture Recognition, 2008. FG'08. 8th IEEE
+  International Conference on}, pages 1--7. IEEE, 2008.
+
+\bibitem{jain1999data}
+{\sc A.K. Jain, M.N. Murty, and P.J. Flynn}.
+\newblock {\bf Data clustering: a review}.
+\newblock {\em ACM computing surveys (CSUR)}, {\bf 31}(3):264--323, 1999.
+
+\bibitem{scholkopf1998nonlinear}
+{\sc B.~Sch{\"o}lkopf, A.~Smola, and K.R. M{\"u}ller}.
+\newblock {\bf Nonlinear component analysis as a kernel eigenvalue problem}.
+\newblock {\em Neural computation}, {\bf 10}(5):1299--1319, 1998.
 
 \end{thebibliography}
