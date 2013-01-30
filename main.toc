@@ -27,7 +27,7 @@
 \contentsline {subsection}{\numberline {2.3.2}Application is research fields}{7}{subsection.41}
 \contentsline {section}{\numberline {2.4}Temporal pattern recognition}{7}{section.42}
 \contentsline {subsection}{\numberline {2.4.1}Dynamic Time Warping}{7}{subsection.43}
-\contentsline {subsection}{\numberline {2.4.2}$k$-means clustering}{7}{subsection.44}
+\contentsline {subsection}{\numberline {2.4.2}$k$-means clustering}{8}{subsection.44}
 \contentsline {subsection}{\numberline {2.4.3}Self-organizing Map}{8}{subsection.46}
 \contentsline {subsection}{\numberline {2.4.4}Support Vector Machine}{8}{subsection.47}
 \contentsline {subsection}{\numberline {2.4.5}Na\"{i}ve Bayes}{8}{subsection.48}

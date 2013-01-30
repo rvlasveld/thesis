@@ -209,7 +209,8 @@ confirmatory \cite{jain1999data}. In the former, the purpose is to discover
 clusters in a point cloud of data points. Here the cluster is defined as a 
 group of homogeneous data points measured by some coherence measure, often a 
 distance function with the data points being defined as vectors. The produced 
-clusters, which are a representation of the data examined, can be used in the 
+clusters, which together form a representation of the data examined, can be 
+used in the 
 latter application to assign new provided data points to a cluster and thereby 
 classify them.
 
@@ -218,7 +219,7 @@ after or an implementation of temporal segmentation. When temporal
 segmentation is used to create successive coherent data points, clustering can 
 be used to recognize the same activities in different points of time. The data 
 points provided to the clustering will be some representation of each segment 
-and each segment will be labeled with a activity. An other mechanism could be 
+and each segment will be labeled with a activity. Another mechanism could be 
 to extract features from the raw data points and use these to create clusters 
 directly *** [temporal modifications]. Both mechanisms requires the 
 exploratory and confirmatory phases.
@@ -247,12 +248,33 @@ implemented as the Euclidean
 or Mahalanobis distance when the data points are represented as vectors or 
 other similarity measures for conceptual patterns.
 
-The most critical step, the \emph{grouping},
+In the most critical step, the \emph{grouping}, the data points with the 
+highest coherence are linked together to form a cluster. The result can be a 
+hard partition over the data or a fuzzy membership degree to each cluster for 
+each data point. When applying rules for merging and splitting cluster, a 
+hierarchical partition is constructed. Partitional clustering algorithms 
+assign data points to clusters by optimizing some criterion, e.g. the mean 
+squared distance from each data point to the clusters' centroid.
+
+Especially in case of large data sets, the resulting clusters will be defined 
+by many data points. To form a compacter and simpler representation, 
+\emph{abstraction} can be used. This will simply analysis by humans or 
+automated systems. A common abstraction is to use the clusters' centroid 
+\cite{diday1976clustering} or parameters of Gaussian patterns.
+
+The final step which can be applied to the resulting partition is some 
+\emph{qualification}. The quality of multiple partitions can be compared and 
+the validity of the partition can be determined. A partition is valid if 
+reasonably it could not been constructed by change or as some random process. 
+External references of models can be used to compare, or the internal data 
+points can be examined. *** [better wordings]
 
 
 %-------------------
 
 \subsection{Formal definition}
+
+
 
 
 

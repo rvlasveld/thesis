@@ -94,15 +94,6 @@
   publisher = {MIT Press}
 }
 
-@ARTICLE{smith2002tutorial,
-  author = {Smith, L.I.},
-  title = {A tutorial on principal components analysis},
-  journal = {Cornell University, USA},
-  year = {2002},
-  volume = {51},
-  pages = {52}
-}
-
 @ARTICLE{wold1987principal,
   author = {Wold, S. and Esbensen, K. and Geladi, P.},
   title = {Principal component analysis},

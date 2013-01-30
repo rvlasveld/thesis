@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  30 JAN 2013 12:37
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  30 JAN 2013 14:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -669,11 +669,11 @@ Chapter 2.
 ] [3] [4] [5] [6]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 271.
+(hyperref)                removing `math shift' on input line 284.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 271.
+(hyperref)                removing `math shift' on input line 284.
 
 [7]) (./Chapters/Chapter3.tex [8]
 Chapter 3.
@@ -729,10 +729,10 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 294.
  ) 
 Here is how much of TeX's memory you used:
- 10645 strings out of 493633
- 150250 string characters out of 3143378
- 235673 words of memory out of 3000000
- 13659 multiletter control sequences out of 15000+200000
+ 10649 strings out of 493633
+ 150355 string characters out of 3143378
+ 235707 words of memory out of 3000000
+ 13662 multiletter control sequences out of 15000+200000
  19437 words of font info for 72 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
  49i,12n,45p,429b,413s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -756,10 +756,10 @@ e/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2011/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2011/te
 xmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb>
-Output written on main.pdf (27 pages, 263098 bytes).
+Output written on main.pdf (27 pages, 263830 bytes).
 PDF statistics:
- 475 PDF objects out of 1000 (max. 8388607)
- 421 compressed objects within 5 object streams
- 95 named destinations out of 1000 (max. 500000)
+ 477 PDF objects out of 1000 (max. 8388607)
+ 423 compressed objects within 5 object streams
+ 96 named destinations out of 1000 (max. 500000)
  321 words of extra memory for PDF output out of 10000 (max. 10000000)
 
