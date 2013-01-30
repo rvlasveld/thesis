@@ -23,21 +23,24 @@
 \contentsline {subsection}{\numberline {2.2.4}Principal Component Analysis}{5}{subsection.31}
 \contentsline {subsection}{\numberline {2.2.5}Segmentation as clustering}{5}{subsection.32}
 \contentsline {section}{\numberline {2.3}Clustering}{6}{section.34}
-\contentsline {section}{\numberline {2.4}Temporal pattern recognition}{6}{section.35}
-\contentsline {subsection}{\numberline {2.4.1}Dynamic Time Warping}{6}{subsection.36}
-\contentsline {subsection}{\numberline {2.4.2}$k$-means clustering}{6}{subsection.37}
-\contentsline {subsection}{\numberline {2.4.3}Self-organizing Map}{7}{subsection.39}
-\contentsline {subsection}{\numberline {2.4.4}Support Vector Machine}{7}{subsection.40}
-\contentsline {subsection}{\numberline {2.4.5}Na\"{i}ve Bayes}{7}{subsection.41}
-\contentsline {section}{\numberline {2.5}Unsupervised clustering of temporal patterns}{7}{section.42}
-\contentsline {chapter}{\numberline {3}Experiments}{8}{chapter.43}
-\contentsline {section}{\numberline {3.1}}{8}{section.44}
-\contentsline {chapter}{\numberline {4}Results}{9}{chapter.45}
-\contentsline {section}{\numberline {4.1}}{9}{section.46}
-\contentsline {chapter}{\numberline {5}Discussion}{10}{chapter.47}
-\contentsline {section}{\numberline {5.1}}{10}{section.48}
-\contentsline {chapter}{\numberline {6}Conclusions}{11}{chapter.49}
-\contentsline {section}{\numberline {6.1}}{11}{section.50}
+\contentsline {subsection}{\numberline {2.3.1}Formal definition}{7}{subsection.40}
+\contentsline {subsection}{\numberline {2.3.2}Application is research fields}{7}{subsection.41}
+\contentsline {section}{\numberline {2.4}Temporal pattern recognition}{7}{section.42}
+\contentsline {subsection}{\numberline {2.4.1}Dynamic Time Warping}{7}{subsection.43}
+\contentsline {subsection}{\numberline {2.4.2}$k$-means clustering}{7}{subsection.44}
+\contentsline {subsection}{\numberline {2.4.3}Self-organizing Map}{8}{subsection.46}
+\contentsline {subsection}{\numberline {2.4.4}Support Vector Machine}{8}{subsection.47}
+\contentsline {subsection}{\numberline {2.4.5}Na\"{i}ve Bayes}{8}{subsection.48}
+\contentsline {section}{\numberline {2.5}Unsupervised clustering of temporal patterns}{8}{section.49}
+\contentsline {chapter}{\numberline {3}Experiments}{9}{chapter.50}
+\contentsline {section}{\numberline {3.1}}{9}{section.51}
+\contentsline {chapter}{\numberline {4}Results}{10}{chapter.52}
+\contentsline {section}{\numberline {4.1}}{10}{section.53}
+\contentsline {chapter}{\numberline {5}Discussion}{11}{chapter.54}
+\contentsline {section}{\numberline {5.1}}{11}{section.55}
+\contentsline {chapter}{\numberline {6}Conclusions}{12}{chapter.56}
+\contentsline {section}{\numberline {6.1}}{12}{section.57}
 \vspace {2em}
-\contentsline {chapter}{\numberline {A}Appendix Title Here}{12}{appendix.51}
+\contentsline {chapter}{\numberline {A}Appendix Title Here}{13}{appendix.58}
 \vspace {2em}
+\contentsline {chapter}{Bibliography}{14}{dummy.59}

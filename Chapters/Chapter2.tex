@@ -195,7 +195,73 @@ kernel used in $\mathit{dist}_c$ to measure the distance from a segment to the
 class which it is assigned to uses the Dynamic Time Alignment Kernel 
 [REFERENCE?] to measure between time series.
 
+%----------------------------------------------------------------------------------------
+
 \section{Clustering}
+
+This section will give an introduction and overview to clustering of data. 
+When processing time series of data the line of distinction between 
+segmentation and clustering is very fine. This section will introduce 
+clustering for the purpose as used in this project.
+
+Data clustering can be used with two different applications, exploratory or 
+confirmatory \cite{jain1999data}. In the former, the purpose is to discover 
+clusters in a point cloud of data points. Here the cluster is defined as a 
+group of homogeneous data points measured by some coherence measure, often a 
+distance function with the data points being defined as vectors. The produced 
+clusters, which are a representation of the data examined, can be used in the 
+latter application to assign new provided data points to a cluster and thereby 
+classify them.
+
+Depended on the precise setup, clustering can be used as a successive step 
+after or an implementation of temporal segmentation. When temporal 
+segmentation is used to create successive coherent data points, clustering can 
+be used to recognize the same activities in different points of time. The data 
+points provided to the clustering will be some representation of each segment 
+and each segment will be labeled with a activity. An other mechanism could be 
+to extract features from the raw data points and use these to create clusters 
+directly *** [temporal modifications]. Both mechanisms requires the 
+exploratory and confirmatory phases.
+
+The exploratory phase roughly consists of the following five steps 
+\cite{jain1999data}
+\begin{enumerate}
+	\item data point representation,
+	\item definition of coherence,
+	\item grouping data points,
+	\item cluster abstraction,
+	\item output qualification
+\end{enumerate}
+
+The first step is to find a \emph{representation} of the data points and 
+clusters, considering the number, type and scale of the features and the 
+number of desired classes to cluster in. When dealing with high-dimensional 
+data points a \emph{feature selection} can be performed to use only the most 
+discriminating features. When the raw features are not useful enough, 
+\emph{extraction} can be used to create new synthetic features. *** 
+[qualitative versus quantitative/conceptual]
+
+When the data points are represented in a meaningful way, the measure of 
+\emph{coherence} between pairs of points must be defined. Often this is 
+implemented as the Euclidean 
+or Mahalanobis distance when the data points are represented as vectors or 
+other similarity measures for conceptual patterns.
+
+The most critical step, the \emph{grouping},
+
+
+%-------------------
+
+\subsection{Formal definition}
+
+
+
+%-------------------
+
+\subsection{Application is research fields}
+
+
+%----------------------------------------------------------------------------------------
 
 \section{Temporal pattern recognition}
 
