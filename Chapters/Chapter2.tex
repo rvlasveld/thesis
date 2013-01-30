@@ -161,6 +161,29 @@ Information Criterion \cite{pelleg2000x} or the Davies-Bouldin Index which
 guides $k$-means clustering as used in \cite{krause2003unsupervised}.
 
 \subsection{Principal Component Analysis}
+When working with simple 2- or 3-dimensional data it is often, for humans, 
+easy to discover patterns in the set. The data can be plotted and the lines or 
+planes among which the data points lie gives an indication of the pattern. 
+With Principal Component Analysis (PCA) this process is also easy for 
+automated systems. With this method the overall form of a set of data points 
+can be represented, the most discriminative dimensions can be found, the 
+dimensionality of a set can be reduced (which yield in data compression) or 
+the result can be used to characterize and differentiate sets of data points.
+
+The workings of the PCA \cite{smith2002tutorial} relies on the concepts of 
+standard deviation, 
+covariance, eigenvectors and eigenvalues of matrices. These concepts will be 
+discussed very briefly. The standard deviation of a set is an measure for the 
+spread around the mean for a single dimension, or feature. The covariance 
+between two features indicates how they are related; when positive the two 
+features will increase together; when negative one will decrease when the 
+other increases and when zero they are unrelated.
+*** [eigenvectors]
+*** [eigenvalues]
+
+***
+[purpose: dimensionality reduction, most discriminative dimensions. Difference 
+in dimensionality.]
 
 \subsection{Segmentation as clustering}
 In the previous section the discussed methods all relied on the stream of data 

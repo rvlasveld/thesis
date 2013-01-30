@@ -1,4 +1,4 @@
-\begin{thebibliography}{8}
+\begin{thebibliography}{9}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -34,6 +34,11 @@ A.~Krause, D.P. Siewiorek, A.~Smailagic, and J.~Farringdon.
   context in wearable computing.
 \newblock In \emph{Proceedings of the 7th IEEE International Symposium on
   Wearable Computers}, page~88. IEEE Computer Society, 2003.
+
+\bibitem[Smith(2002)]{smith2002tutorial}
+L.I. Smith.
+\newblock A tutorial on principal components analysis.
+\newblock \emph{Cornell University, USA}, 51:\penalty0 52, 2002.
 
 \bibitem[Zhou et~al.(2008)Zhou, Torre, and Hodgins]{zhou2008aligned}
 F.~Zhou, F.~Torre, and J.K. Hodgins.

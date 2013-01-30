@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  30 JAN 2013 14:05
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  30 JAN 2013 17:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -666,49 +666,49 @@ Chapter 2.
 ------------------------------------------------------------------------------
 [2
 
-] [3] [4] [5] [6]
+] [3] [4] [5] [6] [7]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 284.
+(hyperref)                removing `math shift' on input line 317.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 284.
+(hyperref)                removing `math shift' on input line 317.
 
-[7]) (./Chapters/Chapter3.tex [8]
+[8]) (./Chapters/Chapter3.tex [9]
 Chapter 3.
 ------------------------------------------------------------------------------
  3 Experiments
 ------------------------------------------------------------------------------
-) (./Chapters/Chapter4.tex [9
+) (./Chapters/Chapter4.tex [10
 
 ]
 Chapter 4.
 ------------------------------------------------------------------------------
  4 Results
 ------------------------------------------------------------------------------
-) (./Chapters/Chapter5.tex [10
+) (./Chapters/Chapter5.tex [11
 
 ]
 Chapter 5.
 ------------------------------------------------------------------------------
  5 Discussion
 ------------------------------------------------------------------------------
-) (./Chapters/Chapter6.tex [11
+) (./Chapters/Chapter6.tex [12
 
 ]
 Chapter 6.
 ------------------------------------------------------------------------------
  6 Conclusions
 ------------------------------------------------------------------------------
-) (./Appendices/AppendixA.tex [12
+) (./Appendices/AppendixA.tex [13
 
 ]
 Appendix A.
 ------------------------------------------------------------------------------
  A Appendix Title Here
 ------------------------------------------------------------------------------
-) [13
+) [14
 
 ]
 ------------------------------------------------------------------------------
@@ -716,7 +716,7 @@ Appendix A.
 ------------------------------------------------------------------------------
 (./main.bbl)
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 294.
- [14
+ [15
 
 
 ]
@@ -729,10 +729,10 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 294.
  ) 
 Here is how much of TeX's memory you used:
- 10649 strings out of 493633
- 150355 string characters out of 3143378
- 235707 words of memory out of 3000000
- 13662 multiletter control sequences out of 15000+200000
+ 10654 strings out of 493633
+ 150459 string characters out of 3143378
+ 235732 words of memory out of 3000000
+ 13665 multiletter control sequences out of 15000+200000
  19437 words of font info for 72 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
  49i,12n,45p,429b,413s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -756,10 +756,10 @@ e/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2011/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2011/te
 xmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb>
-Output written on main.pdf (27 pages, 263830 bytes).
+Output written on main.pdf (28 pages, 265796 bytes).
 PDF statistics:
- 477 PDF objects out of 1000 (max. 8388607)
- 423 compressed objects within 5 object streams
- 96 named destinations out of 1000 (max. 500000)
+ 484 PDF objects out of 1000 (max. 8388607)
+ 429 compressed objects within 5 object streams
+ 98 named destinations out of 1000 (max. 500000)
  321 words of extra memory for PDF output out of 10000 (max. 10000000)
 
