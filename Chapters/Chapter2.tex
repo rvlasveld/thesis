@@ -164,7 +164,7 @@ guides $k$-means clustering as used in \cite{krause2003unsupervised}.
 When working with simple 2- or 3-dimensional data it is often, for humans, 
 easy to discover patterns in the set. The data can be plotted and the lines or 
 planes among which the data points lie gives an indication of the pattern. 
-With Principal Component Analysis (PCA) this process is also easy for 
+With Principal Component Analysis (PCA) this process is also possible for 
 automated systems. With this method the overall form of a set of data points 
 can be represented, the most discriminative dimensions can be found, the 
 dimensionality of a set can be reduced (which yield in data compression) or 
@@ -173,13 +173,62 @@ the result can be used to characterize and differentiate sets of data points.
 The workings of the PCA \cite{smith2002tutorial} relies on the concepts of 
 standard deviation, 
 covariance, eigenvectors and eigenvalues of matrices. These concepts will be 
-discussed very briefly. The standard deviation of a set is an measure for the 
+discussed very briefly \footnote{For a more in-depth discussion we would like 
+to refer the reader to \cite{jolliffe2005principal}}. The standard deviation 
+of a set is an measure for the 
 spread around the mean for a single dimension, or feature. The covariance 
-between two features indicates how they are related; when positive the two 
+between two features (dimensions of the data points) indicates how they are 
+related; when positive the two 
 features will increase together; when negative one will decrease when the 
-other increases and when zero they are unrelated.
-*** [eigenvectors]
-*** [eigenvalues]
+other increases and when zero they are unrelated. The covariance matrix gives 
+all the covariances for all pairs of features. This matrix is symmetrical 
+about the diagonal and the values on the diagonal are the variances for each 
+feature. For this matrix the eigenvectors can be computed. Eigenvectors have 
+the characteristic that when they multiply a matrix, the resulting vector is a 
+multiple of the eigenvector. The amount by which it is the multiple is the 
+Eigenvalue. This is illustrated in formulae \ref{eq:no-eigenvector} and 
+\ref{eq:eigenvector}. The second formula shows an Eigenvector and its 
+associated Eigenvalue, 4. The vector in the first formula is not an 
+Eigenvector. 
+
+\begin{equation} \label{eq:no-eigenvector}
+	\begin{pmatrix} 2 & 3 \\ 2 & 1 \end{pmatrix}
+\times
+	\begin{pmatrix} 1 \\ 3 \end{pmatrix}
+=
+	\begin{pmatrix} 2 \cdot 1 + 3 \cdot 3 \\ 2 \cdot 1 + 1 \cdot 3 
+	\end{pmatrix}
+=
+	\begin{pmatrix} 11 \\ 5 \end{pmatrix}
+\end{equation}
+
+\begin{equation} \label{eq:eigenvector}
+	\begin{pmatrix} 2 & 3 \\ 2 & 1 \end{pmatrix}
+\times
+	\begin{pmatrix} 3 \\ 2 \end{pmatrix}
+=
+	\begin{pmatrix} 2 \cdot 3 + 3 \cdot 2 \\ 2 \cdot 3 + 1 \cdot 2  
+	\end{pmatrix}
+=
+	\begin{pmatrix} 12 \\ 8 \end{pmatrix}
+=
+	4 \times \begin{pmatrix} 3 \\ 2 \end{pmatrix}
+\end{equation}
+
+It are these Eigenvectors and Eigenvalues that makes PCA possible. Given a 
+matrix of $n \times n$ (only square matrices have Eigenvectors), $n$ 
+Eigenvectors can be found. Each Eigenvector is perpendicular, or orthogonal, 
+to the others. The Eigenvectors combined describes the lines over which the 
+data is plotted. The Eigenvector with the largest Eigenvalue is the 
+\emph{principal} component of the data set. It is said that it is the most 
+significant dimension. Thus the Eigenvectors, and thereby the features or 
+dimensions of the data set, can be sorted on significance by the Eigenvalues.
+
+With this ordering there are a few applications possible. The first is to just 
+make a (comprehensible) representation of the data. The Eigenvectors describe 
+the cloud of data points and thus a 
+
+*** [graph, a bit of formulae with sets and dimensions]
 
 ***
 [purpose: dimensionality reduction, most discriminative dimensions. Difference 

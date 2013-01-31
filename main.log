@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  30 JAN 2013 17:22
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  31 JAN 2013 15:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -666,76 +666,76 @@ Chapter 2.
 ------------------------------------------------------------------------------
 [2
 
-] [3] [4] [5] [6] [7]
+] [3] [4] [5] [6] [7] [8]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 317.
+(hyperref)                removing `math shift' on input line 366.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 317.
+(hyperref)                removing `math shift' on input line 366.
 
-[8]) (./Chapters/Chapter3.tex [9]
+) (./Chapters/Chapter3.tex [9] [10]
 Chapter 3.
 ------------------------------------------------------------------------------
  3 Experiments
 ------------------------------------------------------------------------------
-) (./Chapters/Chapter4.tex [10
+) (./Chapters/Chapter4.tex [11
 
 ]
 Chapter 4.
 ------------------------------------------------------------------------------
  4 Results
 ------------------------------------------------------------------------------
-) (./Chapters/Chapter5.tex [11
+) (./Chapters/Chapter5.tex [12
 
 ]
 Chapter 5.
 ------------------------------------------------------------------------------
  5 Discussion
 ------------------------------------------------------------------------------
-) (./Chapters/Chapter6.tex [12
+) (./Chapters/Chapter6.tex [13
 
 ]
 Chapter 6.
 ------------------------------------------------------------------------------
  6 Conclusions
 ------------------------------------------------------------------------------
-) (./Appendices/AppendixA.tex [13
+) (./Appendices/AppendixA.tex [14
 
 ]
 Appendix A.
 ------------------------------------------------------------------------------
  A Appendix Title Here
 ------------------------------------------------------------------------------
-) [14
+) [15
 
 ]
 ------------------------------------------------------------------------------
  Bibliography
 ------------------------------------------------------------------------------
-(./main.bbl)
+(./main.bbl [16
+
+
+])
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 294.
- [15
-
-
-]
+ [17]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 294.
  (./main.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 294.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 294.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 797C1AE86F5601F4114BF66354BD685A;6326.
+(rerunfilecheck)             Checksum: B92D3A90970DF82CD8BFABD62B620E4E;6326.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 294.
  ) 
 Here is how much of TeX's memory you used:
- 10654 strings out of 493633
- 150459 string characters out of 3143378
- 235732 words of memory out of 3000000
- 13665 multiletter control sequences out of 15000+200000
- 19437 words of font info for 72 fonts, out of 3000000 for 9000
+ 10682 strings out of 493633
+ 150822 string characters out of 3143378
+ 237872 words of memory out of 3000000
+ 13680 multiletter control sequences out of 15000+200000
+ 22293 words of font info for 82 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
- 49i,12n,45p,429b,413s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 49i,12n,45p,429b,438s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 </usr/local/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb>
@@ -748,18 +748,19 @@ ocal/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/loc
 al/texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local
 /texlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/te
 xlive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texli
-ve/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb></usr/local/texliv
-e/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive
-/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2
-011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/201
-1/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2011
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2011/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2011/te
-xmf-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb>
-Output written on main.pdf (28 pages, 265796 bytes).
+ve/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/
+2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb></usr/local/texlive/2
+011/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/20
+11/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2011
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2011/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2011/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2011/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2011/texmf
+-dist/fonts/type1/public/amsfonts/symbols/msam7.pfb>
+Output written on main.pdf (30 pages, 281698 bytes).
 PDF statistics:
- 484 PDF objects out of 1000 (max. 8388607)
- 429 compressed objects within 5 object streams
- 98 named destinations out of 1000 (max. 500000)
+ 505 PDF objects out of 1000 (max. 8388607)
+ 447 compressed objects within 5 object streams
+ 104 named destinations out of 1000 (max. 500000)
  321 words of extra memory for PDF output out of 10000 (max. 10000000)
 
