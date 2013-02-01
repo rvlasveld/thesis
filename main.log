@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  1 FEB 2013 11:31
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  1 FEB 2013 11:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -668,16 +668,16 @@ Chapter 2.
 
 ] [3] [4]
 
-LaTeX Warning: Reference `' on page 5 undefined on input line 174.
+LaTeX Warning: Reference `' on page 5 undefined on input line 173.
 
 [5] [6] [7] [8]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 389.
+(hyperref)                removing `math shift' on input line 388.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 389.
+(hyperref)                removing `math shift' on input line 388.
 
 [9]) (./Chapters/Chapter3.tex [10]
 Chapter 3.
@@ -765,7 +765,7 @@ exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2011/te
 xmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2011/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2011/texmf
 -dist/fonts/type1/public/amsfonts/symbols/msam7.pfb>
-Output written on main.pdf (30 pages, 283650 bytes).
+Output written on main.pdf (30 pages, 283631 bytes).
 PDF statistics:
  513 PDF objects out of 1000 (max. 8388607)
  455 compressed objects within 5 object streams
