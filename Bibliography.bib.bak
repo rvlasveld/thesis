@@ -111,6 +111,17 @@
   pages = {52}
 }
 
+@ARTICLE{tipping1999probabilistic,
+  author = {Tipping, M.E. and Bishop, C.M.},
+  title = {Probabilistic principal component analysis},
+  journal = {Journal of the Royal Statistical Society: Series B (Statistical Methodology)},
+  year = {1999},
+  volume = {61},
+  pages = {611--622},
+  number = {3},
+  publisher = {Wiley Online Library}
+}
+
 @ARTICLE{wold1987principal,
   author = {Wold, S. and Esbensen, K. and Geladi, P.},
   title = {Principal component analysis},

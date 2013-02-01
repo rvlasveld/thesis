@@ -186,6 +186,18 @@ times for different values of $k$. Using some criteria, e.g. the Bayesian
 Information Criterion \cite{pelleg2000x} or the Davies-Bouldin Index which 
 guides $k$-means clustering as used in \cite{krause2003unsupervised}.
 
+\subsection{Statistical methods}
+An method to process data, or create a basis for further processing, is by 
+analyzing the statistical properties of a data set. When there is a continuous 
+stream of data, it is possible to extract events by comparing the statistical 
+properties of sliding time windows. By definition, events have a different 
+statistical profile then their background. When two consecutive actions are 
+regarded as the background, then a transition is an event between them. 
+
+\subsection{Hidden Markov Models Based Methods}
+
+\subsection{Bayesian Methods}
+
 \subsection{Principal Component Analysis}
 When working with simple 2- or 3-dimensional data it is often, for humans, 
 easy to discover patterns in the set. The data can be plotted and the lines or 
@@ -282,6 +294,10 @@ used in \cite{barbivc2004segmenting}. Sets of data can then be distinguished
 by the number of features needed to describe the points.
 
 *** [graph, a bit of formulae with sets and dimensions]
+
+\subsection{Hidden Markov Models}
+Viterbi algorithm / path; find the most likely sequence of cause-states for 
+the observed measures.
 
 \subsection{Segmentation as clustering}
 In the previous section the discussed methods all relied on the stream of data 
