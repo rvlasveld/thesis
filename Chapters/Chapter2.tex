@@ -15,7 +15,7 @@
 \section{Temporal Segmentation}
 
 This section will give an introduction and in-depth analysis of temporal 
-segmentation. test. nog een test. test
+segmentation.
 
 \subsection{Aims of segmentation}
 When processing and analyzing time series of data, e.g. motion measurements, 
@@ -170,12 +170,30 @@ can be represented, the most discriminative dimensions can be found, the
 dimensionality of a set can be reduced (which yield in data compression) or 
 the result can be used to characterize and differentiate sets of data points.
 
+The following steps are performed, which are explained below and illustrated 
+in figure *** [add figure with plot of sets] \ref{}:
+\begin{enumerate}
+	\item \textbf{Gather data} and represent them in a chosen number of 
+	features,
+	\item \textbf{Subtract mean} to center the data around the axis. The new 
+	data set will have mean zero,
+	\item \textbf{Generate covariance matrix} by calculating all pairwise 
+	feature variances,
+	\item \textbf{Calculate Eigenvectors and Eigenvalues} of the covariance 
+	matrix. The Eigenvectors are then normalized to make further calculations 
+	easier,
+	\item \textbf{Generate feature vector} which indicated which features are 
+	characteristic or meant to keep in de data set, by comparing the 
+	Eigenvalues. 
+\end{enumerate}
+
 The workings of the PCA \cite{smith2002tutorial} relies on the concepts of 
-standard deviation, 
+standard deviation, variance,
 covariance, eigenvectors and eigenvalues of matrices. These concepts will be 
 discussed very briefly \footnote{For a more in-depth discussion we would like 
 to refer the reader to \cite{jolliffe2005principal}}. The standard deviation 
-of a set is an measure for the 
+and variance
+of a set are measures for the 
 spread around the mean for a single dimension, or feature. The covariance 
 between two features (dimensions of the data points) indicates how they are 
 related; when positive the two 
@@ -185,9 +203,11 @@ all the covariances for all pairs of features. This matrix is symmetrical
 about the diagonal and the values on the diagonal are the variances for each 
 feature. For this matrix the eigenvectors can be computed. Eigenvectors have 
 the characteristic that when they multiply a matrix, the resulting vector is a 
-multiple of the eigenvector. The amount by which it is the multiple is the 
+multiple of the Eigenvector. The amount by which it is the multiple is the 
 Eigenvalue. This is illustrated in formulae \ref{eq:no-eigenvector} and 
-\ref{eq:eigenvector}. The second formula shows an Eigenvector and its 
+\ref{eq:eigenvector}. The second formula shows an Eigenvector 
+$ \left( \begin{smallmatrix} 
+3 \\ 2 \end{smallmatrix} \right)$ and its 
 associated Eigenvalue, 4. The vector in the first formula is not an 
 Eigenvector. 
 
@@ -216,23 +236,26 @@ Eigenvector.
 \end{equation}
 
 It are these Eigenvectors and Eigenvalues that makes PCA possible. Given a 
-matrix of $n \times n$ (only square matrices have Eigenvectors), $n$ 
+matrix of size $n \times n$ (only square matrices have Eigenvectors), $n$ 
 Eigenvectors can be found. Each Eigenvector is perpendicular, or orthogonal, 
 to the others. The Eigenvectors combined describes the lines over which the 
 data is plotted. The Eigenvector with the largest Eigenvalue is the 
 \emph{principal} component of the data set. It is said that it is the most 
-significant dimension. Thus the Eigenvectors, and thereby the features or 
+significant feature. Thus the Eigenvectors, and thereby the features or 
 dimensions of the data set, can be sorted on significance by the Eigenvalues.
 
 With this ordering there are a few applications possible. The first is to just 
 make a (comprehensible) representation of the data. The Eigenvectors describe 
-the cloud of data points and thus a 
+the cloud of data points and thus are a compressed representation of the data. 
+When the original data points are to be compressed, it is possible to remove 
+the least significant features and reconstruct the data points from the 
+resulting Eigenvectors. This will yield in a lossy compression. *** [figure to 
+illustrate]. An extension of this application is to determine the number of 
+features needed to keep the compression within a certain error criterion, as 
+used in \cite{barbivc2004segmenting}. Sets of data can then be distinguished 
+by the number of features needed to describe the points.
 
 *** [graph, a bit of formulae with sets and dimensions]
-
-***
-[purpose: dimensionality reduction, most discriminative dimensions. Difference 
-in dimensionality.]
 
 \subsection{Segmentation as clustering}
 In the previous section the discussed methods all relied on the stream of data 
