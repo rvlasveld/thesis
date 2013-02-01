@@ -99,6 +99,8 @@ of correlated data. After dividing, each segment represent a period in time in
 which the same activity is performed. Or, stated otherwise, it results in 
 transitions moments between activities.
 
+\subsection{PCA Based Methods}
+
 Many fields of research have been active in the unsupervised segmentation of 
 data. Many authors rely on a form of Principal Component Analysis (PCA), as 
 used a.o. in \cite{barbivc2004segmenting}. Often PCA is used to reduce the 
@@ -119,13 +121,36 @@ fixed, less dimensions are needed for simple motions in which movements of
 body parts are highly correlated. For segments in which the data points are 
 lesser correlated, e.g. because of transition state, a higher degree of 
 dimensions of the hyperplane is needed to represent the data with equal error 
-degree.
+degree. When the dimensionality is reduced from $d$ to $r \le d$, the ratio of 
+error 
+$E_r$ can be calculated as
 
-[SKIPPING]
-By analyzing the derivative of the error rate, the algorithm is capable of 
-selecting transition points and thus segmenting the data. When a data point 
-$d_i$ is more than $k_\sigma=3$ times the standard deviation from the average 
-over the previous data points $d_j, j<i$, then a cut is assigned to that frame.
+\begin{equation}
+	E_r = \frac{\sum_{j=1}^{r} \sigma_j^2}{\sum_{j=1}^{d} \sigma_j^2}
+\end{equation}
+
+where $\sigma_j$ are the singular values as a result from Singular Value 
+Decomposition (SVD), which is closely related to PCA \cite{shlens2005tutorial}.
+
+In \cite{barbivc2004segmenting} the stream of frames is analyzed on cut-frames 
+to find transitions between action. First, for a number of $k$ frames (e.g. 
+the 
+equivalent of 2.5 seconds) the required dimensionality $r$ to keep the error 
+$E_r$ 
+below some threshold $\tau$ is calculated. This will yield in an error $e_i$ 
+for the first 
+$i$ frames. When more frames are added to the window, the error will increase 
+with a low constant when it is still in the same activity, due to noise in the 
+activity. When a new activity 
+starts, e.g. at frame $j$, the error at frame $j$ will start increasing 
+faster. This can be expressed by the derivative of the error rate $d_i = e_i - 
+e_{i-l}$, where $l$ is a constant to remove noise. From this derivative the 
+mean and standard deviation can be calculated, for each point. When a 
+derivative $d_j$ rises more than a factor $k_\sigma = 3$ standard deviations 
+from the mean, a transition point is encountered. The previous frames are then 
+cut from the sequence (as a segment) and the algorithm starts over.
+
+*** [figure to illustrate derivative and standard deviation]
 
 A second approach in \cite{barbivc2004segmenting} uses the probabilistic 
 variant of PCA (PPCA) to model the data set as a Gaussian distribution instead 
@@ -140,6 +165,8 @@ motions in the window and thus a low likelihood of membership and a indication
 of a transition. In order to distinct activities and subactivities (which 
 require a subset of motions is a distinct activity) the algorithm is also 
 processed backward over the data series.
+
+*** [figure to illustrate mahalanobis distance measure and peaks]
 
 The third algorithm in \cite{barbivc2004segmenting} is based on the 
 observation that data points (frames) tend to form clusters in the space. 

@@ -94,6 +94,23 @@
   publisher = {MIT Press}
 }
 
+@ARTICLE{shlens2005tutorial,
+  author = {Shlens, J.},
+  title = {A tutorial on principal component analysis},
+  journal = {Systems Neurobiology Laboratory, University of California at San
+	Diego},
+  year = {2005}
+}
+
+@ARTICLE{smith2002tutorial,
+  author = {Smith, L.I.},
+  title = {A tutorial on principal components analysis},
+  journal = {Cornell University, USA},
+  year = {2002},
+  volume = {51},
+  pages = {52}
+}
+
 @ARTICLE{wold1987principal,
   author = {Wold, S. and Esbensen, K. and Geladi, P.},
   title = {Principal component analysis},

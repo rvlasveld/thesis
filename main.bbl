@@ -1,4 +1,4 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{11}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -19,6 +19,12 @@ J.~Barbi{\v{c}}, A.~Safonova, J.Y. Pan, C.~Faloutsos, J.K. Hodgins, and N.S.
 \newblock Segmenting motion capture data into distinct behaviors.
 \newblock In \emph{Proceedings of Graphics Interface 2004}, pages 185--194.
   Canadian Human-Computer Communications Society, 2004.
+
+\bibitem[Shlens(2005)]{shlens2005tutorial}
+J.~Shlens.
+\newblock A tutorial on principal component analysis.
+\newblock \emph{Systems Neurobiology Laboratory, University of California at
+  San Diego}, 2005.
 
 \bibitem[Pelleg et~al.(2000)Pelleg, Moore, et~al.]{pelleg2000x}
 D.~Pelleg, A.~Moore, et~al.
