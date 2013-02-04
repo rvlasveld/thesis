@@ -295,9 +295,93 @@ by the number of features needed to describe the points.
 
 *** [graph, a bit of formulae with sets and dimensions]
 
+
+%-------------------
+
+
 \subsection{Hidden Markov Models}
+Many dynamic systems can be viewed as some sequence of consecutive states 
+which are observable by the world. These kind of systems are known as Markov 
+Chains. When the state in which the system is can not be observed with 
+complete certainty, a system known as a Hidden Markov Model (HMM) can be 
+constructed. It has been shown that HMMs are effective on in the task of 
+speech recognition \cite{rabiner1989tutorial}. Because of some resemblance 
+between natural speech construction and human activities, modifications have 
+been able to classify human activities \cite{guenterberg2009distributed} and 
+extensions are implemented which create layers of HMMs to handle different 
+granularity over time and reduce retraining 
+\cite{oliver2002layered,perdikis2008recognition}. A HMM is a state-space model 
+representing a single model for each label which needs to be classified.
+
+Formally, a Hidden Markov Model is characterized by the following elements 
+\cite{rabiner1989tutorial}:
+\begin{enumerate}
+	\item A number of $N$ states in the model. These states are a 
+	representation of the underlying mechanism of the system and can not be 
+	directly observed from outside (hence the \emph{hidden} model). Individual 
+	states are referenced by $S = \{S_1, S_2, \dots, S_N \}$ and a single 
+	state in time $t$ is denoted by $q_t$.
+	\item An alphabet of $M$ discrete observable symbols for each state. An 
+	observed symbol is the only indication of the systems current situation. 
+	Each individual symbol is referenced by $V = \{ v_1, v_2, \dots, v_m \}$.
+	\item A state transition probability distribution $A = \{ a_{ij} \}$ 
+	indication the probability of being in state $j$ at time $t+1$ when the 
+	state on time $t$ was $i$:
+	\begin{eqnarray}
+		a_{ij} = P [ q_{t+1} = S_j | q_t = S_i ], & 1 \le i, j \le N
+	\end{eqnarray}
+	Note that by setting the probability $a_{ij}=0$ for some $i$ and $j$ 
+	indicates that $j$ is not reachable from state $i$.
+	\item A symbol observation probability distribution in state $j$, $B = \{ 
+	b_j(k) \}$, where
+	\begin{eqnarray}
+	b_j(k) = P[ v_k\ \mathrm{at} \ t | q_t = S_j], & 1 \le j \le N \nonumber \\
+	& 1 \le k \le M
+	\end{eqnarray}
+	Note that every symbol can be observed in every state.
+	\item The initial state distribution in which the system starts $\pi= \{ 
+	\pi_i \}$ where
+	\begin{eqnarray}
+	\pi_i = P[q_1 = S_i], & 1 \le i \le N
+	\end{eqnarray}
+\end{enumerate}
+This system is often abbreviated to
+\begin{equation}
+	\lambda = \{ \pi_i, a_{ij}, b_j(k)\}
+\end{equation}
+The HMM will act as a generator giving a sequence of $T$ observations, each 
+being a symbol from $V$:
+\begin{equation}
+O = O_1, O_2 \dots O_T
+\end{equation}
+
+Given the characteristics of a specific HMM, there are three major application 
+which serve the classification of an activity. The first application is, given 
+a sequence of observations $O = O_1,O_2,\dots,O_T$, to label this sequence 
+with the activity with 
+the highest associated probability for that label, e.g. compute $P(O|\lambda)$ 
+for each model $\lambda$. The second task a HMM can perform is to 
+\emph{explain} a observation sequence $O$, by choosing an optimal 
+corresponding state sequence $Q = q_1,q_2,\dots,q_T$. The last application is 
+more of a problem statement, being the task to train the HMM to adjust the 
+parameters $\lambda = \{ \pi_i, a_{ij}, b_j(k)\}$ to maximize $P(O|\lambda)$. 
+In the overall task of activity recognition, one would first use the last 
+application to train a set of HMMs with the provided and labeled training 
+data. The second application can be used to further optimize the HMM (set the 
+number of states, adjust vector codebook etc.) and improve the capability of 
+modeling the activities. Finally, when the system is provided with unlabeled 
+data the first application is used to identify the observed sequence with 
+trained examples, by comparing the probability result of multiple HMMs.
+
+
+
 Viterbi algorithm / path; find the most likely sequence of cause-states for 
 the observed measures.
+
+
+%-------------------
+
+
 
 \subsection{Segmentation as clustering}
 In the previous section the discussed methods all relied on the stream of data 

@@ -21,27 +21,31 @@
 \contentsline {subsection}{\numberline {2.2.2}Formal definition}{3}{subsection.26}
 \contentsline {subsection}{\numberline {2.2.3}Application in research fields}{4}{subsection.30}
 \contentsline {subsection}{\numberline {2.2.4}PCA Based Methods}{4}{subsection.31}
-\contentsline {subsection}{\numberline {2.2.5}Principal Component Analysis}{6}{subsection.33}
-\contentsline {subsection}{\numberline {2.2.6}Segmentation as clustering}{7}{subsection.42}
-\contentsline {section}{\numberline {2.3}Clustering}{8}{section.44}
-\contentsline {subsection}{\numberline {2.3.1}Formal definition}{10}{subsection.50}
-\contentsline {subsection}{\numberline {2.3.2}Application is research fields}{10}{subsection.51}
-\contentsline {section}{\numberline {2.4}Temporal pattern recognition}{10}{section.52}
-\contentsline {subsection}{\numberline {2.4.1}Dynamic Time Warping}{10}{subsection.53}
-\contentsline {subsection}{\numberline {2.4.2}$k$-means clustering}{10}{subsection.54}
-\contentsline {subsection}{\numberline {2.4.3}Self-organizing Map}{11}{subsection.56}
-\contentsline {subsection}{\numberline {2.4.4}Support Vector Machine}{11}{subsection.57}
-\contentsline {subsection}{\numberline {2.4.5}Na\"{i}ve Bayes}{11}{subsection.58}
-\contentsline {section}{\numberline {2.5}Unsupervised clustering of temporal patterns}{11}{section.59}
-\contentsline {chapter}{\numberline {3}Experiments}{12}{chapter.60}
-\contentsline {section}{\numberline {3.1}}{12}{section.61}
-\contentsline {chapter}{\numberline {4}Results}{13}{chapter.62}
-\contentsline {section}{\numberline {4.1}}{13}{section.63}
-\contentsline {chapter}{\numberline {5}Discussion}{14}{chapter.64}
-\contentsline {section}{\numberline {5.1}}{14}{section.65}
-\contentsline {chapter}{\numberline {6}Conclusions}{15}{chapter.66}
-\contentsline {section}{\numberline {6.1}}{15}{section.67}
+\contentsline {subsection}{\numberline {2.2.5}Statistical methods}{6}{subsection.33}
+\contentsline {subsection}{\numberline {2.2.6}Hidden Markov Models Based Methods}{6}{subsection.34}
+\contentsline {subsection}{\numberline {2.2.7}Bayesian Methods}{6}{subsection.35}
+\contentsline {subsection}{\numberline {2.2.8}Principal Component Analysis}{6}{subsection.36}
+\contentsline {subsection}{\numberline {2.2.9}Hidden Markov Models}{8}{subsection.45}
+\contentsline {subsection}{\numberline {2.2.10}Segmentation as clustering}{10}{subsection.56}
+\contentsline {section}{\numberline {2.3}Clustering}{10}{section.58}
+\contentsline {subsection}{\numberline {2.3.1}Formal definition}{12}{subsection.64}
+\contentsline {subsection}{\numberline {2.3.2}Application is research fields}{12}{subsection.65}
+\contentsline {section}{\numberline {2.4}Temporal pattern recognition}{12}{section.66}
+\contentsline {subsection}{\numberline {2.4.1}Dynamic Time Warping}{12}{subsection.67}
+\contentsline {subsection}{\numberline {2.4.2}$k$-means clustering}{12}{subsection.68}
+\contentsline {subsection}{\numberline {2.4.3}Self-organizing Map}{13}{subsection.70}
+\contentsline {subsection}{\numberline {2.4.4}Support Vector Machine}{13}{subsection.71}
+\contentsline {subsection}{\numberline {2.4.5}Na\"{i}ve Bayes}{13}{subsection.72}
+\contentsline {section}{\numberline {2.5}Unsupervised clustering of temporal patterns}{13}{section.73}
+\contentsline {chapter}{\numberline {3}Experiments}{14}{chapter.74}
+\contentsline {section}{\numberline {3.1}}{14}{section.75}
+\contentsline {chapter}{\numberline {4}Results}{15}{chapter.76}
+\contentsline {section}{\numberline {4.1}}{15}{section.77}
+\contentsline {chapter}{\numberline {5}Discussion}{16}{chapter.78}
+\contentsline {section}{\numberline {5.1}}{16}{section.79}
+\contentsline {chapter}{\numberline {6}Conclusions}{17}{chapter.80}
+\contentsline {section}{\numberline {6.1}}{17}{section.81}
 \vspace {2em}
-\contentsline {chapter}{\numberline {A}Appendix Title Here}{16}{appendix.68}
+\contentsline {chapter}{\numberline {A}Appendix Title Here}{18}{appendix.82}
 \vspace {2em}
-\contentsline {chapter}{Bibliography}{17}{dummy.69}
+\contentsline {chapter}{Bibliography}{19}{dummy.83}

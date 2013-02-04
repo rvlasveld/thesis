@@ -1,4 +1,4 @@
-\begin{thebibliography}{11}
+\begin{thebibliography}{14}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -19,12 +19,6 @@ J.~Barbi{\v{c}}, A.~Safonova, J.Y. Pan, C.~Faloutsos, J.K. Hodgins, and N.S.
 \newblock Segmenting motion capture data into distinct behaviors.
 \newblock In \emph{Proceedings of Graphics Interface 2004}, pages 185--194.
   Canadian Human-Computer Communications Society, 2004.
-
-\bibitem[Shlens(2005)]{shlens2005tutorial}
-J.~Shlens.
-\newblock A tutorial on principal component analysis.
-\newblock \emph{Systems Neurobiology Laboratory, University of California at
-  San Diego}, 2005.
 
 \bibitem[Pelleg et~al.(2000)Pelleg, Moore, et~al.]{pelleg2000x}
 D.~Pelleg, A.~Moore, et~al.
@@ -50,6 +44,33 @@ L.I. Smith.
 I.~Jolliffe.
 \newblock \emph{Principal component analysis}.
 \newblock Wiley Online Library, 2005.
+
+\bibitem[Rabiner(1989)]{rabiner1989tutorial}
+L.R. Rabiner.
+\newblock A tutorial on hidden markov models and selected applications in
+  speech recognition.
+\newblock \emph{Proceedings of the IEEE}, 77\penalty0 (2):\penalty0 257--286,
+  1989.
+
+\bibitem[Guenterberg et~al.(2009)Guenterberg, Ghasemzadeh, Loseu, and
+  Jafari]{guenterberg2009distributed}
+E.~Guenterberg, H.~Ghasemzadeh, V.~Loseu, and R.~Jafari.
+\newblock Distributed continuous action recognition using a hidden markov model
+  in body sensor networks.
+\newblock \emph{Distributed Computing in Sensor Systems}, pages 145--158, 2009.
+
+\bibitem[Oliver et~al.(2002)Oliver, Horvitz, and Garg]{oliver2002layered}
+N.~Oliver, E.~Horvitz, and A.~Garg.
+\newblock Layered representations for human activity recognition.
+\newblock In \emph{Multimodal Interfaces, 2002. Proceedings. Fourth IEEE
+  International Conference on}, pages 3--8. IEEE, 2002.
+
+\bibitem[Perdikis et~al.(2008)Perdikis, Tzovaras, and
+  Strintzis]{perdikis2008recognition}
+S.~Perdikis, D.~Tzovaras, and M.G. Strintzis.
+\newblock Recognition of human activities using layered hidden markov models.
+\newblock In \emph{Cognitive Information Processing Workshop}, pages 114--119.
+  Citeseer, 2008.
 
 \bibitem[Zhou et~al.(2008)Zhou, Torre, and Hodgins]{zhou2008aligned}
 F.~Zhou, F.~Torre, and J.K. Hodgins.
