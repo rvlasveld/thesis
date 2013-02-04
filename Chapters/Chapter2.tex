@@ -373,6 +373,29 @@ modeling the activities. Finally, when the system is provided with unlabeled
 data the first application is used to identify the observed sequence with 
 trained examples, by comparing the probability result of multiple HMMs.
 
+Generally a HMM can be fully connected, or ergodic model. Other configurations 
+are also possible, of which the left-right model, or Bakis model, is popular 
+for temporal applications \cite{rabiner1989tutorial}. This because the 
+structure of the state probability distribution resembles the construction of 
+possible states over time. This left-right model can be generalized by setting
+\begin{eqnarray}
+a_{ij} = 0, & j > i + \Delta
+\end{eqnarray}
+for some $\Delta$, indicating the possible \emph{distance} of the jumps over 
+states.
+
+*** [INSERT GRAPHICS SHOWING STRUCTURE OF HMM]
+
+In \cite{oliver2002layered} it is stated that HMMs are robust mechanisms with 
+respect to changes in temporal segmentation of observations, although they 
+suffer from a few problems when applied to reason about longer and complexer 
+sequences over time. They state that, especially with limited training data, 
+the HMM tend to be overfitted and tend to lack structure and have an excess of 
+parameters. The overcome this limitation, they introduce a Layered Hidden 
+Markov Model (LHHM) which they show is more robust to temporal changes in 
+observations. They make use of the hypothesis from the field of psychology, 
+that human behavior is hierarchically structured \cite{zacks2001event}.
+
 
 
 Viterbi algorithm / path; find the most likely sequence of cause-states for 
