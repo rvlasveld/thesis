@@ -12,6 +12,9 @@
 
 \section{Signal pro-processing and sensor fusion for timed patterns}
 
+*** [fusion of accelerometer data, gyroscopes, magnetic field sensors, 
+pressure, microphones, etc]
+
 \section{Temporal Segmentation}
 
 This section will give an introduction and in-depth analysis of temporal 
@@ -194,6 +197,12 @@ properties of sliding time windows. By definition, events have a different
 statistical profile then their background. When two consecutive actions are 
 regarded as the background, then a transition is an event between them. 
 
+In \cite{guenterberg2009automatic} a automatic system is used to segment a 
+continuous stream of data. By calculating features as activity level from the 
+standard deviation of a sliding window and applying Adaptive Thresholds, the 
+data can be segmented in active and rest parts. There is no model 
+representation.
+
 \subsection{Hidden Markov Models Based Methods}
 
 \subsection{Bayesian Methods}
@@ -352,7 +361,7 @@ This system is often abbreviated to
 The HMM will act as a generator giving a sequence of $T$ observations, each 
 being a symbol from $V$:
 \begin{equation}
-O = O_1, O_2 \dots O_T
+	O = O_1, O_2 \dots O_T
 \end{equation}
 
 Given the characteristics of a specific HMM, there are three major application 
@@ -379,12 +388,18 @@ for temporal applications \cite{rabiner1989tutorial}. This because the
 structure of the state probability distribution resembles the construction of 
 possible states over time. This left-right model can be generalized by setting
 \begin{eqnarray}
-a_{ij} = 0, & j > i + \Delta
+	a_{ij} = 0, & j > i + \Delta
 \end{eqnarray}
 for some $\Delta$, indicating the possible \emph{distance} of the jumps over 
 states.
 
 *** [INSERT GRAPHICS SHOWING STRUCTURE OF HMM]
+
+*** [discrete and continuous HHMs]
+
+*** Applications of HHM: \cite{shi2009towards} uses 10 coefficients extracted 
+with FFT from 6 axis (3 times accelerometer and 3 times gyroscope). Example of 
+continuous HMM (?). Recognition rates fo 50\%-100\%.
 
 In \cite{oliver2002layered} it is stated that HMMs are robust mechanisms with 
 respect to changes in temporal segmentation of observations, although they 
@@ -394,11 +409,23 @@ the HMM tend to be overfitted and tend to lack structure and have an excess of
 parameters. The overcome this limitation, they introduce a Layered Hidden 
 Markov Model (LHHM) which they show is more robust to temporal changes in 
 observations. They make use of the hypothesis from the field of psychology, 
-that human behavior is hierarchically structured \cite{zacks2001event}.
+that human behavior is hierarchically structured \cite{zacks2001event}. In 
+\cite{perdikis2008recognition} a layered construction of HMMs is used which 
+feeds the low-level data from a sliding window to the lower layer. This layer 
+will recognize simple motions, such as moving the arm in a pre-defined 
+segment. The results from these lower HMMs are then fed to a higher-level 
+layer of HMMs which are able to recognize abstract motions, such as adjusting 
+a monitor and picking up a pen. The results showed that the layered system was 
+better at recognition then a similar single-layered setup. It was also robust 
+in the sense that when the environment was changed, only the relatively simple 
+low-level HMMs needed to be retrained.
+
+*** [DIAGRAM WITH EXAMPLE OF LOW- AND HIGH-LEVEL HMMs, SUCH AS MOVING ARM, 
+PICKING UP PEN]
 
 
-
-Viterbi algorithm / path; find the most likely sequence of cause-states for 
+*** Viterbi algorithm / path; find the most likely sequence of cause-states 
+for 
 the observed measures.
 
 
