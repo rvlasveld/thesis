@@ -1,0 +1,5 @@
+digraph G {
+  rankdir=LR
+  node [shape=box]
+  "Specify k" -> "Choose k\nrandom centers" -> "Assign each point\nto closest center" -> "Calculate mean\nas new cluster" -> "Reassign all points" -> "Iterate until\nconvergence"
+}

@@ -1,0 +1,13 @@
+digraph G {
+  main [label = "Clustering"]
+  main -> {Supervised;Unsupervised}
+  Structure
+  HS [label = "Hard / Soft"]
+  SM [label = "Single  / Multiple"]
+  Unsupervised -> {Structure; HS; Iterative; SM; }
+  Structure -> {Hierarchical; Flat}
+  Hierarchical -> Hierarchical_list
+  Hierarchical_list [shape = "box", label = "* Detailed data analysis\n* More information\n* Less efficient"]
+  Flat -> Flat_list
+  Flat_list [shape = "box", label = "* Efficient for large data set\n * k-means often sufficient"]
+}
