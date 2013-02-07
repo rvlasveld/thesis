@@ -1,0 +1,10 @@
+digraph G {
+  main [label="Human Activity Recognition"]
+  main -> {TS; SPP }
+  SPP [label = "Signal Pre-Processing"]
+  TS [label="Temporal Segmentation"]
+  FE [label="Feature Extraction"]
+  TS -> {Clustering; Labeling; FE}
+  Clustering -> {"K-Means"}
+  FE -> {PCA; FFT}
+}
