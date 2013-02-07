@@ -1,10 +1,15 @@
 digraph G {
   main [label="Human Activity Recognition"]
-  main -> {TS; SPP }
   SPP [label = "Signal Pre-Processing"]
   TS [label="Temporal Segmentation"]
   FE [label="Feature Extraction"]
-  TS -> {Clustering; Labeling; FE}
+  Match [label = "Match new data"]
+  Labeling [label = "Label new activity"]
+
+  main -> Match
+  Match -> Labeling [label = " Do by"]
+  Labeling -> TS -> Clustering -> {SPP; FE}
+
   Clustering -> {"K-Means"}
   FE -> {PCA; FFT}
 }

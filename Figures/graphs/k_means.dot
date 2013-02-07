@@ -1,5 +1,17 @@
 digraph G {
   rankdir=LR
+  size = "4,4"
   node [shape=box]
-  "Specify k" -> "Choose k\nrandom centers" -> "Assign each point\nto closest center" -> "Calculate mean\nas new cluster" -> "Reassign all points" -> "Iterate until\nconvergence"
+
+  1 [label="Specify k"]
+  2 [label="Choose k\nrandom centers"]
+  3 [label="Assign each point\nto closest center"]
+  4 [label="Calculate mean\nas new cluster"]
+  5 [label="Reassign all points"]
+  6 [label="Iterate until\nconvergence"]
+
+  { rank = same; 1; 6}
+  { rank = same; 2; 5}
+  { rank = same; 3; 4}
+  1 -> 2 -> 3 -> 4 -> 5 -> 6
 }

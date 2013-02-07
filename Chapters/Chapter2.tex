@@ -565,14 +565,19 @@ Used to measure similarity between time sequences. Exact matching is
 high-cost, so approximations such as Minimum Bounding Rectangles are used.
 
 \subsection{k-means clustering}
-[EXPLAIN] divide data set $n$ into $k$ clusters.
+[EXPLAIN] divide data set $n$ into $k$ clusters. Follows the outline in figure \ref{fig:k_means}
 
 Among many unsupervised clustering techniques, $k$-means is successfully
 applied to large data sets. It is simple to implement and linear in time
-complexity so computationally attractive \cite{jain1999data}. A drawback of
-the method is that the results of the algorithm greatly depends on the initial
-configuration (the data points which will act as centroids) and the number of
-cluster $k$ must be determined beforehand.
+complexity so computationally attractive \cite{jain1999data}. A drawback of the method is that the results of the algorithm greatly depends on the initial configuration (the data points which will act as centroids) and the number of cluster $k$ must be determined beforehand.
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics{./Figures/graphs/k_means.png}
+		\rule{35em}{0.5pt}
+	\caption[K-means]{Outline of the $k$-means algorithm.}
+	\label{fig:k_means}
+\end{figure}
 
 Generally, the $k$-means methods will minimize the squared error for a
 clustering $\mathcal{L}$ criterion which is defined as the distance from the
