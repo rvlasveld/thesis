@@ -1,0 +1,4 @@
+digraph G {
+  rankdir = BT
+  "Sensing" -> "Signal Processing" -> "Feature eExtraction" -> "Pattern Processing" -> "Situation Assessment" -> "Decision Making"
+}
