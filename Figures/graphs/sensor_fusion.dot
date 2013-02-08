@@ -1,7 +1,8 @@
 digraph G {
-
+  size="4,4"
   subgraph fusion {
     rankdir = BT
+    label = "Sensor fusion"
     Fusion [label="Sensor Fusion"]
     Repre [label="Internal representation", shape = box]
     Application [label="Application"]
@@ -9,13 +10,19 @@ digraph G {
   }
 
   subgraph integration {
-   rankdir = BT
+    rankdir = BT
     Application2 [label="Application"]
-    T1 [label = "S1"]
-    T2 [label = "S2"]
-    T3 [label = "S3"]
+
+
+    subgraph environment2 {
+      T1 [label = "S1"]
+      T2 [label = "S2"]
+      T3 [label = "S3"]
+    }
+
     {T1; T2; T3} -> Application2
   }
 
   { rank = same; Application2; Application }
+  { rank = same; S1; S2; S3; T1; T2; T3 }
 }
