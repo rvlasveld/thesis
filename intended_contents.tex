@@ -6,51 +6,89 @@
 \title{Intended Table of Contents Thesis}
 
 
+
+
 \begin{document}
 \maketitle
 \tableofcontents
 
 \section{Introduction}
+\label{sec:Introduction}
 This section introduces the subject, outlines the global goal of the thesis and explains the problem.
 The main research-questions are introduced.
 In the subsections the main components (global, not as an implementation) are introduced.
+Outline of the thesis is presented.
+Chapter~\ref{sec:Concepts} introduces the big parts of the puzzle.
+Chapter~\ref{sec:Setup} gives details about the algorithms used.
+Chapter~\ref{sec:Implementation} will give the implementation details.
+Chapter~\ref{sec:Experiments} will show how data is gathered and shows the data.
+Chapter~\ref{sec:Discussion} will discuss and relate the results
+Chapter~\ref{sec:Conclusion} will conclude and give final remarks.
+
 
   \subsection{Thesis goal}
   The goal of the thesis will be discussed, e.g. "precise unsupervised on-line human activity recognition".
-  Mention application to show why it is useful.
+  Mention application to show why it is useful, such as medical and other health (losing weight, fitness) problems.
+  The main research questions will be formulated here.
 
   \subsection{Results of earlier research}
   First, results of earlier project are outlined. Look at the data being used, the precision and error rates (shortly, no details) and look at the different concepts being discussed.
   This will give reason for the following subsections.
 
 \section{Concepts}
+\label{sec:Concepts}
+This chapter will introduce the abstract concepts which will be used.
+There will be some formulas, but minimal implementations.
+The focus is on the meaning of the terms and what they do and how they do it.
+Real implementations will be discussed in chapter~\ref{sec:Setup}.
 
   \subsection{Temporal pattern recognition}
-  This will explain about what patterns are and what kind of patterns need to be recognized (long-term, short-term repetitive, etc)
+  This will explain about what patterns are and what kind of patterns need to be recognized (long-term, short-term repetitive, etc).
+  This is not specific about segmentation of clustering, but more as the ultimate goal.
 
 	\subsection{Signal pre-processing}
-  Describe how data is collected and processed. Include feature extraction, like PCA, FFT.
+  Describe how data is collected and processed, the form of the data (continuous to discrete, amplitude, energy, frequencies, etc).
+  Include feature extraction, like PCA, FFT, energy, mean, but discuss it further in subsection.
+  Only the concepts will be explained and the scheme of the computations (or simply formulas), no precise implementations.
   Mention only shortly with meaning, no further explanation.
 
     \subsubsection{Signal fusion}
+    What, why and how.
 
     \subsubsection{Signal smoothing}
+    What, why and how.
 
     \subsubsection{Feature extraction}
+    What, why and how.
 
 	\subsection{Temporal Segmentation}
   What is segmentation, the purpose and what kind of methods are there.
-  E.g. model-based, statistics-based. Diagram with types. Supervised / unsupervised.
-  HMMs, Statistical, Bayesian. K-means, SOM
+  Disctinction with clustering.
+  E.g. model-based, statistics-based.
+  Diagram with types.
+  Supervised / unsupervised.
+
+    \subsubsection{Methods}
+    Describe methods, such as HMMs, Statistical, Bayesian. K-means, SOM
 
   \subsection{Temporal clustering}
-  When is segmenting clustering? Explain difference, mention techniques (diagrams), Dynamic Time Warping, k-means (and variations), SOM, SVM, Naive Bayes, Neural Networks.
+  When is segmenting clustering?
+  Explain difference of point of view/mechanism, mention techniques (diagrams).
   This is the unsupervised part.
 
+    \subsubsection{Methods}
+    Explain difference in techniques and give schematic overview of inner workings.
+    Dynamic Time Warping, k-means (and variations), SOM, SVM, Naive Bayes, Neural Networks.
 
 
+  \subsection{Matching}
+  Not really sure about this section yet.
+  It would be about matching new on-line gathered data with already learned patterns.
+  But maybe it is more of a on-line combination of segmentation and clustering.
 
-\section{Problem statement}
+
+\section{Algorithms setup}
+\label{sec:Setup}
 This section proposes a setup to improve (or: answer) the research-questions.
 It will discuss techniques used in other projects and how implemented here.
 In the subsections each used technique is further explained. (Only explained when really used)
@@ -77,17 +115,22 @@ In the subsections each used technique is further explained. (Only explained whe
 
 
 \section{Implementation}
+\label{sec:Implementation}
 This section will discuss implementation details.
 Hardware platform (if any), software used. Complexity, precision of metrics etc.
+Data-linking between algorithms, pipeline construction.
 
 \section{Experiments, results}
+\label{sec:Experiments}
 This section will outline the precise experiments and gives the results of these.
 
 \section{Discussion}
+\label{sec:Discussion}
 This section will discuss the results of the previous section.
 It will relate the results to previous work.
 
 \section{Conclusion}
+\label{sec:Conclusion}
 Conclusion (answer research question), summary of results, feature work.
 
 
