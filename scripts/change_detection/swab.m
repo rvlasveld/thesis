@@ -67,13 +67,42 @@ endfunction
 
 function segments = swab(max_error, segments_number)
   segments = {};
-  segments_buffer = bottom_up( buffer, max_error);
-  first_segment = segments_buffer(1){1,1}
 
-  % Add new segment and remove datapoints from buffer
-  segments(end+1) = first_segment
-  takeout_length = length(first_segment)
-  buffer(1:first_segment) = []
+  buffer = get_data_points(4*segments_number);
+  read_length = length(buffer);
+
+  lower_bound = read_length / 2;
+  upper_bound = read_length * 2;
+
+
+  new_data = get_data_points(1);
+
+  % "while data at input"
+  while !isempty(new_data)
+
+    T = bottom_up(buffer, max_error);
+    first_segment = T(1){1,1};
+    segments(end+1) = first_segment;
+
+    % Remove length of just created segment at beginning of buffer
+    buffer(1:length(first_segment)) = [];
+
+    % todo: check if there is data
+    new_segment = best_line(max_error);
+
+    if isempty(new_segment)
+      % No more data, flush segments from buffer
+      segments = [segments T(2:end)];
+    else
+      buffer = [buffer new_segment];
+    endif
+
+    % todo: check bounds
+
+    new_data = get_data_points(1);
+
+  end
+
 
 endfunction
 
@@ -85,7 +114,7 @@ function s = best_line(max_error)
   s_new = [];
   while error < max_error
     s = s_new;
-    s_new = [s get_data_point(1)];
+    s_new = [s get_data_points(1)];
     if length(s_new) > 2
       error = calculate_error(s_new);
     endif
@@ -97,7 +126,7 @@ endfunction
 % Helping function to simulate online algorithm
 %
 current_input_pointer = 1;
-function data = get_data_point(size)
+function data = get_data_points(size)
   global current_input_pointer = 1;
   global data_stream;
 
@@ -107,7 +136,7 @@ function data = get_data_point(size)
   end
 
   if (current_input_pointer + size) > length(data_stream)
-    data = []
+    data = [];
     return;
   endif
 
