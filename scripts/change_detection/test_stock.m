@@ -19,13 +19,13 @@ function draw_segments(segments)
     segment = segments(i){1,1};
     segment_length = length(segment);
     x_segment = [x_running:x_running+segment_length-1];
-
     p = polyfit(x_segment, segment, 1);
     yfit = polyval(p,x_segment);
-    line_segment = plot(x_segment, yfit, 'r-');
 
-    points = plot(x_segment,segment, '.+');
-    set( [line_segment, points] , 'color', colors(mod(i - 1,length(colors)) + 1));
+    line_segment = plot(x_segment, yfit, 'r-');
+    points = plot(x_segment,segment, 'b.+');
+
+    % set( [line_segment, points] , 'color', colors(mod(i - 1,length(colors)) + 1));
 
     x_running += segment_length;
   endfor
@@ -37,3 +37,4 @@ endfunction
 
 segments = swab(0.1, 5);
 draw_segments(segments);
+segments
