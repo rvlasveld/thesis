@@ -3,15 +3,18 @@ clear all
 source('swab.m');
 
 % data = load('stock_data.dat');
+% data = load('t_body_acc_energy_x.dat');
 data = load('body_acc_x_train_first_column_head.dat');
-y = stock_data(1:end,1)';
+y = data(1:end,1)';
 % x = [1:length(y)];
 
 clf
 figure("Position",[0,0,1600,800]);
 hold on;
 
-% segments = bottom_up(y, 0.8);
+segments = bottom_up(y, 0.6);
+
+% segments
 
 function draw_segments(segments)
   % x = [1:length(segments)];
@@ -38,7 +41,7 @@ endfunction
 
 % best_line(0.05)
 
-segments = swab(0.8, 10);
+% segments = swab(0.8, 10);
 draw_segments(segments);
 printf("Number of final segments: %i\n", length(segments));
 % segments
