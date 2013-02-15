@@ -53,15 +53,29 @@ endfunction
 % Return the error for a segment, with applying linear regression
 % As used in http://www.mathworks.nl/help/matlab/data_analysis/linear-regression.html
 function error = calculate_error( segment )
+
   x = [1:length(segment)];
   y = segment;
 
-  p = polyfit(x,y,1);
-  yfit = polyval(p,x);
-  yresid = y - yfit;
-  SSresid = sum(yresid.^2);
-  SStotal = (length(y)-1) * var(y);
-  error = 1 - SSresid / SStotal;
+  % p = polyfit(x,y,1);
+  % yfit = polyval(p,x);
+  % yresid = y - yfit;
+  % SSresid = sum(yresid.^2);
+  % SStotal = (length(y)-1) * var(y);
+  % error = SSresid / SStotal;
+
+
+  %  http://emil.informatik.uni-bremen.de/~hiben/w/blog:simple_linear_regression_for_octave
+  A = [sum(x.*x) sum(x); sum(x) length(x)];
+  b = [sum(x.*y); sum(y)];
+  % solve
+  r = A\b;
+  slope = r(1);
+  intercept = r(2);
+
+  error = sum( (((x .* slope) + intercept) - y).^2 ) / sum( (y - mean(y)).^2 );
+  r2 = 1 - error;
+
 endfunction
 
 
@@ -75,32 +89,27 @@ function segments = swab(max_error, segments_number)
   upper_bound = read_length * 2;
 
 
-  new_data = get_data_points(1);
+  new_data = get_data_points(1, false);
 
   % "while data at input"
   while !isempty(new_data)
 
     T = bottom_up(buffer, max_error);
     first_segment = T(1){1,1};
+    T(1) = [];
     segments(end+1) = first_segment;
 
     % Remove length of just created segment at beginning of buffer
     buffer(1:length(first_segment)) = [];
 
-    % todo: check if there is data
-    new_segment = best_line(max_error);
+    new_data = get_data_points(1, false);
+    if !isempty(new_data)
 
-    if isempty(new_segment)
-      % No more data, flush segments from buffer
-      segments = [segments T(2:end)];
-    else
+      new_segment = best_line(max_error);
       buffer = [buffer new_segment];
+    else
+      segments = [segments T];
     endif
-
-    % todo: check bounds
-
-    new_data = get_data_points(1);
-
   end
 
 
@@ -111,13 +120,24 @@ endfunction
 function s = best_line(max_error)
   error = 0;
   s = [];
-  s_new = [];
+  s_proposed = [];
   while error < max_error
-    s = s_new;
-    s_new = [s get_data_points(1)];
-    if length(s_new) > 2
-      error = calculate_error(s_new);
-    endif
+
+    s = s_proposed;
+    new_data = get_data_points(1);
+    s_proposed = [s new_data];
+    if length(new_data) > 0
+      % There is new data
+
+      if length(s_proposed) > 2
+        % Segment is large enough to calculate error
+        error = calculate_error(s_proposed);
+      endif
+    else
+      % There is no data at the stream anymore
+      return;
+    end
+
   endwhile
 endfunction
 
@@ -125,14 +145,14 @@ endfunction
 %
 % Helping function to simulate online algorithm
 %
-current_input_pointer = 1;
-function data = get_data_points(size)
+function data = get_data_points(size, remove_from_stream = true)
   global current_input_pointer = 1;
   global data_stream;
 
   if isempty(data_stream)
-    stock_data = load('stock_data.dat');
-    data_stream = stock_data(1:end,1)';
+    % data = load('stock_data.dat');
+    data = load('body_acc_x_train_first_column_head.dat');
+    data_stream = data(1:end,1)';
   end
 
   if (current_input_pointer + size) > length(data_stream)
@@ -141,7 +161,10 @@ function data = get_data_points(size)
   endif
 
   data = data_stream(current_input_pointer:current_input_pointer+size);
-  current_input_pointer += 1;
+
+  if remove_from_stream
+    current_input_pointer += size;
+  endif
 endfunction
 
 
