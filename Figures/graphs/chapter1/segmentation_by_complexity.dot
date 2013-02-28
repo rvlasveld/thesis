@@ -1,0 +1,22 @@
+digraph G {
+  rankdir = TB
+  node [shape = box]
+  raw [label = "Raw data"]
+  features [label = "Extracted features"]
+  models [label = "Extracted models"]
+
+  subgraph methods {
+    raw -> features -> models
+  }
+
+  node [shape = ellipse]
+  PLR [label="Linear Piecewise Representation"]
+  PLR -> raw
+
+  GIR [label = "Global Iterative Replacement"]
+  GIR -> {features; models}
+
+
+  { rank = same; PLR; raw }
+  { rank = same; GIR; features }
+}
