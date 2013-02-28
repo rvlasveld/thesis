@@ -59,9 +59,14 @@ As used in \cite{barbivc2004segmenting}, the dimensionality of the data can be u
 Using Principal Component Analyses, Barbi{\v{c}} et al. use the dimensionality required to project the data points on a hyperplane while keeping the error below a certain rate as a measure of similarity.
 The error threshold is fixed as a range of three times the standard deviation from the mean of the error.
 In an extension of their method, using Probabilistic PCA \cite{tipping1999probabilistic}, the Mahanalobis distance \cite{duda1995pattern} for each frame represents similarity of concurrent motions.
-In a third method the authors use a Gaussian Mixture Model *** elaborate on this one ***.
-With the PPCA method the authors where able to get the best results, with precision of 92\% and recall of 95\%.
+By traversing the Mahanalobis distance as a function of the frames, cut-points are placed on specific points of interest.
+*** NOTE to self: thus this method can segment (and group) unknown and new activities? ***
+In a third method the authors use a Gaussian Mixture Model *** elaborate on this one [does it segment of direct classify?] ***.
+Using this segmenting, and comparing the segments with earlier gathered representations of motions, the PPCA method gets the best results, with precision of 92\% and recall of 95\%.
 The test subjects wore 14 sensors on joints of the body and each frame is represented as a 56-dimensional vector.
+The test considered seven simple human motions: walking, running, sitting down, forward jumping, climbing, arm stretching and punching.
+
+
 
 
 *** Elaborate on measures, e.g. precision, recall, confusion matrix etc.  ***
