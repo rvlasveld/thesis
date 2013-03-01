@@ -33,7 +33,7 @@ The data being processed determines the classification, which can be the raw dat
 
 One of the more simple and directs methods is to Piecewise Linear Represent the signal, while keeping the approximation error below a certain value, as discussed in \cite{keogh2001online}.
 As with many algorithms, PLR can be applied to a batch of or real time stream input data (also known as off-line and on-line analyzes, respectively).
-Keogh et al. propose a method which combines these different techniques to form a Sliding Window and Bottom-up (SWAB) analyzes.
+Keogh et al. \cite{keogh2001online} propose a method which combines these different techniques to form a Sliding Window and Bottom-up (SWAB) analyzes.
 The algorithm works by first, per window of data points, creating for every two data points a segment.
 Neighboring segments are joined together, as long as the approximation error is below the provided value.
 This analyzes can be used as a starting point to further analyze the data segments.
@@ -55,7 +55,7 @@ The difference with the method of Keogh et al. is that with GIR the number of se
 By running multiple instances of the GIR algorithm with each an increasing number of $k$ segments (bounded by user provided values), the optimal number and location of cut points is determined.
 
 Other approaches form a higher level analyses of the raw data.
-As used in \cite{barbivc2004segmenting}, the dimensionality of the data can be used to distinguish between actions.
+As used in \cite{barbivc2004segmenting}, from the field of computer graphics, the dimensionality of the data can be used to distinguish between actions.
 Using Principal Component Analyses, Barbi{\v{c}} et al. use the dimensionality required to project the data points on a hyperplane while keeping the error below a certain rate as a measure of similarity.
 The error threshold is fixed as a range of three times the standard deviation from the mean of the error.
 In an extension of their method, using Probabilistic PCA \cite{tipping1999probabilistic}, the Mahanalobis distance \cite{duda1995pattern} for each frame represents similarity of concurrent motions.
@@ -65,6 +65,36 @@ In a third method the authors use a Gaussian Mixture Model *** elaborate on this
 Using this segmenting, and comparing the segments with earlier gathered representations of motions, the PPCA method gets the best results, with precision of 92\% and recall of 95\%.
 The test subjects wore 14 sensors on joints of the body and each frame is represented as a 56-dimensional vector.
 The test considered seven simple human motions: walking, running, sitting down, forward jumping, climbing, arm stretching and punching.
+
+It is very common the use a higher level of features extracted from the raw data.
+The approach of Zhou et al. \cite{zhou2008aligned} maps the data points to a higher dimension by using a kernel function.
+The proposed method, Aligned Cluster Analysis, extends kernel $k$-means clustering on this higher dimensional data set.
+Using the Dynamic Time Aligned Kernel (DTAK) metric, similarity between segments is measured.
+Due to the properties of $k$-means clustering, discovering an unknown number of segments in the data set requires and iterative approach.
+
+
+*** motifs ***
+
+
+*** HMM ***
+
+*** Finite mixture models ***
+
+*** Infinite mixture models ***
+
+
+*****
+List of all papers, shortly categorized
+\begin{itemize}
+  \item ``Discovering characteristic actions from on-body sensor data'' \cite{minnen2006discovering}, cited: 63. Motifs, HHM, DTW, 87\% accuracy. Known motifs.
+  \item ``Recognition of human activities using layered hidden Markov models'' \cite{perdikis2008recognition}, cited: 3. HMM, layerd (primitive and abstract actions). Uses vision for workplace-activities. Direct classification
+  \item ``Accelerometer-Based Gait Analysis, A survey'', \cite{derawi2010accelerometer}, cited: 4. Compares methods to distinguish walking of normal, fast, slow. Focus on gait, but compares classification methods such as SVM, PCA, KSOM.
+  \item ``An Automatic Segmentation Technique in Body Sensor Networks based on Signal Energy'', \cite{guenterberg2009automatic}, cited: 13. Automatic segmenting, adaptive threshold. Pure segmenting, no classification. Nice and clean method? Weakness: single action segmented as multiple. Used multiple sensors.
+  \item ``Towards HMM based Human Motion Recognition using MEMS Inertial Sensors'', \cite{shi2009towards}, cited: 13. Uses HHM, Fourier transform for features. 5 fixed activities, trained HMM. Correct rates from 90\% to 100\%. Classification, not just segmentation
+  \item ``Change-Point Detection in Time-Series Data by Direct Density-Ratio Estimation'', \cite{kawahara2009change}, cited: 41. Non-parametric approach, online method, no strong model assumptions. Uses multiple datasets, origin referenced. Much follow-up work done.
+  \item ``Unsupervised, Dynamic Identification of Physiological and Activity Context in Wearable Computing'', \cite{krause2003unsupervised}, cited: 106(!). Combination of KSOM, iterative K-means clustering, transient states removal (using markov model). Online algorithm.
+  \item ``Activity Recognition using Cell Phone Accelerometers'', \cite{kwapisz2011activity}, cited: 122 (!).
+\end{itemize}
 
 
 
