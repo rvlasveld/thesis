@@ -110,9 +110,12 @@ In \cite{bao2004activity} the effectiveness of different body locations for sens
 It is shown that using two locations (the hip and wrist or thigh and wrist) instead of five does not significantly reduce the activity recognition.
 The (dominant) wrist is the preferred location when only a single sensor is used.
 
-Some experiments have only been performed in laboratory settings \cite{yang2008using}, thus probably resulting in less robust trained models.
-In \cite{siirtola2012recognizing} the test subjects have performed the testing phase outside, and thus the method is tested in a more natural environment.
-\\ *** Elaborate on lab/outside ***.
+Some experiments have only been performed in an artificial or laboratory setting \cite{minnen2006discovering, yang2008using, perdikis2008recognition, guenterberg2009automatic, ravi2005activity, bao2004activity, sherril2005using, he2009activity}, thus probably resulting in less robust trained models.
+In \cite{siirtola2012recognizing, kwapisz2011activity} the experiments are performed in a uncontrolled environment.
+This results in a more natural setting with more noise due to free movement.
+It also introduces transition-states in the data, because there is no clear distinction between activities.
+The method of \cite{krause2003unsupervised} explicitly filters the signals for transitions.
+Others have provided the test subjects with a measuring device for a longer period of time, some up to a few days \cite{krause2003unsupervised, long2009single}.
 
 A more objective comparison can be made based on the segmentation and classification technique used.
 In \cite{bao2004activity} and \cite{ravi2005activity} extensive comparisons are made between much used algorithms which are widely implemented, such as in the WEKA toolkit \cite{hall2009weka}.
@@ -120,7 +123,7 @@ These include the base-classifiers Decision Trees (also used in \cite{kwapisz201
 The research of \cite{bao2004activity} also implemented a number of meta-level classifiers, of which Plurality Voting resulted in the highest accuracy.
 A very well known and applied algorithm from the field of data mining is $k$-means clustering.
 A drawback of this method is that the number of expected clusters needs to be predetermined.
-To overcome this shortcoming an interative implementation can be used, which selects the best clustering.
+To overcome this shortcoming an iterative implementation can be used, which selects the best clustering.
 A variant is known as Fuzzy $c$-means clustering, in which a data point can belong to one or more clusters, each with a degree of membership.
 The method of $k$-means clustering (or a modified version) is used in \cite{krause2003unsupervised, zhou2008aligned, lee2178physical}.
 
@@ -129,7 +132,7 @@ Although these kind of networks typically perform well on spatial-typed problems
 The methods of \cite{yang2008using, kwapisz2011activity} create a multi-level neural network to generate complex discriminators as activity classifiers.
 A variant of neural networks known as Kohonen Self Organizing Maps is used in \cite{krause2003unsupervised} to create a vector codebook, which is further processed by a $k$-means clustering.
 
-Inspired on the problems for continuous speech recognition have Hidden Markov Models been applied to activity recognition tasks.
+Due similarity with the problem of continuous speech recognition, Hidden Markov Models have been applied to activity recognition tasks.
 A layered approach proved to be robust for small changes in \cite{perdikis2008recognition}.
 In \cite{shi2009towards} five activities have been modeled as HMMs.
 The method of \cite{fox2010bayesian} introduces HMMs with Markov Jump Linear Systems to segment a signal, with a fixed number of models.
@@ -139,7 +142,7 @@ The application of \cite{guenterberg2009distributed} constructs separate HHMs fo
 
 A common property of the above mentioned classification algorithms is that there is no explicit segmentation phase.
 Data points can be segmented a posteriori, by joining adjacent data points which have the same label.
-An approach in which the data points are processed per segment include \cite{minnen2006discovering}, in which known motifs in the sensor signals are discovered.
+An approach in which the data points are processed per segment include \cite{minnen2006discovering}, in which motifs over sensor data from actions are discovered.
 In \cite{guenterberg2009automatic} the signal is segmented (without classification) by applying adaptive threshold values on the energy of the signal.
 The estimates of the direct density-ratio for probability distributions are compared to create change-points in \cite{kawahara2009change}.
 By making minimal model assumptions a non-parametric segmentation is obtained, without classification.
@@ -149,7 +152,7 @@ The method of \cite{barbivc2004segmenting} considers the intrinsic dimensionalit
 This method also is independent of trained models and thus also is a non-parametric approach.
 The method of \cite{keogh2001online} creates a piecewise linear representation of the signal as thus approximates it.
 This does not result in a segmentation in the sense of some homogeneity over the data points, but it can support one.
-In contrast, the method of \cite{himberg2001time} splits and merges segments the signal in a constant number $k$ segments using a cost function to minimize the heterogeity of a segment.
+In contrast, the method of \cite{himberg2001time} splits and merges segments the signal in a constant number $k$ segments using a cost function to minimize the heterogeneity of a segment.
 
 *** TABLE *** \\
 *** Create a table of all the papers mentioned? Columns would be:\\
