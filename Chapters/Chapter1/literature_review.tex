@@ -1,0 +1,195 @@
+% Section Signal Pre-processing
+% !TEX root = ../../main.tex
+
+% \section{Literature review}
+% Look into earlier application mentioned in the literature to this kind of  problems. Look for similarities in the problem and address where the  techniques used fail or are not applicable.
+
+% *** Most of the activity recognition techniques can be classified in two  different types.
+% Some rely on a state-space model, in which the activities to be recognized are represented in a statistical manner.
+% Bayesian networks, Finite State Machines and Hidden Markov Models can be considered among those.
+% Other techniques process the directly as a pattern recognition task, such as  Support Vector Machines, Neural Networks, Dynamic Time Warping, and Bayes and K-means clustering.
+
+% \subsection{Segmentation}
+% Describe the different approaches to segmentation.
+% Group different viewpoints, e.g. cut-points, change detection, segmentation, etc.
+
+
+% \section{Literature review}
+% This section will provide a review of the existing literature and research of the different subjects discussed in this thesis.
+% First the different approaches to mere segmentation of signals is discussed, followed by *** other techniques. ***
+
+% \subsection{Segmentation}
+% One of the first stages in analyzing the sensor data time series is to segment the signal.
+% The goal is to set cut-points in the signal such that all the data points in between consecutive cut-points have some homogeneous property among them. *** "organizing data into homogeneous groups where the within-group-object similarity is minimized and the between-group-object dissimilarity is maximized." ***
+% This results in the more abstract notion of change (point) detection.
+% The general concern is to detect the occurrence and time identification of changes in the signal, often expressed as changes in the probability distribution of the time series.
+% This literature review will discuss the different types of change detection as applied in the research.
+% To each applications question about the methods, complexity and usability etc. are asked.
+% On account of usability, it is desired to have a successful segmentation algorithm with minimal user interaction, e.g. defining thresholds and error rates.
+% ** something about what is considered, e.g. complexity, measurements, e.g. ***
+
+% Following the organization of \cite{warren2005clustering}, research can be structured in three groups.
+% The data being processed determines the classification, which can be the raw data, indirectly via features extracted from the raw data or indirectly via models extracted from the raw data.
+
+% One of the more simple and directs methods is to Piecewise Linear Represent the signal, while keeping the approximation error below a certain value, as discussed in \cite{keogh2001online}.
+% As with many algorithms, PLR can be applied to a batch of or real time stream input data (also known as off-line and on-line analyzes, respectively).
+% Keogh et al. \cite{keogh2001online} propose a method which combines these different techniques to form a Sliding Window and Bottom-up (SWAB) analyzes.
+% The algorithm works by first, per window of data points, creating for every two data points a segment.
+% Neighboring segments are joined together, as long as the approximation error is below the provided value.
+% This analyzes can be used as a starting point to further analyze the data segments.
+% Although Keogh et al. apply the SWAB algorithm only direct on the raw data, it is easily imagined how to apply it to extracted features of the signal, e.g. the energy or mean.
+% In its default application, the method yields little information about each segment; it is merely a linear representation.
+% The SWAB algorithm works by segmenting parts of the data series by linear approximation while keeping the error below a certain rate.
+% This rate needs to be user defined (e.g. by an expert), which makes it not possible to apply directly on any signal.
+% This method only divides the signal into segments, which representations can be processed further to form clusters or related segments.
+% The complexity of this method is relatively low, $O(Ln)$, where $L$ is the expected segment length and $n$ the number of data points.
+
+% The task of segmenting any form of data is made easier when the number of segments is beforehand known.
+% Many authors apply the well-known \emph{k-means} clustering *** refs needed *** on this type of problems.
+% An incremental error-minimizing version can determine the optimal number of segments (or actually, clusters in this case).
+% The proposed method of \cite{himberg2001time}, Global Iterative Replacement, resembles the method of Keogh et al., in the sense that it merges segments.
+% The algorithm is applied on two different data sets.
+% The first data sets can be considered as extracted features from sensor data, whilst the second data set works on model properties and thus can give a richer contextual segmentation.
+% For both types of data sets a cost function is defined, which represents the internal heterogeneity of a segment (e.g. the variance of the data within a segment).
+% The difference with the method of Keogh et al. is that with GIR the number of segments is known beforehand and during the algorithm this number is, through splits and merges, kept constant.
+% By running multiple instances of the GIR algorithm with each an increasing number of $k$ segments (bounded by user provided values), the optimal number and location of cut points is determined.
+
+% Other approaches form a higher level analyses of the raw data.
+% As used in \cite{barbivc2004segmenting}, from the field of computer graphics, the dimensionality of the data can be used to distinguish between actions.
+% Using Principal Component Analyses, Barbi{\v{c}} et al. use the dimensionality required to project the data points on a hyperplane while keeping the error below a certain rate as a measure of similarity.
+% The error threshold is fixed as a range of three times the standard deviation from the mean of the error.
+% In an extension of their method, using Probabilistic PCA \cite{tipping1999probabilistic}, the Mahanalobis distance \cite{duda1995pattern} for each frame represents similarity of concurrent motions.
+% By traversing the Mahanalobis distance as a function of the frames, cut-points are placed on specific points of interest.
+% *** NOTE to self: thus this method can segment (and group) unknown and new activities? ***
+% In a third method the authors use a Gaussian Mixture Model *** elaborate on this one [does it segment of direct classify?] ***.
+% Using this segmenting, and comparing the segments with earlier gathered representations of motions, the PPCA method gets the best results, with precision of 92\% and recall of 95\%.
+% The test subjects wore 14 sensors on joints of the body and each frame is represented as a 56-dimensional vector.
+% The test considered seven simple human motions: walking, running, sitting down, forward jumping, climbing, arm stretching and punching.
+
+% It is very common the use a higher level of features extracted from the raw data.
+% The approach of Zhou et al. \cite{zhou2008aligned} maps the data points to a higher dimension by using a kernel function.
+% The proposed method, Aligned Cluster Analysis, extends kernel $k$-means clustering on this higher dimensional data set.
+% Using the Dynamic Time Aligned Kernel (DTAK) metric, similarity between segments is measured.
+% Due to the properties of $k$-means clustering, discovering an unknown number of segments in the data set requires and iterative approach.
+
+
+% *** motifs ***
+
+
+% *** HMM ***
+
+% *** Finite mixture models ***
+
+% *** Infinite mixture models ***
+
+
+\section{Literature review}
+This section will provide a literature review per coherent subject of this thesis.
+In subsection \ref{sec:lit_review_segmentation} the research in segmentation and classification of human activities will be discussed.
+
+
+\subsection{Segmentation and classification}\label{sec:lit_review_segmentation}
+In recent years much research is done in the field of segmentation and classification of signals into human activities.
+Due to the nature of many applied algorithms and the field of research (computer vision, data mining, robotics), often there is no clear distinction between the segmentation and classification phase.
+As a result, these two subjects will be discussed together although, where possible, the different techniques for the two will be mentioned.
+All the reviewed papers have a global setup in common; a single- or multiple- sensory device is worn by subjects.
+From the raw signals features are extracted which are used to train some models.
+During the testing phase the same extracted features are compared with the trained models to classify the activity.
+Some methods rely on clear segmentations of the signals, whilst other ignore this possible feature and classify on sliding windows.
+The content of this section is summarized in table \ref{table:papers_segmentation_classification}.
+
+During the last ten years much research is performed, as a result of smaller and cheaper measuring devices. *** cite needed ***.
+With the introduction of smartphones with sensory hardware the research has shifted to these devices, as they create a more natural and ubiquitous setting for the test subject. *** cite needed ***.
+
+A distinction can be made in the sensor setup, like wearing multiple sensors, a single sensor and the location of the sensors.
+Research have been performed with multiple sensors, refered to as Body Sensor Networks, as done in \cite{guenterberg2009automatic, guenterberg2009distributed, bao2004activity, sherril2005using}.
+Locations used include the upper arm, waist, thigh, wrist and ankle.
+Single sensors have be worn at different locations, including the upper arm \cite{krause2003unsupervised}, the front leg pocket \cite{kwapisz2011activity, duque2012offline, siirtola2012recognizing, he2009activity}, the waist \cite{ravi2005activity, lester2006practical, lee2178physical}, the chest \cite{ahmed2012non, himberg2001time}, the shoulder \cite{lester2005hybrid} and the dominant wrist \cite{yang2008using, long2009single}.
+Other approaches have not used body-worn sensors at all, but instead relied on other meaures, such as motion capture data \cite{barbivc2004segmenting, zhou2008aligned} and visual \cite{perdikis2008recognition} and acoustic data in office surroundings \cite{oliver2002layered}
+
+In \cite{bao2004activity} the effectiveness of different body locations for sensors is discussed.
+It is shown that using two locations (the hip and wrist or thigh and wrist) instead of five does not significantly reduce the activity recognition.
+The (dominant) wrist is the preferred location when only a single sensor is used.
+
+Some experiments have only been performed in an artificial or laboratory setting \cite{minnen2006discovering, yang2008using, perdikis2008recognition, guenterberg2009automatic, ravi2005activity, bao2004activity, sherril2005using, he2009activity}, thus probably resulting in less robust trained models.
+In \cite{siirtola2012recognizing, kwapisz2011activity} the experiments are performed in a uncontrolled environment.
+This results in a more natural setting with more noise due to free movement.
+It also introduces transition-states in the data, because there is no clear distinction between activities.
+The method of \cite{krause2003unsupervised} explicitly filters the signals for transitions.
+Others have provided the test subjects with a measuring device for a longer period of time, some up to a few days \cite{krause2003unsupervised, long2009single}.
+
+A more objective comparison can be made based on the segmentation and classification technique used.
+In \cite{bao2004activity} and \cite{ravi2005activity} extensive comparisons are made between much used algorithms which are widely implemented, such as in the WEKA toolkit \cite{hall2009weka}.
+These include the base-classifiers Decision Trees (also used in \cite{kwapisz2011activity,duque2012offline}), Decision Tables, K-nearest neighbors (also used \cite{duque2012offline, siirtola2012recognizing}), Support Vector Machines (also used in \cite{derawi2010accelerometer,he2009activity, he2008activity}) and Naive Bayes (also used in \cite{long2009single}).
+The research of \cite{bao2004activity} also implemented a number of meta-level classifiers, of which Plurality Voting resulted in the highest accuracy.
+A very well known and applied algorithm from the field of data mining is $k$-means clustering.
+A drawback of this method is that the number of expected clusters needs to be predetermined.
+To overcome this shortcoming an iterative implementation can be used, which selects the best clustering.
+A variant is known as Fuzzy $c$-means clustering, in which a data point can belong to one or more clusters, each with a degree of membership.
+The method of $k$-means clustering (or a modified version) is used in \cite{krause2003unsupervised, zhou2008aligned, lee2178physical}.
+
+Very much used in machine learning problems are neural networks. *** cite needed ***
+Although these kind of networks typically perform well on spatial-typed problems *** cite needed ***, adjustments have been made to apply them for temporal classification.
+The methods of \cite{yang2008using, kwapisz2011activity} create a multi-level neural network to generate complex discriminators as activity classifiers.
+A variant of neural networks known as Kohonen Self Organizing Maps is used in \cite{krause2003unsupervised} to create a vector codebook, which is further processed by a $k$-means clustering.
+
+Due similarity with the problem of continuous speech recognition, Hidden Markov Models have been applied to activity recognition tasks.
+A layered approach proved to be robust for small changes in \cite{perdikis2008recognition}.
+In \cite{shi2009towards} five activities have been modeled as HMMs.
+The method of \cite{fox2010bayesian} introduces HMMs with Markov Jump Linear Systems to segment a signal, with a fixed number of models.
+In \cite{lester2006practical} a layer of HMMs of on top of a layer of static classifiers to estimate the current activity.
+This has a commonality with \cite{lester2005hybrid} in which HMMs are used to capture regularities and smooth activity transitions.
+The application of \cite{guenterberg2009distributed} constructs separate HHMs for each activity and then joins them in a single model to estimate the likelihood of an activity.
+
+A common property of the above mentioned classification algorithms is that there is no explicit segmentation phase.
+Data points can be segmented a posteriori, by joining adjacent data points which have the same label.
+An approach in which the data points are processed per segment include \cite{minnen2006discovering}, in which motifs over sensor data from actions are discovered.
+In \cite{guenterberg2009automatic} the signal is segmented (without classification) by applying adaptive threshold values on the energy of the signal.
+The estimates of the direct density-ratio for probability distributions are compared to create change-points in \cite{kawahara2009change}.
+By making minimal model assumptions a non-parametric segmentation is obtained, without classification.
+A further application of probability distributions is discussed in \cite{ahmed2012non}, which uses an non-parametric Bayesian method to create an Infinite Gaussian Mixture Model to represent activities.
+Very interesting is the ability to recognize past and new activities without training.
+The method of \cite{barbivc2004segmenting} considers the intrinsic dimensionality of poses by using Probabilistic Principal Component Analysis and creates cut-points.
+This method also is independent of trained models and thus also is a non-parametric approach.
+The method of \cite{keogh2001online} creates a piecewise linear representation of the signal as thus approximates it.
+This does not result in a segmentation in the sense of some homogeneity over the data points, but it can support one.
+In contrast, the method of \cite{himberg2001time} splits and merges segments the signal in a constant number $k$ segments using a cost function to minimize the heterogeneity of a segment.
+
+Each research outcome is defined in some kind of correctness to segment and classify the signal in the correct and preferred manner.
+In many methods an error was measured as the difference between the algorithms outcome and a domain-experts ground truth.
+In case of segmenting the time series, the method of \cite{guenterberg2009automatic} measures the delayed number of seconds before a new segment is created.
+For classification the measure takes on many forms and names, such as recognition rates \cite{bao2004activity} or hit precision \cite{ahmed2012non}.
+Confusion matrices often are used to give insight in which activities are hard to discriminate from each other, as for instance in \cite{kwapisz2011activity}.
+The term false alarm rate is often used to indicate incorrectly new introduced elements, such as activities in \cite{ahmed2012non} and \cite{kawahara2009change}.
+
+The overall results of many methods are fairly high and promising.
+Many methods, for a fixed number of activities or an iterative approach, obtain precision up to the range from 95\% to 100\% \cite{minnen2006discovering, shi2009towards, kwapisz2011activity, duque2012offline, he2009activity, lee2178physical, siirtola2012recognizing}.
+Problems for which the number of activities is unknown perform up to 95\% \cite{ahmed2012non, barbivc2004segmenting}.
+The most problems arise from discriminating between similar activities, such as taking the stairs up or down and walking when the movement of legs or waist is considered \cite{kwapisz2011activity, duque2012offline}.
+
+Some researchers have made their used data set explicitly public available and other data sets are just available, providing valuable labeled activity patterns. *** This should be in experiments setup? ***
+*** List here the datasets used ***
+
+\begin{table}
+\tiny
+\centering
+\begin{tabular}{ | l | c | p{1.5cm} | p{1.5cm} | p{1.5cm} | p{2.5cm} | p{3cm} | }
+  \hline
+  Refs. & \# & Location & Activities & Env. & Algorithms & Results \\
+  \hline
+  \cite{minnen2006discovering} & Single & Wrist & Signal motifs & Artificial data & Motif discovery, HHMs, DTW & overall 87\% \\
+  \hline
+  \cite{guenterberg2009automatic} & Multiple & wrist, legs, waist & 12 daily routine & Controlled & Adaptive threshold, segmenting & 85\% \\
+  \hline
+  \cite{shi2009towards} & Single & Unknown & walking, upstairs, falling, running, standing & Controlled & FFT, HMMs & 90\% - 100\% \\
+  \hline
+  \cite{kawahara2009change} & - & - & - & Artificial data & Non-parametric Density-Ratio estimation & ??? \\
+  \hline
+  many more... & & & & & & \\
+  \hline
+\end{tabular}
+\caption{Overview of researches with the focus on segmentation and classification techniques.}
+\label{table:papers_segmentation_classification}
+\end{table}
+
+\input{./Chapters/Chapter1/paper_list}
