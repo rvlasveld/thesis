@@ -96,6 +96,7 @@ All the reviewed papers have a global setup in common; a single- or multiple- se
 From the raw signals features are extracted which are used to train some models.
 During the testing phase the same extracted features are compared with the trained models to classify the activity.
 Some methods rely on clear segmentations of the signals, whilst other ignore this possible feature and classify on sliding windows.
+The content of this section is summarized in table \ref{table:papers_segmentation_classification}.
 
 During the last ten years much research is performed, as a result of smaller and cheaper measuring devices. *** cite needed ***.
 With the introduction of smartphones with sensory hardware the research has shifted to these devices, as they create a more natural and ubiquitous setting for the test subject. *** cite needed ***.
@@ -154,13 +155,39 @@ The method of \cite{keogh2001online} creates a piecewise linear representation o
 This does not result in a segmentation in the sense of some homogeneity over the data points, but it can support one.
 In contrast, the method of \cite{himberg2001time} splits and merges segments the signal in a constant number $k$ segments using a cost function to minimize the heterogeneity of a segment.
 
-*** TABLE *** \\
-*** Create a table of all the papers mentioned? Columns would be:\\
-Refs | single/multiple | body locations | activities | lab/outside | training/testing method | result ***
+Each research outcome is defined in some kind of correctness to segment and classify the signal in the correct and preferred manner.
+In many methods an error was measured as the difference between the algorithms outcome and a domain-experts ground truth.
+In case of segmenting the time series, the method of \cite{guenterberg2009automatic} measures the delayed number of seconds before a new segment is created.
+For classification the measure takes on many forms and names, such as recognition rates \cite{bao2004activity} or hit precision \cite{ahmed2012non}.
+Confusion matrices often are used to give insight in which activities are hard to discriminate from each other, as for instance in \cite{kwapisz2011activity}.
+The term false alarm rate is often used to indicate incorrectly new introduced elements, such as activities in \cite{ahmed2012non} and \cite{kawahara2009change}.
 
+The overall results of many methods are fairly high and promising.
+Many methods, for a fixed number of activities or an iterative approach, obtain precision up to the range from 95\% to 100\% \cite{minnen2006discovering, shi2009towards, kwapisz2011activity, duque2012offline, he2009activity, lee2178physical, siirtola2012recognizing}.
+Problems for which the number of activities is unknown perform up to 95\% \cite{ahmed2012non, barbivc2004segmenting}.
+The most problems arise from discriminating between similar activities, such as taking the stairs up or down and walking when the movement of legs or waist is considered \cite{kwapisz2011activity, duque2012offline}.
 
-*** Elaborate on measures, e.g. precision, recall, confusion matrix etc.  ***
-*** Precision is defined as the ratio of reported correct cuts versus the total number of reported cuts. Recall is defined as the ratio of reported correct cuts versus the total number of correct cuts. The closer precision and recall are to 1, the more accurate the algorithm is. ***
+Some researchers have made their used data set explicitly public available and other data sets are just available, providing valuable labeled activity patterns. *** This should be in experiments setup? ***
+*** List here the datasets used ***
 
+\begin{table}
+\tiny
+\centering
+\begin{tabular}{ | l | c | p{1.5cm} | p{1.5cm} | p{1.5cm} | p{2.5cm} | p{3cm} | }
+  \hline
+  Refs. & \# & Location & Activities & Env. & Algorithms & Results \\
+  \hline
+  \cite{minnen2006discovering} & Single & Wrist & Signal motifs & Artificial data & Motif discovery, HHMs, DTW & overall 87\% \\
+  \hline
+  \cite{guenterberg2009automatic} & Multiple & wrist, legs, waist & 12 daily routine & Controlled & Adaptive threshold, segmenting & 85\% \\
+  \hline
+  \cite{shi2009towards} & Single & Unknown & walking, upstairs, falling, running, standing & Controlled & FFT, HMMs & 90\% - 100\% \\
+  \hline
+  \cite{kawahara2009change} & - & - & - & Artificial data & Non-parametric Density-Ratio estimation & ??? \\
+  \hline
+\end{tabular}
+\caption{Overview of researches with the focus on segmentation and classification techniques.}
+\label{table:papers_segmentation_classification}
+\end{table}
 
 \input{./Chapters/Chapter1/paper_list}
