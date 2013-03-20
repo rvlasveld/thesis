@@ -1,0 +1,9 @@
+% Section Literature Review Segmentation
+% !TEX root = ../../main.tex
+
+\subsection{Temporal Segmentation}\label{sec:lit_review_temporal_segmentation}
+
+The task of temporal segmentation consists of splitting a time series data $M$ into $M_1 \dots M_n$ consecutive segments, where each segment bundles homogeneous data points and there is some notion of heterogeneity between segments.
+This problem arises in many fields of study, among which computer vision *** refs ***, motion capture *** refs *** and data mining *** refs ***.
+Some approaches are implemented as batch, or off-line, methods, whilst others split the signal while processing it on-line.
+Due to the nature of this research, only segmenting techniques with an on-line approach (or easy translation to one ***?***) will be considered.

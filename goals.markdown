@@ -14,8 +14,12 @@ Filters vs. wrappers. Bij filters zit segmentatie en classificatie apart (?), wr
 
 Transities van segmenten (activiteiten): "zitten" --> "staan" ==> "zitten" --> "overgang (opstaan)" --> "staan".
 
+Segmenteren op verschillende dimensies? E.g. "walking" vs "sitting", maar ook "Work" vs "home", "meeting" vs "television/radio".
+
 Wat is precies een transitie? Moment van lage homogeniteit? Kan een algoritme segmenten en transities onderscheiden? Apart segment of een continue punt op de tijdslijn? Clusteren van transities mogelijk? Window-length invloeg op transities? Window-less mogelijk?
 
 Gebruiken van andere segmentatie toepassingen (vision, image) ter inspiratie. Spatio-temporal segmentation (object tracking). K-neighbors?
 
 Transitie stap wordt vaak overgeslagen (wrapper methods) in activiteit herkenning. Dus een toevoeging aan de literatuur.
+
+Vergelijken hoe resultaten gemeten worden. Kwaliteit van segmenten. Hoe in te stellen door user?

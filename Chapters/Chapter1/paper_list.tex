@@ -33,3 +33,12 @@ It is possible this will be in tabular form in the final thesis document.
   \item ``Activity recognition from acceleration data based on discrete cosine transform and SVM'', \cite{he2009activity}, cited: 25, 2009. Uses Discrete Cosine Transform (DCT) to get features, PCA to reduce them an multiple SVMs to classify windows. Four daily activities, 97\% precision. Trousers pocket. Laboratory setting.
   \item ``Physical Activity Recognition Using a Single Tri-Axis Accelerometer'', \cite{lee2178physical}, cited: 16, 2009. Five daily activities, FFT, fuzzy c means classification, offline. 99\% accuracy. No smartphone, other device. Outside, although restricted (standing, sitting, lying, walking, running)
 \end{itemize}
+
+
+\subsubsection{Pure segmentation}
+\begin{itemize}
+  \item ``Bayesian Online Changepoint Detection'', \cite{adams2007bayesian}, cited: 67, 2007. Uses a priori and posteriori distribution prediction of the current run-length. Online. Uses well-drilling data, Dow Jones return value and coal-mine accidents rate, which are all used by others. Does not compare results. Decouples algorithm from model (?).
+  \item CUSUM Method: piece wise segments of gaussian mean with noise. More refs needed.
+  \item ``An Automatic Segmentation Technique in Body Sensor Networks based on Signal Energy'', \cite{guenterberg2009automatic}, cited: 13. Automatic segmenting, adaptive threshold. Pure segmenting, no classification. Nice and clean method? Weakness: single action segmented as multiple. Used multiple sensors.
+  \item ``Segmenting Motion Capture Data into Distinct Behaviors'', \cite{barbivc2004segmenting}, cited: 242, 2004. On-line methods: cut-points on increased intrinsic dimensionality, distribution of poses is observed to change. Batch: cut when consecutive frames belong to different Gaussian mixture models. Fixed fourteen motions, compared with manual segmentation. Uses PCA and Probabilistic PCA (models the non-pc subspaces as noise). PPCA is the best. (paper anne)
+\end{itemize}
