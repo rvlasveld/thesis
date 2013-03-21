@@ -1,0 +1,73 @@
+% !TEX root = ../../main.tex
+% Section Literature Review Segmentation
+
+\subsection{Temporal Segmentation}\label{sec:lit_review_temporal_segmentation}
+Many different approaches have been applied to segmenting time series data.
+Due to the nature of this research, only segmenting techniques with an on-line approach (or easy translation to one ***?***) will be considered.
+Interesting are algorithms which have been applied to multi-dimensional data, since we are considering segmenting accelerometer data provided by three-axial sensors.
+Nonetheless, online segmenting algorithms on single dimensional data will also be considered.
+
+
+*** Piecewise linear approximation ***
+
+
+Segmentation methods can roughly be categorized in three methods in the way the data is processed, as discussed by Avci et al \cite{avci2010activity}:
+\begin{itemize}
+  \item \textbf{Top-down} methods iteratively divide the signal in segments by splitting at the best location.
+  The algorithm starts with two segments and completes when a certain condition is met, such as when an error value or number of segments $k$ is reached.
+  These methods process the data points recursively, which results in a complexity of $O(n^2k)$.
+  \item \textbf{Bottom-up} methods are the natural complement to top-down methods.
+  They start with creating $n/2$ segments and iteratively join adjacent segments while the value of a cost function for that operation is below a certain value.
+  Given the average segment length $L$, the complexity of this method is $O(nL)$.
+  \item \textbf{Sliding-window} methods are simple and intuitive for online segmenting purposes.
+  It starts with a small initial subsequence of the time series.
+  New data points are joined in the segment until the fit-error is above a threshold.
+  Because of the simple approax, the data is only processed very locally which can yield in poor results \cite{keogh2001online}.
+  The complexity is equal to the bottom-up approach, $O(nL)$, where $L$ is the average segment length.
+  \item \textbf{Sliding Window And Bottom-up} (SWAB), as introduced by Keogh et al. \cite{keogh2001online}, joins the ability of the sliding window mechanism to process time series online and the bottom-up approach the create superior segments in terms of fit-error.
+  The algorithm processes the data in two stages.
+  The first stage is to join new data points in the current segment created by a sliding window, and pass this to a buffer with space for a few segments.
+  The buffer then processes the data Bottom-up and returns the first (left-most) segment as final segment.
+  Because this second stage retains some (semi-)global view of the data, the results are comparative with normal Bottom-up.
+  It is stated by Keogh et al. that the complexity of SWAB is a small constant factor worse than that of regular Bottom-up.
+\end{itemize}
+It is clear that for the application of this research Sliding-window and preferably SWAB-based algorithms should be considered.
+
+The SWAB method proposed by Keogh et al. \cite{keogh2001online} is dependent on an user setting, providing the maximum error when performing both stages.
+Each segment is approximated by using Piecewise Linear Representation, an often used method.
+The user provided error threshold controls the granularity and number of segments.
+Other methods have been proposed, such as an adaptive threshold based on the signal energy by Guenterberg et al. \cite{guenterberg2009automatic} and an adaptive CUSUM-based test by Alippi et al. \cite{alippi2006adaptive}, in order to eliminate this user-dependency.
+The latter of these methods is able to process the accelerometer values directly, although better results are obtained when features of the signal are processed, as done in the former method.
+Here the signal energy, mean and standard deviation are used to segment activities and by adding all the axial time series together, the Signal-To-Noise ration is increased, resulting in a robuster method.
+
+The method of Guenterberg at al. extracts features from the raw sensor signal to base the segmentation on other properties than the pure values.
+The method of Bernecker et al. \cite{bernecker2012activity} uses other statistical properties, namely autocorrelation, to distinguish periodic from non-periodic segments.
+Using the SWAB method the self-similarity of a one-dimensional signal is obtained.
+The authors claim that only a slight modification is needed to perform the method on multi-dimensional data.
+After the segmentation phase, the method of Bernecker et al. extracts other statistical features which are used in the classification phase.
+
+The proposal of Guo et al. \cite{guo2012adaptive} dynamically determines which features should be used for the segmentation and simultaneously determines the best model to fit the segment.
+For each of the three dimensions features such as the mean, variance, covariance, correlation, energy and entropy are calculated.
+By extending the SWAB method, for every frame a feature set is selected, using an enhanced version of Principal Component Analysis (PCA).
+Whereas the before mentioned algorithms use a linear representation, this methods considers linear, quadratic and cubical representations for each segment.
+This differs from other methods where the model is fixed for the whole time series, such as \cite{fuchs2010online}, which is stated to perform inferior on non-stationary time series such as daily life.
+
+The time series data from a sensor can be considered as a stochastic process *** is this a correct term? ***.
+Probabilistic models can be constructed on that signal, yielding in probabilistic and Bayesian based segmentation methods.
+The CUSUM-method relies on the log-likelihood ratio to measure the difference between two distributions.
+To calculate the ratio, the probability density functions need to be calculated.
+The method of Kawahara et al. \cite{kawahara2009change} proposes to estimate the ratio of probability densities (known as the \emph{importance}) directly, without explicit estimation of the densities.
+They claim this results in a robuster approach for real-world scenarios.
+Although this is a model-based method, no strong assumptions (parameter settings) are made on the models.
+
+An other application of PCA is to characterize the data by determining the dimensionality of a sequence of data points.
+The proposed method of Berbi\v{c} et al. \cite{barbivc2004segmenting} determines the number of dimensions (features) needed to approximate a sequence within a specified error.
+With the observation that more dimensions are needed to keep the error below the threshold when transitions between actions occur, cut-points can be located and segments will be created.
+The superior extension of their approach uses a Probabilistic PCA algorithm to incorporate the dimensions outside the selected set as noise.
+
+The method of Adams and MacKay \cite{adams2007bayesian} builds a probabilistic model on the segment run length, given the observed data so far.
+Instead of modeling the values of the data points as a probabilistic distribution, the length of segments as a function if time is modeled by calculating the posterior probability.
+It uses a prior estimate for the run length and a predictive distribution for newly-observed data, given the data since the last change point.
+This method contrasts with the approach of Guralnik and Srivastava \cite{guralnik1999event} in which change points are detected by a change in the (parameters of an) underlying, observed, model.
+For each new data point, the likelihoods of being a change point and part of the current segment are calculated, without a prior model (and thus is a non-Bayesian approach).
+It is observed that when no change point is detected for a long period of time, the computational complexity increases significantly.
