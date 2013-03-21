@@ -12,6 +12,8 @@ Temporal segmentatie met granulariteit instellingen - op minuut / dag / week niv
 
 Filters vs. wrappers. Bij filters zit segmentatie en classificatie apart (?), wrappers zijn gecombineerde methods: In: signaal --> uit: classes. Black box. Moeilijk te vergelijken en fine-tunen. Bij filter beter te vergelijken tussen technieken.
 
+Filters vs. smoothers. Smoothers gebruiken "hele" history. Filters (Kahlman) gebruikt vorige met predictie. Smoothers kunnen niet online zijn (vanwege geheugen). Filters hebben altijd drift.
+
 Transities van segmenten (activiteiten): "zitten" --> "staan" ==> "zitten" --> "overgang (opstaan)" --> "staan".
 
 Segmenteren op verschillende dimensies? E.g. "walking" vs "sitting", maar ook "Work" vs "home", "meeting" vs "television/radio".

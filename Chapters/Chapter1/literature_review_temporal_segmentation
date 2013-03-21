@@ -1,9 +1,13 @@
-% Section Literature Review Segmentation
 % !TEX root = ../../main.tex
-
+% Section Literature Review Segmentation
 \subsection{Temporal Segmentation}\label{sec:lit_review_temporal_segmentation}
-
+As stated by Keogh et al. \cite{keogh2001online}, key to finding solutions is the representation of the data.
+Due to the nature of this research, only segmenting techniques with an on-line approach (or easy translation to one ***?***) will be considered.
+Furthermore, segmentation algorithms can be distinguished in the way it processes the signal.
+Here a distinction is made between periodic and non-periodic activities, using autocorrelation as a measure for self-similarity of a signal.
+Many papers propose segmentation in a SWAB-manner, among which \cite{bernecker2012activity}.
+Some approaches are implemented as batch, or off-line, methods, whilst others split the signal while processing it on-line.
+The algorithm processes an on-line signal per sliding window and merges segments in a bottom-up approach whilst keeping the approximation error below an user-specified threshold.
+The research proposes the Sliding-Window And Bottom-up (SWAB) algorithm to represent a signal as segments of linear approximations.
 The task of temporal segmentation consists of splitting a time series data $M$ into $M_1 \dots M_n$ consecutive segments, where each segment bundles homogeneous data points and there is some notion of heterogeneity between segments.
 This problem arises in many fields of study, among which computer vision *** refs ***, motion capture *** refs *** and data mining *** refs ***.
-Some approaches are implemented as batch, or off-line, methods, whilst others split the signal while processing it on-line.
-Due to the nature of this research, only segmenting techniques with an on-line approach (or easy translation to one ***?***) will be considered.
