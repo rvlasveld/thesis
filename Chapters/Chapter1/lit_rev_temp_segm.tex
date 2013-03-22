@@ -31,10 +31,10 @@ Segmentation methods can roughly be categorized in three methods in the way the 
   Because this second stage retains some (semi-)global view of the data, the results are comparative with normal Bottom-up.
   It is stated by Keogh \etal that the complexity of SWAB is a small constant factor worse than that of regular Bottom-up.
 \end{itemize}
-It is clear that for the application of this research Sliding-window and preferably SWAB-based algorithms should be considered.
+It is clear that for the application of this research sliding-window and preferably SWAB-based algorithms should be considered.
 
 The SWAB method proposed by Keogh \etal \cite{keogh2001online} is dependent on an user setting, providing the maximum error when performing both stages.
-Each segment is approximated by using Piecewise Linear Representation, an often used method.
+Each segment is approximated by using piecewise linear representation (PLR), an often used method.
 The user provided error threshold controls the granularity and number of segments.
 Other methods have been proposed, such as an adaptive threshold based on the signal energy by Guenterberg \etal \cite{guenterberg2009automatic} and an adaptive CUSUM-based test by Alippi \etal \cite{alippi2006adaptive}, in order to eliminate this user-dependency.
 The latter of these methods is able to process the accelerometer values directly, although better results are obtained when features of the signal are processed, as done in the former method.
@@ -60,7 +60,7 @@ The method of Kawahara \etal \cite{kawahara2009change} proposes to estimate the 
 They claim this results in a robuster approach for real-world scenarios.
 Although this is a model-based method, no strong assumptions (parameter settings) are made on the models.
 
-An other application of PCA is to characterize the data by determining the dimensionality of a sequence of data points.
+Another application of PCA is to characterize the data by determining the dimensionality of a sequence of data points.
 The proposed method of Berbi\v{c} \etal \cite{barbivc2004segmenting} determines the number of dimensions (features) needed to approximate a sequence within a specified error.
 With the observation that more dimensions are needed to keep the error below the threshold when transitions between actions occur, cut-points can be located and segments will be created.
 The superior extension of their approach uses a Probabilistic PCA algorithm to incorporate the dimensions outside the selected set as noise.
