@@ -1,25 +1,19 @@
 % !TEX root = ../main.tex
 % Chapter 1
+
+\chapter{Introduction}
+
+\label{Chapter1} % For referencing the chapter elsewhere, use \ref{Chapter1}
+
+\lhead{Chapter 1. \emph{Introduction}} % This is for the header on each page - perhaps a shortened title
+
 %----------------------------------------------------------------------------------------
 
-%perhaps a shortened title
-*** [GRAPHICS diagram: sensors --> signal pre-processing --> feature extraction --> analysis [* segmentation, * labeling] --> conclusions]
-*** Give context problems, means to reach (e.g. monitoring of patients,  getting conclusions over health and activity).
-\chapter{Introduction} % Main chapter title
-\label{Chapter1} % For referencing the chapter elsewhere, use \ref{Chapter1}
-\lhead{Chapter 1. \emph{Introduction}} % This is for the header on each page -
-
-\section{Literature review}
-This section will provide a literature review per coherent subject of this thesis.
-
-% \input{./Chapters/Chapter1/literature_review_nonparametric_clustering}
-\input{./Chapters/Chapter1/lit_rev_segm_and_class}
-\input{./Chapters/Chapter1/lit_rev_temp_segm}
-\input{./Chapters/Chapter1/paper_list}
-
-
-\section{Problem statement}
-
-% \section{System architecture}
-% In subsection \ref{sec:lit_review_segmentation} the research in segmentation and classification of human activities will be discussed.
-% Subsection \ref{sec:lit_review_nonparametric} will take a look on applied non-parametric methods in clustering (time series) of data.
+\section{Outline}
+\begin{itemize}
+  \item Context of research (human activity recognition), real-world applications
+  \item Current methods, wrapper vs. filter methods
+  \item Problem statement with current filter methods (which follows from Chapter \ref{Chapter3} which goes in-depth with methods).
+  \item Purpose of this research. E.g. "Find a better algorithm for short-activity segmentation"
+  \item Relate to real-world applications
+\end{itemize}
