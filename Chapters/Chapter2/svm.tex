@@ -1,0 +1,46 @@
+% !TEX root = ../../main.tex
+\section{Change-detection by Support Vector Machines}
+
+Introduced by Vapnik \cite{vapnik1998statistical, vapnik1999nature}, Support Vector Machines offer a way to segment, and classify, linear separable data.
+When combined with a mapping function, which maps the data from the input space $I$ to a higher dimension feature space $F$, the input data can be non-linear separable.
+The linear hyperplane, which segments the data in the feature space $F$, yields to a non-linear segmentation in the lower-dimensional input space $I$.
+Instead of explicitly mapping the input data to the higher dimensional space, a kernel function can be used.
+This kernel function can calculate values of the feature space directly, without the need to first map the input values to this space.
+This process is referred to as the kernel trick.
+
+*** Let sigma be a mapping from I to F such that the dot product in F can be computed using some simple kernel ***
+
+\subsection{One-class Support Vector Machine}
+The proposed method of Camci \cite{camci2010change} uses a one-class support vector machine to segment time series data.
+One-class SVMs are used to describe the current data under consideration, by assuming all data points are from the same class \cite{tax2001one}.
+The class is described by a spherical boundary around the data with center $c$ and radius $r$, such that the volume is minimized.
+Following the definition of Camci \cite{camci2010change}, the class description is obtained by minimizing $r^2$:
+\begin{equation}
+  \mathrm{Min}\ r^2
+\end{equation}
+\begin{equation}
+  \mathrm{Subject\ to} : \|\mathbf{x}_i - \mathbf{c}\|^2 \le r^2\ \forall i,\ \mathbf{x}_i : i \mathrm{th\ data\ point}
+\end{equation}
+
+To be able to handle outliers in the input data, a penalty cost function $\varepsilon_i$ for each outlier can be added.
+
+*** Add new function and constraints? ***
+
+Using this one-class SVM formulation, differences between two (consecutive) windows of data points with size $w$ can be obtained.
+The first window is used as the input set, $h_1$ and the second as the test set $h_t$.
+For the first window a one-class SVM is constructed, yielding in a representation by $c_1$ and $r_1$.
+When the data points of the second window belong to the same class, the representation of that one-class SVM would equal the first:
+\begin{equation}
+  c_1 = c_2, r_1 = r_2
+\end{equation}
+
+*** First tell more about (underlying) probability density functions, to relate to other methods ***
+
+In case the second window of data points does not belong to the same class, i.e. the probability density function that describes the data differs from the first, the describing values of the second window will differ from the first.
+The amount of difference can be expressed by a dissimilarity measure over the representations.
+When the dissimilarity between the two windows exceeds some predefined threshold $th$, there exists a change point between the windows.
+
+This process can be visualized as done in *** insert figure of four circles ***. The second window, $h_2$ can be constructed from the first by e.g. a shift of one data point. *** explain data point positions by circle ***.
+
+Note that a difference in the SVM center $c$ or radius $r$ represent a change in the mean and variance, respectively.
+
