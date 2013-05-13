@@ -23,12 +23,22 @@
 \end{itemize}
 
 
+
+\section{Statistical framework}
+Many applications require the detection of time points at which underlying properties of a system change.
+This problem thus has received a lot of attention in the fields of data mining, etc... *** list and refs ***.
+
+Some methods, such as the CUSUM (cumulative sum) \cite{basseville1993detection} and GLR (generalized likelihood ratio) \cite{gustafsson1996marginalized, gustafsson2000adaptive} formulate this problem in the statistical framework in the following sense.
+A time series is represented by an underlying probability distribution generating the data.
+The PDFs (probability distribution function) of two consecutive segments around a target point are compared.
+If they differ significantly, the target point is considered as a change point \cite{kawahara2009change}.
+
 %----------------------------------------------------------------------------------------
 \section{Change-detection by Dimensionality Reduction / Covariance structure}
 
 
 %----------------------------------------------------------------------------------------
-\section{Change-detection by Density-Ratio Estimation}
+\input{./Chapters/Chapter2/density_ratio}
 
 %----------------------------------------------------------------------------------------
 \input{./Chapters/Chapter2/svm}
