@@ -25,24 +25,46 @@
 
 
 \section{Statistical framework}
-Many applications require the detection of time points at which underlying properties of a system change.
+Many applications require the detection of time points at which the underlying properties of a system change.
 This problem thus has received a lot of attention in the fields of data mining, etc... *** list and refs ***.
+Often this problem is formulated in a statistical framework, by inspecting the data generating PDF (Probability Density Function) of the time series data.
+A change point is then defined as a significant change in the properties of the PDF, such as the mean and variance.
 
-Some methods, such as the CUSUM (cumulative sum) \cite{basseville1993detection} and GLR (generalized likelihood ratio) \cite{gustafsson1996marginalized, gustafsson2000adaptive} formulate this problem in the statistical framework in the following sense.
-A time series is represented by an underlying probability distribution generating the data.
-The PDFs (probability distribution function) of two consecutive segments around a target point are compared.
-If they differ significantly, the target point is considered as a change point \cite{kawahara2009change}.
+The widely used CUSUM (cumulative sum) method by Basseville \etal \cite{basseville1993detection}, and the GLR (Generalized Likelihood Ratio) by Gustafsson \cite{gustafsson1996marginalized,gustafsson2000adaptive} take this approach.
+The former originates from control methods for detection from bench marks.
+The latter compares the logarithm of the likelihood ratio over two consecutive intervals.
+These two methods is discussed and analyzed in section \ref{cusum-glr}.
+
+The GLR method, as with others, relies on pre-specified parametric model assumptions and considers the data be independent over time, which makes it less flexible to real-world applications.
+The proposed methods by Kawahara \etal \cite{kawahara2009change} and Lui \etal \cite{liu2013change} try to overcome these problems by estimating the \emph{ratio} between the PDF, instead of estimating each PDF.
+This approach is discussed and analyzed in section \ref{density-ratio}.
+
+The density-estimation methods, as with the GLR, rely on the log-likelihood ratio between PDFs.
+The method of Camci \cite{camci2010change} takes an other approach within the statistical framework, by using a SVM (Support Vector Machine).
+One problem it tries to overcome is the (claimed) weakness of many methods to detect a decrease in variance.
+The method represents the distribution over the data points as a hyper-sphere in a higher dimension using kernel trick.
+A change in the PDF is represented by a change in the radius of this sphere.
+Section \ref{svm} discusses the SVM-method.
+
+The final method under consideration, change detection via (intrinsic) dimensionality reduction, takes a different point of view.
+Opposed to the other discussed methods, dimensionality reduction is framed in the MDL (Minimum Description Length) framework.
+It uses the estimated underlying number of parameters of the time series as a model for change detection.
+Section \ref{dim-reduction} discuses this method.
+
+
 
 %----------------------------------------------------------------------------------------
-\section{Change-detection by Dimensionality Reduction / Covariance structure}
-
+% CUSUM and GLR
+\input{./Chapters/Chapter2/cusum_glr}
 
 %----------------------------------------------------------------------------------------
+% Density Ratio Estimation
 \input{./Chapters/Chapter2/density_ratio}
 
 %----------------------------------------------------------------------------------------
+% Support Vector Machines
 \input{./Chapters/Chapter2/svm}
 
 %----------------------------------------------------------------------------------------
-\section{Change-detection by Cumulative Sum}
-
+% Dimensionality reduciton
+\input{./Chapters/Chapter2/dim_reduction}
