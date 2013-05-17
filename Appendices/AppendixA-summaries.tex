@@ -1,0 +1,73 @@
+% !TEX root = ../main.tex
+% Appendix A
+
+\chapter{Summaries} % Main appendix title
+
+\label{AppendixA} % For referencing this appendix elsewhere, use \ref{AppendixA}
+
+\lhead{Appendix A. \emph{Summaries}} % This is for the header on each page - perhaps a shortened title
+
+Please ignore this Appendix.
+This appendix is for my own personal use.
+It contains summaries of articles I have read.
+
+%----------------------------------------------------------------------------------------
+\section{Support Vector Machines}
+
+\subsection{Machine learning: the art and science of algorithms that make sense of data}
+Book by Peter Flach: \cite{flach2012machine}.
+Mainly about chapter 7, ``Linear Models''.
+Most important: section 7.3 - 7.5, about support vector machines and non-linearity.
+\textbf{Some parts are direct text; do not use this text directly!}
+
+\subsection{Linear models}
+Models can be represented by their geometry of $d$ real-values features.
+Data points are represented in the $d$-dimensional cartesian coordinate system/space $\mathcal{X} = \mathbb{R}^d$.
+Geometric concepts such as lines and planes can be used for \emph{classification} and \emph{regression}.
+An alternative approach is to use the distance between datapoints as a similarity measure, resulting from the geometrical representation.
+Linear methods do not use that property, but rely on understanding of models in terms of lines and planes.
+
+Linear models are of great interest in machine learning because of their simplicity.
+A few manifestations of this simplicity are:
+\begin{itemize}
+  \item Linear models are \emph{parametric}, thus fixed small number of parameters that need to be learned from the data.
+  \item Linear models are \emph{stable}, thus small variations in training data have small impact on the learned model. In logical models they can have large impact, because ``splitting rules'' in root have great impact.
+  \item Due to relative few parameters, less likely to \emph{overfit} the training data.
+\end{itemize}
+
+The last two are summarized by saying that \emph{linear models have low variance but high bias}.
+This is preferred with limited data and overfitting is to be avoided.
+
+Linear models are well studied, in particular for the problem of linear regression.
+This can be solved by the \emph{least-squares} method and classification as discussed in section \ref{least-squares}, the \emph{perceptron} as explained in section \ref{perceptron}.
+Linear regression with the \emph{support vector machine} is handled in section \ref{svm-explained} and used for probability density estimation in section \ref{svm-pdf}.
+The kernel trick used for learning non-linear models is explained in section \ref{non-linear}.
+
+\subsection{Least-squares method}\label{least-squares}
+The regression problem is to learn a function estimator $\hat{f}:\mathcal{X} \to \mathbb{R}$ from the examples $(x_i, f(x_i))$ where we assume $\mathcal{X} = \mathbb{R}^d$.
+The difference between the actual and estimated function values are called \emph{residuals} $\epsilon_i = f(x_i) - \hat{f}(x_i)$.
+The \emph{least-squares method} finds the estimation $\hat{f}$ by minimizing $\sum_{i=1}^{n} \epsilon_i^2$.
+Univariate regressesion assumes a linear equation $y = a + b x$, with parameters $a$ and $b$ chosen such that the sum of squared residuals $\sum_{i=1}^{n} (y_i - (a + b x_i))^2$ is minimized.
+Here the estimated parameter $\hat{a}$ is called the \emph{intercept} such that it goes through the (estimated) pooint $(\hat{x},\hat{y})$ and $\hat{b}$is the \emph{slope} which can be expressed by the (co)variances: $\hat{b} = \frac{\sigma_{xy}}{\sigma_{xx}}$.
+In order to find the parameters, take the partial derivatives, set them to $0$ and solve for $a$ and $b$.
+
+Although least-squares is sensitive to outliers, it works very well for such a simple method.
+This can be explained as folows.
+We can assume the underlying function is indeed linear but contanimated with random noise.
+That means that our examples are actually $(x_i, f(x_i) + \epsilon_i)$ and $f(x) = ax + b$.
+If we know $a$ and $b$ we can calculate what the residuals are, and by knowing $\sigma^2$ we can estimate \emph{the probability of observering the residuals}.
+But since we don't know $a$ and $b$ we have to estimate them, by estimating the values for $a$ and $b$ that maximizes the probability of the residuals.
+This is the \emph{maximum-likelihood estimate} (chapter 9 in the book).
+
+The least-squares method can be used for a (binary) classifier, by encoding the target variable $y$ as classes by real numbers $-1$ (negative) and $1$ (positive).
+It follows that $\matrixsym{X}^T\vectorsym(y) = P \vectorsym{\mu^+} - N \vectorsym{\mu^-}$, where $P$, $N$, $\vectorsym{\mu^+}$ and $\vectorsym{\mu^-}$ are the number of positive and negative examples, and the $d$-vectors containing each feature's mean values, resp.
+The regression equation $y = \bar{y} + \hat{b}(x - \bar{x})$ can be used to obtain a decision boundary.
+We need to determine the point $(x_0, y_0)$ such that $y_0$ is half-way between $y^+$ and $y^-$ (the positive and negative examples, i.e. $y_0 = 0$).
+
+\subsection{Perceptron}\label{perceptron}
+\subsection{Support Vector Machine}\label{svm-explained}
+\subsection{Support Vector Machine Density Functions}\label{svm-pdf}
+\subsection{Non-linear models}\label{non-linear}
+
+
+%----------------------------------------------------------------------------------------
