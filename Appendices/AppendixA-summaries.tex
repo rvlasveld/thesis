@@ -65,6 +65,15 @@ The regression equation $y = \bar{y} + \hat{b}(x - \bar{x})$ can be used to obta
 We need to determine the point $(x_0, y_0)$ such that $y_0$ is half-way between $y^+$ and $y^-$ (the positive and negative examples, i.e. $y_0 = 0$).
 
 \subsection{Perceptron}\label{perceptron}
+Labelled data is \emph{linearly separable} if the exists a linear boundary separating the classes.
+The least-squares may find one, but it is not guaranteed.
+Image a perfect linearly separatable data set.
+Move all the positive points away from the negative, but one.
+At one point the new boundary will exclude (misqualify) the one original positive outlier.
+The \emph{perceptron} will guaranteed perform perfect separation when the data allows it to be.
+It was originally proposed as a \emph{simple neural network}.
+
+
 \subsection{Support Vector Machine}\label{svm-explained}
 \subsection{Support Vector Machine Density Functions}\label{svm-pdf}
 \subsection{Non-linear models}\label{non-linear}
