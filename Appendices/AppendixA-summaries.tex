@@ -159,7 +159,7 @@ We would like, instead, to get the probability (using Bayes' rule)
 \begin{equation}
   \hat{p}(\vectorsym{x}) = P(+|d(\vectorsym{x}) = \frac{P(d(\vectorsym{x})|+)P(+)}{P(d(\vectorsym{x})|+)P(+) + P(d(\vectorsym{x})|-)P(-)} = \frac{LR}{LR + 1/clr}
 \end{equation}
-where $LR$ is the likelihood ratio obtained from the normal score distributions, als $clr$ is the class ratio.
+where $LR$ is the likelihood ratio obtained from the normal score distributions, and $clr$ is the class ratio.
 With some rewriting we can convert $d$ into a probability by means of the mapping $d \mapsto \frac{exp(d)}{exp(d) + 1}$, which is the \emph{logistic function}.
 The logarithm of the likelihood ratio is linear in $\vectorsym{x}$ and such models are called \emph{log-linear models}.
 This logistic calibration procedure can change the location of the decision boundary but not ts direction.
@@ -168,6 +168,31 @@ Finding that maximum-likelihood linear classifier using the logistic model is ca
 
 %--------------------------------------------
 \subsection{Non-linear models}\label{non-linear}
+Linear methods such as least-squares for regression can be used for binary classification, yielding in the basic linear classifier.
+The (heuristic) perceptron guaranteers to classify correctly linear separable data points.
+Support vector machines find the unique decision boundary with maximum margin and can be adapted to non-linear separable data.
+These methods can be adjusted to learn non-linear boundaries.
+The main idea is to transform the data from the \emph{input space} non-linearly to a \emph{feature space} (which can, but does need to be in a higher dimension) in which linear classification can be applied.
+The mapping back from the feature space to the input space is often non-trivial (e.g. mapping $(x,y)$ to feature space by $(x^2, y^2)$, yields in four coordinates when transformed back to the input space).
+
+\emph{The remarkable thing is that often the feature space does not have to be explicitly constructed, as we can perform all necessary operations in input space.}
+For instance; the perceptron algorithm mainly depends on the dot product of $\vectorsym{x}_i \cdot \vectorsym{x}_j$.
+Assuming $\vectorsym{x}_i = (x_i, y_i)$ and $\vectorsym{x}_j = (x_j, y_j)$, the dot product can be written as $\vectorsym{x}_i \cdot \vectorsym{x}_j = x_i x_j + y_i y_j$.
+The instances in quadratic feature space are $(x_i^2, y_i^2)$ and $(x_j^2, y_j^2)$ and their dot product is $(x_i^2, y_i^2) \cdot (x_j^2, y_j^2) = x_i^2 x_j^2 + y_i^2 y_j^2$.
+This is almost equal to $(\vectorsym{x}_i \cdot \vectorsym{x}_j)^2 = (x_i x_j)^2 + (y_i y_j^2 + 2 x_i x_j y_i y_j$, but not quite because of the third term.
+We can make the equations equal by \emph{extending the feature space} (to a higher dimension) with a third feature $\sqrt{2xy}$, so the feature space is $\phi(\vectorsym{x}_i) = (x_i^2, y_i^2, \sqrt{2x_i y_i})$.
+
+If we define $\kappa(\vectorsym{x}_i, \vectorsym{x}_j) = (\vectorsym{x}_i, \vectorsym{x}_j)^2$ and replace $\vectorsym{x}_i \cdot \vectorsym{x}_j$ with $\kappa(\vectorsym{x}_i, \vectorsym{x}_j)$ in the (perceptron) algorithm, we obtain the \emph{kernel perceptron} with the degree $p = 2$.
+We are not restricted to polynomial kernels; an often used kernel is the \emph{Gaussian kernel}, defined as:
+\begin{equation}
+  \kappa(\vectorsym{x}_i, \vectorsym{x}_j) = exp(\dfrac{-\norm{\vectorsym{x}_i - \vectorsym{x}_j}^2}{2\sigma^2})
+\end{equation}
+where $\sigma$ is known as the \emph{bandwidth} parameter. We can think of the Gaussian kernel as imposing a Gaussian (i.e., multivariate normal) surface on each support vector in instance space, so that the boundary is defined in therms of those Gaussian surfaces.
+Kernel methods are best known in combination with support vector machines.
+Notice that the soft margin optimization problem is defined in terms of dot product between training examples, and thus the `kernel trick' can be applied.
+Note that the decision boundary learn with a non-linear kernel cannot be represented by a simple weight vector in input space.
+Thus, to classify a new example $\vectorsym{x}$ we need to evaluate $y_i \sum_{j=1}^n \alpha_j y_j \kappa(\vectorsym(x), \vectorsym{x}_j)$ (the Gram matrix?) involving all training examples, or at least all with non-zero multipliers $a_j$ (the support vectors).
+
 
 
 %----------------------------------------------------------------------------------------
