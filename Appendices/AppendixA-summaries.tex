@@ -85,6 +85,56 @@ This means that during the training only the pairwise dot-products of the data i
 This instance-based perspective will be further discussed in section \ref{svm-explained} about the support vector machine.
 
 \subsection{Support Vector Machine}\label{svm-explained}
+A training example can be expressed by its \emph{margin}: $c(x)\hat{s}(x)$, where $c(x)$ is $+1$ for positive and $-1$ for negative examples and $\hat{s}(x)$ is the score.
+The score can be expressed as $\hat{s}(\vectorsym{x}) = \vectorsym{w} \cdot \vectorsym{x} - t$.
+A true positive example $\vectorsym{x}_i$ has a margin $\vectorsym{w} \cdot \vectorsym{x}_i > 0$ and a true negative $\vectorsym{x}_j$ has $\vectorsym{w} \cdot \vectorsym{x}_j < 0$.
+If $m^+$ and $m^-$ are the smallest positive and negative examples, then we want the sum of these to be as large as possible.
+\emph{The training examples with these minimal values are closest to the decision boundary $t$ and are called the support vectors.}
+The decision boundary is defined as a linear combination of the support vectors.
+The margin is thus defined as $\frac{m}{\norm{\vectorsym{w}}}$.
+Minimizing the margin (which is often set to $1$ and rescaling is allowed) yields to minimizing $\norm{\vectorsym{w}}$, or: $\frac{1}{2}\norm{\vectorsym{w}}^2$, restricted that none of the training points fall inside the margin.
+This gives the following quadratic, constrained optimisation problem:
+
+\begin{equation}
+\begin{aligned}
+  & \vectorsym{w}^*, t^* = \argmin\limits_{\vectorsym{w},t} \frac{1}{2} \norm{w}^2 & & \text{subject to } y_i(\vectorsym{w} \cdot \vectorsym{x}_i - t) \geq 1, 1 \leq i \leq n
+\end{aligned}
+\end{equation}
+
+This equation can be transformed with the Lagrange multipliers by adding the constraints to the minimization part with multipliers $\alpha_i$.
+Taking the partial derivative with respect to $t$ and setting it to $0$, we find that for the optimal solution (threshold) $t$ we have $\sum_{i=1}^{n} \alpha_i y_i = 0$.
+When we take the partial derivative with respect to $w\vectorsym{w}$ we see that the Langrange multipliers define the weight vector as a linear combination of the training examples.
+This partial derivative is $0$ for an optimal weight we get that $\vectorsym{w} = \sum_{i=1}^{n} \alpha_i y_i \vectorsym{x}_i$, \emph{which is the same expression as for the perceptrond derived in section \ref{perceptron}}.
+By plugging $\vectorsym{w}$ and $t$ back into the Langrange equation, we can eliminate these and get the dual optimization problem entirely formulated in terms of the Lagrange multipliers:
+
+\begin{equation}
+  \Lambda(\alpha_1, \dots, \alpha_n) = - \frac{1}{2} \sum\limits_{i=i}^n \sum\limits_{j=1}^n \alpha_i \alpha_j y_i y_j \vectorsym{x}_i \cdot \vectorsym{x}_j + \sum\limits_{i=1}^n \alpha_i
+\end{equation}
+
+The dual problem maximizes this function under positivity constaints and one equality constraint:
+
+\begin{equation}
+\begin{aligned}
+  \alpha_1^*, \dots, \alpha_n^* = \argmax\limits_{\alpha_1, \dots, \alpha_n} - \frac{1}{2} \sum\limits_{i=i}^n \sum\limits_{j=1}^n \alpha_i \alpha_j y_i y_j \vectorsym{x}_i \cdot \vectorsym{x}_j + \sum\limits_{i=1}^n \alpha_i \\
+  \text{subject to } \alpha_i \geq 0, 1 \leq i \leq n \text{ and } \sum\limits_{i=1}^n \alpha_i y_i = 0
+\end{aligned}
+\end{equation}
+
+This shows to important properties:
+\begin{enumerate}
+  \item Searching for the maximum-margin decision boundary is equivalent to searching for the support vectors; they are the training examples with non-zero Lagrange multipliers.
+  \item The optimization problem is entirely defined by pairwise dot products between training instances: the entries of the Gram matrix.
+\end{enumerate}
+
+The second property enables powerful adaption for support vector machines to learn non-linear decision boundaries, as discussed in section \ref{non-linear}.
+
+An other solution to non-linear separable data, that is when the constraints $\vectorsym{w} \cdot \vectorsym{x}_i - t \geq 1$ are not jointly satisfiable, is to add \emph{slack variables} $\xi_i$, one for each example.
+This allows them to be in the margin, of even at the wrong side of the boundary -- known as boundary errors.
+Thus, the constaints become $\vectorsym{w} \cdot \vectorsym{x}_i - t \geq 1 - \xi_i$.
+
+``In summary, \emph{support vector machines are linear classifiers that construct the unique decision boundary that maximises the distance to the nearest training examples (the support vectors)}.
+Training an SVM involves solving a large quadratic optimisation problem and is usually best left to a dedicated numerical solver.''
+
 \subsection{Support Vector Machine Density Functions}\label{svm-pdf}
 \subsection{Non-linear models}\label{non-linear}
 
