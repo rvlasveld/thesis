@@ -69,10 +69,20 @@ Labelled data is \emph{linearly separable} if the exists a linear boundary separ
 The least-squares may find one, but it is not guaranteed.
 Image a perfect linearly separatable data set.
 Move all the positive points away from the negative, but one.
-At one point the new boundary will exclude (misqualify) the one original positive outlier.
+At one point the new boundary will exclude (misqualify) the one original positive outlier, due to the mean-statistics it relies on.
 The \emph{perceptron} will guaranteed perform perfect separation when the data allows it to be.
 It was originally proposed as a \emph{simple neural network}.
+It works by iterating over the training set and modifying the weight vector for every misclassified example ($\vectorsym{w} \cdot \vectorsym{x}_i < t$ for positive examples $\vectorsym{x}_i$).
+It uses a learning rate $\eta$, for a misclassified $y_i = \left\{-1,+1\right\}$: $\vectorsym{w}' = \vectorsym{w} + \eta y_i \vectorsym{x}_i$.
+The algorithm can be made \emph{online} by processing a stream of data points and and updating the weight vector only when a new data point is misclassified.
 
+When the algorithm is completed, every $y_i\vectorsym{x}_i$ is added $\alpha_i$ times to the weight vector (every time it was misclassified).
+Thus, the weight vector can be expressed as: $\vectorsym{w} = \sum_{i=i}^n \alpha_i y_i \vectorsym{x}_i$.
+In other words: the weight vector is a linear combination of the training instances.
+The dual form of the algorithm learns the instance weights $\alpha_i$ rather than the features weights $\vectorsym{w}_i$.
+An instance $\vectorsym{x}$ is then classified as $\hat{y} = sign(\sum_{i=1}^n \alpha_i y_i \vectorsym{x}_i \cdot \vectorsym{x})$.
+This means that during the training only the pairwise dot-products of the data is needed; this results in the \emph{n}-by-\emph{n} Gram matrix $\matrixsym{G} = \matrixsym{X}\matrixsym{X}^T$.
+This instance-based perspective will be further discussed in section \ref{svm-explained} about the support vector machine.
 
 \subsection{Support Vector Machine}\label{svm-explained}
 \subsection{Support Vector Machine Density Functions}\label{svm-pdf}
