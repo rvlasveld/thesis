@@ -20,6 +20,8 @@ Mainly about chapter 7, ``Linear Models''.
 Most important: section 7.3 - 7.5, about support vector machines and non-linearity.
 \textbf{Some parts are direct text; do not use this text directly!}
 
+
+%--------------------------------------------
 \subsection{Linear models}
 Models can be represented by their geometry of $d$ real-values features.
 Data points are represented in the $d$-dimensional cartesian coordinate system/space $\mathcal{X} = \mathbb{R}^d$.
@@ -40,9 +42,11 @@ This is preferred with limited data and overfitting is to be avoided.
 
 Linear models are well studied, in particular for the problem of linear regression.
 This can be solved by the \emph{least-squares} method and classification as discussed in section \ref{least-squares}, the \emph{perceptron} as explained in section \ref{perceptron}.
-Linear regression with the \emph{support vector machine} is handled in section \ref{svm-explained} and used for probability density estimation in section \ref{svm-pdf}.
+Linear regression with the \emph{support vector machine} is handled in section \ref{svm-explained} and used for probability density estimation in section \ref{linear-classifier-pdf}.
 The kernel trick used for learning non-linear models is explained in section \ref{non-linear}.
 
+
+%--------------------------------------------
 \subsection{Least-squares method}\label{least-squares}
 The regression problem is to learn a function estimator $\hat{f}:\mathcal{X} \to \mathbb{R}$ from the examples $(x_i, f(x_i))$ where we assume $\mathcal{X} = \mathbb{R}^d$.
 The difference between the actual and estimated function values are called \emph{residuals} $\epsilon_i = f(x_i) - \hat{f}(x_i)$.
@@ -64,6 +68,8 @@ It follows that $\matrixsym{X}^T\vectorsym(y) = P \vectorsym{\mu^+} - N \vectors
 The regression equation $y = \bar{y} + \hat{b}(x - \bar{x})$ can be used to obtain a decision boundary.
 We need to determine the point $(x_0, y_0)$ such that $y_0$ is half-way between $y^+$ and $y^-$ (the positive and negative examples, i.e. $y_0 = 0$).
 
+
+%--------------------------------------------
 \subsection{Perceptron}\label{perceptron}
 Labelled data is \emph{linearly separable} if the exists a linear boundary separating the classes.
 The least-squares may find one, but it is not guaranteed.
@@ -84,6 +90,8 @@ An instance $\vectorsym{x}$ is then classified as $\hat{y} = sign(\sum_{i=1}^n \
 This means that during the training only the pairwise dot-products of the data is needed; this results in the \emph{n}-by-\emph{n} Gram matrix $\matrixsym{G} = \matrixsym{X}\matrixsym{X}^T$.
 This instance-based perspective will be further discussed in section \ref{svm-explained} about the support vector machine.
 
+
+%--------------------------------------------
 \subsection{Support Vector Machine}\label{svm-explained}
 A training example can be expressed by its \emph{margin}: $c(x)\hat{s}(x)$, where $c(x)$ is $+1$ for positive and $-1$ for negative examples and $\hat{s}(x)$ is the score.
 The score can be expressed as $\hat{s}(\vectorsym{x}) = \vectorsym{w} \cdot \vectorsym{x} - t$.
@@ -135,7 +143,30 @@ Thus, the constaints become $\vectorsym{w} \cdot \vectorsym{x}_i - t \geq 1 - \x
 ``In summary, \emph{support vector machines are linear classifiers that construct the unique decision boundary that maximises the distance to the nearest training examples (the support vectors)}.
 Training an SVM involves solving a large quadratic optimisation problem and is usually best left to a dedicated numerical solver.''
 
-\subsection{Support Vector Machine Density Functions}\label{svm-pdf}
+%--------------------------------------------
+\subsection{Density Functions from linear classifiers}\label{linear-classifier-pdf}
+The score of an data point can be used to obtain the signed distance of $\vectorsym{x}_i$ to the dicision boundary:
+\begin{equation}
+  d(\vectorsym{x}_i) = \frac{\hat{s}(\vectorsym{x}_i)}{\norm{w}} = \frac{\vectorsym{w} \cdot \vectorsym{x}_i - t}{\norm{w}} = \vectorsym{w}' \cdot \vectorsym{x}_i - t'
+\end{equation}
+where $\vectorsym{w}' = \vectorsym{w} / \norm{\vectorsym{w}}$ rescaled to unit length and $t' = t / \norm{w}$ corresponds to the rescaled intercept.
+this geometric interpretation of the scores enables them to turn into probabilities.
+Let $\bar{d}^+ = \vectorsym{w} \cdot \vectorsym{\mu}^+ - t$ denote the mean distance of the positive examples to the boundary, where $\vectorsym{\mu}^+$ is the mean of positive examples (in the grid) and $\vectorsym{w}$ is unit length.
+We can assume that the distance of the examples is normally distributed around the mean (which give a bell curve when plotted).
+
+If we obtain a new point $\vectorsym{x}$ we can get the class by $sign(d(\vectorsym{x}))$.
+We would like, instead, to get the probability (using Bayes' rule)
+\begin{equation}
+  \hat{p}(\vectorsym{x}) = P(+|d(\vectorsym{x}) = \frac{P(d(\vectorsym{x})|+)P(+)}{P(d(\vectorsym{x})|+)P(+) + P(d(\vectorsym{x})|-)P(-)} = \frac{LR}{LR + 1/clr}
+\end{equation}
+where $LR$ is the likelihood ratio obtained from the normal score distributions, als $clr$ is the class ratio.
+With some rewriting we can convert $d$ into a probability by means of the mapping $d \mapsto \frac{exp(d)}{exp(d) + 1}$, which is the \emph{logistic function}.
+The logarithm of the likelihood ratio is linear in $\vectorsym{x}$ and such models are called \emph{log-linear models}.
+This logistic calibration procedure can change the location of the decision boundary but not ts direction.
+There may be an alternative weight vector with a different direction that assign a higher likelihood to the data.
+Finding that maximum-likelihood linear classifier using the logistic model is called \emph{logistic regression}.
+
+%--------------------------------------------
 \subsection{Non-linear models}\label{non-linear}
 
 
