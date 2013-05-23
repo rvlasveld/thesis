@@ -252,3 +252,28 @@ The problem then becomes:
 It has been shown that Gaussian kernels offer better performance for one-class classification the others.
 The optimization of the \emph{scale parameter} has led to several implementations.
 As can been seen, there are no assumptions about the data distribution or independency made.
+
+\subsubsection{Problem formulation}
+[Not summarized here, useful for e.g. section \ref{statistical-framework}]
+
+\subsubsection{SVCPD: The algorithm}
+Instead of using statistical properties of the data, for each window of size $w$ a hyper-sphere is constructed without increasing computational complexity due to the \emph{kernel trick}.
+The window size is related to the sensitivity of the method to change; small windows are sensitive with high false alarm rate whilst large windows are slow to detect change and have low alarm rates.
+The algorithm is:
+
+\begin{center}\begin{table}
+\begin{tabular}{ l p{12cm} }
+  \hline
+  Step & Action \\
+  \hline
+  1 & Start with $n$ observations and construct hyper-sphere \\
+  2 & Add next observation $x_t$ and drop first one \\
+  3 & Identify new hyper-sphere and its \emph{approximate radius} \\
+  4 & if $x_t$ is outside hyper-sphere, mark $t$ as change points and continue from step 2 \\
+  5 & calculate radius average of last $w$ hyper-planes \\
+  6 & calculate radius ratio $\hbar$. If lower than ${th}_{low}$ or greater than ${th}_{high}$ then mark $t$ as change point \\
+  7 & continue from step 2 \\
+  \hline
+\end{tabular}
+\caption{Support Vector machine based Change Point Detection algorithm}
+\end{table}\end{center}
