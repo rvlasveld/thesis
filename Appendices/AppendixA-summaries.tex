@@ -24,9 +24,9 @@ Most important: section 7.3 - 7.5, about support vector machines and non-lineari
 %--------------------------------------------
 \subsubsection{Linear models}
 Models can be represented by their geometry of $d$ real-values features.
-Data points are represented in the $d$-dimensional cartesian coordinate system/space $\mathcal{X} = \mathbb{R}^d$.
+Data points are represented in the $d$-dimensional Cartesian coordinate system/space $\mathcal{X} = \mathbb{R}^d$.
 Geometric concepts such as lines and planes can be used for \emph{classification} and \emph{regression}.
-An alternative approach is to use the distance between datapoints as a similarity measure, resulting from the geometrical representation.
+An alternative approach is to use the distance between data points as a similarity measure, resulting from the geometrical representation.
 Linear methods do not use that property, but rely on understanding of models in terms of lines and planes.
 
 Linear models are of great interest in machine learning because of their simplicity.
@@ -56,10 +56,10 @@ Here the estimated parameter $\hat{a}$ is called the \emph{intercept} such that 
 In order to find the parameters, take the partial derivatives, set them to $0$ and solve for $a$ and $b$.
 
 Although least-squares is sensitive to outliers, it works very well for such a simple method.
-This can be explained as folows.
-We can assume the underlying function is indeed linear but contanimated with random noise.
+This can be explained as follows.
+We can assume the underlying function is indeed linear but contaminated with random noise.
 That means that our examples are actually $(x_i, f(x_i) + \epsilon_i)$ and $f(x) = ax + b$.
-If we know $a$ and $b$ we can calculate what the residuals are, and by knowing $\sigma^2$ we can estimate \emph{the probability of observering the residuals}.
+If we know $a$ and $b$ we can calculate what the residuals are, and by knowing $\sigma^2$ we can estimate \emph{the probability of observing the residuals}.
 But since we don't know $a$ and $b$ we have to estimate them, by estimating the values for $a$ and $b$ that maximizes the probability of the residuals.
 This is the \emph{maximum-likelihood estimate} (chapter 9 in the book).
 
@@ -71,11 +71,11 @@ We need to determine the point $(x_0, y_0)$ such that $y_0$ is half-way between 
 
 %--------------------------------------------
 \subsubsection{Perceptron}\label{perceptron}
-Labelled data is \emph{linearly separable} if the exists a linear boundary separating the classes.
+Labeled data is \emph{linearly separable} if the exists a linear boundary separating the classes.
 The least-squares may find one, but it is not guaranteed.
-Image a perfect linearly separatable data set.
+Image a perfect linearly separable data set.
 Move all the positive points away from the negative, but one.
-At one point the new boundary will exclude (misqualify) the one original positive outlier, due to the mean-statistics it relies on.
+At one point the new boundary will exclude (mis qualify) the one original positive outlier, due to the mean-statistics it relies on.
 The \emph{perceptron} will guaranteed perform perfect separation when the data allows it to be.
 It was originally proposed as a \emph{simple neural network}.
 It works by iterating over the training set and modifying the weight vector for every misclassified example ($\vectorsym{w} \cdot \vectorsym{x}_i < t$ for positive examples $\vectorsym{x}_i$).
@@ -101,7 +101,7 @@ If $m^+$ and $m^-$ are the smallest positive and negative examples, then we want
 The decision boundary is defined as a linear combination of the support vectors.
 The margin is thus defined as $\frac{m}{\norm{\vectorsym{w}}}$.
 Minimizing the margin (which is often set to $1$ and rescaling is allowed) yields to minimizing $\norm{\vectorsym{w}}$, or: $\frac{1}{2}\norm{\vectorsym{w}}^2$, restricted that none of the training points fall inside the margin.
-This gives the following quadratic, constrained optimisation problem:
+This gives the following quadratic, constrained optimization problem:
 
 \begin{equation}
 \begin{aligned}
@@ -111,15 +111,15 @@ This gives the following quadratic, constrained optimisation problem:
 
 This equation can be transformed with the Lagrange multipliers by adding the constraints to the minimization part with multipliers $\alpha_i$.
 Taking the partial derivative with respect to $t$ and setting it to $0$, we find that for the optimal solution (threshold) $t$ we have $\sum_{i=1}^{n} \alpha_i y_i = 0$.
-When we take the partial derivative with respect to $w\vectorsym{w}$ we see that the Langrange multipliers define the weight vector as a linear combination of the training examples.
-This partial derivative is $0$ for an optimal weight we get that $\vectorsym{w} = \sum_{i=1}^{n} \alpha_i y_i \vectorsym{x}_i$, \emph{which is the same expression as for the perceptrond derived in section \ref{perceptron}}.
-By plugging $\vectorsym{w}$ and $t$ back into the Langrange equation, we can eliminate these and get the dual optimization problem entirely formulated in terms of the Lagrange multipliers:
+When we take the partial derivative with respect to $w\vectorsym{w}$ we see that the Lagrange multipliers define the weight vector as a linear combination of the training examples.
+This partial derivative is $0$ for an optimal weight we get that $\vectorsym{w} = \sum_{i=1}^{n} \alpha_i y_i \vectorsym{x}_i$, \emph{which is the same expression as for the perceptron derived in section \ref{perceptron}}.
+By plugging $\vectorsym{w}$ and $t$ back into the Lagrange equation, we can eliminate these and get the dual optimization problem entirely formulated in terms of the Lagrange multipliers:
 
 \begin{equation}
   \Lambda(\alpha_1, \dots, \alpha_n) = - \frac{1}{2} \sum\limits_{i=i}^n \sum\limits_{j=1}^n \alpha_i \alpha_j y_i y_j \vectorsym{x}_i \cdot \vectorsym{x}_j + \sum\limits_{i=1}^n \alpha_i
 \end{equation}
 
-The dual problem maximizes this function under positivity constaints and one equality constraint:
+The dual problem maximizes this function under positivity constraints and one equality constraint:
 
 \begin{equation}
 \begin{aligned}
@@ -138,14 +138,14 @@ The second property enables powerful adaption for support vector machines to lea
 
 An other solution to non-linear separable data, that is when the constraints $\vectorsym{w} \cdot \vectorsym{x}_i - t \geq 1$ are not jointly satisfiable, is to add \emph{slack variables} $\xi_i$, one for each example.
 This allows them to be in the margin, of even at the wrong side of the boundary -- known as boundary errors.
-Thus, the constaints become $\vectorsym{w} \cdot \vectorsym{x}_i - t \geq 1 - \xi_i$.
+Thus, the constraints become $\vectorsym{w} \cdot \vectorsym{x}_i - t \geq 1 - \xi_i$.
 
-``In summary, \emph{support vector machines are linear classifiers that construct the unique decision boundary that maximises the distance to the nearest training examples (the support vectors)}.
-Training an SVM involves solving a large quadratic optimisation problem and is usually best left to a dedicated numerical solver.''
+``In summary, \emph{support vector machines are linear classifiers that construct the unique decision boundary that maximizes the distance to the nearest training examples (the support vectors)}.
+Training an SVM involves solving a large quadratic optimization problem and is usually best left to a dedicated numerical solver.''
 
 %--------------------------------------------
 \subsubsection{Density Functions from linear classifiers}\label{linear-classifier-pdf}
-The score of an data point can be used to obtain the signed distance of $\vectorsym{x}_i$ to the dicision boundary:
+The score of an data point can be used to obtain the signed distance of $\vectorsym{x}_i$ to the decision boundary:
 \begin{equation}
   d(\vectorsym{x}_i) = \frac{\hat{s}(\vectorsym{x}_i)}{\norm{w}} = \frac{\vectorsym{w} \cdot \vectorsym{x}_i - t}{\norm{w}} = \vectorsym{w}' \cdot \vectorsym{x}_i - t'
 \end{equation}
@@ -223,3 +223,32 @@ Other methods generally suffer from:
 \end{itemize}
 
 \subsubsection{Support vector based one-class classification}
+Although SVM was originally designed for two-class classification, it has been successfully applied to multi-class and one-class classification.
+SVM-based one-class classification gives the minimum volume closed spherical boundary around the data, represented by center $c$ and radius $r$.
+It minimizes $r^2$ (representing structural error), and uses a penalty coefficient $C$ for each outlier with distance $\xi_i$ from the hyper-sphere boundary:
+\begin{equation}
+\begin{aligned}
+  \text{Min } r^2 + C \sum_{i} \xi_i \\
+  \text{Subject to : } \norm{\vectorsym{x}_i - c}^2 \leq r^2 + \xi_i & & \xi_i \geq 0, & & \forall i, \vectorsym{x}_i: i\text{th data point}
+\end{aligned}
+\end{equation}
+This quadratic optimization problem can be transformed to its dual form by introduction Lagrange multipliers $\alpha_i$.
+If, for a data point, the multiplier $\alpha_i = 0$, then that point is inside the sphere.
+When it is $0 < \alpha_i < C$, then it is on the boundary.
+Data points for which the multiplier is $\alpha_i = C$ are located outside the sphere (and are penalized).
+The dual form is:
+\begin{equation}
+\begin{aligned}
+  \text{Max } \sum_i \alpha_i (\vectorsym{x}_i \cdot \vectorsym{x}_i) - \sum_{i,j} \alpha_i \alpha_j (\vectorsym{x}_i \cdot \vectorsym{x}_j) \\
+  \text{Subject to : } 0 \leq \alpha_i \leq C & & \forall i, & & \sum_i \alpha_i = 1
+\end{aligned}
+\end{equation}
+Note that only dot-products of the data points $\vectorsym{x}$ appear.
+In order to transform the data points to a higher dimension, to create a good representational hyper-sphere, kernels replace the dot products without compromising computational complexity.
+The problem then becomes:
+\begin{equation}
+  \text{Max } \sum_i \alpha_i K(\vectorsym{x}_i, \vectorsym{x}_i) - \sum_{i,j} \alpha_i \alpha_j K(\vectorsym{x}_i, \vectorsym{x}_j)
+\end{equation}
+It has been shown that Gaussian kernels offer better performance for one-class classification the others.
+The optimization of the \emph{scale parameter} has led to several implementations.
+As can been seen, there are no assumptions about the data distribution or independency made.
