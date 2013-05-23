@@ -259,7 +259,8 @@ As can been seen, there are no assumptions about the data distribution or indepe
 \subsubsection{SVCPD: The algorithm}
 Instead of using statistical properties of the data, for each window of size $w$ a hyper-sphere is constructed without increasing computational complexity due to the \emph{kernel trick}.
 The window size is related to the sensitivity of the method to change; small windows are sensitive with high false alarm rate whilst large windows are slow to detect change and have low alarm rates.
-The algorithm is:
+The algorithm is listed in table \ref{tab:alg-svcdp}.
+Note that SVCPD can be applied directly to multidimensional data, whilst many other methods can only be applied to one-dimensional data.
 
 \begin{center}\begin{table}
 \begin{tabular}{ l p{12cm} }
@@ -276,4 +277,5 @@ The algorithm is:
   \hline
 \end{tabular}
 \caption{Support Vector machine based Change Point Detection algorithm}
+\label{tab:alg-svcdp}
 \end{table}\end{center}
