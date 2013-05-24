@@ -279,3 +279,81 @@ Note that SVCPD can be applied directly to multidimensional data, whilst many ot
 \caption{Support Vector machine based Change Point Detection algorithm}
 \label{tab:alg-svcdp}
 \end{table}\end{center}
+
+
+
+%----------------------------------------------------------------------------------------
+\section{CUSUM for variance}
+
+\subsection{Use of Cumulative Sums of Squares for Retrospective Detection of Changes of Variance}
+Carla Inclan and George C. Tiao \cite{inclan1994use}, 1944, 162 refs.
+
+
+%--------------------------------------------
+\subsubsection{Introduction}
+This paper is about reflective detection of multiple changes of variance in a sequence of independent observations.
+This is a statistical method, which differs from others (in that field) such as Bayesian method (Bayes ratio, posterior odds), maximum likelihood methods and (autoregressive) models.
+This approach uses the centered version of cumulative sums of squares to search for change points systematically and iteratively (and reflective).
+
+
+%--------------------------------------------
+\subsubsection{Centered Cumulative Sum of Squares}
+The cumulative sum of squares is often used for change detection in the mean.
+It is defined as $C_k = \sum_{i=1}^k \alpha_t^2$ for a series of uncorrelated random variables $\{\alpha_t\}$ with mean $0$ and variance $\sigma_t^2, t = 1, 2, \dots, T$.
+The centered (and normalized) cumulative sum of squares is:
+\begin{equation}
+  \begin{aligned}
+  D_k = \frac{C_k}{C_T} - \frac{k}{T}, & & k = 1, \dots, T, & & \text{with } D_0 = D_T = 0
+  \end{aligned}
+\end{equation}
+For homogeneous variance the plot of $D_k$ against $k$ (the first $k$ elements of the series) will oscillate around $0$.
+When a sudden change in variance occurs, the pattern of the plot of $D_k$ will break out some specified boundaries with high probability.
+For $C_k$ it holds that, under homogeneous variance, the plot will be a straight line with slope $\sigma^2$.
+With one of more change points the plot appears as a line of several straight pieces.
+The plot of $D_k$ creates a peak for a smaller and a trough for a larger variance, is visually more clear and breaks out a predefined value.
+The search for a change point is variance is than to find $k^* = \text{max}_k \abs{D_k}$.
+If the value of $D_k$ at $k^*$ exceeds a predefined value (e.g. $D_{0.5}^* = 1.358$, for $\sqrt{T / 2D_k}$ because of the Brownian bridge property), that value of $k^*$ will be an estimate for a change point.
+
+There is a relation between $D_k$ and the $F$ statistic, which is used for testing equality of variances between two independent samples.
+For a fixed $k$, $D_k(F)$ is a monotone function of $F$ (it depends only on $k$ through $k/T$).
+An important distinction: the $F$ statistic is \emph{used with known $k$}, whereas we are looking for $\text{max}_k \abs{D_k}$ to determine the location of the change point.
+
+When we assume that $\{\alpha_t\}$ is normally distributed with mean $0$ and variances $\sigma_t^2$, then we can obtain the \emph{likelihood ratio} for testing the hypothesis of one change against the hypothesis of no change in the variance.
+When maximizing the likelihood estimator for a location $\kappa$, we can find the log-likelihood ratio $LR_{0,1}$.
+Although $LR_{0,1}$ and $\text{max}_k \abs{D_k}$ are related, they are not the same.
+The latter puts more weight near the middle of the series is thus biased toward $T/2$.
+
+The (expected) value of $D_k$ given a change in variance differs in the context.
+If a smaller variance corresponds to the smaller portion of the series, then it will be harden to find the change point using $D_k$.
+There is a masking effect when there are multiple change points in the series; the order of small, medium and large variances result in the value of $D_k$.
+The iterative algorithm presented in this paper in section \ref{subsec:icss} is designed to lessen the masking effect.
+
+%--------------------------------------------
+\subsubsection{Multiple changes: Iterated cumulative sums of squares}\label{subsec:icss}
+In case of a single change point the $D_k$ method would succeed.
+But we are interested in multiple change points of variance, and thus the usefulness of the $D_k$ reduces due to the masking effect.
+A solution is to iteratively applying the method and dividing the series at each possible change point.
+The algorithm is presented in table \ref{tab:icss}.
+It is the third steps which reduces the masking effect and helps to ``fine tune'' the algorithm by (re)moving the potential change points by checking each location given the adjacent ones.
+
+\begin{center}\begin{table}
+\begin{tabular}{ l p{12cm} }
+  \hline
+  Step & Action \\
+  \hline
+  0 & Let $t_1 = 1$ \\
+  1 & Calculate $D_k(\alpha[t_1 : T])$. Let $k^*(\alpha[t_1 : T])$ be the point at which $\text{max}_k \abs{D_k(\alpha[t_1 : T])}$. Let $D^*$ be the asymptotically critical value and $M$ the max value in the series segment (?). If $M > D^*$ then consider $k^*$ to be a change point. Else, there is no change point and the algorithm stops. \\
+  2a & Repeat for the first part (up to the change point), until no more change points are found. \\
+  2b & Repeat for the second part (from the change point forward), until no more change points are found. \\
+  3 & When two or more change points are found; check for each $\alpha[j-1 : j+1]$ if there is indeed a change point ($j$). Repeat until the number of change points does not change and each new found change point is ``close'' enough to previous. \\
+  \hline
+\end{tabular}
+\caption{Iterated Cumulative Sums of Squares (ICSS) Algorithm}
+\label{tab:alg-svcdp}
+\end{table}\end{center}
+
+\subsubsection{Results}
+When the ICSS algorithm was applied to stock data, it resulted in comparable results as the maximum likelihood estimates and Bayesian analysis.
+The performance (CPU-time and correct observations with artificial data) of ICSS outperforms the other two.
+The heavy computational burden of posterior odds can be partially alleviated by the maximum log-likelihood method.
+The ICSS algorithm avoids calculating a function at all possible locations of change points due the iterative manner.
