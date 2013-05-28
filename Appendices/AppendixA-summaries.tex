@@ -12,6 +12,9 @@ This appendix is for my own personal use.
 It contains summaries of articles I have read.
 
 %----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
 \section{Support Vector Machines}
 
 \subsection{Machine learning: the art and science of algorithms that make sense of data}
@@ -282,6 +285,11 @@ Note that SVCPD can be applied directly to multidimensional data, whilst many ot
 
 
 
+
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
 \section{CUSUM for variance}
 
@@ -357,3 +365,62 @@ When the ICSS algorithm was applied to stock data, it resulted in comparable res
 The performance (CPU-time and correct observations with artificial data) of ICSS outperforms the other two.
 The heavy computational burden of posterior odds can be partially alleviated by the maximum log-likelihood method.
 The ICSS algorithm avoids calculating a function at all possible locations of change points due the iterative manner.
+
+
+
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+\section{Density Ratio Estimation}
+
+\subsection{Change-Point Detection in Time-Series Data by Direct Density-Ratio Estimation}
+Kawahara and Sugiyama \cite{kawahara2009change}, 2009, 45 refs.
+
+``This paper provides a change-point detection algorithm based on direct density-ratio estimation that can be computed very efficiently in an online manner''.
+
+%--------------------------------------------
+\subsubsection{Introduction}
+The problem of change-point detection is well studied over the last decades in the field of statistics.
+A common statistical formulation of change-point detection is to consider the probability distributions over past and present data intervals, and regard the target time as a change-point if the two distributions are significantly different.
+Some approaches (such as CUSUM and GLR) make use of the \emph{log-likelihood ratio}, and are extensively explored in the data mining community.
+Many approaches (novelty detection, maximum-likelihood ratio, learning of autoregressive models, subspace identification) rely on pre-specified parametric models (probability density models, autoregressive models, state-space models).
+That makes it less applicable to real-life problems.
+There have been some non-parametric density estimation approaches proposed, but that is known to be a hard problem.
+The key idea of this paper to directly estimate the \emph{ratio} of the probability densities (also known as \emph{importance}).
+The Kullback-Leibler Importance Estimation Procedure (KLIEP) is an example, but it is a batch algorithm.
+This paper introduces an online version of the KLIEP algorithm and develops a flexible and computationally efficient change-point detection method.
+This method is equipped with a natural cross validation procedure and thus the value of tuning parameters can be objectively determined.
+
+\subsubsection{Problem formulation and Basic Approach}
+Let $\vectorsym{y}(t) (\in \mathbb{R}^d)$ be a $d$-dimensional time series sample at time $t$.
+The task is to detect whether there exists a change point between two consecutive time intervals, called the \emph{reference} and \emph{test} intervals.
+The conventional algorithms consider the likelihood ratio over samples from the two intervals.
+Since time-series samples generally are not independent over time it is hard to deal with them directly.
+To overcome this difficulty, we consider \emph{sequences} of samples in the intervals: $\matrixsym{Y}(t)(\in \mathbb{R}^{dk})$ is the forward subsequence of length $k$ at time $t$.
+This is a common practice in subspace identification since it takes implicitly time correlation into consideration.
+The algorithm in the paper is based on the logarithm of the likelihood ration of the \emph{sequence sample} $\matrixsym{Y}$:
+\begin{equation}
+  s(\matrixsym{Y}) = \text{ln}\frac{p_\text{te}(\matrixsym{Y})}{p_\text{rf}(\matrixsym{Y})}
+\end{equation}
+where $p_{\text{te}}(\matrixsym{Y})$ and $p_{\text{rf}}(\matrixsym{Y})$ are the probability density functions of the reference and test sequence samples.
+Let $t_{\text{rf}}$ and $t_{\text{te}}$ be the starting points of the reference and test intervals.
+Decide if there is a change-point between the reference and test interval by monitoring the logarithm of the likelihood ratio:
+\begin{equation}
+  S = \sum_{i=1}^{n_\text{te}} \text{ln} \frac{p_{\text{te}}(\matrixsym{Y}_\text{te}(i))}{p_\text{rf}(\matrixsym{Y}_\text{te}(i))}
+\end{equation}
+If, for a predefined $\mu > 0$, it holds that $S > \mu$ then a change occurs.
+The remaining question is how to calculate the density ratio, because it is unknown and we need to estimate it from examples.
+The naive approach would be to first estimate the densities for the reference and test interval separately and then take the ratio.
+This approach via non-parametric density estimation may not be effective --- directly estimating the density ratio without estimating the densities would be more promising.
+
+The direct estimation of the density ratio is based on the Kullback-Leibler Importance Estimation Procedure.
+Let us model the density ratio $w(\matrixsym{Y})$ by a non-parametric Gaussian kernel model:
+\begin{equation}
+  \hat{w}(\matrixsym{Y}) = \sum_{l=1}^{n_\text{te}} \alpha_l K_\sigma(\matrixsym{Y}, \matrixsym{Y}_\text{te}(l)),
+\end{equation}
+where $\{\alpha_l\}_{l=1}^{n_\text{te}}$ are parameters to be learned from the data samples and $K_\sigma(\matrixsym{Y}, \matrixsym{Y}')$ is the Gaussian kernel function with mean $\matrixsym{Y}'$ and standard deviation $\sigma$.
+
+\subsubsection{Online Algorithm}
+...
