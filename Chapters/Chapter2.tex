@@ -14,41 +14,43 @@
   \item Consider methods for the context of filter-methods for classification
   \item Take a loot at 3-4 different kind of methods for change detection:
     \begin{itemize}
-      \item Dimensionality reduction
+      \item Introduction with a lot of techniques
+      \item Explain why look at a few
+      \item CUSUM - or other more traditional methods
       \item Density-ratio estimation
       \item Support Vector Machines (?) - if there are more sources about this
-      \item CUSUM - or other more traditional methods
+      \item (Dimensionality reduction)
     \end{itemize}
   \item With each method, shortly look at characteristics, strengths and weaknesses and consider applicability to accelerometer sensor data
 \end{itemize}
 
 
-\section{Statistical framework}\label{statistical-framework}
-Many applications require the detection of time points at which the underlying properties of a system change.
-This problem thus has received a lot of attention in the fields of data mining, etc... *** list and refs ***.
-Often this problem is formulated in a statistical framework, by inspecting the data generating PDF (Probability Density Function) of the time series data.
-A change point is then defined as a significant change in the properties of the PDF, such as the mean and variance.
+% \section{Statistical framework}\label{statistical-framework}
+% Many applications require the detection of time points at which the underlying properties of a system change.
+% This problem thus has received a lot of attention in the fields of data mining, etc... *** list and refs ***.
+% Often this problem is formulated in a statistical framework, by inspecting the data generating PDF (Probability Density Function) of the time series data.
+% A change point is then defined as a significant change in the properties of the PDF, such as the mean and variance.
 
-The widely used CUSUM (cumulative sum) method by Basseville \etal \cite{basseville1993detection}, and the GLR (Generalized Likelihood Ratio) by Gustafsson \cite{gustafsson1996marginalized,gustafsson2000adaptive} take this approach.
-The former originates from control methods for detection from bench marks.
-The latter compares the logarithm of the likelihood ratio over two consecutive intervals.
-These two methods is discussed and analyzed in section \ref{cusum-glr}.
+% The widely used CUSUM (cumulative sum) method by Basseville \etal \cite{basseville1993detection}, and the GLR (Generalized Likelihood Ratio) by Gustafsson \cite{gustafsson1996marginalized,gustafsson2000adaptive} take this approach.
+% The former originates from control methods for detection from bench marks.
+% The latter compares the logarithm of the likelihood ratio over two consecutive intervals.
+% These two methods is discussed and analyzed in section \ref{cusum-glr}.
 
-The GLR method, as with others, relies on pre-specified parametric model assumptions and considers the data be independent over time, which makes it less flexible to real-world applications.
-The proposed methods by Kawahara \etal \cite{kawahara2009change} and Lui \etal \cite{liu2013change} try to overcome these problems by estimating the \emph{ratio} between the PDF, instead of estimating each PDF.
-This approach is discussed and analyzed in section \ref{density-ratio}.
+% The GLR method, as with others, relies on pre-specified parametric model assumptions and considers the data be independent over time, which makes it less flexible to real-world applications.
+% The proposed methods by Kawahara \etal \cite{kawahara2009change} and Lui \etal \cite{liu2013change} try to overcome these problems by estimating the \emph{ratio} between the PDF, instead of estimating each PDF.
+% This approach is discussed and analyzed in section \ref{density-ratio}.
 
-The density-estimation methods, as with the GLR, rely on the log-likelihood ratio between PDFs.
-The method of Camci \cite{camci2010change} takes an other approach within the statistical framework, by using a SVM (Support Vector Machine).
-One problem it tries to overcome is the (claimed) weakness of many methods to detect a decrease in variance.
-The method represents the distribution over the data points as a hyper-sphere in a higher dimension using kernel trick.
-A change in the PDF is represented by a change in the radius of this sphere.
-Section \ref{svm} discusses the SVM-method.
+% The density-estimation methods, as with the GLR, rely on the log-likelihood ratio between PDFs.
+% The method of Camci \cite{camci2010change} takes an other approach within the statistical framework, by using a SVM (Support Vector Machine).
+% One problem it tries to overcome is the (claimed) weakness of many methods to detect a decrease in variance.
+% The method represents the distribution over the data points as a hyper-sphere in a higher dimension using kernel trick.
+% A change in the PDF is represented by a change in the radius of this sphere.
+% Section \ref{svm} discusses the SVM-method.
 
-The final method under consideration, change detection via (intrinsic) dimensionality reduction, takes a different point of view.
-Opposed to the other discussed methods, dimensionality reduction is framed in the MDL (Minimum Description Length) framework.
-It uses the estimated underlying number of parameters of the time series as a model for change detection.
-Section \ref{dim-reduction} discuses this method.
+% The final method under consideration, change detection via (intrinsic) dimensionality reduction, takes a different point of view.
+% Opposed to the other discussed methods, dimensionality reduction is framed in the MDL (Minimum Description Length) framework.
+% It uses the estimated underlying number of parameters of the time series as a model for change detection.
+% Section \ref{dim-reduction} discuses this method.
 
 
 
