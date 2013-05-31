@@ -341,7 +341,7 @@ The iterative algorithm presented in this paper in section \ref{subsec:icss} is 
 In case of a single change point the $D_k$ method would succeed.
 But we are interested in multiple change points of variance, and thus the usefulness of the $D_k$ reduces due to the masking effect.
 A solution is to iteratively applying the method and dividing the series at each possible change point.
-The algorithm is presented in table \ref{tab:icss}.
+The algorithm is presented in table \ref{tab:alg-icss}.
 It is the third steps which reduces the masking effect and helps to ``fine tune'' the algorithm by (re)moving the potential change points by checking each location given the adjacent ones.
 
 \begin{center}\begin{table}
@@ -357,7 +357,7 @@ It is the third steps which reduces the masking effect and helps to ``fine tune'
   \hline
 \end{tabular}
 \caption{Iterated Cumulative Sums of Squares (ICSS) Algorithm}
-\label{tab:alg-svcdp}
+\label{tab:alg-icss}
 \end{table}\end{center}
 
 \subsubsection{Results}
