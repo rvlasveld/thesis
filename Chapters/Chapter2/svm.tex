@@ -1,7 +1,7 @@
 % !TEX root = ../../main.tex
 \section{Change-detection by Support Vector Machines}\label{svm}
 
-Introduced by Vapnik \cite{vapnik1998statistical, vapnik1999nature}, Support Vector Machines offer a way to segment, and classify, linear separable data.
+Introduced by Cortes and Vapnik \cite{vapnik1998statistical, vapnik1999nature}, Support Vector Machines offer a way to segment, and classify, linear separable data.
 This technique can also be applied to estimate density functions of given time series \cite{weston1999support}.
 When combined with a mapping function, which maps the data from the input space $I$ to a higher dimension feature space $F$, the input data can be non-linear separable.
 The linear hyperplane, which segments the data in the feature space $F$, yields to a non-linear segmentation in the lower-dimensional input space $I$.
@@ -9,24 +9,12 @@ Instead of explicitly mapping the input data to the higher dimensional space, a 
 This kernel function can calculate values of the feature space directly, without the need to first map the input values to this space.
 This process is referred to as the kernel trick.
 
-The method of Camci \cite{camci2010change} uses one-class support vector machines to segment time series data.
-For the current interval a hyper-sphere is constructed, using the kernel trick, which circumscribes all the data.
-To cope with possible errors or outliers a soft-margin is applied.
-The data can thus be represented using a center $c_1$ and radius $r_1$ of the hyper-sphere.
-New data points are consecutively mapped from the input space to the feature space.
-The retrieved (high dimension) data point can be in- or outside the earlier constructed hyper-sphere, thereby giving information about a possible change point.
-
-
-
-\subsection{One-class Support Vector Machine}
-*** This section is too detailed for the Literature Review, but keep it for now ***
-
-
-*** Replace with / add information from summary in \ref{svm-explained}. ***
-
 The proposed method of Camci \cite{camci2010change} uses a one-class support vector machine to segment time series data.
 One-class SVMs are used to describe the current data under consideration, by assuming all data points are from the same class \cite{tax2001one}.
+To cope with possible errors or outliers a soft-margin is applied \cite{cortes1995support}.
 The class is described by a spherical boundary around the data with center $c$ and radius $r$, such that the volume is minimized.
+New data points are consecutively mapped from the input space to the feature space.
+The retrieved (high dimension) data point can be in- or outside the earlier constructed hyper-sphere, thereby giving information about a possible change point.
 Following the definition of Camci \cite{camci2010change}, the class description is obtained by minimizing $r^2$:
 \begin{equation}
   \mathrm{Min}\ r^2
@@ -36,8 +24,6 @@ Following the definition of Camci \cite{camci2010change}, the class description 
 \end{equation}
 
 To be able to handle outliers in the input data, a penalty cost function $\varepsilon_i$ for each outlier can be added.
-
-*** Add new function and constraints? ***
 
 Using this one-class SVM formulation, differences between two (consecutive) windows of data points with size $w$ can be obtained.
 The first window is used as the input set, $h_1$ and the second as the test set $h_t$.
@@ -49,13 +35,9 @@ When the data points of the second window belong to the same class, the represen
 \end{aligned}
 \end{equation}
 
-*** First tell more about (underlying) probability density functions, to relate to other methods ***
-
 In case the second window of data points does not belong to the same class, i.e. the probability density function that describes the data differs from the first, the describing values of the second window will differ from the first.
+A difference in the SVM center $c$ or radius $r$ represent a change in the mean and variance, respectively.
 The amount of difference can be expressed by a dissimilarity measure over the representations.
 When the dissimilarity between the two windows exceeds some predefined threshold $th$, there exists a change point between the windows.
 
-This process can be visualized as done in *** insert figure of four circles ***. The second window, $h_2$ can be constructed from the first by e.g. a shift of one data point. *** explain data point positions by circle ***.
-
-Note that a difference in the SVM center $c$ or radius $r$ represent a change in the mean and variance, respectively.
-
+*** Give visual explanation with circles and in- and out-side new data points ***

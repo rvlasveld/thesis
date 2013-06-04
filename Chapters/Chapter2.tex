@@ -9,6 +9,7 @@
 
 %----------------------------------------------------------------------------------------
 \section{Outline}
+\emph{Not intented for the reader.}
 \begin{itemize}
   \item Literature review about Temporal Segmentation (previous draft was more about classification)
   \item Consider methods for the context of filter-methods for classification
@@ -31,19 +32,15 @@ This problem thus has received a lot of attention in the fields of data mining, 
 Often this problem is formulated in a statistical framework, by inspecting the data generating PDF (Probability Density Function) of the time series data.
 A change point is then defined as a significant change in the properties of the PDF, such as the mean and variance.
 
-*** Remove notion of GLR ***
+The widely used CUSUM (cumulative sum) method by Basseville \etal \cite{basseville1993detection} takes this approach.
+It originates from control methods for detection from bench marks.
+This method and some derivatiges are discussed and analyzed in section \ref{cusum}.
 
-
-The widely used CUSUM (cumulative sum) method by Basseville \etal \cite{basseville1993detection}, and the GLR (Generalized Likelihood Ratio) by Gustafsson \cite{gustafsson1996marginalized,gustafsson2000adaptive} take this approach.
-The former originates from control methods for detection from bench marks.
-The latter compares the logarithm of the likelihood ratio over two consecutive intervals.
-These two methods is discussed and analyzed in section \ref{cusum}.
-
-The GLR method, as with others, relies on pre-specified parametric model assumptions and considers the data be independent over time, which makes it less flexible to real-world applications.
+Many methods rely on pre-specified parametric model assumptions and considers the data be independent over time, which makes it less flexible to real-world applications.
 The proposed methods by Kawahara \etal \cite{kawahara2009change} and Lui \etal \cite{liu2013change} try to overcome these problems by estimating the \emph{ratio} between the PDF, instead of estimating each PDF.
 This approach is discussed and analyzed in section \ref{density-ratio}.
 
-The density-estimation methods, as with the GLR, rely on the log-likelihood ratio between PDFs.
+The density-estimation methods rely on the log-likelihood ratio between PDFs.
 The method of Camci \cite{camci2010change} takes an other approach within the statistical framework, by using a SVM (Support Vector Machine).
 One problem it tries to overcome is the (claimed) weakness of many methods to detect a decrease in variance.
 The method represents the distribution over the data points as a hyper-sphere in a higher dimension using kernel trick.
@@ -54,6 +51,8 @@ Section \ref{svm} discusses the SVM-method.
 % Opposed to the other discussed methods, dimensionality reduction is framed in the MDL (Minimum Description Length) framework.
 % It uses the estimated underlying number of parameters of the time series as a model for change detection.
 % Section \ref{dim-reduction} discuses this method.
+
+*** Maybe add dimensionality reduction, but for now leave out ***
 
 
 

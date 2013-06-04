@@ -1,35 +1,33 @@
 % !TEX root = ../../main.tex
 \section{CUSUM}\label{cusum}
 
-*** read book Basseville \cite{basseville1993detection} ***
+% *** read book Basseville \cite{basseville1993detection} ***
 
 
-Papers:
-\begin{itemize}
-  \item Use of Cumulative Sums of Squares for Retrospective Detection of Changes of Variance, 1994, 162 refs \cite{inclan1994use} \\
-  Implemented this algorithm.
-  \item An adaptive CUSUM-based test for signal change detection, 2006, 15 refs. \cite{alippi2006adaptive}
-  \item The MOSUM of squares test for monitoring variance changes \cite{hsu2007mosum}
-\end{itemize}
+% Papers:
+% \begin{itemize}
+%   \item Use of Cumulative Sums of Squares for Retrospective Detection of Changes of Variance, 1994, 162 refs \cite{inclan1994use} \\
+%   Implemented this algorithm.
+%   \item An adaptive CUSUM-based test for signal change detection, 2006, 15 refs. \cite{alippi2006adaptive}
+%   \item The MOSUM of squares test for monitoring variance changes \cite{hsu2007mosum}
+% \end{itemize}
 
-
-\subsection{CUSUM}
 Non-Bayesian change detection algorithm (thus: no prior distribution believe available for the change time).
 The CUSUM (cumulative sum) method is developed by Page \cite{page1954continuous} for the application of statistical quality control (it is also known as a control chart).
 Primary for detection of mean shift.
 The MOSUM of squares test for monitoring variance changes \cite{hsu2007mosum}.
 Use of Cumulative Sums of Squares for Retrospective Detection of Changes of Variance \cite{inclan1994use}
 
-
-An other used approach in the statistical framework of change detection is the Cumulative Sum of Squares (CUSUM) as introduced by Page \cite{page1954continuous}.
+An often used approach in the statistical framework of change detection is the Cumulative Sum of Squares (CUSUM) as introduced by Page \cite{page1954continuous}.
 Originally used for quality control in production environments, its main function is to detect change in the mean of measurements and has been applied to this problem \cite{basseville1993detection}.
+It is an non-Bayesian method and thus makes no assumptions (or: prior belief distributions) for the change points.
 Many extensions to this method have been proposed.
 Some focus on the change in mean, such the method of Alippi and Roveri \cite{alippi2006adaptive}.
 Others apply the method the problems in which the change of variance is under consideration.
 Among others are there the centered version of the cumulative sums, introduced by Brown, Durbin and Evans \cite{brown1975techniques} and the Moving Sum (MOSUM) of squares by \cite{hsu2007mosum}.
 
-The method of Incl\'{a}n and Tiao \cite{inclan1994use} builds on the centered version of CUSUM to detect changes in variance.
-Using an iterative method algorithm --- Iterative Cumulative Sum of Squares (ICSS), they are able to find multiple change points in a reflective manner.
+The method of Incl\'{a}n and Tiao \cite{inclan1994use} builds on the centered version of CUSUM \cite{brown1975techniques} to detect changes in variance.
+Using the Iterative Cumulative Sum of Squares (ICSS) algorithm they are able to find multiple change points in a reflective manner.
 Let $C_k = \sum_{i=1}^k \alpha_t^2$ be the cumulative sum of squares for a series of uncorrelated random variables $\{\alpha_t\}$ of length $T$.
 The centered (and normalized) sum is squares is defined as
 \begin{equation}

@@ -1,13 +1,13 @@
 % !TEX root = ../../main.tex
 \section{Change-detection by Density-Ratio Estimation}\label{density-ratio}
 
-Papers:
-\begin{itemize}
-  \item Change-Point Detection in Time-Series Data by Direct Density-Ratio Estimation, 2009, 45 refs \cite{kawahara2009change}
-  \item Change-Point Detection in Time-Series Data by Relative Density-Ratio Estimation, 2013, 3 refs \cite{liu2013change}
-  \item Density ratio estimation in machine learning (Book), 2009, 24 refs \cite{sugiyama2012density}
-  \item Direct importance estimation for covariate shift adaptation, 2008, 84 refs \cite{sugiyama2008direct}
-\end{itemize}
+% Papers:
+% \begin{itemize}
+%   \item Change-Point Detection in Time-Series Data by Direct Density-Ratio Estimation, 2009, 45 refs \cite{kawahara2009change}
+%   \item Change-Point Detection in Time-Series Data by Relative Density-Ratio Estimation, 2013, 3 refs \cite{liu2013change}
+%   \item Density ratio estimation in machine learning (Book), 2009, 24 refs \cite{sugiyama2012density}
+%   \item Direct importance estimation for covariate shift adaptation, 2008, 84 refs \cite{sugiyama2008direct}
+% \end{itemize}
 
 % Formulate the problem of detecting change in the statistical framework.
 % Consider the probability distributions from which two consecutive segments of time series around a target time point are generated.
@@ -22,17 +22,16 @@ Papers:
 % The distribution over the values of time series data can be represented with a probability density function (pdf).
 % Two sections of a time series data can be generated with the same underlying pdf or each with a different.
 
-
 Many approaches to detect change points, regarded as a change in the underlying probabilistic generation, monitor the logarithm of the likelihood ratio between two consecutive intervals.
 Some methods which rely on this are novelty detection, maximum-likelihood estimation and online learning of autoregressive models \cite{kawahara2009change}.
 A limitation of these methods is that they rely on pre-specified parametric models.
-Non-parametric models for density estimation have been proposed, but it is said to be a hard problem.
+Non-parametric models for density estimation have been proposed, but it is said to be a hard problem \cite{hardle2004nonparametric, sugiyama2012density}.
 A solutions to this is to estimate the \emph{ratio} of probabilities instead of the probabilities themselves.
 One of the recent methods to achieve this is the Kullback-Leibler Importance Estimation Procedure (KLIEP) by Sugiyama \etal \cite{sugiyama2008direct}.
 
 The method proposed by Kawahara and Sugiyama \cite{kawahara2009change} is composed of an online version of the KLIEP algorithm.
 The method also considers \emph{sequences} of samples (rather than samples directly) because the time series samples are generally not independent over time.
-An advantage over other non-parametric approaches, such as sequential one-class support vector machines is that the model has an natural cross-validation procedure.
+An advantage over other non-parametric approaches, such as sequential one-class support vector machines, is that the model has an natural cross-validation procedure.
 This makes that the value of tuning parameters, such as the kernel bandwidth, can be objectively obtained.
 
 In their formulation change is detected by monitoring the logarithm of the likelihood ratio between the reference (past) and test (current) time intervals
