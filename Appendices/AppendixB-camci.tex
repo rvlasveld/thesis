@@ -12,16 +12,17 @@ This appendix is for my own personal use.
 This chapter will look at the paper of Camci \cite{camci2010change} (``Change point detection in time series using support vectors'') and will answer many question that the paper leaves open.
 The goal is to make a better justification for the used techniques and made assumptions.
 }
+
+
 %----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+\section{Density estimation / Data description / Vapnik's principle}
+Following Vapnik's principle, one should ``When solving a problem of interest, do not solve a more general problem as an intermediate step.'' \cite{vapnik1998statistical} when a limited amount of data is available.
+For the problem of change detection we are only interested in some characteristics of the data.
+Solving the complete density estimation might require more data than actually needed when the requested characteristic is a closed boundary around the data.
 
-\section{Density estimation / Data description Vapnik's principle}
-Short look in density estimation. Other techniques to perform this.
-
-Vapnik: ``do not solve a more complicated intermediate problem''.
-
-%---------
-Following Vapnik's principle, one should ``When solving a problem of interest, do not solve a more general problem as an intermediate step.'' \cite{vapnik1998statistical}.
 In \cite{liu2013change} it is stated that the \emph{Support Vector Machine} by Cortes and Vapnik \cite{cortes1995support} is representative example of this principle.
 Instead of estimating the more general data generating probability distributions, it only learns a decision boundary to differentiate between the two distributions.
 
@@ -33,16 +34,37 @@ The compared methods are:
   \item normal density which estimates the mean and covariance matrix;
   \item the Parzen density where the width of the Parzen kernel is estimated;
   \item a Gaussian Mixture Model optimized using EM; and
-  \item the Nearest-Neighbor Method which compares the local density of an object with the density of the nearest neighbor in the target set.
+  \item the Nearest-Neighbor Method which compares the local density of an object with the density of the nearest neighbor in the target set (and is thus, just as SVDD, a boundary-based method).
 \end{inparaenum}
 The results show that when the problem formulation is to characterize an area in a feature space (and not the complete density distribution) SVDD gives a good data description.
+
+The study of Tax on one-class classifiers \cite{tax2001one} further compares density methods, boundary methods (amongst which SVDD) and reconstruction methods.
+One promesing result for SVDD is that it performs well on read-world data, for which generalization is needed.
 
 The method of Camci \cite{camci2010change} uses a Support Vector based method to find change points in the data.
 It does not explicitly create a density estimation, but instead relies on the spherical boundary and uses its ability to detect novel data or outliers to detect change points in time series data.
 
-*** Thus methods of data descriptions should be compared (which are more general) and not only density estimation ***
+*** Thus methods of data descriptions should be compared (which are more general) and not only density estimation? ***
 
+
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
 \section{Change point definition}
+The method of Camci \cite{camci2010change} regards a change point as the moment in time that the underlying stochastic process has changed, say from $p^1$ to $p^2$.
+It assumes that each of these stochastic processes is modeled following a Gaussian distribution, such that a change can occur in the value of the mean and/or the variance; $p^1 \sim N(\mu_1, \sigma_1^2)$.
+The CUSUM-based method of \cite{inclan1994use} also regards each semgent as a Gaussian distribution.
+
+The method if Kawahara \etal \cite{kawahara2009change} is based on the log likelihood ratio of test samples, and the method by Liu \etal \cite{liu2013change} uses a comparable dissimilarity measure using the KLIEP algorithm.
+
+The method of Chamroukhi \etal \cite{chamroukhi2013joint} is based on a Hidden Markov Model and logistic regression.
+It assumes a $K$-state hidden process with a (hidden) state sequence, each state providing the parameters (amongst which the order) for a polynomial.
+The order of the model segment is determined by model selecting, often using the Bayesian Information Criterion (BIC) or the similair Akaike Information Criterion (AIC) \cite{akaike1974new}, as in \cite{he2008activity}.
+
+*** REVIEW zoeken: change points in time series ***
+
 Periodicity/consecutive data vs unique/irregular data?
 
 Change in model parameters (mean/variance, of linear/non-linear)? --> Model selection?
@@ -51,6 +73,12 @@ Definition of continuity --> windows the domain and problem.
 Will result in definition of dis-continuity --> this is the goal to find
 Relation with double differentiation.
 
+
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
 \section{Data and model}
 Why assume (model of) data is Gaussian/normal distribution? Thus, piecewise linear with mean and variance as changing properties. Why not set of polynomial models, as for example in \cite{chamroukhi2013joint}?
 
@@ -59,8 +87,23 @@ What is the best model for accelerometer data of human activities? --> Look to r
 Should we build a model of the data? (Gaussian distribution is also the model). And be able to reconstruct?
 
 Why is it better (as Camci states) that a method makes no assumptions about the form of data/distribution of data? Is it that there are less parameters to estimate?
+%----------------
 
+Many methods describe and compare methods to construct classifier models for the classification of accelerometer data, such as \cite{kwapisz2011activity} and \cite{zhang2011optimal} (often using extracted features from the raw data signal).
+In contrast, we could not find a clear characterization of accelerometer data obtained from human activities.
+When the problem of temporal segmentation is regarded in this context, a formalization of the data under consideration is needed.
+Some assume the data follows a piecewise linear set of segments with a mean and noise/variance modeled by a normal (Gaussian) distribution (such as \cite{camci2010change}).
+Other approaches regard the data as a set of polynomials, which can be estimated by regression (such as \cite{chamroukhi2013joint}) and apply a form of model selection to each segment.
+
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
 \section{Segmentation (SVM) method}
+Overview of segmentation methods.
+Collection of papers use relative and direct density-ratio estimation \cite{kawahara2009change, liu2013change}.
+
 Why use SVM for density estimation? Look for justification, perhaps a review paper which compares/mentions SVM for temporal segmentation of (human activity type of) data?
 
 Why use RBF/Gaussian kernel? Is it because of one-class SVM of because of form the data? Why not polynomial/linear?
@@ -83,7 +126,10 @@ How do relations over data, such as distance, volume and noise, act in the highe
 
 What is the kernel trick to not explicit do the mapping to the higher space?
 
-
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
 \section{Relation to other methods}
 
 \subsection{Novelty/outlier detection}
@@ -93,6 +139,11 @@ Is the method robust, in the sense that outliers have restricted impact on the q
 
 What is the relation to M-Estimators (Wikipedia: ``M-estimators are a broad class of estimators, which are obtained as the minima of sums of functions of the data'', http://en.wikipedia.org/wiki/M-estimator)
 
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
 \section{Quality metrics}
 As used in Camci: benefit, false alarm rate
 
