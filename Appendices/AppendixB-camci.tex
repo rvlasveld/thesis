@@ -1,0 +1,102 @@
+% !TEX root = ../main.tex
+% Appendix B
+
+\chapter{Session with Anne 24-06-2013 - Paper Camci analysis} % Main appendix title
+
+\label{AppendixB} % For referencing this appendix elsewhere, use \ref{AppendixA}
+
+\lhead{Appendix B. \emph{Paper Camci}} % This is for the header on each page - perhaps a shortened title
+
+\emph{Please ignore this Appendix.
+This appendix is for my own personal use.
+This chapter will look at the paper of Camci \cite{camci2010change} (``Change point detection in time series using support vectors'') and will answer many question that the paper leaves open.
+The goal is to make a better justification for the used techniques and made assumptions.
+}
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+
+\section{Density estimation / Data description Vapnik's principle}
+Short look in density estimation. Other techniques to perform this.
+
+Vapnik: ``do not solve a more complicated intermediate problem''.
+
+%---------
+Following Vapnik's principle, one should ``When solving a problem of interest, do not solve a more general problem as an intermediate step.'' \cite{vapnik1998statistical}.
+In \cite{liu2013change} it is stated that the \emph{Support Vector Machine} by Cortes and Vapnik \cite{cortes1995support} is representative example of this principle.
+Instead of estimating the more general data generating probability distributions, it only learns a decision boundary to differentiate between the two distributions.
+
+The proposed method SVDD of Tax and Duin \cite{tax1999support, tax2004support} models the boundary of data under consideration.
+Thereby it characterizes a data set and can be used to detect novel data or outliers.
+The performance is compared to methods which model the distribution's density instead, using Receiver-Operating Characteristic (ROC) curves and false negative rates.
+The compared methods are:
+\begin{inparaenum}[\itshape (1)]
+  \item normal density which estimates the mean and covariance matrix;
+  \item the Parzen density where the width of the Parzen kernel is estimated;
+  \item a Gaussian Mixture Model optimized using EM; and
+  \item the Nearest-Neighbor Method which compares the local density of an object with the density of the nearest neighbor in the target set.
+\end{inparaenum}
+The results show that when the problem formulation is to characterize an area in a feature space (and not the complete density distribution) SVDD gives a good data description.
+
+The method of Camci \cite{camci2010change} uses a Support Vector based method to find change points in the data.
+It does not explicitly create a density estimation, but instead relies on the spherical boundary and uses its ability to detect novel data or outliers to detect change points in time series data.
+
+*** Thus methods of data descriptions should be compared (which are more general) and not only density estimation ***
+
+\section{Change point definition}
+Periodicity/consecutive data vs unique/irregular data?
+
+Change in model parameters (mean/variance, of linear/non-linear)? --> Model selection?
+
+Definition of continuity --> windows the domain and problem.
+Will result in definition of dis-continuity --> this is the goal to find
+Relation with double differentiation.
+
+\section{Data and model}
+Why assume (model of) data is Gaussian/normal distribution? Thus, piecewise linear with mean and variance as changing properties. Why not set of polynomial models, as for example in \cite{chamroukhi2013joint}?
+
+What is the best model for accelerometer data of human activities? --> Look to result of model-selecting papers.
+
+Should we build a model of the data? (Gaussian distribution is also the model). And be able to reconstruct?
+
+Why is it better (as Camci states) that a method makes no assumptions about the form of data/distribution of data? Is it that there are less parameters to estimate?
+
+\section{Segmentation (SVM) method}
+Why use SVM for density estimation? Look for justification, perhaps a review paper which compares/mentions SVM for temporal segmentation of (human activity type of) data?
+
+Why use RBF/Gaussian kernel? Is it because of one-class SVM of because of form the data? Why not polynomial/linear?
+\begin{itemize}
+  \item ``Use RBF when relation between class and data is non-linear''
+  \item ``RBF uses less paramters (C for penalty/soft margin and gamme for kernel width) than non-linear polynomial kernels''
+  \item (arguments from \cite{zhang2011optimal} ``Optimal model selection for posture recognition in home-based healthcare'')
+\end{itemize}
+
+
+
+\subsection{Higher dimension mapping (including kernel)}
+What does the mapping from the data-space to higher dimension looks like?
+
+What is a RBF kernel?
+
+What form has the higher dimensional space?
+
+How do relations over data, such as distance, volume and noise, act in the higher dimensional space?
+
+What is the kernel trick to not explicit do the mapping to the higher space?
+
+
+\section{Relation to other methods}
+
+\subsection{Novelty/outlier detection}
+\subsection{Scale parameter}
+\subsection{Robust statistics / "M-Estimators"}
+Is the method robust, in the sense that outliers have restricted impact on the quality.
+
+What is the relation to M-Estimators (Wikipedia: ``M-estimators are a broad class of estimators, which are obtained as the minima of sums of functions of the data'', http://en.wikipedia.org/wiki/M-estimator)
+
+\section{Quality metrics}
+As used in Camci: benefit, false alarm rate
+
+Asymmetric test: feed data from front-to-back and back-to-front; how far are matched datapoint apart.
+
+Model reconstruction error: try to reconstruct the simulated models, test similarity (BIC?). Is that a good measure? (If we are only interested in finding change points...)
+
