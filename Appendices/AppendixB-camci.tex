@@ -44,8 +44,10 @@ One promesing result for SVDD is that it performs well on read-world data, for w
 The method of Camci \cite{camci2010change} uses a Support Vector based method to find change points in the data.
 It does not explicitly create a density estimation, but instead relies on the spherical boundary and uses its ability to detect novel data or outliers to detect change points in time series data.
 
-*** Thus methods of data descriptions should be compared (which are more general) and not only density estimation? ***
+*** \emph{Thus methods of data descriptions should be compared (which are more general) and not only density estimation?} ***
 
+The paper of Yin \etal \cite{yin2008sensor} makes a distinction between similarity based (using a defined distance measure) and model based (which characterize the data using predictive models) approach.
+The one-class SVM is used in the model-approach to filter out normal activities in order to detect abnormality behavior.
 
 
 %----------------------------------------------------------------------------------------
@@ -95,6 +97,7 @@ When the problem of temporal segmentation is regarded in this context, a formali
 Some assume the data follows a piecewise linear set of segments with a mean and noise/variance modeled by a normal (Gaussian) distribution (such as \cite{camci2010change}).
 Other approaches regard the data as a set of polynomials, which can be estimated by regression (such as \cite{chamroukhi2013joint}) and apply a form of model selection to each segment.
 
+*** TODO: make a clear distinction between model types; similarity (distance based) or model based, as in \cite{yin2008sensor} ***
 
 %----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
@@ -113,6 +116,11 @@ Why use RBF/Gaussian kernel? Is it because of one-class SVM of because of form t
   \item (arguments from \cite{zhang2011optimal} ``Optimal model selection for posture recognition in home-based healthcare'')
 \end{itemize}
 
+
+%-------------------------
+
+Re-evaluatie \cite{guo2012adaptive}, uses (amongst others) a pca-based dimension-detection method (?).
+Also uses model-selection as an intermediate step.
 
 
 \subsection{Higher dimension mapping (including kernel)}
@@ -133,6 +141,9 @@ What is the kernel trick to not explicit do the mapping to the higher space?
 \section{Relation to other methods}
 
 \subsection{Novelty/outlier detection}
+*** Read \cite{hodge2004survey} ``A survey of outlier detection methodologies'' to compare with other methodologies. ***
+
+
 \subsection{Scale parameter}
 \subsection{Robust statistics / "M-Estimators"}
 Is the method robust, in the sense that outliers have restricted impact on the quality.
