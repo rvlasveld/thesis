@@ -27,9 +27,9 @@ Some methods which rely on this are novelty detection, maximum-likelihood estima
 A limitation of these methods is that they rely on pre-specified parametric models.
 Non-parametric models for density estimation have been proposed, but it is said to be a hard problem \cite{hardle2004nonparametric, sugiyama2012density}.
 A solutions to this is to estimate the \emph{ratio} of probabilities instead of the probabilities themselves.
-One of the recent methods to achieve this is the Kullback-Leibler Importance Estimation Procedure (KLIEP) by Sugiyama \etal \cite{sugiyama2008direct}.
+One of the recent methods to achieve this is the \gls{kliep} by Sugiyama \etal \cite{sugiyama2008direct}.
 
-The method proposed by Kawahara and Sugiyama \cite{kawahara2009change} is composed of an online version of the KLIEP algorithm.
+The method proposed by Kawahara and Sugiyama \cite{kawahara2009change} is composed of an online version of the \gls{kliep} algorithm.
 The method also considers \emph{sequences} of samples (rather than samples directly) because the time series samples are generally not independent over time.
 An advantage over other non-parametric approaches, such as sequential one-class support vector machines, is that the model has an natural cross-validation procedure.
 This makes that the value of tuning parameters, such as the kernel bandwidth, can be objectively obtained.
@@ -48,7 +48,7 @@ because this ratio is unknown and should be estimated.
 The naive approach is to estimate the ratio by taking the ratio of the estimated densities.
 Since this is known to be a hard problem and sensitive for errors, the solution would be to estimate the ratio directly.
 
-The procedure of the method proposed by Kawahara and Sugiyama \cite{kawahara2009change} is to first apply the batch KLIEP algorithm with model selection for initial parameter $\vectorsym{\alpha}$ and kernel width calculation.
+The procedure of the method proposed by Kawahara and Sugiyama \cite{kawahara2009change} is to first apply the batch \gls{kliep} algorithm with model selection for initial parameter $\vectorsym{\alpha}$ and kernel width calculation.
 Then for every new sample the reference and test intervals are shifted and the calculated parameters $\vectorsym{\alpha}$ are updated.
 Finally the logarithm of the likelihood ratio is evaluated.
 If it is beyond the threshold $\mu$ the current time is reported as a change point.

@@ -18,7 +18,7 @@ It contains summaries of articles I have read.
 \section{Support Vector Machines}
 
 \subsection{Machine learning: the art and science of algorithms that make sense of data}
-Book by Peter Flach: \cite{flach2012machine}.
+Book by Peter Flach:~\cite{flach2012machine}.
 Mainly about chapter 7, ``Linear Models''.
 Most important: section 7.3 - 7.5, about support vector machines and non-linearity.
 \textbf{Some parts are direct text; do not use this text directly!}
@@ -201,7 +201,7 @@ Thus, to classify a new example $\vectorsym{x}$ we need to evaluate $y_i \sum_{j
 %----------------------------------------------------------------------------------------
 
 \subsection{Change Point Detection In Time Series Data Using Support Vectors}
-Paper by Fatih Camci \cite{camci2010change}
+Paper by Fatih Camci~\cite{camci2010change}
 About segmentation with SVMs.
 Will be main material for section \ref{svm} about SVMs.
 
@@ -294,7 +294,7 @@ Note that SVCPD can be applied directly to multidimensional data, whilst many ot
 \section{CUSUM for variance}
 
 \subsection{Use of Cumulative Sums of Squares for Retrospective Detection of Changes of Variance}
-Carla Inclan and George C. Tiao \cite{inclan1994use}, 1944, 162 refs.
+Carla Inclan and George C. Tiao~\cite{inclan1994use}, 1944, 162 refs.
 
 
 %--------------------------------------------
@@ -376,7 +376,7 @@ The \gls{icss} algorithm avoids calculating a function at all possible locations
 \section{Density Ratio Estimation}
 
 \subsection{Change-Point Detection in Time-Series Data by Direct Density-Ratio Estimation}
-Kawahara and Sugiyama \cite{kawahara2009change}, 2009, 45 refs.
+Kawahara and Sugiyama~\cite{kawahara2009change}, 2009, 45 refs.
 
 ``This paper provides a change-point detection algorithm based on direct density-ratio estimation that can be computed very efficiently in an online manner''.
 
@@ -389,8 +389,8 @@ Many approaches (novelty detection, maximum-likelihood ratio, learning of autore
 That makes it less applicable to real-life problems.
 There have been some non-parametric density estimation approaches proposed, but that is known to be a hard problem.
 The key idea of this paper to directly estimate the \emph{ratio} of the probability densities (also known as \emph{importance}).
-The Kullback-Leibler Importance Estimation Procedure (KLIEP) is an example, but it is a batch algorithm.
-This paper introduces an online version of the KLIEP algorithm and develops a flexible and computationally efficient change-point detection method.
+The \gls{kliep} is an example, but it is a batch algorithm.
+This paper introduces an online version of the \gls{kliep} algorithm and develops a flexible and computationally efficient change-point detection method.
 This method is equipped with a natural cross validation procedure and thus the value of tuning parameters can be objectively determined.
 
 \subsubsection{Problem formulation and Basic Approach}
@@ -424,3 +424,26 @@ where $\{\alpha_l\}_{l=1}^{n_\text{te}}$ are parameters to be learned from the d
 
 \subsubsection{Online Algorithm}
 ...
+
+
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+\section{Outlier Detection methods}
+\subsection{A Survey of Outlier Detection Methodologies}
+Hodge and Austin,~\cite{hodge2004survey}, 2004, 734 refs.
+
+\subsection{Summary}
+This survey tooks a look at different methodologies that perform outlier detection.
+It gives two definitions of outliers, one of which relates to the problem statement in this thesis (taken from~\cite{barnett1994outliers}):
+\begin{quote}An observation (or subset of observations) which appears to be inconsistent with the remainder of that set of data.\end{quote}
+
+The survey introduces three fundamental approaches to the problem of outlier detection:
+\begin{description}
+  \item[Type 1] - no prior knowledge about the data; analogous to \emph{unsupervised clustering}. Flags the remote points as outliers; mainly batch-processing systems.
+  \item[Type 2] - model (and requires) both normal and abnormal data; analogous to \emph{supervised classification}. Is able to process new data online.
+  \item[Type 3] - Model only normal data (and in very few cases abnormal). Generally refered to as \emph{novelty detection}, analogous to \emph{semi-supervised recognition or detection}. It only requires pre-classified normal data. It aims to define a boundary of normality.
+\end{description}
+
+The type of approaches of interest in this research is of \textbf{type 3}.
