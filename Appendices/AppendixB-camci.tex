@@ -26,7 +26,7 @@ Solving the complete density estimation might require more data than actually ne
 In \cite{liu2013change} it is stated that the \emph{Support Vector Machine} by Cortes and Vapnik \cite{cortes1995support} is representative example of this principle.
 Instead of estimating the more general data generating probability distributions, it only learns a decision boundary to differentiate between the two distributions.
 
-The proposed method SVDD of Tax and Duin \cite{tax1999support, tax2004support} models the boundary of data under consideration.
+The proposed method \gls{svdd} of Tax and Duin \cite{tax1999support, tax2004support} models the boundary of data under consideration.
 Thereby it characterizes a data set and can be used to detect novel data or outliers.
 The performance is compared to methods which model the distribution's density instead, using Receiver-Operating Characteristic (ROC) curves and false negative rates.
 The compared methods are:
@@ -107,13 +107,14 @@ Other approaches regard the data as a set of polynomials, which can be estimated
 Overview of segmentation methods.
 Collection of papers use relative and direct density-ratio estimation \cite{kawahara2009change, liu2013change}.
 
-Why use SVM for density estimation? Look for justification, perhaps a review paper which compares/mentions SVM for temporal segmentation of (human activity type of) data?
+Why use \gls{svm} for density estimation? Look for justification, perhaps a review paper which compares/mentions SVM for temporal segmentation of (human activity type of) data?
 
 Why use RBF/Gaussian kernel? Is it because of one-class SVM of because of form the data? Why not polynomial/linear?
 \begin{itemize}
   \item ``Use RBF when relation between class and data is non-linear''
   \item ``RBF uses less paramters (C for penalty/soft margin and gamme for kernel width) than non-linear polynomial kernels''
   \item (arguments from \cite{zhang2011optimal} ``Optimal model selection for posture recognition in home-based healthcare'')
+  \item Survey \cite{hodge2004survey} states RBF is similair to Gaussian Mixture model (page 25).
 \end{itemize}
 
 
@@ -149,6 +150,13 @@ What is the kernel trick to not explicit do the mapping to the higher space?
 
 \subsection{Novelty/outlier detection}
 *** Read \cite{hodge2004survey} ``A survey of outlier detection methodologies'' to compare with other methodologies. ***
+\begin{itemize}
+  \item One-class classification is referred to as ``Type 3'', with \emph{semi-supervised recognition or detection}.
+  \item It explains why one-class can be beneficial over type-2 where negative examples needs to be provided.
+  \item We are interested in type-3, so compare SVM with the others stated in this survey regarding type-3.
+  \item Often refers to the convex hull of the data set. Link with geometric approach as in \cite{bennett2000duality,mavroforakis2006geometric}?
+  \item It states that PCA and regression techniques are linear models and thus often are too simple for practical applications. SVMs try to find a hyperplane in higher dimensional space; linear models to implement complex class boundaries. It refers to \cite{tax1999support}.
+\end{itemize}
 
 
 \subsection{Scale parameter}

@@ -60,9 +60,17 @@
 \DeclareMathOperator*{\argmin}{\arg\!\min}
 \DeclareMathOperator*{\argmax}{\arg\!\max}
 
+% \usepackage{hyperref}
+\usepackage[nomain,acronym,xindy,toc]{glossaries}
+\renewcommand*{\glstextformat}[1]{\textcolor{black}{#1}}
+\makeglossaries
+\usepackage[xindy]{imakeidx}
+\makeindex
 
 
 \begin{document}
+\include{glossary-acronyms}
+\include{glossaries}
 
 \frontmatter % Use roman page numbering style (i, ii, iii, iv...) for the pre-content pages
 
@@ -225,35 +233,46 @@ The acknowledgements and the people to thank go here, don't forget to include yo
 \lhead{\emph{List of Tables}} % Set the left side page header to "List of Tables"
 \listoftables % Write out the List of Tables
 
+% %----------------------------------------------------------------------------------------
+% %	ABBREVIATIONS
+% %----------------------------------------------------------------------------------------
+
+% \clearpage % Start a new page
+
+% \setstretch{1.5} % Set the line spacing to 1.5, this makes the following tables easier to read
+
+% \lhead{\emph{Abbreviations}} % Set the left side page header to "Abbreviations"
+% \listofsymbols{ll} % Include a list of Abbreviations (a table of two columns)
+% {
+% \textbf{LAH} & \textbf{L}ist \textbf{A}bbreviations \textbf{H}ere \\
+% %\textbf{Acronym} & \textbf{W}hat (it) \textbf{S}tands \textbf{F}or \\
+% \textbf{PCA} & \textbf{P}rinciple \textbf{C}omponent \textbf{A}nalysis
+% }
+
 %----------------------------------------------------------------------------------------
-%	ABBREVIATIONS
+% GLOSSARIES
 %----------------------------------------------------------------------------------------
 
-\clearpage % Start a new page
+\clearpage
 
-\setstretch{1.5} % Set the line spacing to 1.5, this makes the following tables easier to read
+\lhead{\emph{Acronyms}}
 
-\lhead{\emph{Abbreviations}} % Set the left side page header to "Abbreviations"
-\listofsymbols{ll} % Include a list of Abbreviations (a table of two columns)
-{
-\textbf{LAH} & \textbf{L}ist \textbf{A}bbreviations \textbf{H}ere \\
-%\textbf{Acronym} & \textbf{W}hat (it) \textbf{S}tands \textbf{F}or \\
-\textbf{PCA} & \textbf{P}rinciple \textbf{C}omponent \textbf{A}nalysis
-}
+\printglossaries
 
-%----------------------------------------------------------------------------------------
-%	PHYSICAL CONSTANTS/OTHER DEFINITIONS
-%----------------------------------------------------------------------------------------
 
-\clearpage % Start a new page
+% %----------------------------------------------------------------------------------------
+% %	PHYSICAL CONSTANTS/OTHER DEFINITIONS
+% %----------------------------------------------------------------------------------------
 
-\lhead{\emph{Physical Constants}} % Set the left side page header to "Physical Constants"
+% \clearpage % Start a new page
 
-\listofconstants{lrcl} % Include a list of Physical Constants (a four column table)
-{
-Speed of Light & $c$ & $=$ & $2.997\ 924\ 58\times10^{8}\ \mbox{ms}^{-\mbox{s}}$ (exact)\\
-% Constant Name & Symbol & = & Constant Value (with units) \\
-}
+% \lhead{\emph{Physical Constants}} % Set the left side page header to "Physical Constants"
+
+% \listofconstants{lrcl} % Include a list of Physical Constants (a four column table)
+% {
+% Speed of Light & $c$ & $=$ & $2.997\ 924\ 58\times10^{8}\ \mbox{ms}^{-\mbox{s}}$ (exact)\\
+% % Constant Name & Symbol & = & Constant Value (with units) \\
+% }
 
 %----------------------------------------------------------------------------------------
 %	SYMBOLS
@@ -279,6 +298,7 @@ $\omega$ & angular frequency & rads$^{-1}$ \\
 %	DEDICATION
 %----------------------------------------------------------------------------------------
 
+\clearpage
 \setstretch{1.3} % Return the line spacing back to 1.3
 
 \pagestyle{empty} % Page style needs to be empty for this page

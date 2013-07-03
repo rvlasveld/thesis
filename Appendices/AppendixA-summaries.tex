@@ -356,15 +356,15 @@ It is the third steps which reduces the masking effect and helps to ``fine tune'
   3 & When two or more change points are found; check for each $\alpha[j-1 : j+1]$ if there is indeed a change point ($j$). Repeat until the number of change points does not change and each new found change point is ``close'' enough to previous. \\
   \hline
 \end{tabular}
-\caption{Iterated Cumulative Sums of Squares (ICSS) Algorithm}
+\caption{Iterated Cumulative Sums of Squares Algorithm}
 \label{tab:alg-icss}
 \end{table}\end{center}
 
 \subsubsection{Results}
-When the ICSS algorithm was applied to stock data, it resulted in comparable results as the maximum likelihood estimates and Bayesian analysis.
-The performance (CPU-time and correct observations with artificial data) of ICSS outperforms the other two.
+When the \gls{icss} algorithm was applied to stock data, it resulted in comparable results as the maximum likelihood estimates and Bayesian analysis.
+The performance (CPU-time and correct observations with artificial data) of \gls{icss} outperforms the other two.
 The heavy computational burden of posterior odds can be partially alleviated by the maximum log-likelihood method.
-The ICSS algorithm avoids calculating a function at all possible locations of change points due the iterative manner.
+The \gls{icss} algorithm avoids calculating a function at all possible locations of change points due the iterative manner.
 
 
 
@@ -384,7 +384,7 @@ Kawahara and Sugiyama \cite{kawahara2009change}, 2009, 45 refs.
 \subsubsection{Introduction}
 The problem of change-point detection is well studied over the last decades in the field of statistics.
 A common statistical formulation of change-point detection is to consider the probability distributions over past and present data intervals, and regard the target time as a change-point if the two distributions are significantly different.
-Some approaches (such as CUSUM and GLR) make use of the \emph{log-likelihood ratio}, and are extensively explored in the data mining community.
+Some approaches (such as \gls{cusum} and GLR) make use of the \emph{log-likelihood ratio}, and are extensively explored in the data mining community.
 Many approaches (novelty detection, maximum-likelihood ratio, learning of autoregressive models, subspace identification) rely on pre-specified parametric models (probability density models, autoregressive models, state-space models).
 That makes it less applicable to real-life problems.
 There have been some non-parametric density estimation approaches proposed, but that is known to be a hard problem.
