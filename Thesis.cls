@@ -182,8 +182,8 @@
 %	defined as \examname above so you cite it as \examname
 %----------------------------------------------------------------------------------------
 
-\thesistitle{Human Acitivity Recognition Using Accelerometer Data} % Your
-%thesis title - this is used in the title and abstract
+\thesistitle{Temporal Segmentation using Support Vector Machines in the context of Human Activity Recognition}
+% Your thesis title - this is used in the title and abstract
 %-------------------------------------------------
 \supervisor{Dr. James \textsc{Smith}} % You supervisor's name - this is used in the title page
 %-------------------------------------------------
