@@ -19,7 +19,7 @@ This section will give an introduction and in-depth analysis of temporal segment
 \subsection{Aims of segmentation}
 When processing and analyzing time series of data, e.g. motion measurements, stock market fluctuations or natural language, first a low-level division between the discriminative parts of the stream must be made.
 One can view this as splitting the series into the \emph{atoms}, which are the building blocks of the total stream.
-These building blocks will be the aggregation of non-overlapping, internally homogeneous segments~\cite{himberg2001time}.
+These building blocks will be the aggregation of non-overlapping, internally homogeneous segments \cite{himberg2001time}.
 This means that the data points inside a segment should have some resemblance relation to each other and their difference lies between some boundary.
 The process of segmenting can be viewed as a subproblem to context analysis of time series.
 Temporal segmentation is closely related to temporal clustering, although it is a stricter, and simpler, process.
@@ -36,7 +36,7 @@ Formally, temporal segmentation is dividing a time series $s$, which consists of
 Individual \emph{segments} are referenced by $s(a,b)$, consisting of the consecutive samples $\mathbf{x}(a),\mathbf{x}(a+1),\dots,\mathbf{x}(b)$, $a \le b$.
 Let $s_1 = s(a,b)$ and $s_2 = s(b+1,c)$ be two segments, then their concatenation is $s_1s_2 = s(a,c)$.
 A segmentation $S$ of $s$ consists of a sequence of $k$ non-empty segments $s_1s_2 \dots s_k = s$.
-This notation is adopted from~\cite{himberg2001time}.
+This notation is adopted from \cite{himberg2001time}.
 
 As stated, informally each segment should be internally homogeneous.
 This can formally be measured with an cost function $F$, indication the heterogeneity of a segment.
@@ -83,12 +83,12 @@ Or, stated otherwise, it results in transitions moments between activities.
 \subsection{PCA Based Methods}
 
 Many fields of research have been active in the unsupervised segmentation of data.
-Many authors rely on a form of Principal Component Analysis (PCA), as used a.o. in~\cite{barbivc2004segmenting}.
+Many authors rely on a form of Principal Component Analysis (PCA), as used a.o. in \cite{barbivc2004segmenting}.
 Often PCA is used to reduce the dimensionality of the data being processed [REFERENCE] by only using the top $r$ dimensions to describe the data set.
 It is observed that data series of simple motions have a lower dimensionality then complexer motions.
 When a simple (repetitive) motion is about to end and fluently transforms in a new motion, there will be a window of time in which a high dimensionality will be present, due to the new motion.
 After this period of transition, the dimensionality will decrease, since only the new simple motion is present in the window of time.
-The first algorithm of~\cite{barbivc2004segmenting} is based on this principle.
+The first algorithm of \cite{barbivc2004segmenting} is based on this principle.
 
 Given a set of data points, a lower dimensional hyperplane can by constructed to which the data points can be projected.
 This projection on a lower dimension introduces a error to the original position.
@@ -99,9 +99,9 @@ When the dimensionality is reduced from $d$ to $r \le d$, the ratio of error $E_
 	E_r = \frac{\sum_{j=1}^{r} \sigma_j^2}{\sum_{j=1}^{d} \sigma_j^2}
 \end{equation}
 
-where $\sigma_j$ are the singular values as a result from Singular Value Decomposition (SVD), which is closely related to PCA~\cite{shlens2005tutorial}.
+where $\sigma_j$ are the singular values as a result from Singular Value Decomposition (SVD), which is closely related to PCA \cite{shlens2005tutorial}.
 
-In~\cite{barbivc2004segmenting} the stream of frames is analyzed on cut-frames to find transitions between action.
+In \cite{barbivc2004segmenting} the stream of frames is analyzed on cut-frames to find transitions between action.
 First, for a number of $k$ frames (e.g. the equivalent of 2.5 seconds) the required dimensionality $r$ to keep the error $E_r$ below some threshold $\tau$ is calculated.
 This will yield in an error $e_i$ for the first $i$ frames.
 When more frames are added to the window, the error will increase with a low constant when it is still in the same activity, due to noise in the activity.
@@ -113,7 +113,7 @@ The previous frames are then cut from the sequence (as a segment) and the algori
 
 *** [figure to illustrate derivative and standard deviation]
 
-A second approach in~\cite{barbivc2004segmenting} uses the probabilistic variant of PCA (PPCA) to model the data set as a Gaussian distribution instead of ignoring the frames which do not fit in the subspace.
+A second approach in \cite{barbivc2004segmenting} uses the probabilistic variant of PCA (PPCA) to model the data set as a Gaussian distribution instead of ignoring the frames which do not fit in the subspace.
 Over windows of frames the mean and variance are calculated.
 In a forward manner the Mahalanobis distance of a new window of frames is calculated, which represents the likelihood of the new window belonging to the same segment as the original widow.
 When the distance decreases, the likelihood increases which happens when the motions in the becomes more homogeneous.
@@ -122,7 +122,7 @@ In order to distinct activities and sub-activities (which require a subset of mo
 
 *** [figure to illustrate mahalanobis distance measure and peaks]
 
-The third algorithm in~\cite{barbivc2004segmenting} is based on the observation that data points (frames) tend to form clusters in the space.
+The third algorithm in \cite{barbivc2004segmenting} is based on the observation that data points (frames) tend to form clusters in the space.
 These clusters are represented by $k$ Gaussian distributions for which each the Expectation-Maximization (EM) algorithm estimates the mean $m_j$, covariance matrix $\sum_{j}$ and prior $\pi_j$.
 With all the Gaussian distributions estimated, the data points are assigned to the cluster with the highest membership likelihood.
 When two consecutive frames $x_i$ and $x_{i+1}$ belong to different clusters, a transition of activities is recognized.
@@ -130,7 +130,7 @@ Note that this algorithm succeeds in segmenting the data and also labels the sim
 
 A drawback in this system, and many others which implement a variant of the $k$-means algorithm, is that the number of clusters $k$ need to be predetermined.
 To cope with this, often the algorithm is performed multiple times for different values of $k$.
-Using some criteria, e.g. the Bayesian Information Criterion~\cite{pelleg2000x} or the Davies-Bouldin Index which guides $k$-means clustering as used in~\cite{krause2003unsupervised}.
+Using some criteria, e.g. the Bayesian Information Criterion \cite{pelleg2000x} or the Davies-Bouldin Index which guides $k$-means clustering as used in \cite{krause2003unsupervised}.
 
 \subsection{Statistical methods}
 An method to process data, or create a basis for further processing, is by analyzing the statistical properties of a data set.
@@ -138,7 +138,7 @@ When there is a continuous stream of data, it is possible to extract events by c
 By definition, events have a different statistical profile then their background.
 When two consecutive actions are regarded as the background, then a transition is an event between them.
 
-In~\cite{guenterberg2009automatic} a automatic system is used to segment a continuous stream of data.
+In \cite{guenterberg2009automatic} a automatic system is used to segment a continuous stream of data.
 By calculating features as activity level from the standard deviation of a sliding window and applying Adaptive Thresholds, the data can be segmented in active and rest parts.
 There is no model representation.
 
@@ -163,8 +163,8 @@ The following steps are performed, which are explained below and illustrated in 
 	\item \textbf{Generate feature vector} which indicated which features are characteristic or meant to keep in de data set, by comparing the Eigenvalues.
 \end{enumerate}
 
-The workings of the PCA~\cite{smith2002tutorial} relies on the concepts of standard deviation, variance, covariance, eigenvectors and eigenvalues of matrices.
-These concepts will be discussed very briefly \footnote{For a more in-depth discussion we would like to refer the reader to~\cite{jolliffe2005principal}}.
+The workings of the PCA \cite{smith2002tutorial} relies on the concepts of standard deviation, variance, covariance, eigenvectors and eigenvalues of matrices.
+These concepts will be discussed very briefly \footnote{For a more in-depth discussion we would like to refer the reader to \cite{jolliffe2005principal}}.
 The standard deviation and variance of a set are measures for the spread around the mean for a single dimension, or feature.
 The covariance between two features (dimensions of the data points) indicates how they are related; when positive the two features will increase together; when negative one will decrease when the other increases and when zero they are unrelated.
 The covariance matrix gives all the covariances for all pairs of features.
@@ -214,7 +214,7 @@ The first is to just make a (comprehensible) representation of the data.
 The Eigenvectors describe the cloud of data points and thus are a compressed representation of the data.
 When the original data points are to be compressed, it is possible to remove the least significant features and reconstruct the data points from the resulting Eigenvectors.
 This will yield in a lossy compression. *** [figure to illustrate].
-An extension of this application is to determine the number of features needed to keep the compression within a certain error criterion, as used in~\cite{barbivc2004segmenting}.
+An extension of this application is to determine the number of features needed to keep the compression within a certain error criterion, as used in \cite{barbivc2004segmenting}.
 Sets of data can then be distinguished by the number of features needed to describe the points.
 
 *** [graph, a bit of formulae with sets and dimensions]
@@ -227,8 +227,8 @@ Sets of data can then be distinguished by the number of features needed to descr
 Many dynamic systems can be viewed as some sequence of consecutive states which are observable by the world.
 These kind of systems are known as Markov Chains.
 When the state in which the system is can not be observed with complete certainty, a system known as a Hidden Markov Model (HMM) can be constructed.
-It has been shown that HMMs are effective on in the task of speech recognition~\cite{rabiner1989tutorial}.
-Because of some resemblance between natural speech construction and human activities, modifications have been able to classify human activities~\cite{guenterberg2009distributed} and extensions are implemented which create layers of HMMs to handle different granularity over time and reduce retraining \cite{oliver2002layered,perdikis2008recognition}.
+It has been shown that HMMs are effective on in the task of speech recognition \cite{rabiner1989tutorial}.
+Because of some resemblance between natural speech construction and human activities, modifications have been able to classify human activities \cite{guenterberg2009distributed} and extensions are implemented which create layers of HMMs to handle different granularity over time and reduce retraining \cite{oliver2002layered,perdikis2008recognition}.
 A HMM is a state-space model representing a single model for each label which needs to be classified.
 
 Formally, a Hidden Markov Model is characterized by the following elements
@@ -280,7 +280,7 @@ The second application can be used to further optimize the HMM (set the number o
 Finally, when the system is provided with unlabeled data the first application is used to identify the observed sequence with trained examples, by comparing the probability result of multiple HMMs.
 
 Generally a HMM can be fully connected, or ergodic model.
-Other configurations are also possible, of which the left-right model, or Bakis model, is popular for temporal applications~\cite{rabiner1989tutorial}.
+Other configurations are also possible, of which the left-right model, or Bakis model, is popular for temporal applications \cite{rabiner1989tutorial}.
 This because the structure of the state probability distribution resembles the construction of possible states over time.
 This left-right model can be generalized by setting
 \begin{eqnarray}
@@ -292,14 +292,14 @@ for some $\Delta$, indicating the possible \emph{distance} of the jumps over sta
 
 *** [discrete and continuous HHMs]
 
-*** Applications of HHM:~\cite{shi2009towards} uses 10 coefficients extracted with FFT from 6 axis (3 times accelerometer and 3 times gyroscope).
+*** Applications of HHM: \cite{shi2009towards} uses 10 coefficients extracted with FFT from 6 axis (3 times accelerometer and 3 times gyroscope).
 Example of continuous HMM (?).
 Recognition rates fo 50\%-100\%.
 
-In~\cite{oliver2002layered} it is stated that HMMs are robust mechanisms with respect to changes in temporal segmentation of observations, although they suffer from a few problems when applied to reason about longer and complexer sequences over time.
+In \cite{oliver2002layered} it is stated that HMMs are robust mechanisms with respect to changes in temporal segmentation of observations, although they suffer from a few problems when applied to reason about longer and complexer sequences over time.
 They state that, especially with limited training data, the HMM tend to be overfitted and tend to lack structure and have an excess of parameters.
 The overcome this limitation, they introduce a Layered Hidden Markov Model (LHHM) which they show is more robust to temporal changes in observations.
-They make use of the hypothesis from the field of psychology, that human behavior is hierarchically structured~\cite{zacks2001event}.
+They make use of the hypothesis from the field of psychology, that human behavior is hierarchically structured \cite{zacks2001event}.
 In \cite{perdikis2008recognition} a layered construction of HMMs is used which feeds the low-level data from a sliding window to the lower layer.
 This layer will recognize simple motions, such as moving the arm in a pre-defined segment.
 The results from these lower HMMs are then fed to a higher-level layer of HMMs which are able to recognize abstract motions, such as adjusting a monitor and picking up a pen.
@@ -318,7 +318,7 @@ It was also robust in the sense that when the environment was changed, only the 
 
 \subsection{Segmentation as clustering}
 In the previous section the discussed methods all relied on the stream of data points and tried to find cuts the discriminate between successive different type of activities.
-An other approach is to consider the tasks of segmentation as a type of clustering~\cite{zhou2008aligned}.
+An other approach is to consider the tasks of segmentation as a type of clustering \cite{zhou2008aligned}.
 In clustering the objective is to assign labels, or classes, to all the data points indication a similar type of activity.
 A clustering $\mathcal{L}$ is thereby more informative then a segmentation but is also harder to produce.
 
@@ -344,7 +344,7 @@ This section will give an introduction and overview to clustering of data.
 When processing time series of data the line of distinction between segmentation and clustering is very fine.
 This section will introduce clustering for the purpose as used in this project.
 
-Data clustering can be used with two different applications, exploratory or confirmatory~\cite{jain1999data}.
+Data clustering can be used with two different applications, exploratory or confirmatory \cite{jain1999data}.
 In the former, the purpose is to discover clusters in a point cloud of data points.
 Here the cluster is defined as a group of homogeneous data points measured by some coherence measure, often a distance function with the data points being defined as vectors.
 The produced clusters, which together form a representation of the data examined, can be used in the latter application to assign new provided data points to a cluster and thereby classify them.
@@ -413,7 +413,7 @@ Exact matching is high-cost, so approximations such as Minimum Bounding Rectangl
 [EXPLAIN] divide data set $n$ into $k$ clusters. Follows the outline in figure~\ref{fig:k_means}
 
 Among many unsupervised clustering techniques, $k$-means is successfully applied to large data sets.
-It is simple to implement and linear in time complexity so computationally attractive~\cite{jain1999data}.
+It is simple to implement and linear in time complexity so computationally attractive \cite{jain1999data}.
 A drawback of the method is that the results of the algorithm greatly depends on the initial configuration (the data points which will act as centroids) and the number of cluster $k$ must be determined beforehand.
 
 \begin{figure}[htbp]
@@ -435,7 +435,7 @@ This is expressed as optimizing to a local optimum the energy function
 
 There are several limitation on the $k$-means method.
 One of these is that only spherical shapes of cluster can be generated.
-One of the extensions is kernel $k$-means~\cite{scholkopf1998nonlinear}, which implicitly projects the data points to a higher dimension and thereby is able to form irregular shaped cluster.
+One of the extensions is kernel $k$-means \cite{scholkopf1998nonlinear}, which implicitly projects the data points to a higher dimension and thereby is able to form irregular shaped cluster.
 
 \subsection{Self-organizing Map}
 
