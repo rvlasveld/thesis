@@ -57,8 +57,8 @@
 \makeatother
 % End of double bar notations
 
-\DeclareMathOperator*{\argmin}{\arg\!\min}
-\DeclareMathOperator*{\argmax}{\arg\!\max}
+\DeclareMathOperator*{\argminold}{\arg\!\min}
+\DeclareMathOperator*{\argmaxold}{\arg\!\max}
 
 % \usepackage{hyperref}
 \usepackage[nomain,acronym,xindy,toc]{glossaries}
@@ -67,6 +67,7 @@
 \usepackage[xindy]{imakeidx}
 \makeindex
 
+\usepackage{templates/math_shorthands}
 
 \begin{document}
 \include{glossary-acronyms}
@@ -339,8 +340,7 @@ $\omega$ & angular frequency & rads$^{-1}$ \\
 
 \input{./Appendices/AppendixA-Summaries}
 \input{./Appendices/AppendixB-Camci}
-%\input{./Appendices/AppendixB}
-%\input{./Appendices/AppendixC}
+\input{./Appendices/AppendixC}
 
 \addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
 

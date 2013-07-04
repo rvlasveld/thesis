@@ -1,0 +1,339 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Author:    A.C. van Rossum
+% Copyright: LGPLv3 or later, choose as you wish
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Include by something like:
+% \usepackage{../templates/rurshorthands}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Additional packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Required to create a list of items separated by commas
+\usepackage{xparse}
+
+% Requires for the "aligned" environment in \minimize and \maximize
+\usepackage{amsmath}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Define a set with a variable number of arguments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\NewDocumentCommand\setof{>{\SplitList{;}}m}
+  {
+    \left\{
+      \ProcessList{#1}{ \insertsetitem }
+    \right\}
+  }
+\newcommand\insertsetitem[1]{#1\let\insertsetitem\insertsetitema}
+\newcommand\insertsetitema[1]{, #1}
+
+% Helper to generate a list of items separated by commas
+\def\my@commalist #1,#2\@eolst{%
+  \ifx\relax#2\relax
+    #1^*
+  \else
+    #1^*,
+    \my@commalist #2\@eolst%
+  \fi}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definition of argmin and argmax
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Often recommended online or in LaTeX documentation:
+%   \newcommand{\argmin}{\operatornamewithlimits{argmin}}
+%   \DeclareMathOperator*{\argmin}{\arg\!\min}
+%   \DeclareMathOperator*{\argmin}{\arg\,\min}
+% Expected notation: \argmin_{x} f(x)
+
+% Better though:
+%   \newcommand{\argmin}[1]{\underset{#1}{\operatorname{arg}\!\operatorname{min}}\;}
+%   \newcommand{\argmax}[1]{\underset{#1}{\operatorname{arg}\!\operatorname{max}}\;}
+% Expected notation: \argmin {x} f(x)
+% You will not need to write the underscore. Moreover, it is now impossible to forget for what "arg" we try to find the
+% optimum. Note that the return value is often equated to the "arg" itself. So, x* = argmax. This is actually incorrect
+% notation, the result can be a set with multiple optima!
+
+% So, the result should be "{x*} = argmax" or "x* \in argmax". The latter is chosen:
+\newcommand\argmin[1]{%
+  \my@commalist #1,\relax\noexpand\@eolst %
+  \in \underset{#1}{\operatorname{arg}\!\operatorname{min}}\;}
+
+\newcommand\argmax[1]{%
+  \my@commalist #1,\relax\noexpand\@eolst%
+  \in \underset{#1}{\operatorname{arg}\!\operatorname{max}}\;}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definition of a function that maximizes or minimizes with certain constraints
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Use as arguments:
+% 1: object to maximize over, e.g. f(x)
+% 2: object to maximize with, e.g. x
+% 3: constraint
+%   \begin{eqnarray}
+%     \maximize{f(x)}{x}{x < C}
+%   \end{eqnarray}
+
+\newcommand\maximize[3]{%
+\begin{aligned}%
+& \underset{#1}{\text{maximize}}%
+& & {#2}\\%
+& \text{subject to}%
+& & {#3}%
+\end{aligned}%
+}
+
+\newcommand\minimize[3]{%
+\begin{aligned}%
+& \underset{#1}{\text{minimize}}%
+& & {#2}\\%
+& \text{subject to}%
+& & {#3} %
+\end{aligned}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definition of an if-else function
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Use as arguments:
+% 1: function
+% 2: if_result
+% 3: else_result
+% 4: if_condition
+% 5: else_condition
+
+\newcommand\ifelse[5]{%
+#1 = \left\{%
+\begin{array}{l l}%
+  #2 & \quad \text{#3}\\%
+  #4 & \quad \text{#4}%
+\end{array} \right.%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definition of \other
+% from http://tex.stackexchange.com/questions/83689/next-subsequent-letter-in-the-alphabet
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% the nextLetter command
+\newcommand*{\nextLetter}[2][1]{%
+    \edef\numLet{\expandafter\number\expandafter`#2}%
+    \edef\numNewLet{\number\numexpr\numLet+#1\relax}%
+    \ifnum\numNewLet>122\relax%
+        \edef\numNewLet{\number\numexpr\numNewLet-26\relax}%
+    \fi%
+    \expandafter\char\expandafter\numNewLet%
+}
+
+% the "other" in scientific texts, is often "y" compared to "x", or "j" compared to "i", or "L" compared to "K", so we
+% use the nextLetter commmand for this
+\newcommand*{\other}[1]{%
+    \nextLetter{#1}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Capitalization
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Helper function to make something Capitalized
+\def\capfirst#1{\MakeUppercase{#1}}
+\def\upcase{\expandafter\makeupcase}
+\def\makeupcase#1{\uppercase{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Very general names
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Change to "k" if you publish for control-oriented journals, where discrete time is always "k"
+\newcommand{\timeindex}{t}
+
+% Notation will become: a_t a_{t+1} a_{t-1}
+\newcommand{\now}{_\timeindex}
+\newcommand{\tnext}{_{\timeindex+1}}
+\newcommand{\tprev}{_{\timeindex-1}}
+\newcommand{\expected}[1]{\widetilde{#1}}
+\newcommand{\sometime}{_{\other{\timeindex}}}
+\newcommand{\othertime}{\other{\timeindex}}
+
+% Makes explicit that it concerns a sequence over time a_{1:t}
+\newcommand{\seqtime}{_{1:\timeindex}}
+\newcommand{\seqprevtime}{_{1:\timeindex-1}}
+
+% Derivative over time
+\newcommand{\devtime}[1]{\frac{d#1}{d\timeindex}}
+
+% Noise-specific stuff
+\newcommand{\gaussiannoise}[2]{\mathcal{N}({#1},{#2})}
+\newcommand{\zerogaussiannoise}[1]{\mathcal{N}(0,{#1})}
+
+% The big-O notation
+\newcommand{\bigO}{\mathcal{O}}
+
+% State is normally a vector x, use \vec if you want
+\newcommand{\state}{\mathbf{x}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MDP naming of variables
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% A number of useful random variates (a particular outcome of a random variable, see below)
+%\newcommand{\observation}{\tilde{o}}
+%\newcommand{\action}{a}
+%\newcommand{\internalstate}{s}
+%\newcommand{\worldstate}{w}
+%\newcommand{\internalmodel}{m}
+%\newcommand{\sensorimotorstate}{\psi}
+%\newcommand{\angle}{\theta}
+
+% A number of useful random variables
+%\newcommand{\Observation}{\tilde{O}}
+%\newcommand{\Action}{A}
+%\newcommand{\Internalstate}{S}
+%\newcommand{\Worldstate}{W}
+%\newcommand{\Internalmodel}{M}
+%\newcommand{\Sensorimotorstate}{\Psi}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definition of probabilistic values
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Probability
+\newcommand{\prob}[1]{p(#1)}
+
+% Countable set is used in mutual information and corresponds with the domain of a random variable
+% The countable set of a dice: \Omega = {1,2,3,4,5,6}
+\newcommand{\countableset}[1]{\Omega_{#1}}
+% Helper function for mutual information to define \Omega(Var) (with capital letter) automatically
+\newcommand{\setover}[1]{\countableset{\MakeUppercase #1}}
+
+% Mutual information requires two arguments
+\newcommand\mutualinformation[2]{%
+  \sum_{#2 \in \setover{#2}} \sum_{#1 \in \setover{#1}}(#1,#2)log\frac{\prob{#1,#2}}{\prob{#1}\prob{#2}}%
+}
+
+\newcommand{\samplespace}{S}
+\newcommand{\sample}{s} % or outcome
+\newcommand{\randomvariable}{X}
+\newcommand{\randomvector}{\mathbf{X}}
+\newcommand{\randomvariablevalue}{x}
+
+\newcommand{\spacereal}{\mathbb{R}}
+\newcommand{\spacezerotoone}{[0,1]}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definition of variables in master equations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\thisnotempty}{(1-\delta(0,n_i))}
+\newcommand{\nextnotfull}{(1-\delta(k,n_{i+1}))}
+\newcommand{\prevnotfull}{(1-\delta(k,n_{i-1}))}
+\newcommand{\movetonext}{\delta(n_i',n_i-1)\delta(n_{i+1}',n_{i+1}+1)}
+\newcommand{\movetoprev}{\delta(n_i',n_i-1)\delta(n_{i-1}',n_{i-1}+1)}
+\newcommand{\tonext}{\frac{1+\cos(\theta_i)}{2}}
+\newcommand{\toprev}{\frac{1-\cos(\theta_i)}{2}}
+\newcommand{\prevtonext}{\frac{1+\cos(\theta_{i-1})}{2}}
+\newcommand{\nexttoprev}{\frac{1-\cos(\theta_{i+1})}{2}}
+
+\newcommand{\toup}{\frac{1+\sin(\theta_i)}{2}}
+\newcommand{\todown}{\frac{1-\sin(\theta_i)}{2}}
+
+\newcommand{\toeast}{\tonext(1-sin^2(\theta_i))}
+\newcommand{\towest}{\toprev(1-sin^2(\theta_i))}
+\newcommand{\tonorth}{\toup(1-cos^2(\theta_i))}
+\newcommand{\tosouth}{\todown(1-cos^2(\theta_i))}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Robotics and SLAM variable names
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% the multi-robot setting requires proper indexing
+\newcommand{\robotcount}{K}
+\newcommand{\robotindex}{\MakeLowercase{\robotcount}}
+
+% the robot pose or state is one of the most fundamental variables in the SLAM
+% problem definition, note \MakeUppercase is required instead of \uppercase,
+% see: http://www.tex.ac.uk/cgi-bin/texfaq2html?label=casechange
+\newcommand{\robotpose}{x}
+\newcommand{\robotposeindex}{i}
+\newcommand{\robotposeset}{\mathcal{\MakeUppercase{\robotpose}}}
+
+% the 3D-points, or more specific: landmark positions, in 3D reconstruction these
+% are called 3d points, but the term "point" is a bit to general/vague
+\newcommand{\landmarkposition}{y}
+\newcommand{\landmarkcount}{N}
+\newcommand{\landmarkpositionset}{\mathcal{\MakeUppercase{\landmarkposition}}}
+\newcommand{\landmarkpositionindex}{\MakeLowercase{\landmarkcount}}
+
+% in the data-association problem, there is an explicit mapping from observations
+% to landmarks via correspondence variables
+\newcommand{\correspondence}{c}
+
+% in 3D scene reconstruction observations are numbered
+% !! conflicts now with robots
+\newcommand{\observation}{z}
+\newcommand{\observationcount}{K}
+\newcommand{\observationindex}{\MakeLowercase{\observationcount}}
+
+% the actions are in SLAM not important. SLAM has to work as a background task, only
+% in active SLAM this becomes different
+\newcommand{\action}{u}
+
+% in structure-from-motion literature there is no robot, there are just (moving)
+% cameras or `platforms', however, it is exactly the same entity involved here, so
+% we can conflate the notation to the same one as of robots.
+\newcommand{\camparam}{\robotpose}
+\newcommand{\camparamindex}{\robotposeindex}
+
+\newcommand{\constraintindex}{k}
+
+
+\newcommand{\slamfactor}{f}
+\newcommand{\slamfactorindex}{k}
+
+\newcommand{\slamvariable}{\theta}
+\newcommand{\slamvariableset}{\mathcal{\MakeUppercase{\slamvariable}}}
+
+\newcommand{\slamobservation}{z}
+\newcommand{\slammeasurement}{h}
+
+% information matrix of observation
+\newcommand{\measurementinformationmatrix}{\Omega}
+
+\newcommand{\robotaction}{\action^\robotindex}
+
+\newcommand{\robotobservation}{\observation\now^\robotindex}
+
+% will resolve in something like: g^k(x^k_t,u_t)
+\newcommand{\motion}{g}
+\newcommand{\robotposetransition}{\motion^\robotindex(\robotpose^\robotindex\now,\robotaction\now) }
+% will resolve in something like: h^k(x^k_t,Y)
+\newcommand{\measurement}{h}
+\newcommand{\observationfunction}{\measurement^\robotindex(\robotpose^\robotindex\now,\landmarkpositionset) }
+
+\newcommand{\motioncovariance}{G}
+\newcommand{\measurementcovariance}{Q}
+\newcommand{\slamvariablecovariance}{\Sigma}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Image processing and computer vision
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% In case we want to reason over planes:
+%\newcommand{\shape}{plane}
+%\newcommand{\shapes}{planes}
+%\newcommand{\shapeconf}(r,\theta,\phi)
+%\newcommand{\shapepoints}(\setof{p_1;p_2;p_3})
+
+% In case we want to reason over lines:
+\newcommand{\shape}{line}
+\newcommand{\shapes}{lines}
+\newcommand{\shapeconf}{r,\theta}
+\newcommand{\shapeconfx}[1]{r_{#1},\theta_{#1}}
+\newcommand{\shapepoints}{(\setof{p_1;p_2})}
+
