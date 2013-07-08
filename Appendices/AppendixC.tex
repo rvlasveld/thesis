@@ -171,3 +171,36 @@ The error function, the sum of squared residuals, being minimized by searching f
   \argmin{b} = \sum_{i=1}^n (y_i - x_i' b)^2 = (\vectorsym{y}-\matrixsym{X}b)^T (\vectorsym{y} - \matrixsym{X}b)
 \end{equation}
 %
+
+
+
+%---------------------------------------------
+%---------------------------------------------
+\clearpage
+\section{Online novelty detection on temporal sequences, by Ma and Perkins}
+Paper: \cite{ma2003online}.
+This method uses support vectors for regression (in contrast with of classification).
+The regression function, using a kernel function $K(x_i, x_j)$ can be written as:
+%
+\begin{equation}
+  f(\vectorsym{x}) = \sum_{i=1}^l \theta_i K(\vectorsym{x}_i, \vectorsym{x}) + b,
+\end{equation}
+%
+where $\theta_i$ is a coefficient resulting from the Lagrange multipliers of the original minimization problem.
+A small fraction these of coefficients are non-zero, and the corresponding samples $\vectorsym{x}_i$ are the \emph{support vectors}.
+The regression function $f(\vectorsym{x})$ is non-linear when a non-linear kernel is chosen.
+
+The regression function is used to created a model of past observations.
+A matching function is constructed which determines the matching value $V(t_0)$ of a new observations with the constructed model.
+This matching value is the residual of the regression function at $t_0$.
+
+The algorithm determines \emph{(novel) events}, \emph{occurrences} and \emph{surprises}.
+\emph{Novel events} are defined as a series of observations for which the confidence value over the number of suprises (out-of-model observations) is high enough.
+Events thus have a length; they are constructed of a sub-series of observations.
+
+The papers presents an alternative implementation in order to handle fixed-resource environments and thus induce an online algorithm.
+After $W$ observations have been observed and used for the trained model, the oldest observation is disregarded before the newly obtained observation is incorporated.
+
+\emph{Note:} the Support Vector approach in this paper is used to select the observations to use in the regression model.
+This differs from one-class applications of support vector machines.
+The same authors have also presented a paper which does use one-class construction using support vector machines: \cite{ma2003time}.
