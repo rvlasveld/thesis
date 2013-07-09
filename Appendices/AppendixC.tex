@@ -100,7 +100,7 @@ The observations get a label assigned by maximizing the logistic probability ($\
 \clearpage
 \section{Support Vector Data Description, by Tax and Duin}
 Paper: \cite{tax2004support}.
-The paper proposes the \gls{svdd} method, analogous to the \gls{svc} of Vapnik \cite{vapnik1998statistical}, based on the separating hyperplane of Sch{\"o}lkopf \etal \cite{scholkopf1999sv}.
+The paper proposes the \gls{svdd} method, analogous to the \gls{svc} of Vapnik \cite{vapnik1998statistical}, based on the separating hyper-plane of Sch{\"o}lkopf \etal \cite{scholkopf1999sv}.
 Where \gls{svc} is ablo to distinguish data between two classes, \gls{svdd} obtains a closed boundary around the target class and can detect outliers.
 
 Method and formulas very similair to description in Section \ref{sec:camci}.
@@ -204,3 +204,57 @@ After $W$ observations have been observed and used for the trained model, the ol
 \emph{Note:} the Support Vector approach in this paper is used to select the observations to use in the regression model.
 This differs from one-class applications of support vector machines.
 The same authors have also presented a paper which does use one-class construction using support vector machines: \cite{ma2003time}.
+
+
+
+%---------------------------------------------
+%---------------------------------------------
+\clearpage
+\section{Time-series novelty detection using one-class support vector machines, by Ma and Perkins}
+Paper: \cite{ma2003time}
+This approach is very similar to the other paper of this author discussed in the preview section \cite{ma2003online}.
+The difference is that this method does create a \gls{svm}-classifier to detect in and out of class examples, whilst the other uses the support vectors to construct a regression function.
+
+The method constructs a hyper-plane which separates as many as possible data points in the feature space with the largest margin from the origin.
+This is a different from (and more like the original \gls{svm}-proposal by Sch\"olkopf \cite{scholkopf1999support}) the one-class methodology by Tax which creates a boundary around the data \cite{tax2004support}.
+
+The hyper-plane in feature space is represented as:
+%
+\begin{equation}\label{eq:hyper-plane-ma}
+  f(\vectorsym{x}) = \matrixsym{W}^\transpose \Phi(\vectorsym{x}) - \rho,
+\end{equation}
+%
+where $\Phi(\vectorsym{x})$ maps a vector $\vectorsym{x}$ from the input space $I$ to the (potentially infinite dimensional) feature space $F$.
+$\matrixsym{W}$ and $\rho$ are determined by solving a quadratic optimization problem.
+The dual formulation (using Lagrange multipliers $\alpha_i$) is:
+%
+\begin{equation}
+  \matrixsym{W} = \sum_{i=1}^l \alpha_i \Phi(\vectorsym{x}_i),
+\end{equation}
+%
+where $0 \leq \alpha_i \leq \frac{1}{\nu l}$.
+The parameter $\nu \in (0,1)$ is set to trade-off the smoothness of $f(\vectorsym{x})$ and acts as a upper bound on the fraction of outliers over all the data examples in $\vectorsym{x}$ \cite{scholkopf1999support}.
+
+Using the \emph{kernel trick} the inner product of two vectors in feature space $F$ can be replaced by a kernel function $K$, which is often the \gls{rbf}.
+The equation of the hyper-plane (\ref{eq:hyper-plane-ma}) then becomes the following (non-linear) function:
+%
+\begin{equation}
+  f(\vectorsym{x}) = \sum_{i=1}^l \alpha_i K(\vectorsym{x}_i, \vectorsym{x}) - \rho
+\end{equation}
+%
+
+The form of the input vector $\vectorsym{x}$ is considered to be the \emph{(projected) phase space} representation of the original time series.
+Just like \cite{kawahara2012sequential} which constructs \emph{sequences} of samples and in contrast with \cite{camci2010change}, each element of $\vectorsym{x}$ is a vector with the size of the \emph{embedding dimension} $E$ of the time series.
+Thus, a time series $x(t)$ is converted to a set of vectors $T_E(N)$:
+%
+\begin{equation}
+  T_E(N) = \{ \vectorsym{x}_E(t),\ t = E \cdots N\},
+\end{equation}
+%
+where
+%
+\begin{equation}
+  \vectorsym{x}_E(t) = [x(t - E + 1)\ x(t - E + 2)\ \cdots\ x(t)]
+\end{equation}
+%
+If a point of this vector $\vectorsym{x}_E(t)$ is regarded (in the feature space $F$) as an outlier, all corresponding values in the original time series are also regarded as such.
