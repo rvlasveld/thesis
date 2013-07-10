@@ -258,3 +258,36 @@ where
 \end{equation}
 %
 If a point of this vector $\vectorsym{x}_E(t)$ is regarded (in the feature space $F$) as an outlier, all corresponding values in the original time series are also regarded as such.
+
+
+
+
+%---------------------------------------------
+%---------------------------------------------
+\section{Least squares one-class support vector machine, by Choi}
+Paper: \cite{choi2009least}.
+The proposed method uses a \gls{svm} for a similarity/distance comparison for testing examples to training examples.
+Instead of other methods, such as the standard one-class \gls{svm} by Sch\"olkopf \cite{scholkopf1999support} or the \gls{svdd} of Tax and Duin \cite{tax2004support}, it does not create a boundary for the training data.
+Instead it uses a least-squared approach to construct a hyperplane to which most of the training examples lie close to.
+
+The objective function to be minimized of the standard one-class method by Sch\"olkopf is formulated as:
+%
+\begin{equation}
+  \minimize{\vectorsym{w}}
+    {\frac{1}{2} \norm{\vectorsym{w}}^2 - \rho + C \sum_j \xi_j}
+    {\vectorsym{w} \cdot \phi(\vectorsym{x}_j) \geq \rho - \xi_j \quad \text{and} \quad \xi_j \geq 0}
+\end{equation}
+%
+where $\phi$ is a mapping to the feature space.
+
+The least-squares one-class support vector machine has a small variation on the above formula, which results in the following minimization problem:
+%
+\begin{equation}\label{eq:minimize_least_squares_one_class_svm}
+  \minimize{\vectorsym{w}}
+    {\frac{1}{2} \norm{\vectorsym{w}}^2 - \rho + \frac{1}{2} C \sum_j \xi_j^2}
+    {\vectorsym{w} \cdot \phi(\vectorsym{x}_j) = \rho - \xi_j}
+\end{equation}
+%
+The slack variable (for which in the original formulation $\xi_j \geq 0$ should hold) now represents an error caused by a training example $\vectorsym{x}_j$ with relation to the hyperplane, \ie $\xi_j = \rho - \vectorsym{w} \cdot \phi(\vectorsym{x}_j)$.
+
+In other words, the minimization problem (\ref{eq:minimize_least_squares_one_class_svm})) results in a hyperplane with maximal distance from the origin and for which the sum of the squares of errors $\xi_j^2$ are minimized.
