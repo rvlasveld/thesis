@@ -1,5 +1,9 @@
 ;; xindy style file created by the glossaries package
+<<<<<<< HEAD
 ;; for document 'main' on 2013-10-1
+=======
+;; for document 'main' on 2013-9-23
+>>>>>>> Writing on method
 
 ; required styles
 
