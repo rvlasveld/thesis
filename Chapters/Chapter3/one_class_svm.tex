@@ -1,7 +1,92 @@
 % !TEX root = ../../main.tex
 \section{One-Class Support Vector Machine}\label{sec:one_class_svm}
 *** Use material from blog post ***
-\subsection{Support Vector Machine}
+
+\subsection{Support Vector Machine}\label{subsec:svm}
+We will first discuss the traditional two-class \gls{svm} before we consider the one-class variant, as introduced by Cortes and Vapnik in \cite{cortes1995support}.
+Consider a data set $\Omega = \{ (x_1, y_1),\allowbreak (x_2, y_2), \dots , (x_n, y_n) \}$; points $x_i \in \mathbb{R}^d$ in a (for instance two-dimensional) space where $x_i$ is the $i$-th input data point and $y_i \in \{-1, 1\}$ is the $i$-th output pattern, indicating the class membership.
+
+A \gls{svm} can create a boundary between linear-separable data points, making it a non-probabilistic binary linear classifier.
+More flexible non-linear boundaries can be obtained by the use of a non-linear function $\phi(x)$, as illustrated in Figure \ref{fig:kernel_mapping}.
+This function maps the input data from space $I$ to a higher dimensional space $F$.
+The \gls{svm} can create a linear separating hyperplane in the space $F$ that separates the data points from the two classes.
+When the hyperplane is projected to the (lower) original input space $I$ it creates a non-linear separating curve.
+The mapping and projection of data points can be efficient (and implicit) performed by using the kernel trick, which is discussed in section \ref{subsec:kernel_trick}.
+
+The separating hyperplane is represented by
+\begin{equation}
+w^T x + b = 0,
+\end{equation}
+with $w \in F$ and $b \in R$.
+The hyperplane that is created determines the \emph{margin} between the classes; the minimal distance from one of the data points to the hyperplane.
+In geometric sense, $w$ is the normal vector to the hyperplane and $\frac{b}{\lVert{w}\rVert}$ determines the offset of the hyperplane to the origin.
+Since the distance between the two margins is equal to $\frac{2}{\lVert{w}\rVert}$, the maximum-margin hyperplane is found by minimizing $\lVert{w}\rVert$.
+The data points which lie on the margin are the \emph{support vectors}.
+This geometrical interpretation is illustrated in Figure \ref{fig:svm_hyperplane}.
+All data points for which $y_i = -1$ are on one side of the hyperplane and all other data points (for which $y_i = 1$) are on the other side.
+The minimal distance from a data point to the hyperplane is for both classes equal.
+This results in a \emph{maximal margin} between the two classes.
+Thus, the \gls{svm} searches for a maximal separating hyperplane.
+
+\begin{figure}
+\centering
+  \includegraphics[width=0.5\textwidth]{./Figures/chapter3/svm_separating_plane_with_margin.png}
+  \caption[\gls{svm} and the separating hyperplane]{Illustration of the separating hyperplane of a \gls{svm}. Here $w$ is the normal vector for the separating hyperplane and the distance between the two margins is $\frac{2}{\lVert{w}\rVert}$.}
+  \label{fig:svm_hyperplane}
+\end{figure}
+
+With every classification method there is a risk of overfitting.
+In that case the random error or noise of the data set is described instead of the underlying data.
+The \gls{svm} classifier can use a \emph{soft margin} by allowing some data points to lie within the margin, instead of on the margin or farther away from the hyperplane.
+For this it introduces \emph{slack variables} $\xi_i$ for each data point and the constant $C > 0$ the determines the trade-off between maximizing the margin and the number of data points within that margin (and thus the training errors).
+The objective function for a \gls{svm} is the following minimization function:
+
+\begin{equation}\label{frm:svm_objective}
+  \operatorname*{min}_{w,\ b,\ \xi_i} \frac{ \lVert{w}\rVert^2 }{2} + C \sum_{i=1}^n \xi_i
+\end{equation}
+\begin{equation}
+  \begin{multlined}
+  \mbox{ subject to: } \\*
+  \begin{aligned}
+  y_i( w^T \phi(x_i) + b) \geq & 1 - \xi_i & \mbox{ for all } i = 1, \dots, n \\*
+   & \xi_i \geq 0 & \mbox{ for all } i = 1, \dots, n\\*
+  \end{aligned}
+  \end{multlined}
+\end{equation}
+
+*** TODO: better format of above formula ***
+
+This minimization problem can be solved (using quadratic programming) and transformed to its Lagrange dual formulation.
+To do so, the Lagrange multipliers $a_i >= 0$ are introduced and the decision function becomes:
+\begin{equation}\label{frm:svm_lagrange}
+  f(x) = \operatorname{sgn}( \sum_{i=1}^n \alpha_i y_i K(x, x_i) + b),
+\end{equation}
+where $K(x, x_i) = \phi(x)^T\phi(x_i)$ (which is further discussed in section \ref{subsec:kernel_trick}).
+Here every data point $i$ for which $a_i > 0$ is weighted in the decision function and thus ``supports'' the classification machine: hence the name ``\acrlong{svm}''.
+Since it is shown that under certain circumstances \gls{svm}s show an equality to sparse representations \cite{girosi1998equivalence}, there will often be relatively few Lagrange multipliers with a non-zero value.
+
+\subsection{Kernel trick}\label{subsec:kernel_trick}
+In the previous section, \ref{subsec:svm}, the mapping function $\phi(x)$ and the kernel function $K$ were briefly mentioned.
+The decision function in equation \ref{frm:svm_lagrange} only relies on the dot-products of mapped data points in the feature space $F$ (\ie all pairwise distances between the data points in that space).
+It shows \cite{flach2012machine} that as long as any function has the same result, without an explicit mapping to the higher dimension $F$, the dot-products can be substituted by the kernel function $K$.
+This is known as the \emph{kernel trick} and gives the \gls{svm} the ability to create non-linear decision function without high computational complexity.
+This mapping is illustrated in Figure \ref{fig:kernel_mapping}.
+Here the non-linear separating boundary in the input space $I$ is mapped, via $\phi$, to a linear boundary in the feature space $F$.
+
+The kernel function $K$ can have different forms, such as linear, polynomial and sigmoidal but the most used (and flexible) form is the Gaussian \gls{rbf}, in which the feature space $F$ is a Hilbert Space of infinite dimensions *** ref needed ***:
+\begin{equation}
+  K(x, x') = \operatorname{exp} \left( - \frac{ \lVert x - x' \rVert ^2}{2 \sigma^2 } \right),
+\end{equation}
+where $\sigma \in R$ is a kernel parameter and $\lVert x - x' \rVert$ is the dissimilarity measure expressed in Euclidean distance.
+
+
+\begin{figure}
+\centering
+  \includegraphics[width=0.8\textwidth]{./Figures/chapter3/svm_kernel_mapping.png}
+  \caption[Kernel mapping]{The non-linear boundary in the input space $I$ (left) is transformed to a linear boundary in the feature space $F$ (right) by mapping the data points with the function $\phi$. The kernel trick uses a function $K$ which performs an implicit mapping.}
+  \label{fig:kernel_mapping}
+\end{figure}
+
 \emph{Explain classical two-class problem and workings of \gls{svm}; minimization function etc.}
 
 \subsection{Standard One-Class SVM}
