@@ -12,7 +12,8 @@
 %   \item The MOSUM of squares test for monitoring variance changes \cite{hsu2007mosum}
 % \end{itemize}
 
-Non-Bayesian change detection algorithm (thus: no prior distribution believe available for the change time).
+\emph{Notes:}
+Non-Bayesian change detection algorithm (\ie no prior distribution believe available for the change time).
 The \gls{cusum} method is developed by Page \cite{page1954continuous} for the application of statistical quality control (it is also known as a control chart).
 Primary for detection of mean shift.
 The \gls{mosum} of squares test for monitoring variance changes \cite{hsu2007mosum}.
@@ -36,7 +37,7 @@ The centered (and normalized) sum is squares is defined as
   \end{aligned}
 \end{equation}
 For a series with homogeneous variance, the value of $D_k$ will oscillate around $0$.
-When there is a sudden change, the value will increase and exceed some predefined boundary with high probability.
+In case of a sudden change, the value will increase and exceed some predefined boundary with high probability.
 The behavior of $D_k$ is related a Brownian bridge.
 By using an iterative algorithm, the method is able to minimize the masking effect of successive change points.
 

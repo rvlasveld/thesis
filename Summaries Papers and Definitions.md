@@ -53,7 +53,7 @@ In real world problems it can be hard to obtain the exact (integral) denominator
 * Monte Carlo: methods that help obtain a desired value by performing simulations involving probabilistic choices.
 
 ### Bernoulli Trial
-A single experiment in which we draw from a distribution (e.g. coin flip), such that the outcome is _independent_ of previous trial (i.e. the coin has no memory).
+A single experiment in which we draw from a distribution (e.g. coin flip), such that the outcome is _independent_ of previous trial (\ie the coin has no memory).
 
 ## Papers
 

@@ -69,7 +69,7 @@ This is the \emph{maximum-likelihood estimate} (chapter 9 in the book).
 The least-squares method can be used for a (binary) classifier, by encoding the target variable $y$ as classes by real numbers $-1$ (negative) and $1$ (positive).
 It follows that $\matrixsym{X}^T\vectorsym(y) = P \vectorsym{\mu^+} - N \vectorsym{\mu^-}$, where $P$, $N$, $\vectorsym{\mu^+}$ and $\vectorsym{\mu^-}$ are the number of positive and negative examples, and the $d$-vectors containing each feature's mean values, resp.
 The regression equation $y = \bar{y} + \hat{b}(x - \bar{x})$ can be used to obtain a decision boundary.
-We need to determine the point $(x_0, y_0)$ such that $y_0$ is half-way between $y^+$ and $y^-$ (the positive and negative examples, i.e. $y_0 = 0$).
+We need to determine the point $(x_0, y_0)$ such that $y_0$ is half-way between $y^+$ and $y^-$ (the positive and negative examples, \ie $y_0 = 0$).
 
 
 %--------------------------------------------
@@ -190,7 +190,7 @@ We are not restricted to polynomial kernels; an often used kernel is the \emph{G
 \begin{equation}
   \kappa(\vectorsym{x}_i, \vectorsym{x}_j) = exp(\dfrac{-\norm{\vectorsym{x}_i - \vectorsym{x}_j}^2}{2\sigma^2})
 \end{equation}
-where $\sigma$ is known as the \emph{bandwidth} parameter. We can think of the Gaussian kernel as imposing a Gaussian (i.e., multivariate normal) surface on each support vector in instance space, so that the boundary is defined in therms of those Gaussian surfaces.
+where $\sigma$ is known as the \emph{bandwidth} parameter. We can think of the Gaussian kernel as imposing a Gaussian (\ie, multivariate normal) surface on each support vector in instance space, so that the boundary is defined in therms of those Gaussian surfaces.
 Kernel methods are best known in combination with support vector machines.
 Notice that the soft margin optimization problem is defined in terms of dot product between training examples, and thus the `kernel trick' can be applied.
 Note that the decision boundary learn with a non-linear kernel cannot be represented by a simple weight vector in input space.

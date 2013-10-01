@@ -20,7 +20,8 @@
       \item CUSUM - or other more traditional methods
       \item Density-ratio estimation
       \item Support Vector Machines (?) - if there are more sources about this
-      \item (Dimensionality reduction)
+      \item (Dimensionality reduction) --> probably not
+      \item \emph{Not to much attention to all techniques, focus is on SVM}
     \end{itemize}
   \item With each method, shortly look at characteristics, strengths and weaknesses and consider applicability to accelerometer sensor data
 \end{itemize}
@@ -28,8 +29,8 @@
 
 \section{Statistical framework}\label{statistical-framework}
 Many applications require the detection of time points at which the underlying properties of a system change.
-This problem thus has received a lot of attention in the fields of data mining, etc... *** list and refs ***.
-Often this problem is formulated in a statistical framework, by inspecting the data generating \gls{pdf} of the time series data.
+This problem has received a lot of attention in the fields of data mining, etc... *** list and refs ***.
+Often this problem is formulated in a statistical framework, by inspecting the underlying data generating \gls{pdf} of the time series data.
 A change point is then defined as a significant change in the properties of the \gls{pdf}, such as the mean and variance.
 
 The widely used \gls{cusum} method by Basseville \etal \cite{basseville1993detection} takes this approach.
@@ -37,15 +38,16 @@ It originates from control methods for detection from bench marks.
 This method and some derivatiges are discussed and analyzed in section \ref{cusum}.
 
 Many methods rely on pre-specified parametric model assumptions and considers the data be independent over time, which makes it less flexible to real-world applications.
-The proposed methods by Kawahara \etal \cite{kawahara2009change} and Lui \etal \cite{liu2013change} try to overcome these problems by estimating the \emph{ratio} between the \gls{pdf}, instead of estimating each \gls{pdf}.
+The methods proposed by Kawahara \etal \cite{kawahara2009change} and Lui \etal \cite{liu2013change} try to overcome these problems by estimating the \emph{ratio} between the \gls{pdf}, instead of estimating each \gls{pdf}.
 This approach is discussed and analyzed in section \ref{density-ratio}.
 
 The density-estimation methods rely on the log-likelihood ratio between \glspl{pdf}.
 The method of Camci \cite{camci2010change} takes an other approach within the statistical framework, by using a \gls{svm}.
 One problem it tries to overcome is the (claimed) weakness of many methods to detect a decrease in variance.
-The method represents the distribution over the data points as a hyper-sphere in a higher dimension using kernel trick.
+The method represents the distribution over the data points as a hyper-sphere in a higher dimension using the kernel trick.
 A change in the \gls{pdf} is represented by a change in the radius of this sphere.
 Section \ref{svm} discusses the \gls{svm}-method.
+*** Put emphasis that this is the source of inspiration for the chosen method? ***
 
 % The final method under consideration, change detection via (intrinsic) dimensionality reduction, takes a different point of view.
 % Opposed to the other discussed methods, dimensionality reduction is framed in the MDL (Minimum Description Length) framework.
