@@ -35,6 +35,7 @@ Thus, the \gls{svm} searches for a maximal separating hyperplane.
   \caption[\gls{svm} and the separating hyperplane]{Illustration of the separating hyperplane of a \gls{svm}. Here $w$ is the normal vector for the separating hyperplane and the distance between the two margins is $\frac{2}{\lVert{w}\rVert}$.}
   \label{fig:svm_hyperplane}
 \end{figure}
+*** Add wikipedia reference. How to do? http://en.wikipedia.org/wiki/File:Svm_max_sep_hyperplane_with_margin.png ***
 
 With every classification method there is a risk of overfitting.
 In that case the random error or noise of the data set is described instead of the underlying data.
@@ -90,6 +91,7 @@ where $\sigma \in R$ is a kernel parameter and $\lVert x - x' \rVert$ is the dis
   \caption[Kernel mapping]{The non-linear boundary in the input space $I$ (left) is transformed to a linear boundary in the feature space $F$ (right) by mapping the data points with the function $\phi$. The kernel trick uses a function $K$ which performs an implicit mapping.}
   \label{fig:kernel_mapping}
 \end{figure}
+*** Add wikipedia reference. How to do? http://en.wikipedia.org/wiki/File:Kernel_Machine.png ***
 
 
 %--------------------------------------------
@@ -128,6 +130,13 @@ For a new data points $x$, the function value $f(x)$ determines wheter the data 
 The hyperplane is represented by $g(x) = w \cdot \phi(x) + \rho = 0$ and the decision function is $f(x) = \operatorname{sgn}(g(x))$.
 This hyperplane and the separation from the origin is illustrated in Figure \ref{fig:nu-svm}.
 
+\begin{figure}
+  \centering
+    \includegraphics[width=0.5\textwidth,keepaspectratio]{./Figures/chapter3/nu-svm.pdf}
+  \caption[\gls{nu-svm}]{Graphical representation of \gls{nu-svm}. The separating hyperplane $w \cdot \phi(x_i) + \rho = 0$ create a maximal margin, in the feature space, between the data points and the origin. Slack variables $\xi_i$ are used to create a soft margin.}
+  \label{fig:nu-svm}
+\end{figure}
+
 The objective function to find the separating hyperplane is the following minimization function, which can be solved using \gls{qp}:
 
 \begin{equation}\label{eq:nu-svm_objective}
@@ -143,25 +152,22 @@ The objective function to find the separating hyperplane is the following minimi
   \end{multlined}
 \end{equation}
 
+The decision function in the dual formulation with Lagrange multipliers is denoted as:
+\begin{equation}\label{eq:nu-svm_lagrange}
+f(x) = \operatorname{sgn}((w \cdot \phi(x_i)) - \rho) = \operatorname{sgn}( \sum_{i=1}^n \alpha_i K(x, x_i) - \rho)
+\end{equation}
+
 In the classical \gls{svm} objective function, as denoted in Equation \ref{eq:svm_objective}, the parameter $C$ decided the smoothness of the boundary, with respect to the slack variables $\xi_i$.
 In the formulation of \gls{nu-svm} the equivalent parameter is $\nu \in (0,1)$ (hence the name).
 It characterizes the solution in two ways:
 \begin{enumerate}
-  \item
-  \item
+  \item $\nu$ is an upper bound on the fraction of outliers, \ie training examples regarded as out-of-class.
+  \item $\nu$ is a lower bound on the fraction of \gls{sv}s, \ie training examples with a nonzero Lagrange multiplier $\alpha_i$.
 \end{enumerate}
+When $\nu$ approaches $0$, the penalty factor for nonzero Lagrange multipliers ($\frac{1}{\nu n}$) becomes infinite, and thus the solution resembles a \emph{hard margin} boundary.
 
-\begin{figure}
-  \centering
-    \includegraphics[width=0.5\textwidth,keepaspectratio]{./Figures/chapter3/nu-svm.pdf}
-  \caption[\gls{nu-svm}]{Graphical representation of \gls{nu-svm}. The separating hyperplane $w \cdot \phi(x_i) + \rho = 0$ create a maximal margin, in the feature space, between the data points and the origin. Slack variables $\xi_i$ are used to create a soft margin.}
-  \label{fig:nu-svm}
-\end{figure}
-
-
-
-
-
+This method creates a \emph{hyperplane}, characterized by $w$ and $\rho$, that separates the data with maximal margin from the origin in the feature space $F$.
+In the following section we will discuss an alternative method, which uses an circumscribing \emph{hypersphere} to characterize the data (and the region of distribution $P$ where the density (or: support) lives).
 
 
 %--------------------------------------------
