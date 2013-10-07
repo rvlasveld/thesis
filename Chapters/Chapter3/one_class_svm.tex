@@ -5,7 +5,7 @@
 %--------------------------------------------
 \subsection{Support Vector Machine}\label{subsec:svm}
 We will first discuss the traditional two-class \gls{svm} before we consider the one-class variant, as introduced by Cortes and Vapnik in \cite{cortes1995support}.
-Consider a data set $\Omega = \{ (x_1, y_1),\allowbreak (x_2, y_2), \dots , (x_n, y_n) \}$; points $x_i \in \mathbb{R}^d$ in a (for instance two-dimensional) space where $x_i$ is the $\mathcal{I}$-th input data point and $y_i \in \{-1, 1\}$ is the $\mathcal{I}$-th output pattern, indicating the class membership.
+Consider a data set $\Omega = \{ (x_1, y_1),\allowbreak (x_2, y_2), \dots , (x_n, y_n) \}$; points $x_i \in \mathbb{R}^d$ in a (for instance two-dimensional) space where $x_i$ is the $i$-th input data point and $y_i \in \{-1, 1\}$ is the $i$-th output pattern, indicating the class membership.
 
 A \gls{svm} can create a boundary between linear-separable data points, making it a non-probabilistic binary linear classifier.
 More flexible non-linear boundaries can be obtained by the use of a non-linear function $\phi(x)$, as illustrated in Figure \ref{fig:kernel_mapping}.
@@ -65,7 +65,7 @@ To do so, the Lagrange multipliers $a_i >= 0$ are introduced and the decision fu
 \end{equation}
 where $K(x, x_i) = \phi(x)^T\phi(x_i)$ (which is further discussed in section \ref{subsec:kernel_trick}).
 Here every data point $\mathcal{I}$ for which $a_i > 0$ is weighted in the decision function and thus ``supports'' the classification machine: hence the name ``\acrlong{svm}''.
-Since it is shown that under certain circumstances \gls{svm}s show an equality to sparse representations \cite{girosi1998equivalence}, there will often be relatively few Lagrange multipliers with a non-zero value.
+Since it is shown that under certain circumstances \gls{svm}s show an equality to sparse representations \cite{girosi1998equivalence,smola1998connection}, there will often be relatively few Lagrange multipliers with a non-zero value.
 
 
 %--------------------------------------------
@@ -78,7 +78,9 @@ This is known as the \emph{kernel trick} and gives the \gls{svm} the ability to 
 This mapping is illustrated in Figure \ref{fig:kernel_mapping}.
 Here the non-linear separating boundary in the input space $\mathcal{I}$ is mapped, via $\phi$, to a linear boundary in the feature space $\mathcal{F}$.
 
-The kernel function $K$ can have different forms, such as linear, polynomial and sigmoidal but the most used (and flexible) form is the Gaussian \gls{rbf}, in which the feature space $\mathcal{F}$ is a Hilbert Space of infinite dimensions *** ref needed ***:
+The kernel function $K$ can have different forms, such as linear, polynomial and sigmoidal but the most used (and flexible) form is the Gaussian \gls{rbf}.
+As Smola \etal \cite{smola1998connection} state, this Gaussian kernel yields good performance, especially when no assumptions can be made about the data.
+The kernel maps input space $\mathcal{I}$ to the feature space $\mathcal{F}$ which is a Hilbert Space of infinite dimensions *** ref needed ***:
 \begin{equation}
   K(x, x') = \operatorname{exp} \left( - \frac{ \lVert x - x' \rVert ^2}{2 \sigma^2 } \right),
 \end{equation}
@@ -220,6 +222,13 @@ The dual formulation, by using Lagrange multipliers $\alpha_i$, can be used to t
   \item Explain RBF kernel
   \item Explain RKHS? (Hilbert Space)
 \end{itemize}
+
+$k(\mathbf{x}_i, \mathbf{x})$ is a kernel function computing a dot product in feature space, introduced by Aizerman \etal \cite{aizerman1964theoretical}.
+``Training a \gls{svm} with Gaussian \gls{rbf} kernels corresponds to minimizing the specific cost function with a regularization operator'' \cite{smola1998connection}. \\
+``Gaussian kernels tend to yield good performance under general smoothness assumptions and should be considered especially of no additional knowledge of the data is available.'' \cite{smola1998connection}. \\
+``Choosing a small width of the kernels leads to high generalization error as it effectively decouples the separate basis functions of the kernel expansion into very localized functions which is equivalent to memorizing the data, whereas a wide kernel tends to oversmooth.'' \cite{smola1998connection}. \\
+
+sparsity, RKHS: \cite{girosi1998equivalence}
 
 
 
