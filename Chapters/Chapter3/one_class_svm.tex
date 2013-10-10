@@ -65,7 +65,7 @@ To do so, the Lagrange multipliers $a_i >= 0$ are introduced and the decision fu
 \end{equation}
 where $K(x, x_i) = \phi(x)^T\phi(x_i)$ (which is further discussed in section \ref{subsec:kernel_trick}).
 Here every data point $\mathcal{I}$ for which $a_i > 0$ is weighted in the decision function and thus ``supports'' the classification machine: hence the name ``\acrlong{svm}''.
-Since it is shown that under certain circumstances \gls{svm}s show an equality to sparse representations \cite{girosi1998equivalence,smola1998connection}, there will often be relatively few Lagrange multipliers with a non-zero value.
+Since it is shown that under certain circumstances \glspl{svm} show an equality to sparse representations \cite{girosi1998equivalence,smola1998connection}, there will often be relatively few Lagrange multipliers with a non-zero value.
 
 
 %--------------------------------------------
@@ -112,20 +112,20 @@ This problem is closely related to density estimation.
 In that context, the problem can be the following.
 Given an underlying probabilty distribution $P$ the goal is to find a subset $S$ for which the probability that a data point from $P$ lies outside $S$ equals some predetermined value $\nu$ between $0$ and $1$ \cite{scholkopf1999support}.
 
-We will discuss two implementations of \gls{oc-svm}s.
+We will discuss two implementations of \glspl{oc-svm}.
 The first is the \gls{nu-svm} by Sch\"olkopf \etal \cite{scholkopf1999support} and closely follows the above problem statement regarding density estimation.
 The second, on which we will base our change detection method, is the \gls{svdd} by Tax and Duin \cite{tax2004support}.
 
 %--------------------------------------------
 
-\subsection{\acrlong{nu-svm}s}\label{subsec:nu-svm}
+\subsection{\acrlong{nu-svm}}\label{subsec:nu-svm}
 The first of the \gls{oc-svm} methods we will discuss is often referred to as \gls{nu-svm} and introduced by Sch\"olkopf \etal \cite{scholkopf1999support}.
 Instead of estimating the density function of an distribution $P$, it focuses on an easier problem: the algorithm find regions in the input where the ``probability density lives''.
 This results in a function such that most of the data is in the region where the function is nonzero.
 
 The constructed decision function $\mathcal{F}$ resembles the function discussed in Section \ref{subsec:svm}.
 It returns the value $+1$ in a (possibly small) region capturing most of the data points, and $-1$ elsewhere.
-The method maps the data points from input space $\mathcal{I}$ to a feature space $\mathcal{F}$ (following classical \gls{svm}s).
+The method maps the data points from input space $\mathcal{I}$ to a feature space $\mathcal{F}$ (following classical \glspl{svm}).
 In that space $\mathcal{F}$ it separates the data points with maximal margin from the origin, with a hyperplane.
 For a new data points $x$, the function value $f(x)$ determines wheter the data point is part of the distribution (\ie the value is $+1$) or a novelty (\ie the value is $-1$).
 The hyperplane is represented by $g(x) = w \cdot \phi(x) + \rho = 0$ and the decision function is $f(x) = \operatorname{sgn}(g(x))$.
@@ -163,7 +163,7 @@ In the formulation of \gls{nu-svm} the equivalent parameter is $\nu \in (0,1)$ (
 It characterizes the solution in two ways:
 \begin{enumerate}
   \item $\nu$ is an upper bound on the fraction of outliers, \ie training examples regarded as out-of-class.
-  \item $\nu$ is a lower bound on the fraction of \gls{sv}s, \ie training examples with a nonzero Lagrange multiplier $\alpha_i$.
+  \item $\nu$ is a lower bound on the fraction of \glspl{sv}, \ie training examples with a nonzero Lagrange multiplier $\alpha_i$.
 \end{enumerate}
 When $\nu$ approaches $0$, the penalty factor for nonzero Lagrange multipliers ($\frac{1}{\nu n}$) becomes infinite, and thus the solution resembles a \emph{hard margin} boundary.
 

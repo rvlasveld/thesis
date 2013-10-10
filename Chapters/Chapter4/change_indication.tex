@@ -1,2 +1,33 @@
 % !TEX root = ../../main.tex
 \section{Change Indication}\label{sec:method_change_indication}
+*** TODO: change section title ***
+*** TODO: ***
+\emph{Follow methodology of ``A unifying framework for detecting outliers and change points from time series'' \cite{takeuchi2006unifying}.
+It creates a two-stage process of first searching for outliers, and then using the ``outlier-score'' to find (sudden) change points, by a weighted average of a moving window.
+That eventual score can be thresholded (as in the paper) or processed with something like CUSUM (proposal).
+Looks like my proposed methods, in that is combines outliers and gives a score to change points.}
+
+The proposed method of this thesis follows the unifying framework as introduced by Takeuchi and Yamanishi \cite{takeuchi2006unifying} and an similar implementation by Camci \cite{camci2010change} with \glspl{svm}.
+The unifying framework combines the detection of outliers with change points and divides it in two stages.
+The first stage determines the outliers in a time series by giving a score based on the deviation from a learned model, and thereby creates a new time series.
+The second stage runs on that new created time series and calculates a average over a window of the outlier scores.
+The problem of change detection is then reduced to outlier detection over that average-scored time series.
+This method is named \gls{changeFinder} by the authors.
+The implementation by Camci, which uses \glspl{svm} to detect changes is named \acrlong{svcpd}.
+
+The problem statement and formal definition, following Tackeuchi and Yamanishi \cite{takeuchi2006unifying} and Camci \cite{camci2010change} is the following.
+The algorithm needs to find \emph{sudden} changes in the time series data.
+In other words, slowly changing properties in the data are not considered to be changes.
+This is in line with the search of changes in activities, since we are only interested in different activities (which are represented by sudden changes) instead of changes within an activity.
+Considered a time series $x_1 x_1 \dots$, which is drawn from a stochastic process $p$.
+Each $x_t$ (t = 1, 2, \dots) is a $d$-dimensional real valued vector and $p$ a probability density function of the sequence $x_1 x_2 \dots$.
+Assume $p$ can be decomposed in two different \gls{iid} stationary stochastic processes $p^1$ and $p^2$ and are one-dimensional Gaussian density functions.
+For a time point $a$ data points for which $t < a$ are drawn from $p^1 = N(\mu_1, \sigma_1^2)$ and for $t \geq a$ from $p^2 = N(\mu_2, \sigma_a^2)$.
+If $p^1$ and $p^2$ are different, then the time point $t = a$ is a \emph{change point}.
+In \cite{takeuchi2006unifying} the similarity between the stochastic processes are expressed by the \gls{kliep} divergence $D(p^2||p^1)$.
+The problem with this measure is that, as the authors conclude and Camci discusses, it is not able to detect a change by decrease in variance.
+
+Whereas \gls{changeFinder} uses double probability estimation algorithm, our approach follows \gls{svcpd} by constructing a \gls{svm} over a sliding window.
+The \gls{svcpd} algorithm uses the location of new data points in the feature space $\mathcal{F}$ with respect to the hypersphere and the hypersphere's radius $R$ to determine whether the new data point represents a change point.
+
+*** TODO: What is my contribution compared to Camci? Distance of outliers to hypersphere? ***

@@ -21,13 +21,6 @@
   \item Note: try to avoid the perspective of \emph{density estimation}. Instead: \emph{data description} or \emph{boundary description}.
 \end{itemize}
 
-
-*** TODO: ***
-Follow methodology of ``A unifying framework for detecting outliers and change points from time series'' \cite{takeuchi2006unifying}.
-It creates a two-stage process of first searching for outliers, and then using the ``outlier-score'' to find (sudden) change points, by a weighted average of a moving window.
-That eventual score can be thresholded (as in the paper) or processed with something like CUSUM (proposal).
-Looks like my proposed methods, in that is combines outliers and gives a score to change points.
-
 \input{./Chapters/Chapter3/outlier_detection}
 \input{./Chapters/Chapter3/one_class_svm}
 \input{./Chapters/Chapter3/svm_parameters}
