@@ -17,6 +17,52 @@
 \end{itemize}
 
 
+\subsection{Experiment notes}
+\begin{itemize}
+  \item ICSS/CUSUM is goed in het vinden van variance changes. Niet goed in mean veranderingen.
+  \item Problemen met SVM methode: ook na de verandering blijft de threshold nog stijgen;
+  \item geprobeerd direct model-reset te doen na change point, maar dan kan je achteraf niet meer verder analyseren.
+  \item Veranderingen in mean geven ``extra'' change point wanneer alle data weer in het window zit. Zie \ref{fig:jumping_mean_ratios} op de 50-tallen.
+
+\end{itemize}
+
+\begin{figure}
+\centering
+  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_mean_camci.eps}
+  \caption[Jumping mean camci]{Jumping mean camci}
+\end{figure}
+
+\begin{figure}
+\centering
+  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_mean_camci_thresholds.eps}
+  \caption[Jumping mean camci thresholds]{Jumping mean camci, thresholds}
+\end{figure}
+
+\begin{figure}
+\centering
+  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_mean_camci_ratios_10.eps}
+  \caption[Jumping mean camci ratios]{Jumping mean camci ratios, last 10}
+  \label{fig:jumping_mean_ratios}
+\end{figure}
+
+\begin{figure}
+\centering
+  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_variance.eps}
+  \caption[Jumping variance]{Jumping variance}
+\end{figure}
+
+\begin{figure}
+\centering
+  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_variance_thresholds.eps}
+  \caption[Jumping variance thresholds]{Jumping variance, thresholds}
+\end{figure}
+
+\begin{figure}
+\centering
+  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_variance_ratios_10.eps}
+  \caption[Jumping variance ratios]{Jumping variance ratios, last 10}
+\end{figure}
+
 \input{./Chapters/Chapter4/change_indication}
 \input{./Chapters/Chapter4/overview}
 \input{./Chapters/Chapter4/algorithms}

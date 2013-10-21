@@ -84,13 +84,13 @@ The proposed method of Berbi\v{c} \etal \cite{barbivc2004segmenting} determines 
 With the observation that more dimensions are needed to keep the error below the threshold when transitions between actions occur, cut-points can be located and segments will be created.
 The superior extension of their approach uses a Probabilistic \gls{pca} algorithm to incorporate the dimensions outside the selected set as noise.
 
-In the method by \cite{himberg2001time} a cost function is defined over segments of data which is to be minimized.
+In the method by Himberg \etal \cite{himberg2001time} a cost function is defined over segments of data which is to be minimized.
 The cost functions thereby searches for internally homogeneous segments of data, reflecting states in which the devices and the user are.
 The cost function can be any arbitrary function and in the implementation the sum of variances over the segments is used.
 Both in a local and global iterative replacement procedure (as an alternative for the computationally hard dynamic programming algorithm) the best breakpoint locations $c_i$ for a pre-defined number of segments $1 \leq i \leq k$ are optimized.
 
 Many methods obtain an implicit segmentation as a result of classification over a sliding window *** add refs ***.
-The method of \cite{yang2008distributed} explicitly performs segmentation and classification simultaneously.
+The method of Yang \etal \cite{yang2008distributed} explicitly performs segmentation and classification simultaneously.
 It argues that the classification of a pre-segmented test-sequences becomes straightforward with many classical algorithms to choose from.
 The algorithm matches test examples with the \emph{sparsest} linear representation of mixture subspace models of training examples, searching over different temporal resolutions.
 
@@ -107,7 +107,7 @@ Although these techniques are closely related, there is a subtle difference.
 In the case of \emph{change detection} to goal is to find, possibly unrelated, sudden change points in a signal \cite{takeuchi2006unifying}.
 In contrast, the goal of \emph{temporal segmentation} is to find homogeneous segments of data, which can be the result of multiple detected changes.
 
-The \gls{icss} by Incl\'{a}n and Tiao \cite{inclan1994use} is a statistical method which obtains comparable results (when applied to stock data) compared to \gls{mle} and Bayesian.
+The \gls{icss} by Incl\'{a}n and Tiao \cite{inclan1994use} is a statistical method which obtains results (when applied to stock data) comparable to \gls{mle} and Bayesian *** Bayesian What? ***.
 Whereas \gls{cusum} can be applied to search for a change in mean, the \gls{icss} is adapted to find changes in variance.
 It obtains a \emph{likelihood ratio} for testing the hypothesis of one change against no change in the variance.
 Using an iterative approach, all possible change points are considered.
@@ -186,13 +186,36 @@ The proposal of \cite{cheng2009efficient} extends on the \gls{cusum}-based metho
 ``Local outlier detection reconsidered: a generalized view on locality with applications to spatial, video, and network outlier detection'' \cite{schubert2012local}. 2, 2012 \\
 
 
+\subsection{Support Vector Machines}\label{subsec:svm}
+In this section we review methods of change detection based on the applications of \glspl{svm} as model construction method.
+A number of proposals have been made using this method.
+Sch{\"o}lkopf \etal \cite{scholkopf1999support} applies Vapnik's principle, to never solve a problem which is more general than the one that one is actually interested in, to novelty detection.
+In the case of novelty detection, they argue there is no need for density estimation of the distribution.
+Simple algorithms estimate the density by considering how many data points fall in a region of interest.
+The \gls{nu-svm} method instead starts with the number of data points that should be whithin the region and estimates a region with that desired property.
+It builds on the method of Vapnik and Vladimir \cite{vapnik1963pattern}, which characterizes a set of data by separating it from the origin.
+The \gls{nu-svm} method adds the kernel method, allowing non-linear decision functions, and incorporates `softness' by the $\nu$-parameter.
+Whereas the method in \cite{vapnik1963pattern} focusses on two-class problems, the \gls{nu-svm} method introduces the method the one-class problems.
+
+The method introduced by Ma and Perkins \cite{ma2003time} creates a \emph{projected phase} of a time series data, which is intuitively equal to applying a high-pass filter to the time series.
+The projected phase of the time series construct vectors, which are then classified by the \gls{nu-svm} method.
+The method is applied to a simple synthetic sinusoidal signal with small additional noise and a small segment with large additional noise.
+The algorithm is able to detect that segment, without false alarms.
+
+With the same concepts as \gls{nu-svm}, the \gls{svdd} method by Tax and Duin \cite{tax1999support,tax2004support} uses a separating hypersphere (in contrast with a hyperplane) to characterize the data.
+The data points that lie outside of the created hypersphere are considered to be outliers, which number is a pre-determined fraction of the total number of data points.
+The \gls{svcpd} method of Camci \cite{camci2010change} uses this one-class classification method and applies it to time-series data.
+By using an \gls{oc-svm} the method is able to detect changes in mean variance.
+Especially the detection of variance \emph{decrease} is an improvement over other methods that rely in the Kullback-Leibler divergence, since these are inable to detect decreases in variance \cite{takeuchi2006unifying}.
+
+\textbf{The main goal of this these is to apply the \gls{svcpd} method to accelerometer data.}
+*** Beter verwoorden ***
+
 --- SVMs ---
 
 ``Change point detection in time series data using support vectors'' \cite{camci2010change}. 3, 2010 \\
 
 ``Time-series novelty detection using one-class support vector machines'' \cite{ma2003time}. 78, 2003 \\
-
-``Support Vector Method for Novelty Detection'' \cite{scholkopf1999support}. 337, 1999 \\
 
 ``Support vector domain description'' \cite{tax1999support}. 907, 1999
 ``Support vector data description applied to machine vibration analysis'' \cite{tax1999supportdata}. 76, 1999 \\
