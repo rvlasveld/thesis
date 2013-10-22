@@ -10,7 +10,7 @@
   \item Specific view on \glspl{svm}
 \end{itemize}
 
-This section gives an overview of the literature on temporal segmentation in the context of human activity recognition.
+This section gives an overview of the literature on temporal segmentation in the context of \gls{har}.
 It takes a look on different implementations and methodologies.
 A wide range of terms and subtle differences are used in the field, such as `segmentation', `change detection', `novelty detection' and `outlier detection'.
 These will be the categorical terms for which we discuss the literature.
@@ -100,24 +100,6 @@ The order of the model segment is determined by model selecting, often using the
 
 Field of computer vision: \cite{zhou2008aligned}, \cite{li2007segmentation}.
 
-\subsection{Change detection}\label{subsec:change_detection}
-*** change order of this and temporal segmentation sections? So first change, then segmentation? *** \\
-Whereas the above mentioned researches focus on \emph{segmentation}, many have focused on \emph{change detection}.
-Although these techniques are closely related, there is a subtle difference.
-In the case of \emph{change detection} to goal is to find, possibly unrelated, sudden change points in a signal \cite{takeuchi2006unifying}.
-In contrast, the goal of \emph{temporal segmentation} is to find homogeneous segments of data, which can be the result of multiple detected changes.
-
-The \gls{icss} by Incl\'{a}n and Tiao \cite{inclan1994use} is a statistical method which obtains results (when applied to stock data) comparable to \gls{mle} and Bayesian *** Bayesian What? ***.
-Whereas \gls{cusum} can be applied to search for a change in mean, the \gls{icss} is adapted to find changes in variance.
-It obtains a \emph{likelihood ratio} for testing the hypothesis of one change against no change in the variance.
-Using an iterative approach, all possible change points are considered.
-The proposal of \cite{cheng2009efficient} extends on the \gls{cusum}-based methods to find change points in mean and variance, by creating a more efficient and accurate algorithm.
-
-*** TODO: move CUSUM based techniques to this subsection ***
-
-
-
-
 --- Segmentation ---
 
 % ``An online algorithm for segmenting time series'' \cite{keogh2001online}. See \ref{sec:appendix-C-online-keogh}. 538, 2001 \\
@@ -143,6 +125,21 @@ The proposal of \cite{cheng2009efficient} extends on the \gls{cusum}-based metho
 
 % ``Segmenting motion capture data into distinct behaviors'' \cite{barbivc2004segmenting}. 270, 2004 \\
 
+\subsection{Change detection}\label{subsec:change_detection}
+*** change order of this and temporal segmentation sections? So first change, then segmentation? *** \\
+Whereas the above mentioned researches focus on \emph{segmentation}, many have focused on \emph{change detection}.
+Although these techniques are closely related, there is a subtle difference.
+In the case of \emph{change detection} to goal is to find, possibly unrelated, sudden change points in a signal \cite{takeuchi2006unifying}.
+In contrast, the goal of \emph{temporal segmentation} is to find homogeneous segments of data, which can be the result of multiple detected changes.
+
+The \gls{icss} by Incl\'{a}n and Tiao \cite{inclan1994use} is a statistical method which obtains results (when applied to stock data) comparable to \gls{mle} and Bayesian *** Bayesian What? ***.
+Whereas \gls{cusum} can be applied to search for a change in mean, the \gls{icss} is adapted to find changes in variance.
+It obtains a \emph{likelihood ratio} for testing the hypothesis of one change against no change in the variance.
+Using an iterative approach, all possible change points are considered.
+The proposal of \cite{cheng2009efficient} extends on the \gls{cusum}-based methods to find change points in mean and variance, by creating a more efficient and accurate algorithm.
+
+*** TODO: move CUSUM based techniques to this subsection ***
+
 
 --- Change detection ---
 
@@ -166,6 +163,8 @@ The proposal of \cite{cheng2009efficient} extends on the \gls{cusum}-based metho
 
 ``Change point detection in time series data using support vectors'' \cite{camci2010change}. 3, 2010 \\
 
+\subsection{Novelty detection}\label{subsec:novelty_detection}
+
 --- Novelty detection ---
 
 ``Online novelty detection on temporal sequences'' \cite{ma2003online}. 146, 2003 \\
@@ -175,6 +174,7 @@ The proposal of \cite{cheng2009efficient} extends on the \gls{cusum}-based metho
 
 ``Support Vector Method for Novelty Detection'' \cite{scholkopf1999support}. 337, 1999 \\
 
+\subsection{Outlier detection}\label{subsec:outlier_detection}
 
 --- Outlier detection ---
 ``A unifying framework for detecting outliers and change points from time series'' \cite{takeuchi2006unifying}. 87, 2006 \\
@@ -186,45 +186,17 @@ The proposal of \cite{cheng2009efficient} extends on the \gls{cusum}-based metho
 ``Local outlier detection reconsidered: a generalized view on locality with applications to spatial, video, and network outlier detection'' \cite{schubert2012local}. 2, 2012 \\
 
 
-\subsection{Support Vector Machines}\label{subsec:svm}
-In this section we review methods of change detection based on the applications of \glspl{svm} as model construction method.
-A number of proposals have been made using this method.
-Sch{\"o}lkopf \etal \cite{scholkopf1999support} applies Vapnik's principle, to never solve a problem which is more general than the one that one is actually interested in, to novelty detection.
-In the case of novelty detection, they argue there is no need for density estimation of the distribution.
-Simple algorithms estimate the density by considering how many data points fall in a region of interest.
-The \gls{nu-svm} method instead starts with the number of data points that should be whithin the region and estimates a region with that desired property.
-It builds on the method of Vapnik and Vladimir \cite{vapnik1963pattern}, which characterizes a set of data by separating it from the origin.
-The \gls{nu-svm} method adds the kernel method, allowing non-linear decision functions, and incorporates `softness' by the $\nu$-parameter.
-Whereas the method in \cite{vapnik1963pattern} focusses on two-class problems, the \gls{nu-svm} method introduces the method the one-class problems.
+% --- SVMs ---
 
-The method introduced by Ma and Perkins \cite{ma2003time} creates a \emph{projected phase} of a time series data, which is intuitively equal to applying a high-pass filter to the time series.
-The projected phase of the time series construct vectors, which are then classified by the \gls{nu-svm} method.
-The method is applied to a simple synthetic sinusoidal signal with small additional noise and a small segment with large additional noise.
-The algorithm is able to detect that segment, without false alarms.
+% ``Change point detection in time series data using support vectors'' \cite{camci2010change}. 3, 2010 \\
 
-With the same concepts as \gls{nu-svm}, the \gls{svdd} method by Tax and Duin \cite{tax1999support,tax2004support} uses a separating hypersphere (in contrast with a hyperplane) to characterize the data.
-The data points that lie outside of the created hypersphere are considered to be outliers, which number is a pre-determined fraction of the total number of data points.
-The \gls{svcpd} method of Camci \cite{camci2010change} uses this one-class classification method and applies it to time-series data.
-By using an \gls{oc-svm} the method is able to detect changes in mean variance.
-Especially the detection of variance \emph{decrease} is an improvement over other methods that rely in the Kullback-Leibler divergence, since these are inable to detect decreases in variance \cite{takeuchi2006unifying}.
+% ``Time-series novelty detection using one-class support vector machines'' \cite{ma2003time}. 78, 2003 \\
 
-\textbf{The main goal of this these is to apply the \gls{svcpd} method to accelerometer data.}
-*** Beter verwoorden ***
+% ``Support vector domain description'' \cite{tax1999support}. 907, 1999
+% ``Support vector data description applied to machine vibration analysis'' \cite{tax1999supportdata}. 76, 1999 \\
 
---- SVMs ---
+% ``Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine'' \cite{anguitahuman}. 13, 2012 \\
 
-``Change point detection in time series data using support vectors'' \cite{camci2010change}. 3, 2010 \\
+% ``Support vector machines in remote sensing: A review'' \cite{mountrakis2011support}. 150, 2011 \\
 
-``Time-series novelty detection using one-class support vector machines'' \cite{ma2003time}. 78, 2003 \\
-
-``Support vector domain description'' \cite{tax1999support}. 907, 1999
-``Support vector data description applied to machine vibration analysis'' \cite{tax1999supportdata}. 76, 1999 \\
-
-``Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine'' \cite{anguitahuman}. 13, 2012 \\
-
-``A geometric approach to support vector machine (SVM) classification'' \cite{mavroforakis2006geometric}. 136, 2006 \\
-
-``Support vector machines in remote sensing: A review'' \cite{mountrakis2011support}. 150, 2011 \\
-
-``Predicting time series with support vector machines'' \cite{muller1997predicting}. 693, 1997 \\
-
+% ``Sensor-based abnormal human-activity detection'' \cite{yin2008sensor}. 74, 2008 (builds one-class SVM of all normal traces) \\

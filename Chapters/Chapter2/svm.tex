@@ -1,46 +1,82 @@
 % !TEX root = ../../main.tex
-\section{Change-detection by Support Vector Machines}\label{svm}
+\section{Support Vector Machines in Change Detection}\label{sec:svm_in_change_detection}
 
-Introduced by Cortes and Vapnik \cite{vapnik1998statistical, vapnik1999nature}, Support Vector Machines offer a way to segment, and classify, linear separable data.
-This technique can also be applied to estimate density functions of given time series \cite{weston1999support}.
-When combined with a mapping function, which maps the data from the input space $I$ to a higher dimension feature space $F$, the input data can be non-linear separable.
-A separating linear hyperplane that segments the data in the feature space $F$, yields a non-linear segmentation in the lower-dimensional input space $I$.
-Instead of explicitly mapping the input data to the higher dimensional space, a kernel function can be used.
-This kernel function can calculate values of the feature space directly, without the need to first map the input values to this space.
-This process is referred to as the kernel trick.
+Many proposals in the field of remote sensing and \gls{har} make use of \glspl{svm} as a model construction method.
+An elaborate overview of applications is given in \cite{mountrakis2011support}.
+In this section we review methods of change detection based on the applications of \glspl{svm} as model construction method.
+A number of proposals have been made using this method.
+Sch{\"o}lkopf \etal \cite{scholkopf1999support} applies Vapnik's principle, to never solve a problem which is more general than the one that one is actually interested in, to novelty detection.
+In the case of novelty detection, they argue there is no need for density estimation of the distribution.
+Simple algorithms estimate the density by considering how many data points fall in a region of interest.
+The \gls{nu-svm} method instead starts with the number of data points that should be within the region and estimates a region with that desired property.
+It builds on the method of Vapnik and Vladimir \cite{vapnik1963pattern}, which characterizes a set of data by separating it from the origin.
+The \gls{nu-svm} method adds the kernel method, allowing non-linear decision functions, and incorporates `softness' by the $\nu$-parameter.
+Whereas the method in \cite{vapnik1963pattern} focuses on two-class problems, the \gls{nu-svm} method introduces the method the one-class problems.
 
-The proposed method of Camci \cite{camci2010change} uses a one-class support vector machine to segment time series data.
-One-class SVMs are used to describe the current data under consideration, by assuming all data points are from the same class \cite{tax2001one}.
-To cope with possible errors or outliers a soft-margin is applied \cite{cortes1995support}.
-The class is described by a spherical boundary around the data with center $c$ and radius $r$, such that the volume is minimized.
-New data points are consecutively mapped from the input space to the feature space.
-The retrieved (high dimension) data point can be in- or outside the earlier constructed hyper-sphere, thereby giving information about a possible change point.
-*** NOTE: using the in/out position of a new datapoint is different from the approach in this thesis, by only using the model properties. ***
-Following the definition of Camci \cite{camci2010change}, the class description is obtained by minimizing $r^2$:
-\begin{equation}
-  \mathrm{Min}\ r^2
-\end{equation}
-\begin{equation}
-  \mathrm{Subject\ to} : \|\mathbf{x}_i - \mathbf{c}\|^2 \le r^2\ \forall i,\ \mathbf{x}_i : i \mathrm{th\ data\ point}
-\end{equation}
+The method introduced by Ma and Perkins \cite{ma2003time} creates a \emph{projected phase} of a time series data, which is intuitively equal to applying a high-pass filter to the time series.
+The projected phase of the time series combines a history or data points to a vector, which are then classified by the \gls{nu-svm} method.
+The method is applied to a simple synthetic sinusoidal signal with small additional noise and a small segment with large additional noise.
+The algorithm is able to detect that segment, without false alarms.
 
-To be able to handle outliers in the input data, a penalty cost function $\varepsilon_i$ for each outlier can be added.
+The algorithms of \glspl{svm} has been applied to the problem of \gls{har}, as by Anguita \etal \cite{anguitahuman}.
+In that research a multiclass classification problem is solved using \glspl{svm} and the One-Vs-All method.
+The method exploits fixed-point arithmetic to create a hardware-friendly algorithm, which can be executed on a smartphone.\footnote{Smartphones have limited resources and thus require energy-efficient algorithms. In \cite{anguita2007hardware} a Hardware-Friendly \gls{svm} is introduced. It uses less memory, processor time and power consumption, with a loss of precision.}
 
-Using this one-class SVM formulation, differences between two (consecutive) windows of data points with size $w$ can be obtained.
-The first window is used as the input set, $h_1$ and the second as the test set $h_t$.
-For the first window a one-class SVM is constructed, yielding in a representation by $c_1$ and $r_1$.
-When the data points of the second window belong to the same class, the representation of that one-class SVM would equal the first:
-\begin{equation}
-\begin{aligned}
-  c_1 = c_2, & &  r_1 = r_2
-\end{aligned}
-\end{equation}
+With the same concepts as \gls{nu-svm}, the \gls{svdd} method by Tax and Duin \cite{tax1999support,tax2004support} uses a separating hypersphere (in contrast with a hyperplane) to characterize the data.
+The data points that lie outside of the created hypersphere are considered to be outliers, which number is a pre-determined fraction of the total number of data points.
 
-In case the second window of data points does not belong to the same class, \ie the probability density function that describes the data differs from the first, the describing values of the second window will differ from the first.
-A difference in the SVM center $c$ or radius $r$ represent a change in the mean and variance, respectively.
-The amount of difference can be expressed by a dissimilarity measure over the representations.
-When the dissimilarity between the two windows exceeds some predefined threshold $th$, there exists a change point between the windows.
+The method by Yin and Yang \cite{yin2008sensor} uses the \gls{svdd} method in the first phase of a two-phase algorithm to filter commonly available normal activities.
+The \gls{svcpd} method of Camci \cite{camci2010change} uses \gls{svdd} applies it to time-series data.
+By using an \gls{oc-svm} the method is able to detect changes in mean variance.
+Especially the detection of variance \emph{decrease} is an improvement over other methods that rely in the Kullback-Leibler divergence, since these are unable to detect decreases in variance \cite{takeuchi2006unifying}.
+This main research subject of this thesis is to apply the method of Camci \cite{camci2010change} to sensor data (such as accelerometer time series) obtained by on-body smartphones.
 
-*** Give visual explanation with circles and in- and out-side new data points ***
+The inner workings of \glspl{oc-svm} are discussed in detail in Section \ref{sec:one_class_svm}.
 
-*** Make clear what approach we use (model properties) and create link/bridge to next Chapter (3), which discusses SVM in detail. ***
+
+% \section{Change-detection by Support Vector Machines}\label{svm}
+% *** REMOVE THIS SECTION? ***
+
+% Introduced by Cortes and Vapnik \cite{vapnik1998statistical, vapnik1999nature}, Support Vector Machines offer a way to segment, and classify, linear separable data.
+% This technique can also be applied to estimate density functions of given time series \cite{weston1999support}.
+% When combined with a mapping function, which maps the data from the input space $I$ to a higher dimension feature space $F$, the input data can be non-linear separable.
+% A separating linear hyperplane that segments the data in the feature space $F$, yields a non-linear segmentation in the lower-dimensional input space $I$.
+% Instead of explicitly mapping the input data to the higher dimensional space, a kernel function can be used.
+% This kernel function can calculate values of the feature space directly, without the need to first map the input values to this space.
+% This process is referred to as the kernel trick.
+
+% The proposed method of Camci \cite{camci2010change} uses a one-class support vector machine to segment time series data.
+% One-class SVMs are used to describe the current data under consideration, by assuming all data points are from the same class \cite{tax2001one}.
+% To cope with possible errors or outliers a soft-margin is applied \cite{cortes1995support}.
+% The class is described by a spherical boundary around the data with center $c$ and radius $r$, such that the volume is minimized.
+% New data points are consecutively mapped from the input space to the feature space.
+% The retrieved (high dimension) data point can be in- or outside the earlier constructed hyper-sphere, thereby giving information about a possible change point.
+% *** NOTE: using the in/out position of a new datapoint is different from the approach in this thesis, by only using the model properties. ***
+% Following the definition of Camci \cite{camci2010change}, the class description is obtained by minimizing $r^2$:
+% \begin{equation}
+%   \mathrm{Min}\ r^2
+% \end{equation}
+% \begin{equation}
+%   \mathrm{Subject\ to} : \|\mathbf{x}_i - \mathbf{c}\|^2 \le r^2\ \forall i,\ \mathbf{x}_i : i \mathrm{th\ data\ point}
+% \end{equation}
+
+% To be able to handle outliers in the input data, a penalty cost function $\varepsilon_i$ for each outlier can be added.
+
+% Using this one-class SVM formulation, differences between two (consecutive) windows of data points with size $w$ can be obtained.
+% The first window is used as the input set, $h_1$ and the second as the test set $h_t$.
+% For the first window a one-class SVM is constructed, yielding in a representation by $c_1$ and $r_1$.
+% When the data points of the second window belong to the same class, the representation of that one-class SVM would equal the first:
+% \begin{equation}
+% \begin{aligned}
+%   c_1 = c_2, & &  r_1 = r_2
+% \end{aligned}
+% \end{equation}
+
+% In case the second window of data points does not belong to the same class, \ie the probability density function that describes the data differs from the first, the describing values of the second window will differ from the first.
+% A difference in the SVM center $c$ or radius $r$ represent a change in the mean and variance, respectively.
+% The amount of difference can be expressed by a dissimilarity measure over the representations.
+% When the dissimilarity between the two windows exceeds some predefined threshold $th$, there exists a change point between the windows.
+
+% *** Give visual explanation with circles and in- and out-side new data points ***
+
+% *** Make clear what approach we use (model properties) and create link/bridge to next Chapter (3), which discusses SVM in detail. ***
