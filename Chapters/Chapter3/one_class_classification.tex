@@ -8,22 +8,44 @@
 
 The problem of \gls{occ} is closely related to the (traditional) two-class classification situation\footnote{Two-class problems are considered as to be the basic problem, since multi-class classification problems can be decomposed into multiple two-class problems \cite{fukunaga1990introduction}.}.
 In the case of traditional classification algorithms, the problem is to classify an unknown object to one of the pre-defined categories.
+Every object $i$ is represented as a vector $\vectorsym{x}_i = (x_{i,1},\dots,x_{i,d}), x_{i,j} \in \mathbb{R}$ with $d$ real-valued measurements.
+Using this notation, an object $\vectorsym{x}_i$ thus represents one point in a feature space: $\vectorsym{x}_i \in \mathcal{X} = \mathbb{R}^d$.
+The two classes of objects, $\omega_1$ and $\omega_2$, are labeled $-1$ and $+1$ respectively.
+The objects with a label $y_i \in \{-1, +1\}$ attached are in the training set $\mathcal{X}^{tr}$ (note that it can be both positive and negative example objects).
 This problem is solved by determining a decision boundary in the feature space of the data objects and label the new data object based on the location relative to this boundary.
-
-
-
-In case of the \gls{occ} problem, only one class (often refered to as the target class) of data is available in the training phase, or the aquisition of outliers is very expensive.
-
-Figure \ref{fig:two-vs-one-classification} graphically shows the difference between two and one-class classification and the consequences for outlier objects.
+This is expressed by the decision function $y = f(\vectorsym{x})$:
+\begin{equation}\label{eq:decision_function_classification}
+  f: \mathbb{R}^d \rightarrow \{-1, +1\}
+\end{equation}
+In case of the \gls{occ} problem, only one class (often referred as the target class, or positive examples) of training data is used to create a decision boundary.
+The goal is to determine whether a new data object belongs to the target class or to the unknown class and thus is an outlier.
+One could argue that this problem is equal to the traditional two-class problem by considering all other classes as negative examples, although there are important differences.
+In pure \gls{occ} problems there are no negative example objects available.
+This could be because the acquisition of these examples is very expensive, or because there are only examples of the `normal' state of the system and the goal is to detect `abnormal' states.
+Since the algorithm's goal is to differentiate between normal and abnormal objects (relative to the training objects), \gls{occ} is often called outlier, novelty or anomaly detection, depending on the origin of the problem to which the algorithm is applied\footnote{The term \acrlong{occ} originates from Moya \etal \cite{moya1993one}.}.
+The difference between two and one-class classification and the consequence for outlier objects is illustrated in Figure \ref{fig:two-vs-one-classification}.
+In the two-class classification problem the object \textbf{o} will be member of the \textbf{-1} class whilst the \gls{occ} problem will label it as an outlier.
+In \cite{tax2001one} a more detailed analysis of the \gls{occ} is given.
 
 \begin{figure}
   \centering
     \includegraphics[width=0.5\textwidth,keepaspectratio]{./Figures/chapter3/two-vs-one-classification.pdf}
-  \caption[Difference between two and one-class classification]{This plot shows the difference between two and one-class classification. The solid line indicates a possible decision boundary between the $+$ and $*$ example objects. The dashed circle indicates the closed boundary around all the data objects. In the first type the object $o$ is considered to be member of the $*$-class, whilst in the latter (\gls{occ}) formulation it is an outlier.}
+  \caption[Difference between two and one-class classification]{This plot shows the difference between two and one-class classification. The solid line indicates a possible decision boundary between the \textbf{+1} and \textbf{-1} example objects. The dashed circle indicates the closed boundary around all the data objects. In the first type the object \textbf{o} is considered to be member of the \textbf{-1}-class, whilst in the latter (\gls{occ}) formulation it is an outlier.}
   \label{fig:two-vs-one-classification}
 \end{figure}
 
-
+The \gls{occ} algorithms have been applied to a wide range of applications.
+The first is, obviously, outlier detection of objects which do not resemble the bulk of the training data.
+It can be a goal by itself and can be used as a filtering mechanism for other data processing methods.
+Often methods that rely on data-characteristics are sensitive for remote regions in the data set.
+Using \gls{occ} these remote regions can be removed from the data set.
+A second application is for the problem as described above, in which only data from a single target class is available.
+When this problems originates from \eg a monitoring process, the \gls{occ} is able to recognize abnormal system states, without the need to create (or simulate) faulty states beforehand.
+The final possible application given by Tax \cite{tax2001one} is the comparison of two data sets.
+By constructing a \gls{occ}-classifier using a training data set, one can compare that set to a new data set.
+This will result in a similarity-measure.
+It is easy to see here a relation with similiary measures over \glspl{pdf} and the Kullback-Leibler divergence.
+This application will be further discussed in Section \ref{subsec:change-detection-with-occ}.
 
 \subsection{One-Class Classification methods}\label{subsec:occ-methods}
 In his thesis \cite{tax2001one}, Tax orders a collection of \gls{occ}-methods into three categories, visually represented in Figure \ref{fig:occ-methods}.
@@ -37,8 +59,8 @@ Boundary methods are based on Vapnik's principle\footnote{With a limited amount 
 Examples of methods that focus on the boundary (a direct threshold) of the training data distribution are K-centers, Nearest-neighborhood and \gls{svdd}.
 Especially the latter has a strong bias towards minimal volume solutions.
 These type of methods are sensitive to scaling of features, since they rely on a well-defined distance measure.
-The number of objects that is required is smaller then in the case of density methods.
-The boundary method \gls{svdd}, constructed by Tax, will be further discussed in Section \ref{subsec:oc-svm-svdd}.
+The number of objects that is required is smaller than in the case of density methods.
+The boundary method \gls{svdd}, constructed by Tax and which has shown good performance \cite{khan2010survey}, will be further discussed in Section \ref{subsec:oc-svm-svdd}.
 
 Reconstruction methods take a different approach.
 Instead of focusing on classification of the data and thus on the discriminating features of data objects, they model the data.
@@ -53,17 +75,22 @@ Examples of reconstruction methods are K-means, \gls{pca} and some neural networ
   \label{fig:occ-methods}
 \end{figure}
 
+In \cite{khan2010survey,noumir2012simple} an overview of applications for \gls{occ}-algorithms, and explictly for \gls{svm}-based methods (such as \gls{svdd} and \gls{nu-svm}), is given.
+It shows succesful applications for, amonst others, problems in the field of Handwritten Digit Recognition, Face Recognition Applications, Spam Detection and Anomaly Detection \cite{li2003improving,perdisci2006using}.
+As discussed in Section \ref{sec:outlier_detection}, this can be used for change detection.
+
+\subsection{Change detection with \gls{occ}-methods}\label{subsec:change-detection-with-occ}
+*** Write -short- how \gls{occ}-methods can be used for change detection. Relate to previous section on change detection, \ref{sec:outlier_detection} ***
+
 *** TODO: end with bridge to next chapter, \gls{oc-svm} ***
 
 -- Literature --
 
-``A survey of recent trends in one class classification'' \cite{khan2010survey}. 25, 2010 \\
+% ``A survey of recent trends in one class classification'' \cite{khan2010survey}. 25, 2010 \\
 
 ``One-class classification by combining density and class probability estimation'' \cite{hempstalk2008one}. 51, 2008 \\
 
-``On simple one-class classification methods'' \cite{noumir2012simple}. 2012 \\
-
-``One-class classification'' \cite{tax2001one}. 693, 2001 \\
+% ``One-class classification'' \cite{tax2001one}. 693, 2001 \\
 
 ``The One-Class Classification Approach to Data Description and to Models Applicability Domain'' \cite{baskin2010one}. 19, 2009 \\
 
