@@ -28,7 +28,7 @@ The data points that lie outside of the created hypersphere are considered to be
 The method by Yin and Yang \cite{yin2008sensor} uses the \gls{svdd} method in the first phase of a two-phase algorithm to filter commonly available normal activities.
 The \gls{svcpd} method of Camci \cite{camci2010change} uses \gls{svdd} applies it to time-series data.
 By using an \gls{oc-svm} the method is able to detect changes in mean variance.
-Especially the detection of variance \emph{decrease} is an improvement over other methods that rely in the Kullback-Leibler divergence, since these are unable to detect decreases in variance \cite{takeuchi2006unifying}.
+Especially the detection of variance \emph{decrease} is an improvement over other methods that rely in the \gls{kl} divergence, since these are unable to detect decreases in variance \cite{takeuchi2006unifying}.
 This main research subject of this thesis is to apply the method of Camci \cite{camci2010change} to sensor data (such as accelerometer time series) obtained by on-body smartphones.
 
 The inner workings of \glspl{oc-svm} are discussed in detail in Section \ref{sec:one_class_svm}.

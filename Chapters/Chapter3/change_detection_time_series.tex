@@ -1,0 +1,72 @@
+% !TEX root = ../../main.tex
+\section{Change Detection in Time Series}\label{sec:change_detection_time_series}
+*** The section should relate the problem of outlier detection to change detection.\\
+It should transform the traditional problem formulation to that of time series data.
+Build to one-class classification, which can be used for outlier detection. ***
+
+\subsection{Relation to outlier detection}
+The problems of outlier and novelty detection, segmentation, and change detection are closely related.
+The terminology depends on the field of application, but there are subtle differences.
+The problem of outlier detection is concerned with finding data objects in a data set which have small resemblance with the majority of the data objects.
+These objects can be regarded as erroneous measurements.
+In the case of novelty detection these objects are considered to be member of a new class of objects.
+The unifying framework of Takeuchi and Yamanishi \cite{takeuchi2006unifying}, \gls{changeFinder}, creates a two stage process expressing change detection in terms of outlier detection.
+The first stage determines the outliers in a time series by giving a score based on the deviation from a learned model, and thereby creates a new time series.
+The second stage runs on that new created time series and calculates a average over a window of the outlier scores.
+The problem of change detection is then reduced to outlier detection over that average-scored time series.
+The implementation by Camci \cite{camci2010change}, \gls{svcpd}, implements outlier detection with the \gls{svdd} algorithm to detect changes in mean and variance.
+
+\subsection{Problem formulation}\label{subsec:change_detection_problem_formulation}
+*** Give the problem of change definition. Follow definition of Camci \cite{camci2010change} ***
+
+*** Note: the following block is copied from \ref{sec:method_change_indication} *** \\
+The problem of change point detection can be formulated using different type of models, as discussed in \ref{subsec:segmentation}.
+The methods by Takeuchi and Yamanishi \cite{takeuchi2006unifying} and Camci \cite{camci2010change} use the following formulation for change detection, which we will also use for our problem formulation.
+The algorithm searches for \emph{sudden} changes in the time series data.
+In other words, slowly changing properties in the data are not considered to be changes.
+Considered a time series $x_1 x_1 \dots$, which is drawn from a stochastic process $p$.
+Each $x_t$ (t = 1, 2, \dots) is a $d$-dimensional real valued vector and $p$ a probability density function of the sequence $x_1 x_2 \dots$.
+Assume $p$ can be decomposed in two different \gls{iid} stationary stochastic processes $p^1$ and $p^2$ and are one-dimensional Gaussian density functions.
+For a time point $a$ data points for which $t < a$ are drawn from $p^1 = N(\mu_1, \sigma_1^2)$ and for $t \geq a$ from $p^2 = N(\mu_2, \sigma_a^2)$.
+If $p^1$ and $p^2$ are different, then the time point $t = a$ is a \emph{change point}.
+In \cite{takeuchi2006unifying} the similarity between the stochastic processes are expressed by the \gls{kl} divergence $D(p^2||p^1)$.
+The problem with this measure is that, as the authors conclude and Camci discusses, it is not able to detect a change by decrease in variance.
+
+The definition of change point being \emph{sudden} changes in the time series data is in line with the search of changes in activities.
+Since we are only interested in different activities (which are represented by sudden changes), slight changes within an activity are not of interest.
+Section \ref{sec:sensor_data_characteristics} discusses the representation of activities and changes between them in the data in more detail.
+
+*** TODO: add more formal definition or analysis of change detection ***
+
+-- Literature --
+
+``Online segmentation of time series based on polynomial least-squares approximations'', \cite{fuchs2010online}. 25, 2010 \\
+
+% \subsection{General framework for outlier detection}
+% In \cite{schubert2012local} a general framework for outlier detection is proposed.
+% The authors compare existing methods and identified the common building block of the algorithms.
+% The focus is on unsupervised methods, using information from a local selection of data objects for the detection of outliers.
+% The following common algorithmic building blocks are identified:
+
+% \begin{enumerate}
+%   \item Context: a ``local'' context of an object $o$ for model building
+%   \item Model: the method used for building the model
+%   \item Reference: a ``reference'' context of object $o$ for model comparison
+%   \item Comparison: the method used for model comparison
+%   \item Normalization: a (global) normalization procedure
+% \end{enumerate}
+
+% Here the \emph{context} and \emph{reference} are sets of objects used for model building and model comparison, respectively.
+
+
+% \subsection{Regression, Classification, etc}
+
+% General framework of outlier detection, change detection in context of (simple?) regression, classification.
+
+% \subsection{M-estimators}
+% *** Move this section to somewhere in the end; is specification/extension, not base material ***
+% To make a method less sensitive to outliers (in the training data) techniques from robust statistics are applied.
+% The term \emph{robustness} has many interpretations, one of them that it ``signifies insensi­tivity to small deviations from the [prior] assumptions [about the underlying situation]'', according to Huber \cite{huber2009robust}.
+% Methods have been proposed to apply robust statistics in the form of M-estimators to \glspl{svm}, such as \cite{choi2009least,chen2004m,suykens1999least}.
+
+% *** Question: do slack-variables (allowance of outliers) make SVM robust? ***

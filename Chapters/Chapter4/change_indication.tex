@@ -15,7 +15,9 @@ The problem of change detection is then reduced to outlier detection over that a
 This method is named \gls{changeFinder} by the authors.
 The implementation by Camci, which uses \glspl{svm} to detect changes is named \acrlong{svcpd}.
 
-The problem statement and formal definition, following Tackeuchi and Yamanishi \cite{takeuchi2006unifying} and Camci \cite{camci2010change} is the following.
+
+*** TODO: the following paragraph is copied into \ref{subsec:change_detection_problem_formulation}. Remove here? Or shorten? ***\\
+The problem statement and formal definition, following Takeuchi and Yamanishi \cite{takeuchi2006unifying} and Camci \cite{camci2010change} is the following.
 The algorithm needs to find \emph{sudden} changes in the time series data.
 In other words, slowly changing properties in the data are not considered to be changes.
 This is in line with the search of changes in activities, since we are only interested in different activities (which are represented by sudden changes) instead of changes within an activity.
@@ -26,6 +28,7 @@ For a time point $a$ data points for which $t < a$ are drawn from $p^1 = N(\mu_1
 If $p^1$ and $p^2$ are different, then the time point $t = a$ is a \emph{change point}.
 In \cite{takeuchi2006unifying} the similarity between the stochastic processes are expressed by the \gls{kliep} divergence $D(p^2||p^1)$.
 The problem with this measure is that, as the authors conclude and Camci discusses, it is not able to detect a change by decrease in variance.
+\\*** End copied paragraph ***
 
 Whereas \gls{changeFinder} uses double probability estimation algorithm, our approach follows \gls{svcpd} by constructing a \gls{svm} over a sliding window.
 The \gls{svcpd} algorithm uses the location of new data points in the feature space $\mathcal{F}$ with respect to the hypersphere and the hypersphere's radius $R$ to determine whether the new data point represents a change point.
