@@ -20,7 +20,7 @@ w^T x + b = 0,
 \end{equation}
 with $w \in F$ and $b \in R$.
 The hyperplane that is created determines the \emph{margin} between the classes; the minimal distance from one of the data points to the hyperplane.
-In geometric sense, $w$ is the normal vector to the hyperplane and $\frac{b}{\lVert{w}\rVert}$ determines the offset of the hyperplane to the origin.
+In geometric sense, $w$ is the normal vector indication the direction of the hyperplane and $\frac{b}{\lVert{w}\rVert}$ determines the offset of the hyperplane to the origin.
 Since the distance between the two margins is equal to $\frac{2}{\lVert{w}\rVert}$, the maximum-margin hyperplane is found by minimizing $\lVert{w}\rVert$.
 The data points which lie on the margin are the \emph{support vectors}.
 This geometrical interpretation is illustrated in Figure \ref{fig:svm_hyperplane}.
@@ -56,9 +56,11 @@ The objective function for a \gls{svm} is the following minimization function:
   \end{multlined}
 \end{equation}
 
-*** TODO: better format of above formula ***
+*** TODO: better format of above formulas. Check with notation and formulas of chapter 9 of \cite{cherkassky2007learning}. ***
 
 This minimization problem can be solved (using \gls{qp}) and transformed to its Lagrange dual formulation.
+\\ *** TODO: Add explanation why to use dual, which is: because the problem formulation scales with the number of samples $n$ and not the dimesionality $d$ of the samples.
+More in Section 9.3 of \cite{cherkassky2007learning}. *** \\
 To do so, the Lagrange multipliers $a_i >= 0$ are introduced and the decision function becomes:
 \begin{equation}\label{eq:svm_lagrange}
   f(x) = \operatorname{sgn}( \sum_{i=1}^n \alpha_i y_i K(x, x_i) + b),
@@ -67,6 +69,7 @@ where $K(x, x_i) = \phi(x)^T\phi(x_i)$ (which is further discussed in section \r
 Here every data point $\mathcal{I}$ for which $a_i > 0$ is weighted in the decision function and thus ``supports'' the classification machine: hence the name ``\acrlong{svm}''.
 Since it is shown that under certain circumstances \glspl{svm} show an equality to sparse representations \cite{girosi1998equivalence,smola1998connection}, there will often be relatively few Lagrange multipliers with a non-zero value.
 
+*** TODO: Add more on sparsity and good results, because of sparse representations, even in case of data of high dimensionality. e.g. \cite{cherkassky2007learning}. ***
 
 %--------------------------------------------
 
@@ -115,6 +118,8 @@ Given an underlying probabilty distribution $P$ the goal is to find a subset $S$
 We will discuss two implementations of \glspl{oc-svm}.
 The first is the \gls{nu-svm} by Sch\"olkopf \etal \cite{scholkopf1999support} and closely follows the above problem statement regarding density estimation.
 The second, on which we will base our change detection method, is the \gls{svdd} by Tax and Duin \cite{tax2004support}.
+
+*** Add something about robustness, discusses in section 9.2 from \cite{cherkassky2007learning} ***
 
 %--------------------------------------------
 
@@ -244,7 +249,8 @@ sparsity, RKHS: \cite{girosi1998equivalence}
 *** Maybe add section about ``Change indication'' rather than ``detection''? ***
 
 
-\subsection{More literature}
+-- Literature --
+
 *** These papers need to be referenced and included ***
 
 ``A geometric approach to support vector machine (SVM) classification'' \cite{mavroforakis2006geometric}. 136, 2006 \\
@@ -252,3 +258,5 @@ sparsity, RKHS: \cite{girosi1998equivalence}
 ``Least squares one-class support vector machine'' \cite{choi2009least}. 27, 2009 \\
 
 ``On simple one-class classification methods'' \cite{noumir2012simple}. 2012  --> decouples radius and center optimization, gives fast approximations instead of precise results. \\
+
+``Learning from Data'' \cite{cherkassky2007learning}. 2007, 1547 (book).
