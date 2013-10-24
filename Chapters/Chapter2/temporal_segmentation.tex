@@ -17,9 +17,9 @@ These will be the categorical terms for which we discuss the literature.
 Finally we will discuss other applications of \glspl{svm} in the context of these terms.
 
 \subsection{Segmentation}\label{subsec:segmentation}
-*** This subsection is mainly from previous draft version ***
+\TODO{This subsection is mainly from previous draft version}
 
-*** TODO: Create compact notation, one sentence per paper max ***
+\TODO{Create compact notation, one sentence per paper max}
 
 Segmentation methods can roughly be categorized in three methods in the way the data is processed, as discussed by Avci \etal \cite{avci2010activity}:
 \begin{itemize}
@@ -89,7 +89,7 @@ The cost functions thereby searches for internally homogeneous segments of data,
 The cost function can be any arbitrary function and in the implementation the sum of variances over the segments is used.
 Both in a local and global iterative replacement procedure (as an alternative for the computationally hard dynamic programming algorithm) the best breakpoint locations $c_i$ for a pre-defined number of segments $1 \leq i \leq k$ are optimized.
 
-Many methods obtain an implicit segmentation as a result of classification over a sliding window *** add refs ***.
+Many methods obtain an implicit segmentation as a result of classification over a sliding window \TODO{add refs}.
 The method of Yang \etal \cite{yang2008distributed} explicitly performs segmentation and classification simultaneously.
 It argues that the classification of a pre-segmented test-sequences becomes straightforward with many classical algorithms to choose from.
 The algorithm matches test examples with the \emph{sparsest} linear representation of mixture subspace models of training examples, searching over different temporal resolutions.
@@ -126,13 +126,13 @@ Field of computer vision: \cite{zhou2008aligned}, \cite{li2007segmentation}.
 % ``Segmenting motion capture data into distinct behaviors'' \cite{barbivc2004segmenting}. 270, 2004 \\
 
 \subsection{Change detection}\label{subsec:change_detection}
-*** change order of this and temporal segmentation sections? So first change, then segmentation? *** \\
+\TODO{change order of this and temporal segmentation sections? So first change, then segmentation?} \\
 Whereas the above mentioned researches focus on \emph{segmentation}, many have focused on \emph{change detection}.
 Although these techniques are closely related, there is a subtle difference.
 In the case of \emph{change detection} to goal is to find, possibly unrelated, sudden change points in a signal \cite{takeuchi2006unifying}.
 In contrast, the goal of \emph{temporal segmentation} is to find homogeneous segments of data, which can be the result of multiple detected changes.
 
-The \gls{icss} by Incl\'{a}n and Tiao \cite{inclan1994use} is a statistical method which obtains results (when applied to stock data) comparable to \gls{mle} and Bayesian *** Bayesian What? ***.
+The \gls{icss} by Incl\'{a}n and Tiao \cite{inclan1994use} is a statistical method which obtains results (when applied to stock data) comparable to \gls{mle} and Bayesian \TODO{Bayesian What?}.
 Whereas \gls{cusum} can be applied to search for a change in mean, the \gls{icss} is adapted to find changes in variance.
 It obtains a \emph{likelihood ratio} for testing the hypothesis of one change against no change in the variance.
 Using an iterative approach, all possible change points are considered.
@@ -140,7 +140,7 @@ The proposal of \cite{cheng2009efficient} extends on the \gls{cusum}-based metho
 
 Section \ref{sec:change_detection_time_series} discusses the problem of change detection in time series further, and gives a formal problem definition.
 
-*** TODO: move CUSUM based techniques to this subsection ***
+\TODO{move CUSUM based techniques to this subsection}
 
 
 --- Change detection ---

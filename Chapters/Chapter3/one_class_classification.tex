@@ -1,10 +1,10 @@
 % !TEX root = ../../main.tex
 \section{One-Class Classification}\label{sec:one_class_classification}
 
-*** TODO: bridge that explains why \gls{occ} is interesting, relating it to outlier/change detection ***
+\TODO{bridge that explains why \gls{occ} is interesting, relating it to outlier/change detection}
 
 \subsection{Problem formulation}\label{subsec:occ-problem-formulation}
-*** Introduce problem of \gls{occ}. Relate to two-class classification. ***
+\TODO{Introduce problem of \gls{occ}. Relate to two-class classification.}
 
 The problem of \gls{occ} is closely related to the (traditional) two-class classification situation\footnote{Two-class problems are considered as to be the basic problem, since multi-class classification problems can be decomposed into multiple two-class problems \cite{fukunaga1990introduction}.}.
 In the case of traditional classification algorithms, the problem is to classify an unknown object to one of the pre-defined categories.
@@ -45,7 +45,7 @@ The final possible application given by Tax \cite{tax2001one} is the comparison 
 By constructing a \gls{occ}-classifier using a training data set, one can compare that set to a new data set.
 This will result in a similarity-measure.
 It is easy to see here a relation with similiary measures over \glspl{pdf} and the \gls{kl} divergence. \\
-*** Add reference to \ref{subsec:change_detection_problem_formulation} which also mentions \gls{kl} divergence? ***
+\TODO{Add reference to \ref{subsec:change_detection_problem_formulation} which also mentions \gls{kl} divergence?}
 
 \subsection{One-Class Classification methods}\label{subsec:occ-methods}
 The methods and algorithms used for the \gls{occ}-problem can be organized into three categories \cite{tax2001one,noumir2012simple}, visually represented in Figure \ref{fig:occ-methods}.
@@ -81,7 +81,7 @@ As discussed in Section \ref{sec:change_detection_time_series}, this can be used
 
 In this Section we have discussed the problem of \gls{occ} and different kind of implementations.
 An often used implementation is the \gls{svm}-based method \cite{noumir2012simple}, since is shows good performance in comparitive researches.
-*** TODO: add refs for good results of OC-SVM***
+\TODO{Add refs for good results of OC-SVM}
 In the following section (\ref{sec:one_class_svm}) two implementations of \gls{oc-svm} will be discussed, the \gls{svdd} method of Tax and Duin \cite{tax2004support} and the \gls{nu-svm}-algoritm by Sch\"olkopf.
 
 % -- Literature --

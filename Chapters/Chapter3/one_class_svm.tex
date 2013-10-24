@@ -56,11 +56,11 @@ The objective function for a \gls{svm} is the following minimization function:
   \end{multlined}
 \end{equation}
 
-*** TODO: better format of above formulas. Check with notation and formulas of chapter 9 of \cite{cherkassky2007learning}. ***
+\TODO{better format of above formulas. Check with notation and formulas of chapter 9 of \cite{cherkassky2007learning}.}
 
 This minimization problem can be solved (using \gls{qp}) and transformed to its Lagrange dual formulation.
-\\ *** TODO: Add explanation why to use dual, which is: because the problem formulation scales with the number of samples $n$ and not the dimesionality $d$ of the samples.
-More in Section 9.3 of \cite{cherkassky2007learning}. *** \\
+\\ \TODO{Add explanation why to use dual, which is: because the problem formulation scales with the number of samples $n$ and not the dimesionality $d$ of the samples.
+More in Section 9.3 of \cite{cherkassky2007learning}.} \\
 To do so, the Lagrange multipliers $a_i >= 0$ are introduced and the decision function becomes:
 \begin{equation}\label{eq:svm_lagrange}
   f(x) = \operatorname{sgn}( \sum_{i=1}^n \alpha_i y_i K(x, x_i) + b),
@@ -69,7 +69,7 @@ where $K(x, x_i) = \phi(x)^T\phi(x_i)$ (which is further discussed in section \r
 Here every data point $\mathcal{I}$ for which $a_i > 0$ is weighted in the decision function and thus ``supports'' the classification machine: hence the name ``\acrlong{svm}''.
 Since it is shown that under certain circumstances \glspl{svm} show an equality to sparse representations \cite{girosi1998equivalence,smola1998connection}, there will often be relatively few Lagrange multipliers with a non-zero value.
 
-*** TODO: Add more on sparsity and good results, because of sparse representations, even in case of data of high dimensionality. e.g. \cite{cherkassky2007learning}. ***
+\TODO{Add more on sparsity and good results, because of sparse representations, even in case of data of high dimensionality. e.g. \cite{cherkassky2007learning}.}
 
 %--------------------------------------------
 
@@ -83,7 +83,7 @@ Here the non-linear separating boundary in the input space $\mathcal{I}$ is mapp
 
 The kernel function $K$ can have different forms, such as linear, polynomial and sigmoidal but the most used (and flexible) form is the Gaussian \gls{rbf}.
 As Smola \etal \cite{smola1998connection} state, this Gaussian kernel yields good performance, especially when no assumptions can be made about the data.
-The kernel maps input space $\mathcal{I}$ to the feature space $\mathcal{F}$ which is a Hilbert Space of infinite dimensions *** ref needed ***:
+The kernel maps input space $\mathcal{I}$ to the feature space $\mathcal{F}$ which is a Hilbert Space of infinite dimensions \TODO{ref needed}:
 \begin{equation}
   K(x, x') = \operatorname{exp} \left( - \frac{ \lVert x - x' \rVert ^2}{2 \sigma^2 } \right),
 \end{equation}
@@ -119,7 +119,7 @@ We will discuss two implementations of \glspl{oc-svm}.
 The first is the \gls{nu-svm} by Sch\"olkopf \etal \cite{scholkopf1999support} and closely follows the above problem statement regarding density estimation.
 The second, on which we will base our change detection method, is the \gls{svdd} by Tax and Duin \cite{tax2004support}.
 
-*** Add something about robustness, discusses in section 9.2 from \cite{cherkassky2007learning} ***
+\TODO{Add something about robustness, discusses in section 9.2 from \cite{cherkassky2007learning}}
 
 %--------------------------------------------
 
@@ -246,12 +246,12 @@ sparsity, RKHS: \cite{girosi1998equivalence}
 
 
 
-*** Maybe add section about ``Change indication'' rather than ``detection''? ***
+\TODO{Maybe add section about ``Change indication'' rather than ``detection''?}
 
 
 -- Literature --
 
-*** These papers need to be referenced and included ***
+\TODO{These papers need to be referenced and included}
 
 ``A geometric approach to support vector machine (SVM) classification'' \cite{mavroforakis2006geometric}. 136, 2006 \\
 

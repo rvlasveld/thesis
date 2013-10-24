@@ -44,7 +44,7 @@ One promesing result for \gls{svdd} is that it performs well on read-world data,
 The method of Camci \cite{camci2010change} uses a Support Vector based method to find change points in the data.
 It does not explicitly create a density estimation, but instead relies on the spherical boundary and uses its ability to detect novel data or outliers to detect change points in time series data.
 
-*** \emph{Thus methods of data descriptions should be compared (which are more general) and not only density estimation?} ***
+\TODO{\emph{Thus methods of data descriptions should be compared (which are more general) and not only density estimation?}}
 
 The paper of Yin \etal \cite{yin2008sensor} makes a distinction between similarity based (using a defined distance measure) and model based (which characterize the data using predictive models) approach.
 The \gls{oc-svm} is used in the model-approach to filter out normal activities in order to detect abnormality behavior.
@@ -65,7 +65,7 @@ The method of Chamroukhi \etal \cite{chamroukhi2013joint} is based on a Hidden M
 It assumes a $K$-state hidden process with a (hidden) state sequence, each state providing the parameters (amongst which the order) for a polynomial.
 The order of the model segment is determined by model selecting, often using the \gls{bic} or the similair \gls{aic} \cite{akaike1974new}, as in \cite{he2008activity}.
 
-*** REVIEW zoeken: change points in time series ***
+\TODO{REVIEW zoeken: change points in time series}
 
 Periodicity/consecutive data vs unique/irregular data?
 
@@ -97,7 +97,7 @@ When the problem of temporal segmentation is regarded in this context, a formali
 Some assume the data follows a piecewise linear set of segments with a mean and noise/variance modeled by a normal (Gaussian) distribution (such as \cite{camci2010change}).
 Other approaches regard the data as a set of polynomials, which can be estimated by regression (such as \cite{chamroukhi2013joint}) and apply a form of model selection to each segment.
 
-*** TODO: make a clear distinction between model types; similarity (distance based) or model based, as in \cite{yin2008sensor} ***
+\TODO{make a clear distinction between model types; similarity (distance based) or model based, as in \cite{yin2008sensor}}
 
 %----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
@@ -119,7 +119,7 @@ Why use RBF/Gaussian kernel? Is it because of \gls{oc-svm} of because of form th
 
 
 
-*** TODO: read \cite{mavroforakis2006geometric} and \cite{bennett2000duality} on geometry of SVMs ***
+\TODO{read \cite{mavroforakis2006geometric} and \cite{bennett2000duality} on geometry of SVMs}
 
 %-------------------------
 
@@ -143,13 +143,13 @@ What is the kernel trick to not explicit do the mapping to the higher space?
 %----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
 
-*** Note: in \cite{mavroforakis2006geometric} it is explained why the inner-product between two vectors is a logical choice for the distance/similarity measure. ***
+\TODO{Note: in \cite{mavroforakis2006geometric} it is explained why the inner-product between two vectors is a logical choice for the distance/similarity measure.}
 
 
 \section{Relation to other methods}
 
 \subsection{Novelty/outlier detection}
-*** Read \cite{hodge2004survey} ``A survey of outlier detection methodologies'' to compare with other methodologies. ***
+\TODO{Read \cite{hodge2004survey} ``A survey of outlier detection methodologies'' to compare with other methodologies.}
 \begin{itemize}
   \item One-class classification is referred to as ``Type 3'', with \emph{semi-supervised recognition or detection}.
   \item It explains why one-class can be beneficial over type-2 where negative examples needs to be provided.

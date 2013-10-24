@@ -1,7 +1,7 @@
 % !TEX root = ../../main.tex
 \section{Change Indication}\label{sec:method_change_indication}
-*** TODO: change section title ***
-*** TODO: ***
+\TODO{change section title}
+\TODO{***}
 \emph{Follow methodology of ``A unifying framework for detecting outliers and change points from time series'' \cite{takeuchi2006unifying}.
 It creates a two-stage process of first searching for outliers, and then using the ``outlier-score'' to find (sudden) change points, by a weighted average of a moving window.
 That eventual score can be thresholded (as in the paper) or processed with something like CUSUM (proposal).
@@ -16,7 +16,7 @@ This method is named \gls{changeFinder} by the authors.
 The implementation by Camci, which uses \glspl{svm} to detect changes is named \acrlong{svcpd}.
 
 
-*** TODO: the following paragraph is copied into \ref{subsec:change_detection_problem_formulation}. Remove here? Or shorten? ***\\
+\TODO{the following paragraph is copied into \ref{subsec:change_detection_problem_formulation}. Remove here? Or shorten?}\\
 The problem statement and formal definition, following Takeuchi and Yamanishi \cite{takeuchi2006unifying} and Camci \cite{camci2010change} is the following.
 The algorithm needs to find \emph{sudden} changes in the time series data.
 In other words, slowly changing properties in the data are not considered to be changes.
@@ -28,9 +28,9 @@ For a time point $a$ data points for which $t < a$ are drawn from $p^1 = N(\mu_1
 If $p^1$ and $p^2$ are different, then the time point $t = a$ is a \emph{change point}.
 In \cite{takeuchi2006unifying} the similarity between the stochastic processes are expressed by the \gls{kliep} divergence $D(p^2||p^1)$.
 The problem with this measure is that, as the authors conclude and Camci discusses, it is not able to detect a change by decrease in variance.
-\\*** End copied paragraph ***
+\\\TODO{End copied paragraph}
 
 Whereas \gls{changeFinder} uses double probability estimation algorithm, our approach follows \gls{svcpd} by constructing a \gls{svm} over a sliding window.
 The \gls{svcpd} algorithm uses the location of new data points in the feature space $\mathcal{F}$ with respect to the hypersphere and the hypersphere's radius $R$ to determine whether the new data point represents a change point.
 
-*** TODO: What is my contribution compared to Camci? Distance of outliers to hypersphere? ***
+\TODO{What is my contribution compared to Camci? Distance of outliers to hypersphere?}

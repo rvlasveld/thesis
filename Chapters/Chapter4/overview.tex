@@ -36,7 +36,7 @@ During the initialization the parameters for the \gls{svdd} are provided, begin 
 Step $4$ is executed for every step-size $s$ data points in the stream.
 Every update the oldest $s$ data points are removed from and $s$ new data points are added to the \gls{svdd} model.
 The model is (partially) reconstructed and new model properties, such as the radius of the hypersphere and the number of outliers, are the result of this step \footnote{Other measures are also possible, for instance the distance from all the outliers to the boundary of the hypersphere}.
-*** MORE ON THE UPDATING STEP ***
+\TODO{MORE ON THE UPDATING STEP}
 
 This final step of this method, step $5$, is the interpretation of the model properties.
 Many algorithms can be used for this process, all which take a one-dimensional time series as input and determine where change has occured.
