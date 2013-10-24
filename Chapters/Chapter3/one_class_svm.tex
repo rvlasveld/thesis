@@ -41,6 +41,7 @@ With every classification method there is a risk of overfitting.
 In that case the random error or noise of the data set is described instead of the underlying data.
 The \gls{svm} classifier can use a \emph{soft margin} by allowing some data points to lie within the margin, instead of on the margin or farther away from the hyperplane.
 For this it introduces \emph{slack variables} $\xi_i$ for each data point and the constant $C > 0$ the determines the trade-off between maximizing the margin and the number of data points within that margin (and thus the training errors).
+The slack variables minimize the \emph{sum of deviations} rather than the \emph{number} of incorrect data points \cite{cherkassky2007learning}.
 The objective function for a \gls{svm} is the following minimization function:
 
 \begin{equation}\label{eq:svm_objective}
@@ -227,6 +228,22 @@ The dual formulation, by using Lagrange multipliers $\alpha_i$, can be used to t
   \item Explain RBF kernel
   \item Explain RKHS? (Hilbert Space)
 \end{itemize}
+
+A common class for kernel function is the \acrlong{rbf}.
+These function are of the form
+\begin{equation}
+  g(x) = \operatorname*{sign} \left(  \sum_{i=1}^{n} \alpha_i \operatorname*{exp} \left\{ \frac{|\vectorsym{x} - \vectorsym{x}_i|^2}{\sigma^2} \right\} \right),
+\end{equation}
+where $\sigma$ defines the width.
+The inner product kernel is of the form
+\begin{equation}
+  H(\vectorsym{x}, \vectorsym{x}') = \operatorname*{exp} \left\{ - \frac{| \vectorsym{x} - \vectorsym{x}'|^2}{\sigma^2} \right\}.
+\end{equation}
+
+Note that with the \gls{rbf} class of kernel functions the number of basis functions, the center parameters that correspond to the support vectors, and the weights in the output layer are all automatically determined via the optimal hyperplane \cite{cherkassky2007learning}.
+The width parameter is equal for all basis functions and determined a priori.
+Other examples of kernel function classes are \emph{pylonomial functions} of degree $q$, \emph{neural networks}, \emph{splines} of order $m$ with $b$ nodes, and \emph{Fourier expansions}.
+\TODO{More on basis functions. \cite{cherkassky2007learning}, chapter 9.4}
 
 $k(\mathbf{x}_i, \mathbf{x})$ is a kernel function computing a dot product in feature space, introduced by Aizerman \etal \cite{aizerman1964theoretical}.
 ``Training a \gls{svm} with Gaussian \gls{rbf} kernels corresponds to minimizing the specific cost function with a regularization operator'' \cite{smola1998connection}. \\
