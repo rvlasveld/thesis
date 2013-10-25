@@ -1,7 +1,7 @@
 % !TEX root = ../../main.tex
 \section{Support Vector Machines in Change Detection}\label{sec:svm_in_change_detection}
 
-Many proposals in the field of remote sensing and \gls{har} make use of \glspl{svm} as a model construction method.
+Many proposals in the field of remote sensing and \gls{har} make use of \glspl{svm} as a (supervised) model learning method.
 An elaborate overview of applications is given in \cite{mountrakis2011support}.
 In this section we review methods of change detection based on the applications of \glspl{svm} as model construction method.
 A number of proposals have been made using this method.
@@ -32,6 +32,8 @@ Especially the detection of variance \emph{decrease} is an improvement over othe
 This main research subject of this thesis is to apply the method of Camci \cite{camci2010change} to sensor data (such as accelerometer time series) obtained by on-body smartphones.
 
 The inner workings of \glspl{oc-svm} are discussed in detail in Section \ref{sec:one_class_svm}.
+
+\TODO{Add notion of `supervised' vs `unsupervised' learning. \gls{oc-svm} is unsupervised.}
 
 
 % \section{Change-detection by Support Vector Machines}\label{svm}

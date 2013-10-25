@@ -12,6 +12,7 @@ More flexible non-linear boundaries can be obtained by the use of a non-linear f
 This function maps the input data from space $\mathcal{I}$ to a higher dimensional space $\mathcal{F}$.
 The \gls{svm} can create a linear separating hyperplane in the space $\mathcal{F}$ that separates the data points from the two classes.
 When the hyperplane is projected to the (lower) original input space $\mathcal{I}$ it creates a non-linear separating curve.
+This is illustrated in Figure \ref{fig:svm_mapping_spaces}.
 The mapping and projection of data points can be efficient (and implicit) performed by using the kernel trick, which is discussed in section \ref{subsec:kernel_trick}.
 
 The separating hyperplane is represented by
@@ -28,6 +29,13 @@ All data points for which $y_i = -1$ are on one side of the hyperplane and all o
 The minimal distance from a data point to the hyperplane is for both classes equal.
 This results in a \emph{maximal margin} between the two classes.
 Thus, the \gls{svm} searches for a maximal separating hyperplane.
+
+\begin{figure}
+\centering
+  \includegraphics[width=0.5\textwidth]{./Figures/chapter3/svm_mapping_spaces.pdf}
+  \caption[Mapping spaces in \gls{svm}]{The input vector $\vectorsym{x}$ from input space $\mathcal{I}$ is mapped by a non-linear function $\phi(\vectorsym{x})$ to a feature vector $\vectorsym{z}$ in the high dimensional feature space $\mathcal{F}$. The weights of $\vectorsym{w}$ create a linear separating hypeplace, which maps the high dimensional vector to the predicted outcome $\vectorsym{y}$. \TODO{Is this figure obsolete? Figure \ref{fig:kernel_mapping} shows almost the same}}
+  \label{fig:svm_mapping_spaces}
+\end{figure}
 
 \begin{figure}
 \centering
@@ -59,10 +67,12 @@ The objective function for a \gls{svm} is the following minimization function:
 
 \TODO{better format of above formulas. Check with notation and formulas of chapter 9 of \cite{cherkassky2007learning}.}
 
-This minimization problem can be solved (using \gls{qp}) and transformed to its Lagrange dual formulation.
-\\ \TODO{Add explanation why to use dual, which is: because the problem formulation scales with the number of samples $n$ and not the dimesionality $d$ of the samples.
-More in Section 9.3 of \cite{cherkassky2007learning}.} \\
-To do so, the Lagrange multipliers $a_i >= 0$ are introduced and the decision function becomes:
+This minimization problem can be solved (using \gls{qp}) and transformed to its (Lagrange) dual formulation.
+In the dual formulation the problem scales with the number of training examples $n$ instead of the dimensionality $d$ of the samples.
+Solving this problem directly in the high dimensional feature space $\mathcal{F}$ makes it untractable.
+The linear approximation function corresponds to the kernel function in the dual formulation.
+Solving this dual formulation is equivalent to solving the primal formulation \cite{cherkassky2007learning}.
+In the dual formulation the Lagrange multipliers $a_i >= 0$ are introduced and the decision function becomes:
 \begin{equation}\label{eq:svm_lagrange}
   f(x) = \operatorname{sgn}( \sum_{i=1}^n \alpha_i y_i K(x, x_i) + b),
 \end{equation}
@@ -112,7 +122,7 @@ The classical implementation of a \gls{svm} is to classify a dataset in two dist
 This is a common usecase, although sometimes there is no training data for both classes available.
 Still, one would like to classify new data points as regular, or in-class, or out-of-class, \eg in the case of a novelty detection.
 With that problem only data from one class is available and the objective is to recognize new data points that are not part of that class.
-This problem is closely related to density estimation.
+This unsupervised learning problem is closely related to density estimation.
 In that context, the problem can be the following.
 Given an underlying probabilty distribution $P$ the goal is to find a subset $S$ for which the probability that a data point from $P$ lies outside $S$ equals some predetermined value $\nu$ between $0$ and $1$ \cite{scholkopf1999support}.
 
@@ -120,7 +130,7 @@ We will discuss two implementations of \glspl{oc-svm}.
 The first is the \gls{nu-svm} by Sch\"olkopf \etal \cite{scholkopf1999support} and closely follows the above problem statement regarding density estimation.
 The second, on which we will base our change detection method, is the \gls{svdd} by Tax and Duin \cite{tax2004support}.
 
-\TODO{Add something about robustness, discusses in section 9.2 from \cite{cherkassky2007learning}}
+\TODO{Add something about robustness, discusses in section 9.2 from \cite{cherkassky2007learning,chen2004m}}
 
 %--------------------------------------------
 
@@ -198,7 +208,9 @@ Like the classical \gls{svm} and \gls{svdd} it can be required that all the dist
 In the case of a soft margin, the penalty is determined by $C$ and the minimization is expressed as Equation \ref{eq:svdd_objective}.
 This principle is illustrated in the right image or Figure \ref{fig:nu-vs-svdd}.
 Instead of a separating hyperplane, constructed by \gls{nu-svm} and illustrated on the left of the Figure, the \gls{svdd} creates a hypersphere (in the illustration a cricle) around the data points.
-By using kernel functions (\eg the \gls{rbf}) the hyperspheres in the high dimensional feature space $\mathcal{F}$ corresponds to a flexible and tight enclosing boundary in input space $\mathcal{I}$, illustrated in Figure \ref{fig:svdd-boundary}.
+By using kernel functions (\eg the \gls{rbf}) the hyperspheres in the high dimensional feature space $\mathcal{F}$ corresponds to a flexible and tight enclosing boundary in input space $\mathcal{I}$.
+Possible resulting closed boundaries are illustrated in Figure \ref{fig:svdd-boundary}.
+This enclosing boundary is obtained by minimizing:
 
 \begin{equation}\label{eq:svdd_objective}
   \operatorname*{min}_{R,\ \mathbf{a} } R^2 + C \sum_{i=1}^n \xi_i
@@ -219,6 +231,12 @@ The dual formulation, by using Lagrange multipliers $\alpha_i$, can be used to t
   \lVert z - \mathbf{x} \rVert ^2 = \sum_{i=1}^n \alpha_i \operatorname{exp} \left( \frac{- \lVert z - x_i \rVert ^ 2}{\sigma^2} \right) \geq -R^2/2 + C_R
 \end{equation}
 
+\begin{figure}
+  \centering
+    \includegraphics[width=0.5\textwidth,keepaspectratio]{./Figures/chapter3/svdd-boundary.pdf}
+  \caption[\gls{svdd} boundary]{The \gls{svdd} method trained on a banana-shaped data set with different sigma-values for the \gls{rbf} kernel. Solid circles are support vectors, the dashed line is the boundary. Image by Tax \cite{tax2001one}.}
+  \label{fig:svdd-boundary}
+\end{figure}
 
 %--------------------------------------------
 
@@ -237,14 +255,16 @@ These function are of the form
 where $\sigma$ defines the width.
 The inner product kernel is of the form
 \begin{equation}
-  H(\vectorsym{x}, \vectorsym{x}') = \operatorname*{exp} \left\{ - \frac{| \vectorsym{x} - \vectorsym{x}'|^2}{\sigma^2} \right\}.
+  K(\vectorsym{x}, \vectorsym{x}') = \operatorname*{exp} \left\{ - \frac{| \vectorsym{x} - \vectorsym{x}'|^2}{\sigma^2} \right\}.
 \end{equation}
 
 Note that with the \gls{rbf} class of kernel functions the number of basis functions, the center parameters that correspond to the support vectors, and the weights in the output layer are all automatically determined via the optimal hyperplane \cite{cherkassky2007learning}.
-The width parameter is equal for all basis functions and determined a priori.
+The width parameter $\sigma$ is equal for all basis functions and is set a priori and determines the flexibility and complexity of the boundary.
+In Section \ref{subsec:svm_model_parameters} this (hyper)parameter for a \gls{svm} is further discussed.
 Other examples of kernel function classes are \emph{pylonomial functions} of degree $q$, \emph{neural networks}, \emph{splines} of order $m$ with $b$ nodes, and \emph{Fourier expansions}.
 \TODO{More on basis functions. \cite{cherkassky2007learning}, chapter 9.4}
 
+-- Quotes and refs to use --
 $k(\mathbf{x}_i, \mathbf{x})$ is a kernel function computing a dot product in feature space, introduced by Aizerman \etal \cite{aizerman1964theoretical}.
 ``Training a \gls{svm} with Gaussian \gls{rbf} kernels corresponds to minimizing the specific cost function with a regularization operator'' \cite{smola1998connection}. \\
 ``Gaussian kernels tend to yield good performance under general smoothness assumptions and should be considered especially of no additional knowledge of the data is available.'' \cite{smola1998connection}. \\
@@ -254,14 +274,25 @@ sparsity, RKHS: \cite{girosi1998equivalence}
 
 
 
-\begin{figure}
-  \centering
-    \includegraphics[width=0.5\textwidth,keepaspectratio]{./Figures/chapter3/svdd-boundary.pdf}
-  \caption[\gls{svdd} boundary]{The \gls{svdd} method trained on a banana-shaped data set with different sigma-values for the \gls{rbf} kernel. Solid circles are support vectors, the dashed line is the boundary. Image by Tax \cite{tax2001one}.}
-  \label{fig:svdd-boundary}
-\end{figure}
+%--------------------------------------------
 
+\subsection{SVM model parameters}\label{subsec:svm_model_parameters}
+\gls{svm}-model selectiong and tuning depends on two type of parameters \cite{cherkassky2007learning}:
+\begin{enumerate}
+  \item Parameters controlling the `margin' size,
+  \item Model parameterization, \eg the kernel type and complexity parameters.
+  For the \gls{rbf} kernel the width parameter determines the model complexity.
+\end{enumerate}
 
+In case of a \gls{rbf} kernel, the width parameter $\sigma$ determines the flexibility and complexity of the boundary.
+The value of this parameter greatly determines the outcomes of the algorithm (\eg \gls{svdd}) as illustrated in Figure \ref{fig:svdd-boundary}.
+With a small value for the kernel width $\sigma$, each data point will tend to be used as a support vector and will represent a small Gaussian.
+The solution then corresponds with standard non-parametric density estimation.
+With a large value for the width $\sigma$, the boudary approximates the spherical boundary.
+
+\TODO{More on SVM parameters, \cite{cherkassky2007learning}, section 9.8, page 446}
+
+\TODO{Analysis of C/$\nu$-parameter, which sets a lower bound for the fraction of support vectors and an uppor bound for samples that will be outliers. \cite{flach2012machine} section 9.8 and \cite{scholkopf2002learning} and other Sch\"olkopf material.}
 
 \TODO{Maybe add section about ``Change indication'' rather than ``detection''?}
 
@@ -275,5 +306,3 @@ sparsity, RKHS: \cite{girosi1998equivalence}
 ``Least squares one-class support vector machine'' \cite{choi2009least}. 27, 2009 \\
 
 ``On simple one-class classification methods'' \cite{noumir2012simple}. 2012  --> decouples radius and center optimization, gives fast approximations instead of precise results. \\
-
-``Learning from Data'' \cite{cherkassky2007learning}. 2007, 1547 (book).
