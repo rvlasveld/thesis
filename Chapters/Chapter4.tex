@@ -23,46 +23,26 @@
   \item Problemen met SVM methode: ook na de verandering blijft de threshold nog stijgen;
   \item geprobeerd direct model-reset te doen na change point, maar dan kan je achteraf niet meer verder analyseren.
   \item Veranderingen in mean geven ``extra'' change point wanneer alle data weer in het window zit. Zie \ref{fig:jumping_mean_ratios} op de 50-tallen.
-
 \end{itemize}
 
-\begin{figure}
-\centering
-  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_mean_camci.eps}
-  \caption[Jumping mean camci]{Jumping mean camci}
-\end{figure}
 
-\begin{figure}
-\centering
-  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_mean_camci_thresholds.eps}
-  \caption[Jumping mean camci thresholds]{Jumping mean camci, thresholds}
-\end{figure}
+\begin{description}
+  \item[Data gathering] Explain data gathering methods. Refer to chapter 5 and 6 for articifial and real-world details.
+  \item[Model construction] Explain SVDD model construction and updating.
+  \item[Model properties] Explain the SVDD properties that are used to calculate the change indication.
+  \item[Change detection] Explain the interpretation of the properties, the possible (modulair) methods to give change indication
+\end{description}
 
-\begin{figure}
-\centering
-  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_mean_camci_ratios_10.eps}
-  \caption[Jumping mean camci ratios]{Jumping mean camci ratios, last 10}
-  \label{fig:jumping_mean_ratios}
-\end{figure}
 
-\begin{figure}
-\centering
-  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_variance.eps}
-  \caption[Jumping variance]{Jumping variance}
-\end{figure}
+\TODO{Write chapter introduction/outline. Give overview of method approach and refer to each section for details of that stage.}
 
-\begin{figure}
-\centering
-  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_variance_thresholds.eps}
-  \caption[Jumping variance thresholds]{Jumping variance, thresholds}
-\end{figure}
+\input{./Chapters/Chapter4/data_gathering}
+\input{./Chapters/Chapter4/model_construction}
+\input{./Chapters/Chapter4/model_properties}
+\input{./Chapters/Chapter4/change_detection}
 
-\begin{figure}
-\centering
-  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_variance_ratios_10.eps}
-  \caption[Jumping variance ratios]{Jumping variance ratios, last 10}
-\end{figure}
-
+ --- OLD ---
 \input{./Chapters/Chapter4/change_indication}
 \input{./Chapters/Chapter4/overview}
 \input{./Chapters/Chapter4/algorithms}
+

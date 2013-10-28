@@ -1,0 +1,27 @@
+% !TEX root = ../../main.tex
+\section{Data Gathering}\label{sec:method_data_gathering}
+In this section we briefly discuss the different data gathering methods used for the change detection algorithms and experiments.
+Section \ref{subsec:data_gathering_artificial} reviews the artificial data sets we will use.
+In Section \ref{subsec:data_gathering_real_world} an overview of the real-world data sets used is provided.
+Both sections refer to Chapters \ref{Chapter5} and \ref{Chapter6} for more details, respectively.
+
+% ------
+\subsection{Artificial data}\label{subsec:data_gathering_artificial}
+In order to provide an objective comparison to other methods, we will use artificial data sets which are also used in the researches on which our method is based.
+The data sets are from Takeuchi and Yamanishi \cite{takeuchi2006unifying} and Camci \cite{camci2010change}.
+Both construct a collection of one-dimensional time series data according to the second order \gls{ar} model:
+\begin{equation}
+  x_t = a_1 x_{t-1} + a_2 x_{t-2} + \epsilon_t.
+\end{equation}
+In the different data series the mean and variance of the Gaussian random variable $\epsilon_t$ differs and changes at pre-determined change points.
+Using this data set an objective quality measure over the change detection methods can be obtained and compared.
+All the used data sets are listed and analyzed in Chapter \ref{Chapter5}.
+
+% ------
+\subsection{Real-world data}\label{subsec:data_gathering_real_world}
+In the second type of data sets we apply our method of change detection and temporal segmentation to real-world data sets.
+Our setup records the activities of humans performed both in and out door in an uncontrolled environment.
+Activities performed include walking, running in both a straight line and a curve, standing, walking up and downstairs and sitting.
+Using the time series data sensor output in the form of acceleration, gravity and rotation metrics, our method gives change points based on those signals.
+By comparing the discovered change points with annotated change points (based on video recordings of the performed activities) we are able to give subjective results.
+In Chapter \ref{Chapter6} we give a detailed analysis of the performed activities and the recorded data sets.
