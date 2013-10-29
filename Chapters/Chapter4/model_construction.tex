@@ -1,6 +1,6 @@
 % !TEX root = ../../main.tex
 \section{Model Construction: Incremental SVDD}\label{sec:method_model_construction}
-After the data is collected and pre-processed (or in the case of the artificial data sets: generated), we construct an online incremental sliding window model construction algorithm.
+After the data is collected and pre-processed (or in the case of the artificial data sets: generated), we construct an online incremental sliding window algorithm.
 We follow the method and implementation introduced by Tax and Laskov \cite{tax2003online}, the \acrlong{isvdd} method.
 This method combines the techniques of online, unsupervised and incremental learning methods with the earlier introduced \gls{oc-svm} algorithm \gls{svdd}.
 The method is first initialized with a window length and then in every step a new data object is added to and the last data object is removed from the working set.
@@ -28,3 +28,5 @@ By analyzing the \gls{kkt} conditions, \cite{tax2003online} shows the optimality
 
 From experiments it shows that the online, \gls{isvdd}, method results in less false alarms than the static \gls{svdd}.
 An explanation for this is that \gls{isvdd} follows the changing data distribution, such that small changes over time, like a drift in mean or increase in frequency, continuously re-model the \gls{svm} representation.
+For our method we use the re-modeling capability of the \gls{isvdd} algorithm to obtain change indication measure.
+The following section will discuss the properties used from the constructed \gls{oc-svm} model at every loop-step of the algorithm.

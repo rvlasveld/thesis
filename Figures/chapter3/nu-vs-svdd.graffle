@@ -1413,8 +1413,8 @@
 			<integer>133</integer>
 			<key>Points</key>
 			<array>
-				<string>{290.65032295752223, 152.98118165468188}</string>
-				<string>{320.6639838823391, 145.02513306505992}</string>
+				<string>{290.65030645446546, 152.98111916459027}</string>
+				<string>{320.66379655935123, 145.02442391397747}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -2342,10 +2342,10 @@
 				AAKEBFsxZl0khpKElpYGTlNGb250hpKEhIQGTlNGb250
 				HpSZMIQFWzQ4Y10GAAAAKAAAAP/+UwBUAEkAWABHAGUA
 				bgBlAHIAYQBsAC0AUgBlAGcAdQBsAGEAcgCEAWYMmwCb
-				AZsAmwCGhpcCAZKEmJkEkqGSopKckoSengAAn4EAAqAk
-				hpKElpYNTlNTdXBlclNjcmlwdIaShISECE5TTnVtYmVy
-				AISEB05TVmFsdWUAlIQBKoSEAXGn/4aSmZKEm5sCnIPN
-				zEw+g83MTD6DzcxMPgGGhoY=
+				AZsAmwCGhpcCAZKEmJkEkpySnZKhkqKShJaWDU5TU3Vw
+				ZXJTY3JpcHSGkoSEhAhOU051bWJlcgCEhAdOU1ZhbHVl
+				AJSEASqEhAFxp/+GkpmShJubApyDzcxMPoPNzEw+g83M
+				TD4BhoaG
 				</data>
 				<key>Text</key>
 				<string>{\rtf1\ansi\ansicpg1252\cocoartf1265
@@ -2452,7 +2452,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2013-10-25 11:55:19 +0000</string>
+	<string>2013-10-29 13:06:25 +0000</string>
 	<key>Modifier</key>
 	<string>Roemer Vlasveld</string>
 	<key>NotesVisible</key>
@@ -2547,7 +2547,7 @@
 		<key>SidebarWidth</key>
 		<integer>120</integer>
 		<key>VisibleRegion</key>
-		<string>{{52.25, 50.5}, {386.25, 221.25}}</string>
+		<string>{{52, 45}, {386.25, 221.25}}</string>
 		<key>Zoom</key>
 		<real>4</real>
 		<key>ZoomValues</key>

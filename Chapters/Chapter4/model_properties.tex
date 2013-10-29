@@ -1,2 +1,37 @@
 % !TEX root = ../../main.tex
 \section{Model Properties}\label{sec:method_model_properties}
+
+-- Notes --
+\begin{itemize}
+  \item Error measure of \gls{svdd} is based on both volume of the sphere and number of outliers.
+  \item When the outliers are uniformly distributed around the target data, we should minimize the volume of the description.
+  \item To do this (minimize the volume) we need to estimate the volume.
+  \item \cite{tax2002uniform} states that when the outliers are uniformly distributed, the fraction of outliers that is accepted gives an estimate of the volume of the target data description (with respect to the volume of the outlier distribution).
+  \item When the fraction of outlier is kept constant (by the parameters $C$ and $\sigma$), and when it is known that more outliers are present in current working set, the volume must increase.
+  \item Equation \ref{eq:svdd_inequality} gives that the right term must increase for a larger volume, \ie the value of $R$ will increase.
+  \item Thus, an increase of value $R$ indicates an increase of outliers in the working set.
+  \item This indicates a possible new activity in the time series data.
+\end{itemize}
+
+In the previous section we have discussed the \gls{isvdd} method, which creates a \gls{oc-svm} representation of a working set of data objects at every step of the algorithms loop.
+This section shows how we interpret the constructed model, to obtain a measure which can be used for a indication of change points.
+How this obtained measure is used to indicate a change is discussed in the following section.
+
+The \gls{isvdd} algorithm creates a spherical \gls{oc-svm} representation of the working set at every step of the algorithm.
+This model is obtained by the minimization of Equation \ref{eq:svdd_objective}, which incorporates the radius $R$ of the sphere and the distances $\vectorsym{\xi}$ from the outliers to the boundary.
+We will use the the radius $R$ of the hypersphere as an indication of change.
+
+In \cite{tax2002uniform} Tax and Duin provide an analysis of the error of the \gls{svdd} algorithm.
+This error is based on
+\begin{inparaenum}[\itshape 1\upshape)]
+\item the fraction $f_{T-}$ of target objects that is rejected, and
+\item the fraction $f_{O+}$ of outliers that is accepted.
+\end{inparaenum}
+Since in \gls{occ} situation typically there are (almost) no examples of outlier objects, Tax and Duin construct a method to generate outliers, based on the assumption that the outliers are uniformly distributed around the target set.
+To minimize the error, calculated by the fractions $f_{T-}$ and $f_{O-}$, we should minize the volume of the target data description (\ie the boundary of \gls{svdd}).
+This is since the the fraction of accepted outliers $f_{O-}$ is an estimate of the volume of the target data description, with respect to the volume of the outlier distribution.
+Tax and Duin provide a method to optimize the parameters of the \gls{svdd} method, being the trade-off parameter $C$ and the \gls{rbf} kernel width $\sigma$.
+This optimization will result in the modification of the radius $R$ of Equation \ref{eq:svdd_objective} and affects the Lagrangian inequality \ref{eq:svdd_inequality}.
+
+
+\TODO{outliers is kept constant, thus Radius must increase}
