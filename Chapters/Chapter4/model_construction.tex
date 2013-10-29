@@ -14,7 +14,7 @@ Using the following abstract form of the \gls{svm} optimization problem, the ext
 \end{equation}
 where $\vectorsym{c}$ and $\vectorsym{a}$ are $n \times 1$ vectors, $K$ is a $n \times n$ matrix and $b$ is a scalar.
 The \gls{svdd} implementation of this abstract form is set by the parameters $\vectorsym{c}=\operatorname*{diag}(K)$, $\vectorsym{a} = \vectorsym{y}$ and $b=1$.
-The procudure for the incremental version has two operations: adding and removing a data object $k$.
+The procedure for the incremental version has two operations: adding and removing a data object $k$.
 When a data object $k$ added, its weight $x_k$ is initially set to $0$.
 In case of an object removal, the weight is forced to be $x_k=0$.
 Both the operations conclude with the recalculation $\mu$ and the weights $\vectorsym{x}$ for all the objects, in order to obtain the optimal solution for the enlarged or reduced data set.
@@ -22,4 +22,9 @@ The incremental learning algorithm follows from these two operations: new data o
 
 The size of the initial window of data objects has a lower bound determined by the hyperparameter $C$ (Equation \ref{eq:svdd_objective}).
 Because of the equality constraint $\sum_{i=1}^n a_i x_i = 1$ and the box constraint $0 \le x_i \le C$, the number of objects in the working set must be at least $\ceil{\frac{1}{C}}$.
-\TODO{How to ensure large enough window/working set}
+Thus the algorithm is initialized by selection the first $\ceil{\frac{1}{C}}$ objects for the working set.
+In every step of the loop of the algorithm at least the same number of objects must be added as there are removed.
+By analyzing the \gls{kkt} conditions, \cite{tax2003online} shows the optimality of the algorithm.
+
+From experiments it shows that the online, \gls{isvdd}, method results in less false alarms than the static \gls{svdd}.
+An explanation for this is that \gls{isvdd} follows the changing data distribution, such that small changes over time, like a drift in mean or increase in frequency, continuously re-model the \gls{svm} representation.

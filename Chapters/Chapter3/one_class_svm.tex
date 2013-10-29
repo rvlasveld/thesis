@@ -128,7 +128,7 @@ Given an underlying probabilty distribution $P$ the goal is to find a subset $S$
 
 We will discuss two implementations of \glspl{oc-svm}.
 The first is the \gls{nu-svm} by Sch\"olkopf \etal \cite{scholkopf1999support} and closely follows the above problem statement regarding density estimation.
-The second, on which we will base our change detection method, is the \gls{svdd} by Tax and Duin \cite{tax2004support}.
+The second, on which we will base our change detection method, is the \gls{svdd} by Tax and Duin \cite{tax1999support}.
 
 \TODO{Add something about robustness, discusses in section 9.2 from \cite{cherkassky2007learning,chen2004m}}
 
@@ -190,9 +190,10 @@ In the following section we will discuss an alternative method, which uses an ci
 %--------------------------------------------
 
 \subsection{\acrlong{svdd}}\label{subsec:oc-svm-svdd}
-The method introduced by Tax and Duin \cite{tax2004support}, known as \acrlong{svdd}, takes as spherical instead of planar approach.
+The method introduced by Tax and Duin \cite{tax1999support}, known as \acrlong{svdd}, takes a spherical instead of planar approach.
 The boundary, created in feature space $\mathcal{F}$, forms a hypersphere around the (high density region of the) data.
 The volume of this hypersphere is minimized to get the smallest enclosing boundary.
+The chance of accepting outlier objects is thereby also minimized \cite{tax2003online}.
 By allowing outliers using slacks variables, in the same manner as classical \gls{svm} and \gls{nu-svm}, a soft margin is constructed.
 
 \begin{figure}
@@ -210,10 +211,9 @@ This principle is illustrated in the right image or Figure \ref{fig:nu-vs-svdd}.
 Instead of a separating hyperplane, constructed by \gls{nu-svm} and illustrated on the left of the Figure, the \gls{svdd} creates a hypersphere (in the illustration a cricle) around the data points.
 By using kernel functions (\eg the \gls{rbf}) the hyperspheres in the high dimensional feature space $\mathcal{F}$ corresponds to a flexible and tight enclosing boundary in input space $\mathcal{I}$.
 Possible resulting closed boundaries are illustrated in Figure \ref{fig:svdd-boundary}.
-This enclosing boundary is obtained by minimizing:
-
+This enclosing boundary is obtained by minimizing the following error function $L$ which contains the volume of the hypersphere and the distance from the boundary to the outlier objects:
 \begin{equation}\label{eq:svdd_objective}
-  \operatorname*{min}_{R,\ \mathbf{a} } R^2 + C \sum_{i=1}^n \xi_i
+  L(R, \vectorsym{a}, \vectorsym{\xi}) = R^2 + C \sum_{i=1}^n \xi_i
 \end{equation}
 \begin{equation}
   \begin{multlined}
@@ -224,12 +224,28 @@ This enclosing boundary is obtained by minimizing:
     \end{aligned}
   \end{multlined}
 \end{equation}
-
-The dual formulation, by using Lagrange multipliers $\alpha_i$, can be used to test a new data point $z$ and is the following:
-
-\begin{equation}
-  \lVert z - \mathbf{x} \rVert ^2 = \sum_{i=1}^n \alpha_i \operatorname{exp} \left( \frac{- \lVert z - x_i \rVert ^ 2}{\sigma^2} \right) \geq -R^2/2 + C_R
+In the dual Lagrangian formulation of this error function $L$ the multipliers $\vectorsym{\alpha}$ are maximized:
+\begin{equation}\label{eq:svdd_lagrange}
+  L = \sum_{i} \alpha_i(x_i \cdot x_i) - \sum_{i,j} \alpha_i \alpha_j(x_i \cdot x_j)
 \end{equation}
+\begin{equation}
+  \begin{multlined}
+    \mbox{ subject to: } \\
+    \begin{aligned}
+    0 \le \alpha_i \le C, \sum_{i} \alpha_i = 1
+    \end{aligned}
+  \end{multlined}
+\end{equation}
+
+In the maximization of Equation \ref{eq:svdd_lagrange} a large fraction of the multipliers $\alpha_i$ become zero and for a small fraction $\alpha_i > 0$.
+This small fraction, for which $\alpha_i$ is non-zero, are called the \glspl{sv} and these objects lie on the boundary of the description.
+The center of the hypersphere only depends on this small number of \glspl{sv} and the objects for which $\alpha_i = 0$ can be disregarded from the solution.
+Testing the membership of a (new) object $\vectorsym{z}$ is done by determining if the distance to the center $\vectorsym{a}$ of the sphere is equal or smaller to the radius $R$:
+\begin{equation}
+  \lvert \vectorsym{z} - \vectorsym{a} \rVert ^2 = (\vectorsym{z} \cdot \vectorsym{z}) - 2 \sum_{i} \alpha_i(\vectorsym{z} \cdot \vectorsym{x}_i) + \sum_{i,j}(\vectorsym{x}_i \cdot \vectorsym{x}_j) \le R^2
+\end{equation}
+
+\TODO{Note of inner products and that it can be replaced by kernel functions. Good ref: page 4/158 from \cite{tax2002uniform} and \cite{tax1999support}.}
 
 \begin{figure}
   \centering
@@ -238,8 +254,9 @@ The dual formulation, by using Lagrange multipliers $\alpha_i$, can be used to t
   \label{fig:svdd-boundary}
 \end{figure}
 
-%--------------------------------------------
+\TODO{Note that \gls{svdd} and \gls{nu-svm} have identical solutions when data is preprocessed to have unit form (in the case of \gls{nu-svm}) \cite{tax2002uniform}.}
 
+%--------------------------------------------
 \subsection{Kernel Function}\label{subsec:kernel_function}
 
 \begin{itemize}
