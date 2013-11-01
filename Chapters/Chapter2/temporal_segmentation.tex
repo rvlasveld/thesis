@@ -65,7 +65,7 @@ This differs from other methods where the model is fixed for the whole time seri
 
 The time series data from a sensor can be considered as being drawn from a certain stochastic process.
 Probabilistic models can be constructed on that signal, yielding in probabilistic and Bayesian based segmentation methods.
-The \gls{cusum}-methods takes a statistical approach and relies on the log-likelihood ratio \cite{gustafsson1996marginalized} to measure the difference between two distributions.
+The \gls{cusum}-methods follows a statistical approach and relies on the log-likelihood ratio \cite{gustafsson1996marginalized} to measure the difference between two distributions.
 To calculate the ratio, the probability density functions need to be calculated.
 The method of Kawahara \etal \cite{kawahara2009change} proposes to estimate the ratio of probability densities (known as the \emph{importance}), based on the log likelihood of test samples, directly, without explicit estimation of the densities.
 The method by Liu \etal \cite{liu2013change} uses a comparable dissimilarity measure using the \gls{kliep} algorithm.

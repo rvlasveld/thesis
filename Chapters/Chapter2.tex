@@ -33,7 +33,7 @@ This problem has received a lot of attention in the fields of data mining, etc..
 Often this problem is formulated in a statistical framework, by inspecting the underlying data generating \gls{pdf} of the time series data.
 A change point is then defined as a significant change in the properties of the \gls{pdf}, such as the mean and variance.
 
-The widely used \gls{cusum} method by Basseville \etal \cite{basseville1993detection} takes this approach.
+The widely used \gls{cusum} method by Basseville \etal \cite{basseville1993detection} follows this approach.
 It originates from control methods for detection from bench marks.
 This method and some derivatiges are discussed and analyzed in section \ref{cusum}.
 
@@ -42,14 +42,14 @@ The methods proposed by Kawahara \etal \cite{kawahara2009change} and Lui \etal \
 This approach is discussed and analyzed in section \ref{density-ratio}.
 
 The density-estimation methods rely on the log-likelihood ratio between \glspl{pdf}.
-The method of Camci \cite{camci2010change} takes an other approach within the statistical framework, by using a \gls{svm}.
+The method of Camci \cite{camci2010change} follows an other approach within the statistical framework, by using a \gls{svm}.
 One problem it tries to overcome is the (claimed) weakness of many methods to detect a decrease in variance.
 The method represents the distribution over the data points as a hyper-sphere in a higher dimension using the kernel trick.
 A change in the \gls{pdf} is represented by a change in the radius of this sphere.
 Section \ref{sec:svm_in_change_detection} discusses the \gls{svm}-methods.
 \TODO{Put emphasis that this is the source of inspiration for the chosen method?}
 
-% The final method under consideration, change detection via (intrinsic) dimensionality reduction, takes a different point of view.
+% The final method under consideration, change detection via (intrinsic) dimensionality reduction, follows a different point of view.
 % Opposed to the other discussed methods, dimensionality reduction is framed in the MDL (Minimum Description Length) framework.
 % It uses the estimated underlying number of parameters of the time series as a model for change detection.
 % Section \ref{dim-reduction} discuses this method.
