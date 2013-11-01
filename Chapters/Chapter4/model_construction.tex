@@ -1,9 +1,9 @@
 % !TEX root = ../../main.tex
 \section{Model Construction: Incremental SVDD}\label{sec:method_model_construction}
 After the data is collected and pre-processed (or in the case of the artificial data sets: generated), we construct an online incremental sliding window algorithm.
-We follow the method and implementation introduced by Tax and Laskov \cite{tax2003online}, the \acrlong{isvdd} method.
-This method combines the techniques of online, unsupervised and incremental learning methods with the earlier introduced \gls{oc-svm} algorithm \gls{svdd}.
-The method is first initialized with a window length and then in every step a new data object is added to and the last data object is removed from the working set.
+We follow the \gls{svcpd} method by Camci \cite{camci2010change} and the \gls{isvdd} implementation by Tax and Laskov \cite{tax2003online}.
+That latter algorithm combines the techniques of online, unsupervised and incremental learning methods with the earlier introduced \gls{oc-svm} algorithm \gls{svdd}.
+The method is first initialized with a fixed window length and then in every step a new data object is added to and the oldest data object is removed from the working set.
 
 Using the following abstract form of the \gls{svm} optimization problem, the extension of the incremental \gls{svm} to the \gls{svdd} can be carried out:
 \begin{equation}
@@ -14,19 +14,24 @@ Using the following abstract form of the \gls{svm} optimization problem, the ext
 \end{equation}
 where $\vectorsym{c}$ and $\vectorsym{a}$ are $n \times 1$ vectors, $K$ is a $n \times n$ matrix and $b$ is a scalar.
 The \gls{svdd} implementation of this abstract form is set by the parameters $\vectorsym{c}=\operatorname*{diag}(K)$, $\vectorsym{a} = \vectorsym{y}$ and $b=1$.
-The procedure for the incremental version has two operations: adding and removing a data object $k$.
+The procedure for the incremental version has two operations for a data object $k$: add to and remove from the working set.
 When a data object $k$ added, its weight $x_k$ is initially set to $0$.
 In case of an object removal, the weight is forced to be $x_k=0$.
 Both the operations conclude with the recalculation $\mu$ and the weights $\vectorsym{x}$ for all the objects, in order to obtain the optimal solution for the enlarged or reduced data set.
-The incremental learning algorithm follows from these two operations: new data objects are added to and old data objects are removed from the working set.
+These two operations are the basis for \gls{isvdd}.
+With respect to the timed index, the working set has new data objects are added and old data objects are removed.
 
 The size of the initial window of data objects has a lower bound determined by the hyperparameter $C$ (Equation~\ref{eq:svdd_objective}).
 Because of the equality constraint $\sum_{i=1}^n a_i x_i = 1$ and the box constraint $0 \le x_i \le C$, the number of objects in the working set must be at least $\ceil{\frac{1}{C}}$.
 Thus the algorithm is initialized by selection the first $\ceil{\frac{1}{C}}$ objects for the working set.
-In every step of the loop of the algorithm at least the same number of objects must be added as there are removed.
-By analyzing the \gls{kkt} conditions, \cite{tax2003online} shows the optimality of the algorithm.
+In every loop of the algorithm the number of elements added are at least equal to the number of elements removed.
+The optimality of the algorithm is proved by analysis of the \gls{kkt} conditions \cite{tax2003online}.
 
-From experiments it shows that the online, \gls{isvdd}, method results in less false alarms than the static \gls{svdd}.
-An explanation for this is that \gls{isvdd} follows the changing data distribution, such that small changes over time, like a drift in mean or increase in frequency, continuously re-model the \gls{svm} representation.
+From experiments it shows that the (online) \gls{isvdd} method results in less false alarms than the static \gls{svdd}.
+An explanation for this is that \gls{isvdd} follows the changing data distribution, \ie small changes over time.
+Such changes are a drift in mean or increase in frequency.
+The \gls{isvdd} algorithm continuously re-models the \gls{svm} representation.
 For our method we use the re-modeling capability of the \gls{isvdd} algorithm to obtain change indication measure.
 The following section will discuss the properties used from the constructed \gls{oc-svm} model at every loop-step of the algorithm.
+
+\TODO{make more explicit that the re-modeling is a strong property for our change-detection method.}
