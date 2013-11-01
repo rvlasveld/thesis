@@ -3,7 +3,7 @@
 
 \chapter{Summaries} % Main appendix title
 
-\label{AppendixA} % For referencing this appendix elsewhere, use \ref{AppendixA}
+\label{AppendixA} % For referencing this appendix elsewhere, use~\ref{AppendixA}
 
 \lhead{Appendix A. \emph{Summaries}} % This is for the header on each page - perhaps a shortened title
 
@@ -44,9 +44,9 @@ The last two are summarized by saying that \emph{linear models have low variance
 This is preferred with limited data and overfitting is to be avoided.
 
 Linear models are well studied, in particular for the problem of linear regression.
-This can be solved by the \emph{least-squares} method and classification as discussed in section \ref{least-squares}, the \emph{perceptron} as explained in section \ref{perceptron}.
-Linear regression with the \emph{support vector machine} is handled in section \ref{svm-explained} and used for probability density estimation in section \ref{linear-classifier-pdf}.
-The kernel trick used for learning non-linear models is explained in section \ref{non-linear}.
+This can be solved by the \emph{least-squares} method and classification as discussed in Section~\ref{least-squares}, the \emph{perceptron} as explained in Section~\ref{perceptron}.
+Linear regression with the \emph{support vector machine} is handled in Section~\ref{svm-explained} and used for probability density estimation in Section~\ref{linear-classifier-pdf}.
+The kernel trick used for learning non-linear models is explained in Section~\ref{non-linear}.
 
 
 %--------------------------------------------
@@ -91,7 +91,7 @@ In other words: the weight vector is a linear combination of the training instan
 The dual form of the algorithm learns the instance weights $\alpha_i$ rather than the features weights $\vectorsym{w}_i$.
 An instance $\vectorsym{x}$ is then classified as $\hat{y} = sign(\sum_{i=1}^n \alpha_i y_i \vectorsym{x}_i \cdot \vectorsym{x})$.
 This means that during the training only the pairwise dot-products of the data is needed; this results in the \emph{n}-by-\emph{n} Gram matrix $\matrixsym{G} = \matrixsym{X}\matrixsym{X}^T$.
-This instance-based perspective will be further discussed in section \ref{svm-explained} about the support vector machine.
+This instance-based perspective will be further discussed in Section~\ref{svm-explained} about the support vector machine.
 
 
 %--------------------------------------------
@@ -115,7 +115,7 @@ This gives the following quadratic, constrained optimization problem:
 This equation can be transformed with the Lagrange multipliers by adding the constraints to the minimization part with multipliers $\alpha_i$.
 Taking the partial derivative with respect to $t$ and setting it to $0$, we find that for the optimal solution (threshold) $t$ we have $\sum_{i=1}^{n} \alpha_i y_i = 0$.
 When we take the partial derivative with respect to $w\vectorsym{w}$ we see that the Lagrange multipliers define the weight vector as a linear combination of the training examples.
-This partial derivative is $0$ for an optimal weight we get that $\vectorsym{w} = \sum_{i=1}^{n} \alpha_i y_i \vectorsym{x}_i$, \emph{which is the same expression as for the perceptron derived in section \ref{perceptron}}.
+This partial derivative is $0$ for an optimal weight we get that $\vectorsym{w} = \sum_{i=1}^{n} \alpha_i y_i \vectorsym{x}_i$, \emph{which is the same expression as for the perceptron derived in Section~\ref{perceptron}}.
 By plugging $\vectorsym{w}$ and $t$ back into the Lagrange equation, we can eliminate these and get the dual optimization problem entirely formulated in terms of the Lagrange multipliers:
 
 \begin{equation}
@@ -137,7 +137,7 @@ This shows to important properties:
   \item The optimization problem is entirely defined by pairwise dot products between training instances: the entries of the Gram matrix.
 \end{enumerate}
 
-The second property enables powerful adaption for support vector machines to learn non-linear decision boundaries, as discussed in section \ref{non-linear}.
+The second property enables powerful adaption for support vector machines to learn non-linear decision boundaries, as discussed in Section~\ref{non-linear}.
 
 An other solution to non-linear separable data, that is when the constraints $\vectorsym{w} \cdot \vectorsym{x}_i - t \geq 1$ are not jointly satisfiable, is to add \emph{slack variables} $\xi_i$, one for each example.
 This allows them to be in the margin, of even at the wrong side of the boundary -- known as boundary errors.
@@ -203,7 +203,7 @@ Thus, to classify a new example $\vectorsym{x}$ we need to evaluate $y_i \sum_{j
 \subsection{Change Point Detection In Time Series Data Using Support Vectors}
 Paper by Fatih Camci \cite{camci2010change}
 About segmentation with SVMs.
-Will be main material for section \ref{sec:svm_in_change_detection} about SVMs.
+Will be main material for Section~\ref{sec:svm_in_change_detection} about SVMs.
 
 \subsubsection{Introduction}
 Interprets change detection as finding the transition points from one underlying time series generation model to another.
@@ -257,12 +257,12 @@ The optimization of the \emph{scale parameter} has led to several implementation
 As can been seen, there are no assumptions about the data distribution or independency made.
 
 \subsubsection{Problem formulation}
-[Not summarized here, useful for e.g. section \ref{statistical-framework}]
+[Not summarized here, useful for e.g. Section~\ref{statistical-framework}]
 
 \subsubsection{SVCPD: The algorithm}
 Instead of using statistical properties of the data, for each window of size $w$ a hyper-sphere is constructed without increasing computational complexity due to the \emph{kernel trick}.
 The window size is related to the sensitivity of the method to change; small windows are sensitive with high false alarm rate whilst large windows are slow to detect change and have low alarm rates.
-The algorithm is listed in table \ref{tab:alg-svcdp}.
+The algorithm is listed in table~\ref{tab:alg-svcdp}.
 Note that SVCPD can be applied directly to multidimensional data, whilst many other methods can only be applied to one-dimensional data.
 
 \begin{center}\begin{table}
@@ -334,14 +334,14 @@ The latter puts more weight near the middle of the series is thus biased toward 
 The (expected) value of $D_k$ given a change in variance differs in the context.
 If a smaller variance corresponds to the smaller portion of the series, then it will be harden to find the change point using $D_k$.
 There is a masking effect when there are multiple change points in the series; the order of small, medium and large variances result in the value of $D_k$.
-The iterative algorithm presented in this paper in section \ref{subsec:icss} is designed to lessen the masking effect.
+The iterative algorithm presented in this paper in Section~\ref{subsec:icss} is designed to lessen the masking effect.
 
 %--------------------------------------------
 \subsubsection{Multiple changes: Iterated cumulative sums of squares}\label{subsec:icss}
 In case of a single change point the $D_k$ method would succeed.
 But we are interested in multiple change points of variance, and thus the usefulness of the $D_k$ reduces due to the masking effect.
 A solution is to iteratively applying the method and dividing the series at each possible change point.
-The algorithm is presented in table \ref{tab:alg-icss}.
+The algorithm is presented in table~\ref{tab:alg-icss}.
 It is the third steps which reduces the masking effect and helps to ``fine tune'' the algorithm by (re)moving the potential change points by checking each location given the adjacent ones.
 
 \begin{center}\begin{table}

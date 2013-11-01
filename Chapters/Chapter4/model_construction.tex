@@ -20,7 +20,7 @@ In case of an object removal, the weight is forced to be $x_k=0$.
 Both the operations conclude with the recalculation $\mu$ and the weights $\vectorsym{x}$ for all the objects, in order to obtain the optimal solution for the enlarged or reduced data set.
 The incremental learning algorithm follows from these two operations: new data objects are added to and old data objects are removed from the working set.
 
-The size of the initial window of data objects has a lower bound determined by the hyperparameter $C$ (Equation \ref{eq:svdd_objective}).
+The size of the initial window of data objects has a lower bound determined by the hyperparameter $C$ (Equation~\ref{eq:svdd_objective}).
 Because of the equality constraint $\sum_{i=1}^n a_i x_i = 1$ and the box constraint $0 \le x_i \le C$, the number of objects in the working set must be at least $\ceil{\frac{1}{C}}$.
 Thus the algorithm is initialized by selection the first $\ceil{\frac{1}{C}}$ objects for the working set.
 In every step of the loop of the algorithm at least the same number of objects must be added as there are removed.

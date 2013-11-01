@@ -10,12 +10,12 @@
 
 This section gives a description of the method used for the experiments and change detection mechanism.
 First described is the method to process the gathered sensor data.
-A schematic overview is given in figure \ref{fig:method_overview} and shows the steps of the method.
+A schematic overview is given in figure~\ref{fig:method_overview} and shows the steps of the method.
 A more detailed explanation of the ``Update model'' step follows.
 This section is finalized with the experiments setup, annotation of data streams and quality measure.
 
 \subsection{Change detection method}
-As graphically represented in figure \ref{fig:method_overview}, the change detection method starts by processing the data from sensor, such as the accelerometer, magnetic orientation and rotation measures \footnote{Something about the origin of the streams; all from the same sensor or different sensors?}.
+As graphically represented in figure~\ref{fig:method_overview}, the change detection method starts by processing the data from sensor, such as the accelerometer, magnetic orientation and rotation measures \footnote{Something about the origin of the streams; all from the same sensor or different sensors?}.
 
 The first step is to process the raw streams of data originating from a multiple of sensors.
 The two processes applied are alignment and normalization.
@@ -48,7 +48,7 @@ In our setup we used the \gls{rt} and \gls{cusum} methods, to show the modularit
 For the experiments we used a HTC Sensation XE smartphone as recording device.
 The activities were recorded using a free Android application \cite{sensorlogger}.
 This application was chosen for its convenient data format of the sensor recording and its regularity of the sampling interval.
-Table \ref{tab:recorded_metrics} lists the recorded metrics.
+Table~\ref{tab:recorded_metrics} lists the recorded metrics.
 For our expiments we used the data for the accelerometer, magnatief field and rotation.
 
 \begin{center}\begin{table}
