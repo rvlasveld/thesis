@@ -21,7 +21,7 @@ Use of Cumulative Sums of Squares for Retrospective Detection of Changes of Vari
 
 An often used approach in the statistical framework of change detection is the \gls{cusum} as introduced by Page \cite{page1954continuous}.
 Originally used for quality control in production environments, its main function is to detect change in the mean of measurements and has been applied to this problem \cite{basseville1993detection}.
-It is an non-Bayesian method and thus makes no assumptions (or: prior belief distributions) for the change points.
+It is a non-Bayesian method and thus makes no assumptions, in the form of prior belief distributions, for the change points.
 Many extensions to this method have been proposed.
 Some focus on the change in mean, such the method of Alippi and Roveri \cite{alippi2006adaptive}.
 Others apply the method the problems in which the change of variance is under consideration.
@@ -29,8 +29,9 @@ Among others are there the centered version of the cumulative sums, introduced b
 
 The method of Incl\'{a}n and Tiao \cite{inclan1994use} builds on the centered version of \gls{cusum} \cite{brown1975techniques} to detect changes in variance.
 Using the \gls{icss} algorithm they are able to find multiple change points in a reflective manner.
+\TODO{Explain ``reflective'', or use term as batch, post-processing etc.}
 Let $C_k = \sum_{i=1}^k \alpha_t^2$ be the cumulative sum of squares for a series of uncorrelated random variables $\{\alpha_t\}$ of length $T$.
-The centered (and normalized) sum is squares is defined as
+The centered (and normalized) sum of squares is defined as
 \begin{equation}
   \begin{aligned}
   D_k = \frac{C_k}{C_T} - \frac{k}{T}, & & k = 1, \dots, T, & & \text{with } D_0 = D_T = 0.
@@ -38,7 +39,6 @@ The centered (and normalized) sum is squares is defined as
 \end{equation}
 For a series with homogeneous variance, the value of $D_k$ will oscillate around $0$.
 In case of a sudden change, the value will increase and exceed some predefined boundary with high probability.
-The behavior of $D_k$ is related a Brownian bridge.
 By using an iterative algorithm, the method is able to minimize the masking effect of successive change points.
 
 One of the motivations for the \gls{icss} algorithm was the heavy computational burden involved with Bayesian methods, which need to calculate the posterior odds for the log-likelihood ratio testing.

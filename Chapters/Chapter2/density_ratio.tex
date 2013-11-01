@@ -22,7 +22,8 @@
 % The distribution over the values of time series data can be represented with a probability density function (pdf).
 % Two sections of a time series data can be generated with the same underlying pdf or each with a different.
 
-Many approaches to detect change points, regarded as a change in the underlying probabilistic generation, monitor the logarithm of the likelihood ratio between two consecutive intervals.
+Many approaches to detect change points monitor the logarithm of the likelihood ratio between two consecutive intervals.
+A change is point is regarded to be the moment in time when the underlying probabisitic generation function changes.
 Some methods which rely on this are novelty detection, maximum-likelihood estimation and online learning of autoregressive models \cite{kawahara2009change}.
 A limitation of these methods is that they rely on pre-specified parametric models.
 Non-parametric models for density estimation have been proposed, but it is said to be a hard problem \cite{hardle2004nonparametric, sugiyama2012density}.
@@ -53,5 +54,5 @@ Then for every new sample the reference and test intervals are shifted and the c
 Finally the logarithm of the likelihood ratio is evaluated.
 If it is above the threshold $\mu$ the current time is reported as a change point.
 
-Improvements in this line of research, by Liu \etal \cite{liu2013change} has led the application of improved density-ratio estimation methods to the problem of change detection.
+Improvements in this line of research by Liu \etal \cite{liu2013change} has led the application of improved density-ratio estimation methods to the problem of change detection.
 Such an improvement is the Unconstrained Least-Squares Importance Fitting (uLSIF) method \cite{kanamori2009least} and an extension which possesses a superior non-parametric convergence property: Relative uLSIF (RuLSIF) \cite{yamada2013relative}.
