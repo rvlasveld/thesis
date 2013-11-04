@@ -36,9 +36,18 @@
 
 \TODO{Write chapter introduction/outline. Give overview of method approach and refer to each section for details of that stage.}
 
+\TODO{Puts emphasis on two-stage framework by Takeuchi and Yamanishi \cite{takeuchi2006unifying}.}.
+
+\begin{figure}
+  \centering
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{./Figures/chapter4/method_setup_short.pdf}
+  \caption[Method setup]{Schematic overview of the change detection method. The first step is the data gathering, described in Section \ref{sec:method_data_gathering}. Ater the pre-processing, the data is used to construct a \gls{svdd} model, as described in Section \ref{sec:method_model_construction}. Section \ref{sec:method_model_features} describes which features of the model are used for the final change indication algorithm, discussed in Section \ref{sec:method_change_detection}.}
+  \label{fig:method_overview_short}
+\end{figure}
+
 \input{./Chapters/Chapter4/data_gathering}
 \input{./Chapters/Chapter4/model_construction}
-\input{./Chapters/Chapter4/model_properties}
+\input{./Chapters/Chapter4/model_features}
 \input{./Chapters/Chapter4/change_detection}
 
  --- OLD ---

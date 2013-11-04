@@ -1,5 +1,5 @@
 % !TEX root = ../../main.tex
-\section{Model Properties}\label{sec:method_model_properties}
+\section{Model Features}\label{sec:method_model_features}
 
 -- Notes --
 \begin{itemize}
@@ -14,7 +14,7 @@
 \end{itemize}
 
 In the previous section we have discussed the \gls{isvdd} method, which creates a \gls{oc-svm} representation of a working set of data objects at every step of the algorithms loop.
-This section shows how we interpret the constructed model, to obtain a measure which can be used for a indication of change points.
+This section shows how we interpret the constructed model and extract features to obtain a measure which can be used for a indication of change points.
 The following section discusses how this obtained measure is used to indicate change.
 
 The \gls{isvdd} algorithm creates a spherical \gls{oc-svm} representation of the working set at every step of the algorithm.
@@ -28,8 +28,8 @@ This error is based on
 \item the fraction $f_{O+}$ of outliers that is accepted.
 \end{inparaenum}
 Since in \gls{occ} situation typically there are (almost) no examples of outlier objects, Tax and Duin construct a method to generate outliers based on the assumption that the outliers are uniformly distributed around the target set.
-To minimize the error, calculated by the fractions $f_{T-}$ and $f_{O-}$, we should minimize the volume of the target data description (\ie the boundary of \gls{svdd}).
-This is because the fraction of accepted outliers $f_{O-}$ is an estimate of the volume of the target data description, with respect to the volume of the outlier distribution.
+To minimize the error, calculated by the fractions $f_{T-}$ and $f_{O+}$, we should minimize the volume of the target data description (\ie the boundary of \gls{svdd}).
+This is because the fraction of accepted outliers $f_{O+}$ is an estimate of the volume of the target data description, with respect to the volume of the outlier distribution.
 Tax and Duin provide a method to optimize the parameters of the \gls{svdd} method, \ie the trade-off parameter $C$ and the \gls{rbf} kernel width $\sigma$.
 This optimization will result in the modification of the radius $R$ of Equation~\ref{eq:svdd_objective} and affects the Lagrangian inequality~\ref{eq:svdd_inequality}.
 
@@ -38,6 +38,9 @@ During the \gls{isvdd} algorithm the volume of the hypersphere is being minimize
 This means that only the radius of the sphere will change during the algorithm.
 We will interpret changes in the radius $R$ with the same continuity assumptions as discussed in Section~\ref{subsec:kernel_function}.
 This means that when two objects (in this case radius sizes) are close to each other, their original objects are also close.
-In other words, when the time series changes its data objects, the corresponding radius $R$ will also change.
-Since the data objects in the working set become more heterogeneous, the radius of the hypersphere will increase.
-When the data objects change from a heterogeneous set to a more homogeneous, we expect the radius to decrease in value, since the data objects are closer to each other in the feature space.
+In other words, when the underlying distribution of time series is changed, and thus the characteristics of the data objects changes, the corresponding radius $R$ will also change.
+Since in that case the data objects in the working set become more heterogeneous, the radius of the hypersphere will increase.
+When, instead, the data objects change from a heterogeneous set to a more homogeneous, we expect the radius to decrease in value, since the data objects are closer to each other in the feature space.
+The following section discusses the algorithms which can be applied to the extracted radius $R$ as a volume estimate.
+
+\TODO{Put emphasis on reduction of multi-dimensions to single dimension. Also stage 1 and 2 from unifying framework \cite{takeuchi2006unifying}.}
