@@ -12,7 +12,7 @@ An abstract representation of these expectations is illustrated in Figure~\ref{f
 \begin{figure}
   \centering
     \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{./Figures/chapter4/expected_behaviour.pdf}
-  \caption[Expected radius behaviour]{Expected behaviour of the radius $R$ of the hypersphere. The upper part shows a typical sinusoidal time series signal. The lower graph visualizes an abstract expectation of the values of $R$. Five possible windows are illustrated. The left, middle, and right windows cover an area of homogeneous signal. The expected value of $R$ is low. The other two windows cover a change entering and leaving the window, respectively. At these locations the radius $R$ is expected to increase temporarily. }
+  \caption[Expected radius behavior]{Expected behavior of the radius $R$ of the hypersphere. The upper part shows a typical sinusoidal time series signal. The lower graph visualizes an abstract expectation of the values of $R$. Five possible windows are illustrated. The left, middle, and right windows cover an area of homogeneous signal. The expected value of $R$ is low. The other two windows cover a change entering and leaving the window, respectively. At these locations the radius $R$ is expected to increase temporarily. }
   \label{fig:radius_expectation}
 \end{figure}
 
@@ -23,9 +23,24 @@ In our method we leave open the precise method which is used to find change poin
 Below, we will gives two examples of methods which can be applied.
 The first example is a ratio-based thresholding mechanism used by Camci~\cite{camci2010change}.
 
-\subsection{Ratio-thresholding}
 
+\subsection{Ratio-thresholding}
+The first example of an algorithm that interprets the change indication time series and transforms it to change detection is the radius ratio thresholding method used by Camci~\cite{camci2010change}.
+The method calculates the radius ratio $\hbar_t$ by taking the ratio of the current radius $r_t$ at time $t$ to the average radii since the last change point $y$:
 \begin{equation}\label{eq:ratio_radius}
   \hbar_t = \frac{r_t}{\operatorname*{mean}(r_{y:t-1})},
 \end{equation}
-where $r_t$ is the approximated radius of the hypersphere at time $t$, $y$ is the time of the last change point (or $1$ if there is non) and $\operatorname*{mean}(r_{y:t-1})$ is the average of the previous approximated radii.
+where $\operatorname*{mean}(r_{y:t-1})$ is the average of the previous approximated radii.
+The ratio $\hbar_t$ is compared with two thresholds: the low threshold $th_\text{low}$ and the high threshold $th_\text{high}$.
+When the data objects in the working set becomes more homogeneous at time $t$, the radius $R$ of the hypersphere and thereby the ratio $\hbar_t$ will decrease.
+When the new value of $\hbar_r$ is lower than the low threshold $th_\text{low}$, a change detection is observed for time $t$.
+The same holds for a more heterogeneous set of data and an increase of $\hbar_r$ higher than $th_\text{high}$.
+
+The appropriate values for the thresholds are highly depended on the characteristics of the data and the trade-off parameter $C$ (as discussed in Section~\ref{subsec:oc-svm-svdd}).
+This trade-off parameters regulates the fraction of data objects that will be rejected from the constructed model.
+Since a high value of $C$ assigns a high penalty to outliers, data objects are more likely to be incorporated into the hypersphere by increasing the radius.
+For low values of $C$ the cost of rejecting data objects is, compared to the benefits of a smaller hypersphere, relatively low.
+This gives a relation between the parameters $C$, $th_\text{low}$, and $th_\text{high}$ and the sensitivity of the radius ratio based thresholding method.
+A high value of $C$, or values close to $1$ for $th_\text{low}$ and $th_\text{high}$ result in a sensitive change detection procedure.
+The reverse results in less sensitive methods.
+The correct values for the intended sensitivity need to be empirically determined.
