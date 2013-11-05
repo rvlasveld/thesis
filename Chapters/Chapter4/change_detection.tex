@@ -31,6 +31,7 @@ The method calculates the radius ratio $\hbar_t$ by taking the ratio of the curr
   \hbar_t = \frac{r_t}{\operatorname*{mean}(r_{y:t-1})},
 \end{equation}
 where $\operatorname*{mean}(r_{y:t-1})$ is the average of the previous approximated radii.
+By using only historic data, this method can be incorporated in an online change detection method.
 The ratio $\hbar_t$ is compared with two thresholds: the low threshold $th_\text{low}$ and the high threshold $th_\text{high}$.
 When the data objects in the working set becomes more homogeneous at time $t$, the radius $R$ of the hypersphere and thereby the ratio $\hbar_t$ will decrease.
 When the new value of $\hbar_r$ is lower than the low threshold $th_\text{low}$, a change detection is observed for time $t$.
