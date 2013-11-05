@@ -12,7 +12,7 @@ An abstract representation of these expectations is illustrated in Figure~\ref{f
 \begin{figure}
   \centering
     \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{./Figures/chapter4/expected_behaviour.pdf}
-  \caption[Expected radius behavior]{Expected behavior of the radius $R$ of the hypersphere. The upper part shows a typical sinusoidal time series signal. The lower graph visualizes an abstract expectation of the values of $R$. Five possible windows are illustrated. The left, middle, and right windows cover an area of homogeneous signal. The expected value of $R$ is low. The other two windows cover a change entering and leaving the window, respectively. At these locations the radius $R$ is expected to increase temporarily. }
+  \caption[Expected radius behavior]{Expected behavior of the radius $R$ of the hypersphere. The upper part shows a typical sinusoidal time series signal. The lower graph visualizes an abstract expectation of the values of $R$. Five possible windows are illustrated. The left, middle, and right windows cover an area of homogeneous signal. The expected value of $R$ is low. The other two windows cover a change entering and leaving the window, respectively. At these locations the radius $R$ is expected to increase temporarily.}
   \label{fig:radius_expectation}
 \end{figure}
 
@@ -21,11 +21,30 @@ Besides the dimensionality reduction, the form of the signal is also simplified.
 Whereas the original signal was represented as a sinusoidal or second order \gls{ar} model, the new time series is of much simpler form.
 In our method we leave open the precise method which is used to find change points in the obtained change indication values.
 Below, we will gives two examples of methods which can be applied.
-The first example is a ratio-based thresholding mechanism used by Camci~\cite{camci2010change}.
+The first is a family of methods based on the \gls{cusum} method.
+The second example is a ratio-based thresholding mechanism used by Camci~\cite{camci2010change}.
+We conclude this section by discussing some post-processing techniques we have used, to decrease the number of false positives.
 
+\subsection{CUSUM based methods}
+Many of the simple change detection methods are based on \gls{cusum}, originally introduced by Page~\cite{page1954continuous}.
+Many variations and extensions of the method are proposed and used (\cite{inclan1994use,alippi2006adaptive,hsu2007mosum}).
+Here we will discuss the simple form, which only detects changes for an increase of the examples, in this case the radius $R$.
+The cumulative sum for all the values is calculated:
+\begin{equation}
+  S_n = \sum_{k=1}^n r_k
+\end{equation}
+and a change is detected when the value of the cumulative sums minus the minimum encountered exceeds a predetermined threshold $h$:
+\begin{equation}
+  S_n - \operatorname*{min}_{0 \le i < n} S_i \ge h.
+\end{equation}
+
+Extensions of the \gls{cusum} method have been proposed.
+Amongst others, extensions which extend its use to two-threshold methods, and methods appropiate for changes in mean or variance \cite{inclan1994use}.
+Whilst adaptive methods have been proposed \cite{alippi2006adaptive}, most methods require manual determination of the threshold parameter $h$.
 
 \subsection{Ratio-thresholding}
-The first example of an algorithm that interprets the change indication time series and transforms it to change detection is the radius ratio thresholding method used by Camci~\cite{camci2010change}.
+The second example of an algorithm that interprets the change indication time series and transforms it to change detection is the radius ratio thresholding method used by Camci~\cite{camci2010change}.
+The method shares characteristics with \gls{cusum}, since it relies on summation of historic data and thresholds for change detection.
 The method calculates the radius ratio $\hbar_t$ by taking the ratio of the current radius $r_t$ at time $t$ to the average radii since the last change point $y$:
 \begin{equation}\label{eq:ratio_radius}
   \hbar_t = \frac{r_t}{\operatorname*{mean}(r_{y:t-1})},
@@ -45,3 +64,24 @@ This gives a relation between the parameters $C$, $th_\text{low}$, and $th_\text
 A high value of $C$, or values close to $1$ for $th_\text{low}$ and $th_\text{high}$ result in a sensitive change detection procedure.
 The reverse results in less sensitive methods.
 The correct values for the intended sensitivity need to be empirically determined.
+
+\subsection{Post-processing}
+In our method we use the ratio based thresholding, since it is also used by Camci~\cite{camci2010change}.
+From preliminary experiments we observed that a single change in the data can cause many detected change points, using the ratio based method.
+This phenomenon can be explained by the nature of the thresholding method.
+Since a single (high or low) threshold is set for ratio of the radii, high values are considered to be a change point before the highest point of the peak.
+As illustrated in Figure~\ref{fig:tresholding}, the peak at $t_1$ represents a single change point.
+The region from $t_2$ to $t_3$ is strictly increasing.
+At $t_2$ a change point is detected, since $\hbar_t$ exceeds the threshold.
+But since it is increasing up to $t_3$, all values of $\hbar_t$ in that period will trigger the ratio based method to indicate a change point.
+
+To overcome this problem, we apply a post-processing method on the generated change points.
+All the change points that are within a time period $\delta$ of each other are merged together.
+\TODO{Merged to the front, or to the back, depending on high/low threshold exceeding?}
+
+\begin{figure}
+  \centering
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{./Figures/chapter4/signal_threshold.pdf}
+  \caption[Thresholding]{Abstract illustration of the radius ratio thresholding. The peak at $t_1$ generates a single change point. The region between $t_2$ and $t_3$ generates multiple change points, since the value of $\hbar_t$ keeps increasing.}
+  \label{fig:tresholding}
+\end{figure}

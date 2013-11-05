@@ -1,18 +1,5 @@
 % !TEX root = ../../main.tex
 \section{Model Features}\label{sec:method_model_features}
-
--- Notes --
-\begin{itemize}
-  \item Error measure of \gls{svdd} is based on both volume of the sphere and number of outliers.
-  \item When the outliers are uniformly distributed around the target data, we should minimize the volume of the description.
-  \item To do this (minimize the volume) we need to estimate the volume.
-  \item \cite{tax2002uniform} states that when the outliers are uniformly distributed, the fraction of outliers that is accepted gives an estimate of the volume of the target data description (with respect to the volume of the outlier distribution).
-  \item When the fraction of outlier is kept constant (by the parameters $C$ and $\sigma$), and when it is known that more outliers are present in current working set, the volume must increase.
-  \item Equation~\ref{eq:svdd_inequality} gives that the right term must increase for a larger volume, \ie the value of $R$ will increase.
-  \item Thus, an increase of value $R$ indicates an increase of outliers in the working set.
-  \item This indicates a possible new activity in the time series data.
-\end{itemize}
-
 In the previous section we have discussed the \gls{isvdd} method, which creates a \gls{oc-svm} representation of a working set of data objects at every step of the algorithms loop.
 This section shows how we interpret the constructed model and extract features to obtain a measure which can be used for a indication of change points.
 The following section discusses how this obtained measure is used to indicate change.
@@ -31,7 +18,7 @@ Since in \gls{occ} situation typically there are (almost) no examples of outlier
 To minimize the error, calculated by the fractions $f_{T-}$ and $f_{O+}$, we should minimize the volume of the target data description (\ie the boundary of \gls{svdd}).
 This is because the fraction of accepted outliers $f_{O+}$ is an estimate of the volume of the target data description, with respect to the volume of the outlier distribution.
 Tax and Duin provide a method to optimize the parameters of the \gls{svdd} method, \ie the trade-off parameter $C$ and the \gls{rbf} kernel width $\sigma$.
-This optimization will result in the modification of the radius $R$ of Equation~\ref{eq:svdd_objective} and affects the Lagrangian inequality~\ref{eq:svdd_inequality}.
+This optimization will result in the modification of the radius $R$ of Equation~\ref{eq:svdd_objective} and affects the Lagrangian inequality~(\ref{eq:svdd_inequality}).
 
 Since in our method the parameters $C$ and $\sigma$ are kept constant, and thereby also the fraction of target objects being rejected, the only free parameter is the radius $R$.
 During the \gls{isvdd} algorithm the volume of the hypersphere is being minimized.
@@ -41,6 +28,9 @@ This means that when two objects (in this case radius sizes) are close to each o
 In other words, when the underlying distribution of time series is changed, and thus the characteristics of the data objects changes, the corresponding radius $R$ will also change.
 Since in that case the data objects in the working set become more heterogeneous, the radius of the hypersphere will increase.
 When, instead, the data objects change from a heterogeneous set to a more homogeneous, we expect the radius to decrease in value, since the data objects are closer to each other in the feature space.
-The following section discusses the algorithms which can be applied to the extracted radius $R$ as a volume estimate.
 
-\TODO{Put emphasis on reduction of multi-dimensions to single dimension. Also stage 1 and 2 from unifying framework \cite{takeuchi2006unifying}.}
+With the \gls{isvdd} algorithm we have effectively implemented a form of dimensionality reduction by feature extraction, using the radius $R$.
+The following section discusses the algorithms which can be applied to the extracted radius $R$ as a volume estimate.
+We thereby follow the setup of the unifying framework by Takeuchi and Yamanishi~\cite{takeuchi2006unifying}, of which this section described the first stage.
+
+\TODO{Notion of dimensionality reduction is a bit vague here, because it applies to a window of objects.}
