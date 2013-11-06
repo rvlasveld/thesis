@@ -31,7 +31,5 @@ From experiments it shows that the (online) \gls{isvdd} method results in less f
 An explanation for this is that \gls{isvdd} follows the changing data distribution, \ie small changes over time.
 Such changes are a drift in mean or increase in frequency.
 The \gls{isvdd} algorithm continuously re-models the \gls{svm} representation.
-For our method we use the re-modeling capability of the \gls{isvdd} algorithm to obtain change indication measure.
-The following section will discuss the properties used from the constructed \gls{oc-svm} model at every loop-step of the algorithm.
-
-\TODO{make more explicit that the re-modeling is a strong property for our change-detection method.}
+This re-modeling of the \gls{svm} representation is beneficial for our purpose, since we are only interested in sudden changes between activities.
+The following section will discuss the features extracted from the constructed \gls{oc-svm} model at every loop-step of the algorithm, before Section~\ref{sec:method_change_detection} describes how these features are used to detect change.

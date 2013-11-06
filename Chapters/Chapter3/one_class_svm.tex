@@ -135,6 +135,7 @@ The second, on which we will base our change detection method, is the \gls{svdd}
 %--------------------------------------------
 
 \subsection{\acrlong{nu-svm}}\label{subsec:nu-svm}
+\TODO{Check notations with book of Scholkopf \cite{scholkopf2002learning}, chapter 8, page 227.} \\
 The first of the \gls{oc-svm} methods we will discuss is often referred to as \gls{nu-svm} and introduced by Sch\"olkopf \etal \cite{scholkopf1999support}.
 Instead of estimating the density function of an distribution $P$, it focuses on an easier problem: the algorithm find regions in the input where the ``probability density lives''.
 This results in a function such that most of the data is in the region where the function is nonzero.
@@ -276,7 +277,7 @@ Using Equation~\ref{eq:svdd_test_object}, the following kernel formulation needs
 
 \TODO{Use Figure~\ref{fig:svdd-boundary} or~\ref{fig:svdd-boundary-sigma}?}
 
-\TODO{Note that \gls{svdd} and \gls{nu-svm} have identical solutions when data is preprocessed to have unit form (in the case of \gls{nu-svm}) \cite{tax2002uniform}.}
+\TODO{Note that \gls{svdd} and \gls{nu-svm} have identical solutions when data is preprocessed to have unit form (in the case of \gls{nu-svm}) \cite{tax2002uniform}. and the \gls{rbf} kernel is used. Page 234 of \cite{scholkopf2002learning}.}
 
 %--------------------------------------------
 \subsection{Kernel Function}\label{subsec:kernel_function}
@@ -318,8 +319,9 @@ $k(\mathbf{x}_i, \mathbf{x})$ is a kernel function computing a dot product in fe
 
 sparsity, RKHS: \cite{girosi1998equivalence} \\
 
-Kernels for Support Vector Classifiers were first (?) used by Vapnik \cite{vapnik1998statistical}.
+Kernels for Support Vector Classifiers were first (?) used by Vapnik \cite{vapnik1998statistical}. \\
 
+Use Chapter 2 from ``Learning with kernels'', \cite{scholkopf2002learning}.
 
 
 %--------------------------------------------
