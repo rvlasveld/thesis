@@ -2,7 +2,7 @@
 \section{Model Construction: Incremental SVDD}\label{sec:method_model_construction}
 After the data is collected and pre-processed (or in the case of the artificial data sets: generated), we construct an online incremental sliding window algorithm.
 We follow the \gls{svcpd} method by Camci \cite{camci2010change} and the \gls{isvdd} implementation by Tax and Laskov \cite{tax2003online}.
-That latter algorithm combines the techniques of online, unsupervised, and incremental learning methods with the earlier introduced \gls{oc-svm} algorithm \gls{svdd}.
+The latter algorithm combines the techniques of online, unsupervised, and incremental learning methods with the earlier introduced \gls{oc-svm} algorithm \gls{svdd}.
 The method is initialized with a fixed window length and then in every step a new data object is added to and the oldest data object is removed from the working set.
 
 Using the following abstract form of the \gls{svm} optimization problem, the extension of the incremental \gls{svm} to the \gls{svdd} can be carried out:
