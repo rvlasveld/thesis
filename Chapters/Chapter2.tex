@@ -54,9 +54,49 @@ Section~\ref{sec:svm_in_change_detection} discusses the \gls{svm}-methods.
 % It uses the estimated underlying number of parameters of the time series as a model for change detection.
 % Section~\ref{dim-reduction} discuses this method.
 
-\TODO{Maybe add dimensionality reduction, but for now leave out}
+-- Nieuwe indeling Chapter 2 --
+
+\begin{description}
+  \item[Intro/outline] Introduction and overview of this chapter. Put in the context of temporal classification.
+  \item[Temporal segmentation] Give overview of used temporal segmentation methods, move towards a split in model building/dimensionality reduction and change detection methods
+  \item[Dimensionality reduction] Explain that \gls{dr} can be useful in data processing. Name a few techniques, make bridge to \gls{oc-svm}.
+  \item[Change detection] Describe methods for \emph{direct} change detection. End with notion
+    \begin{description}
+      \item[Model fitting]
+      \item[Cusum]
+      \item[Density ratio]
+    \end{description}
+  \item[Support Vector Machine based methods]
+
+\end{description}
+
+\section{Overview}\label{sec:literature_review_overview}
+As described in Chapter~\ref{Chapter1}, the focus of this research is the application of temporal segmentation to accelerometer data.
+This is with the assumption that explicit temporal segmentation can aid the process of temporal classification.
+
+\TODO{Give examples of temporal classification techniques}
+
+In recent years a lot is research is performed in the classification of human activities, recorded by on-body sensors.
+Especially since smartphones with accelerometer sensors became more available, research has focussed on recordings from these devices.
+
+\TODO{Include highlights from old-classification text}
+
+In the following section of this is chapter we begin with a review of current literature on temporal segmentation.
+Many techniques of temporal segmentation rely in change detection algorithms.
+In Section~\ref{sec:change_detection_methods} we will give an overview of those kind of algorithms.
+An often encountered problem is the \emph{curse of dimensionality}.
+To overcome this problem, we look at \gls{dr} methods in Section~\ref{sec:dimensionality_reduction}.
+We end this chapter with a review on \gls{svm} based methods and algorithms.
+This latter section relates the \gls{oc-svm} methods via \gls{dr} to temporal segmentation.
+
+\input{./Chapters/Chapter2/temporal_segmentation.tex}
+\input{./Chapters/Chapter2/change_detection_methods.tex}
+\input{./Chapters/Chapter2/dimensionality_reduction.tex}
+\input{./Chapters/Chapter2/svm_based.tex}
 
 
+
+-- OLD --
 
 %----------------------------------------------------------------------------------------
 % CUSUM and GLR
@@ -68,12 +108,8 @@ Section~\ref{sec:svm_in_change_detection} discusses the \gls{svm}-methods.
 
 %----------------------------------------------------------------------------------------
 % Temporal Segmentation
-\input{./Chapters/Chapter2/temporal_segmentation.tex}
+\input{./Chapters/Chapter2/temporal_segmentation_old.tex}
 
 %----------------------------------------------------------------------------------------
 % Support Vector Machines
 \input{./Chapters/Chapter2/svm}
-
-%----------------------------------------------------------------------------------------
-% Dimensionality reduciton
-% \input{./Chapters/Chapter2/dim_reduction}
