@@ -42,7 +42,9 @@ Extensions of the \gls{cusum} method have been proposed.
 Amongst others, extensions which extend its use to two-threshold methods, and methods appropiate for changes in mean or variance \cite{inclan1994use}.
 Whilst adaptive methods have been proposed \cite{alippi2006adaptive}, most methods require manual determination of the threshold parameter $h$.
 
-\subsection{Ratio-thresholding}
+\TODO{This subsection has double information. Cleanup. Mention iterated cumulative sum of squares of inclan \cite{inclan1994use}.}
+
+\subsection{Ratio-thresholding}\label{subsec:ratio_thresholding}
 The second example of an algorithm that interprets the change indication time series and transforms it to change detection is the radius ratio thresholding method used by Camci~\cite{camci2010change}.
 The method shares characteristics with \gls{cusum}, since it relies on summation of historic data and thresholds for change detection.
 The method calculates the radius ratio $\hbar_t$ by taking the ratio of the current radius $r_t$ at time $t$ to the average radii since the last change point $y$:
@@ -85,3 +87,23 @@ All the change points that are within a time period $\delta$ of each other are m
   \caption[Thresholding]{Abstract illustration of the radius ratio thresholding. The peak at $t_1$ generates a single change point. The region between $t_2$ and $t_3$ generates multiple change points, since the value of $\hbar_t$ keeps increasing.}
   \label{fig:tresholding}
 \end{figure}
+
+\begin{center}\begin{table}
+\begin{tabular}{ l p{12cm} }
+  \hline
+  Step & Action \\
+  \hline
+  1 & Start with $n$ data objects as working set and construct hypersphere \\
+  2 & Add next data object $x_t$ and drop first one \\
+  3 & Identify new hyper-sphere and its \emph{approximate radius} \\
+  4 & calculate radius average of hyperspheres since last change point \\
+  5 & calculate radius ratio $\hbar$. If lower than ${th}_{low}$ or greater than ${th}_{high}$ then mark $t$ as change point \\
+  6 & continue from step 2, until no more data objects available \\
+  7 & Apply post-processing: merge close change points \\
+  \hline
+\end{tabular}
+\caption{Algorithm of the proposed change detection method, using the Ratio-Thresholding method of \ref{subsec:ratio_thresholding} for change detection.}
+\label{tab:algorithm_proposed_method}
+\end{table}\end{center}
+
+\TODO{Add reference to Table~\ref{tab:algorithm_proposed_method}.}

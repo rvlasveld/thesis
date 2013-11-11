@@ -1,13 +1,19 @@
 % !TEX root = ../../main.tex
 \section{Data Gathering}\label{sec:data_gathering}
 
-\TODO{Use common data sets. The WISDM dataset is not usefull because it has no transitions, only very clear blocks of the same activities. Include a plot to illustrate the problem?}
+\TODO{Use common data sets. The WISDM dataset is not useful because it has no transitions, only very clear blocks of the same activities. Include a plot to illustrate the problem?}
 
 
 \begin{figure}\label{fig:wisdm_excerpt}
 \centering
   \includegraphics[width=1\textwidth]{./Figures/Chapter6/data_collection/wisdm_excerpt.eps}
-  \caption[Jumping variance ratios]{Excerpt from the WISDM data set \cite{kwapisz2011activity}. First five activities for subject $33$ are displayed. Due to the discontinuous nature of the recordings, this data set can not be used for change detection.}
+  \caption[WISDM Excerpt]{Excerpt from the WISDM data set \cite{kwapisz2011activity}. First five activities for subject $33$ are displayed. Due to the discontinuous nature of the recordings, this data set can not be used for change detection.}
+\end{figure}
+
+\begin{figure}\label{fig:uci_annotated}
+\centering
+  \includegraphics[width=1\textwidth]{./Figures/Chapter6/data_collection/uci_annotated.eps}
+  \caption[UCI HAR Excerpt]{Excerpt from the UCI HAR data set \cite{anguita2012human}. The recorded training activities for subject $25$ are displayed. Due to the imprecise (and possibly incorrect) labeling and the short duration of activities, the data set can not be used for the change detection method as described in this thesis.}
 \end{figure}
 
 %---- Run 1: walk-run-roemer
