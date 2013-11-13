@@ -13,7 +13,15 @@ This function maps the input data from space $\mathcal{I}$ to a higher dimension
 The \gls{svm} can create a linear separating hyperplane in the space $\mathcal{F}$ that separates the data points from the two classes.
 When the hyperplane is projected to the (lower) original input space $\mathcal{I}$ it creates a non-linear separating curve.
 This is illustrated in Figure~\ref{fig:svm_mapping_spaces}.
-The mapping and projection of data points can be efficient (and implicit) performed by using the kernel trick, which is discussed in Section~\ref{subsec:kernel_trick}.
+The mapping and projection of data points can be efficient (and implicit) performed by using the kernel trick, which is discussed in Section~\ref{subsec:kernels}.
+
+\begin{figure}
+\centering
+  \includegraphics[width=0.8\textwidth]{./Figures/chapter3/svm_kernel_mapping.png}
+  \caption[Kernel mapping]{The non-linear boundary in the input space $\mathcal{I}$ (left) is transformed to a linear boundary in the feature space $\mathcal{F}$ (right) by mapping the data points with the function $\phi$. The kernel trick uses a function $K$ which performs an implicit mapping. Image from Wikipedia.org\footnotemark}
+  \label{fig:kernel_mapping}
+\end{figure}
+\footnotetext{\url{http://en.wikipedia.org/wiki/File:Kernel_Machine.png}}
 
 The separating hyperplane is represented by
 \begin{equation}
@@ -76,45 +84,60 @@ In the dual formulation the Lagrange multipliers $a_i >= 0$ are introduced and t
 \begin{equation}\label{eq:svm_lagrange}
   f(x) = \operatorname{sgn}( \sum_{i=1}^n \alpha_i y_i K(x, x_i) + b),
 \end{equation}
-\TODO{Elaborate on imporant properties of page 56, in Appendix A: maximum-margin is searching for support vectors and pairwise dot products, Kernel matrix.}
-where $K(x, x_i) = \phi(x)^T\phi(x_i)$ (which is further discussed in Section~\ref{subsec:kernel_trick}).
+where $K(x, x_i) = \phi(x)^T\phi(x_i)$ is the dot product of data objects in feature space $\mathcal{F}$ (which is further discussed in Section~\ref{subsec:kernels}).
 Here every data point $\mathcal{I}$ for which $a_i > 0$ is weighted in the decision function and thus ``supports'' the classification machine: hence the name ``\acrlong{svm}''.
 Since it is shown that under certain circumstances \glspl{svm} show an equality to sparse representations \cite{girosi1998equivalence,smola1998connection}, there will often be relatively few Lagrange multipliers with a non-zero value.
+
+Using this formulation two imporant properties arise \cite{flach2012machine}:
+\begin{enumerate}
+  \item Searching for the maximum margin decision boundary is equivalent to searching for the support vectors; they are the training examples with non-zero Lagrange mulitpliers.
+  \item The optimization problem is entirely defined by pairwise dot products between training examples: the entries of the kernel matrix $K$.
+\end{enumerate}
+The second property is what enables powerful adaption for support vector machines to learn non-linear decision boundaries.
+The workings of the kernel matrix $K$ and the non-linear boundaries is discussed in the following section.
 
 \TODO{Add more on sparsity and good results, because of sparse representations, even in case of data of high dimensionality. e.g. \cite{cherkassky2007learning}.}
 
 %--------------------------------------------
 
-\subsection{Kernel trick}\label{subsec:kernel_trick}
-In the previous section,~\ref{subsec:svm}, the mapping function $\phi(x)$ and the kernel function $K$ were briefly mentioned.
-The decision function in equation~\ref{eq:svm_lagrange} only relies on the dot-products of mapped data points in the feature space $\mathcal{F}$ (\ie all pairwise distances between the data points in that space).
-It shows \cite{flach2012machine} that as long as any function has the same result, without an explicit mapping to the higher dimension $\mathcal{F}$, the dot-products can be substituted by the kernel function $K$.
+\subsection{Kernels}\label{subsec:kernels}
+In the previous section, the mapping function $\phi(x)$ and the kernel function $K$ were briefly mentioned.
+The decision function in Equation~\ref{eq:svm_lagrange} only relies on the dot products of mapped data points in the feature space $\mathcal{F}$ (\ie all pairwise distances between the data points in that space).
+It shows \cite{flach2012machine} that as long as any function has the same result, without an explicit mapping to the higher dimension $\mathcal{F}$, the dot products can be substituted by the kernel function $K$, as introduced by Aizerman~\etal \cite{aizerman1964theoretical} and applied to \glspl{svc} by Vapnik \cite{vapnik1998statistical}:
+\begin{equation}
+  K(\vectorsym{x}, \vectorsym{x}') = (\vectorsym{z} \cdot \vectorsym{z}') = \phi(\vectorsym{x}) \cdot \phi(\vectorsym{x}')
+\end{equation}
+where vectors $\vectorsym{z}$ and $\vectorsym{z}'$ are projections of data objects $\vectorsym{x}$ and $\vectorsym{x}'$ through $\phi(\vectorsym{x})$ on the features space $\mathcal{F}$ and the dot product kernel $K$ is determined by the sum
+\begin{equation}
+  K(\vectorsym{x}, \vectorsym{x}') = \sum_{j=1}^m g_j(\vectorsym{x}) g_j(\vectorsym{x}')
+\end{equation}
+of basis functions $g_j(\vectorsym{x})$.
+Note that the evaluation of dot products in the feature space $\mathcal{F}$ between vectors is performed indirectly via the evaluation of the kernel $K$ between (support) vectors in the input space $\mathcal{I}$.
 This is known as the \emph{kernel trick} and gives the \gls{svm} the ability to create non-linear decision function without high computational complexity.
-This mapping is illustrated in Figure~\ref{fig:kernel_mapping}.
-Here the non-linear separating boundary in the input space $\mathcal{I}$ is mapped, via $\phi$, to a linear boundary in the feature space $\mathcal{F}$.
 
 The kernel function $K$ can have different forms, such as linear, polynomial and sigmoidal but the most used (and flexible) form is the Gaussian \gls{rbf}.
-As Smola \etal \cite{smola1998connection} state, this Gaussian kernel yields good performance, especially when no assumptions can be made about the data.
-The kernel maps input space $\mathcal{I}$ to the feature space $\mathcal{F}$ which is a Hilbert Space of infinite dimensions \TODO{ref needed}:
+The basis functions have the form
 \begin{equation}
-  K(x, x') = \operatorname{exp} \left( - \frac{ \lVert x - x' \rVert ^2}{2 \sigma^2 } \right),
+  g(x) = \operatorname*{sign} \left(  \sum_{i=1}^{n} \alpha_i \operatorname*{exp} \left\{ \frac{\rVert \vectorsym{x} - \vectorsym{x}_i \rVert ^2}{\sigma^2} \right\} \right),
 \end{equation}
-where $\sigma \in R$ is a kernel parameter and $\lVert x - x' \rVert$ is the dissimilarity measure expressed in Euclidean distance.
+where $\sigma$ defines the width and $\rVert \vectorsym{x} - \vectorsym{x}' \rVert ^2$ is the dissimilarity measure expressed as Euclidian distance.
+The inner product kernel $K$ then becomes
+\begin{equation}
+  K(\vectorsym{x}, \vectorsym{x}') = \operatorname*{exp} \left\{ - \frac{ \rVert \vectorsym{x} - \vectorsym{x}' \rVert ^2}{\sigma^2} \right\}.
+\end{equation}
+The kernel $K$ maps input space $\mathcal{I}$ to the feature space $\mathcal{F}$ which is a \gls{rkhs} of (theoretically) infinite dimensions.
+As Smola \etal \cite{smola1998connection} state, this Gaussian kernel yields good performance, especially when no assumptions can be made about the data.
+As an explanation, they show a correspondence between learning \glspl{svm} with \gls{rbf} kernels and good regularization operators.
+This may give insights in why \glspl{svm} have been found to exhibit high generalization ability (by learning with few training objects).
 
+The number of basis functions, the center parameters that correspond with support vectors, and the weights in the ouput layer are all automatically determined via the optimal hyperplane in features space $\mathcal{F}$ \cite{cherkassky2007learning}.
+The width parameter $\sigma$ is equal for all basis functions and is set a priori and determines the flexibility and complexity of the boundary.
+In Section~\ref{subsec:svm_model_parameters} this (hyper)parameter for a \gls{svm} is further discussed.
 
-\begin{figure}
-\centering
-  \includegraphics[width=0.8\textwidth]{./Figures/chapter3/svm_kernel_mapping.png}
-  \caption[Kernel mapping]{The non-linear boundary in the input space $\mathcal{I}$ (left) is transformed to a linear boundary in the feature space $\mathcal{F}$ (right) by mapping the data points with the function $\phi$. The kernel trick uses a function $K$ which performs an implicit mapping. Image from Wikipedia.org\footnotemark}
-  \label{fig:kernel_mapping}
-\end{figure}
-\footnotetext{\url{http://en.wikipedia.org/wiki/File:Kernel_Machine.png}}
-
-%--------------------------------------------
-
-\subsection{Reproducing kernel Hilbert space}
-\emph{Write something on this topic? Or leave it implicit?}
-
+The mapping from input space $\mathcal{I}$ to $\mathcal{F}$ via $\phi(x)$ is subject to the continuity assumptions.
+This general assumption in pattern recogition state that two near objects in feature space should also resemble each other in real life \cite{tax2001one}.
+Thus, objects which are close in feature space should be close in the original input space.
+When this assumption would not hold, the example objects would be scatter through the feature space and finding a decision function becomes very complex.
 
 %--------------------------------------------
 
@@ -306,21 +329,7 @@ Other examples of kernel function classes are \emph{pylonomial functions} of deg
 \TODO{More on basis functions. \cite{cherkassky2007learning}, chapter 9.4}
 
 -- Quotes and refs to use --
-``Continuity assumptions: This is a general assumption in pattern recognition: two objects near in feature space should also resemble each other in real life'' \cite{tax2001one}.
-
-$k(\mathbf{x}_i, \mathbf{x})$ is a kernel function computing a dot product in feature space, introduced by Aizerman \etal \cite{aizerman1964theoretical}.
-
-``Training a \gls{svm} with Gaussian \gls{rbf} kernels corresponds to minimizing the specific cost function with a regularization operator'' \cite{smola1998connection}. \\
-
-``Gaussian kernels tend to yield good performance under general smoothness assumptions and should be considered especially of no additional knowledge of the data is available.'' \cite{smola1998connection}. \\
-
-``Choosing a small width of the kernels leads to high generalization error as it effectively decouples the separate basis functions of the kernel expansion into very localized functions which is equivalent to memorizing the data, whereas a wide kernel tends to oversmooth.'' \cite{smola1998connection}. \\
-
-``For small values of $\sigma$ almost all $\alpha_i >0$ and the \gls{svdd} resembles a Parzen density estimation.'' \cite{tax2002uniform} page 4, \cite{tax1999support} page 4. \\
-
-sparsity, RKHS: \cite{girosi1998equivalence} \\
-
-Kernels for Support Vector Classifiers were first (?) used by Vapnik \cite{vapnik1998statistical}. \\
+sparsity, \gls{rkhs}: \cite{girosi1998equivalence} \\
 
 Use Chapter 2 from ``Learning with kernels'', \cite{scholkopf2002learning}.
 
@@ -361,3 +370,7 @@ With a large value for the width $\sigma$, the boudary approximates the spherica
 ``Least squares one-class support vector machine'' \cite{choi2009least}. 27, 2009 \\
 
 ``On simple one-class classification methods'' \cite{noumir2012simple}. 2012  --> decouples radius and center optimization, gives fast approximations instead of precise results. \\
+
+``Choosing a small width of the kernels leads to high generalization error as it effectively decouples the separate basis functions of the kernel expansion into very localized functions which is equivalent to memorizing the data, whereas a wide kernel tends to oversmooth.'' \cite{smola1998connection}. \\
+
+``For small values of $\sigma$ almost all $\alpha_i >0$ and the \gls{svdd} resembles a Parzen density estimation.'' \cite{tax2002uniform} page 4, \cite{tax1999support} page 4. \\

@@ -90,7 +90,7 @@ Thus, the weight vector can be expressed as: $\vectorsym{w} = \sum_{i=i}^n \alph
 In other words: the weight vector is a linear combination of the training instances.
 The dual form of the algorithm learns the instance weights $\alpha_i$ rather than the features weights $\vectorsym{w}_i$.
 An instance $\vectorsym{x}$ is then classified as $\hat{y} = sign(\sum_{i=1}^n \alpha_i y_i \vectorsym{x}_i \cdot \vectorsym{x})$.
-This means that during the training only the pairwise dot-products of the data is needed; this results in the \emph{n}-by-\emph{n} Gram matrix $\matrixsym{G} = \matrixsym{X}\matrixsym{X}^T$.
+This means that during the training only the pairwise dot products of the data is needed; this results in the \emph{n}-by-\emph{n} Gram matrix $\matrixsym{G} = \matrixsym{X}\matrixsym{X}^T$.
 This instance-based perspective will be further discussed in Section~\ref{svm-explained} about the support vector machine.
 
 
@@ -246,7 +246,7 @@ The dual form is:
   \text{Subject to : } 0 \leq \alpha_i \leq C & & \forall i, & & \sum_i \alpha_i = 1
 \end{aligned}
 \end{equation}
-Note that only dot-products of the data points $\vectorsym{x}$ appear.
+Note that only dot products of the data points $\vectorsym{x}$ appear.
 In order to transform the data points to a higher dimension, to create a good representational hyper-sphere, kernels replace the dot products without compromising computational complexity.
 The problem then becomes:
 \begin{equation}
