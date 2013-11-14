@@ -139,6 +139,12 @@ This general assumption in pattern recogition state that two near objects in fea
 Thus, objects which are close in feature space should be close in the original input space.
 When this assumption would not hold, the example objects would be scatter through the feature space and finding a decision function becomes very complex.
 
+-- Quotes and refs to use --x
+
+sparsity, \gls{rkhs}: \cite{girosi1998equivalence} \\
+
+Use Chapter 2 from ``Learning with kernels'', \cite{scholkopf2002learning}.
+
 %--------------------------------------------
 
 \subsection{One-Class Support Vector Machines}\label{subsec:one-class-svm}
@@ -302,37 +308,6 @@ Using Equation~\ref{eq:svdd_test_object}, the following kernel formulation needs
 \TODO{Use Figure~\ref{fig:svdd-boundary} or~\ref{fig:svdd-boundary-sigma}?}
 
 \TODO{Note that \gls{svdd} and \gls{nu-svm} have identical solutions when data is preprocessed to have unit form (in the case of \gls{nu-svm}) \cite{tax2002uniform}. and the \gls{rbf} kernel is used. Page 234 of \cite{scholkopf2002learning}.}
-
-%--------------------------------------------
-\subsection{Kernel Function}\label{subsec:kernel_function}
-
-\begin{itemize}
-  \item Explain RBF kernel
-  \item Explain RKHS? (Hilbert Space)
-\end{itemize}
-
-A common class for kernel function is the \acrlong{rbf}.
-These function are of the form
-\begin{equation}
-  g(x) = \operatorname*{sign} \left(  \sum_{i=1}^{n} \alpha_i \operatorname*{exp} \left\{ \frac{|\vectorsym{x} - \vectorsym{x}_i|^2}{\sigma^2} \right\} \right),
-\end{equation}
-where $\sigma$ defines the width.
-The inner product kernel is of the form
-\begin{equation}
-  K(\vectorsym{x}, \vectorsym{x}') = \operatorname*{exp} \left\{ - \frac{| \vectorsym{x} - \vectorsym{x}'|^2}{\sigma^2} \right\}.
-\end{equation}
-
-Note that with the \gls{rbf} class of kernel functions the number of basis functions, the center parameters that correspond to the support vectors, and the weights in the output layer are all automatically determined via the optimal hyperplane \cite{cherkassky2007learning}.
-The width parameter $\sigma$ is equal for all basis functions and is set a priori and determines the flexibility and complexity of the boundary.
-In Section~\ref{subsec:svm_model_parameters} this (hyper)parameter for a \gls{svm} is further discussed.
-Other examples of kernel function classes are \emph{pylonomial functions} of degree $q$, \emph{neural networks}, \emph{splines} of order $m$ with $b$ nodes, and \emph{Fourier expansions}.
-\TODO{More on basis functions. \cite{cherkassky2007learning}, chapter 9.4}
-
--- Quotes and refs to use --
-sparsity, \gls{rkhs}: \cite{girosi1998equivalence} \\
-
-Use Chapter 2 from ``Learning with kernels'', \cite{scholkopf2002learning}.
-
 
 %--------------------------------------------
 
