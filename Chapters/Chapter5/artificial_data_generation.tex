@@ -10,14 +10,38 @@ Model:
 where $\epsilon_t$ is a Gaussian distribution, modeling the noise.
 The length of $x_t$ is $10000$ and change points are generated at each $y \times 10000^\text{th}$ data point, with $y = (1, 2, 3, \dots 9)$.
 
-First Takeuchi, reduced jumping mean:
+\begin{figure}
+\centering
+  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_mean_takeuchi.eps}
+  \caption[Jumping mean Takeuchi, set 1]{Jumping mean takeuchi, set 1}
+  \label{fig:jumping_mean_takeuchi}
+\end{figure}
+
+\begin{figure}
+\centering
+  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_mean_takeuchi_thresholds.eps}
+  \caption[Jumping mean Takeuchi, set 1, thresholds]{Jumping mean takeuchi, set 1, thresholds}
+\end{figure}
+
+
+First Takeuchi, reduced jumping mean, Figure~\ref{fig:jumping_mean_takeuchi}:
 $\epsilon_t$ is Gaussian with mean $0$ and variance $\sigma^2 = 1$, $a_1 = 0.6$ and $a_2 = -0.5$.
 
+\begin{figure}
+\centering
+  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_variance_mean_takeuchi.eps}
+  \caption[Jumping variance and mean Takeuchi, set 2]{Jumping variance and mean takeuchi, set 2}
+  \label{fig:jumping_variance_and_mean_takeuchi}
+\end{figure}
 
-First Camci, fixed jumping mean.
-$\Delta y = 5$
-See Figure~\ref{fig:camci_mean_fixed}.
+\begin{figure}
+\centering
+  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_variance_mean_takeuchi_thresholds_log_scale.eps}
+  \caption[Jumping variance mean Takeuchi, set 2, thresholds]{Jumping variance and mean takeuchi, set 2, thresholds (log scale)}
+\end{figure}
 
+Second Takeuchi, jumping mean with $\Delta y = 1$ and $\sigma^2 = 0.1 / (0.01 + (10000 - x)/1000)$.
+Figure~\ref{fig:jumping_variance_and_mean_takeuchi}.
 
 \begin{figure}
 \centering
@@ -25,6 +49,11 @@ See Figure~\ref{fig:camci_mean_fixed}.
   \caption[Jumping mean camci]{Jumping mean camci}
   \label{fig:camci_mean_fixed}
 \end{figure}
+
+First Camci, fixed jumping mean.
+$\Delta y = 5$
+See Figure~\ref{fig:camci_mean_fixed}.
+
 
 \begin{figure}
 \centering
@@ -42,8 +71,13 @@ See Figure~\ref{fig:camci_mean_fixed}.
 \begin{figure}
 \centering
   \includegraphics[width=1\textwidth]{./Figures/notes/jumping_variance.eps}
-  \caption[Jumping variance]{Jumping variance}
+  \caption[Jumping variance]{Jumping variance, equal for Camci and Takeuchi, both set 3}
+  \label{fig:jumping_variance_camci_takeuchi}
 \end{figure}
+
+Third Camci and Takeuchi, jumping variance.
+When $y$ is odd, variance $\sigma^2$ changes from $1.0$ to $9.0$, and when $y$ is even variance $\sigma^2$ changes from $9.0$ to $1.0$.
+See Figure~\ref{fig:jumping_variance_camci_takeuchi}.
 
 \begin{figure}
 \centering
