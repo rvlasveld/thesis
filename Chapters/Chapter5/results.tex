@@ -13,5 +13,9 @@ We can then define the $\operatorname*{average \_ benefit}$ over all the discove
 Besides the benefit, which rewards discovered change points close to the actual change points, we need to penalize discovered change points which do not relate to a true change point.
 For this we use the \acrlong{far}, expressed as
 \begin{equation}\label{eq:false_alarm_rate}
-  \operatorname*{far}(Y) = \frac{Y_{\operatorname*{false}}}{Y}
+  \operatorname*{far}(Y) = \frac{Y_{\operatorname*{false}}}{Y}.
 \end{equation}
+
+For a high quality method the $\operatorname*{average\_benefit}$ should be high and the $\operatorname*{far}$ should be low.
+
+\TODO{Create plots of FAR and average benefit, as a kind of ROC curve.}
