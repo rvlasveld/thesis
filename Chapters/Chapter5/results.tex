@@ -1,2 +1,17 @@
 % !TEX root = ../../main.tex
 \section{Results}\label{sec:artificial_data_results}
+For an objective measure of quality of the proposed method applied to the four aforementioned data sets, we employ two metrics, as defined by Takeuchi \etal \cite{takeuchi2006unifying}.
+The first metric is the $\operatorname*{average \_ benefit}$, for which we first need to define the notion of $\operatorname*{benefit}$ for each change:
+\begin{equation}\label{eq:benefit}
+  \operatorname*{benefit}(y) = 1 - |t_y - t_y^*| / 10  \mbox{~~~(when } |t_y - t_y^*| < 10 \mbox{)},
+\end{equation}
+where $t_y$ is the time of the discovered change point and $t_y^*$ is the true change time.
+We can then define the $\operatorname*{average \_ benefit}$ over all the discovered change points $Y$ as:
+\begin{equation}\label{eq:average_benefit}
+  \operatorname*{average \_ benefit}(Y) = \frac{\sum_{y=1}^Y \operatorname*{benefit}(y)}{Y}.
+\end{equation}
+Besides the benefit, which rewards discovered change points close to the actual change points, we need to penalize discovered change points which do not relate to a true change point.
+For this we use the \acrlong{far}, expressed as
+\begin{equation}\label{eq:false_alarm_rate}
+  \operatorname*{far}(Y) = \frac{Y_{\operatorname*{false}}}{Y}
+\end{equation}
