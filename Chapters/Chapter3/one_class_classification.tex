@@ -23,7 +23,7 @@ One could argue that this problem is equal to the traditional two-class problem 
 In pure \gls{occ} problems there are no negative example objects available.
 This could be because the acquisition of these examples is very expensive, or because there are only examples of the `normal' state of the system and the goal is to detect `abnormal' states.
 Since the algorithm's goal is to differentiate between normal and abnormal objects (relative to the training objects), \gls{occ} is often called outlier, novelty or anomaly detection, depending on the origin of the problem to which the algorithm is applied\footnote{The term \acrlong{occ} originates from Moya \etal \cite{moya1993one}.}.
-The difference between two and one-class classification and the consequence for outlier objects is illustrated in Figure~\ref{fig:two-vs-one-classification}.
+The difference between two and one-class classification and the consequence for outlier objects is illustrated in \Cref{fig:two-vs-one-classification}.
 In the two-class classification problem the object \textbf{o} will be member of the \textbf{-1} class whilst the \gls{occ} problem will label it as an outlier.
 In \cite{tax2001one} a more detailed analysis of the \gls{occ} is given.
 
@@ -48,7 +48,7 @@ It is easy to see here a relation with similiary measures over \glspl{pdf} and t
 \TODO{Add reference to~\ref{subsec:change_detection_problem_formulation} which also mentions \gls{kl} divergence?}
 
 \subsection{One-Class Classification methods}\label{subsec:occ-methods}
-The methods and algorithms used for the \gls{occ}-problem can be organized into three categories \cite{tax2001one,noumir2012simple}, visually represented in Figure~\ref{fig:occ-methods}.
+The methods and algorithms used for the \gls{occ}-problem can be organized into three categories \cite{tax2001one,noumir2012simple}, visually represented in \Cref{fig:occ-methods}.
 The first category consists of methods that estimate the density of the training data and set a threshold on this density.
 Among those are Gaussian models, \glspl{gmm} and Parzen density estimators.
 In order to get good generalization results with these methods, the dimensionality of the data and the complexity of the density need to be restricted.
@@ -60,7 +60,7 @@ Examples of methods that focus on the boundary (a direct threshold) of the train
 Especially the latter has a strong bias towards minimal volume solutions.
 These type of methods are sensitive to scaling of features, since they rely on a well-defined distance measure.
 The number of objects that is required is smaller than in the case of density methods.
-The boundary method \gls{svdd}, constructed by Tax and which has shown good performance \cite{khan2010survey}, will be further discussed in Section~\ref{subsec:oc-svm-svdd}.
+The boundary method \gls{svdd}, constructed by Tax and which has shown good performance \cite{khan2010survey}, will be further discussed in \Cref{subsec:oc-svm-svdd}.
 
 Reconstruction methods take a different approach.
 Instead of focusing on classification of the data and thus on the discriminating features of data objects, they model the data.
@@ -77,7 +77,7 @@ Examples of reconstruction methods are K-means, \gls{pca} and different kind of 
 
 In \cite{khan2010survey,noumir2012simple} an overview of applications for \gls{occ}-algorithms, and explictly for \gls{svm}-based methods (such as \gls{svdd} and \gls{nu-svm}), is given.
 It shows succesful applications for, amonst others, problems in the field of Handwritten Digit Recognition, Face Recognition Applications, Spam Detection and Anomaly Detection \cite{li2003improving,perdisci2006using}.
-As discussed in Section~\ref{sec:change_detection_time_series}, this can be used for change detection in time series data.
+As discussed in \Cref{sec:change_detection_time_series}, this can be used for change detection in time series data.
 
 In this Section we have discussed the problem of \gls{occ} and different kind of implementations.
 An often used implementation is the \gls{svm}-based method \cite{noumir2012simple}, since is shows good performance in comparitive researches.

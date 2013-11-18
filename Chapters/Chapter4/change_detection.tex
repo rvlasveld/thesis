@@ -7,7 +7,7 @@ This employs the second stage of our algorithm, analogue to the second stage of 
 In the previous sections we have discussed how a multi-dimensional signal can be reduced to a single dimension time series data based on the radius $R$.
 We have argued that in the case of a change in the underlying data, where it becomes more heterogeneous, we expect an increase in the radius $R$.
 In the same manner we expect that when the change is in the oldest data objects of the working set the radius $R$ will decrease, since the data becomes more homogeneous.
-An abstract representation of these expectations is illustrated in Figure~\ref{fig:radius_expectation}.
+An abstract representation of these expectations is illustrated in \Cref{fig:radius_expectation}.
 
 \begin{figure}
   \centering
@@ -58,7 +58,7 @@ When the data objects in the working set becomes more homogeneous at time $t$, t
 When the new value of $\hbar_r$ is lower than the low threshold $th_\text{low}$, a change detection is observed for time $t$.
 The same holds for a more heterogeneous set of data and an increase of $\hbar_r$ higher than $th_\text{high}$.
 
-The appropriate values for the thresholds are highly depended on the characteristics of the data and the trade-off parameter $C$ (as discussed in Section~\ref{subsec:oc-svm-svdd}).
+The appropriate values for the thresholds are highly depended on the characteristics of the data and the trade-off parameter $C$ (as discussed in \Cref{subsec:oc-svm-svdd}).
 This trade-off parameters regulates the fraction of data objects that will be rejected from the constructed model.
 Since a high value of $C$ assigns a high penalty to outliers, data objects are more likely to be incorporated into the hypersphere by increasing the radius.
 For low values of $C$ the cost of rejecting data objects is, compared to the benefits of a smaller hypersphere, relatively low.
@@ -72,7 +72,7 @@ In our method we use the ratio based thresholding, since it is also used by Camc
 From preliminary experiments we observed that a single change in the data can cause many detected change points, using the ratio based method.
 This phenomenon can be explained by the nature of the thresholding method.
 Since a single (high or low) threshold is set for ratio of the radii, high values are considered to be a change point before the highest point of the peak.
-As illustrated in Figure~\ref{fig:tresholding}, the peak at $t_1$ represents a single change point.
+As illustrated in \Cref{fig:tresholding}, the peak at $t_1$ represents a single change point.
 The region from $t_2$ to $t_3$ is strictly increasing.
 At $t_2$ a change point is detected, since $\hbar_t$ exceeds the threshold.
 But since it is increasing up to $t_3$, all values of $\hbar_t$ in that period will trigger the ratio based method to indicate a change point.

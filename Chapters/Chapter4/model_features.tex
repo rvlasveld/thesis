@@ -5,7 +5,7 @@ This section shows how we interpret the constructed model and extract features t
 The following section discusses how this obtained measure is used to indicate change.
 
 The \gls{isvdd} algorithm creates a spherical \gls{oc-svm} representation of the working set at every step of the algorithm.
-This model is obtained by the minimization of Equation~\ref{eq:svdd_objective}, which incorporates the radius $R$ of the sphere and the distances $\vectorsym{\xi}$ from the outliers to the boundary.
+This model is obtained by the minimization of \Cref{eq:svdd_objective}, which incorporates the radius $R$ of the sphere and the distances $\vectorsym{\xi}$ from the outliers to the boundary.
 We will use the the radius $R$ of the hypersphere as an indication of change.
 
 In \cite{tax2002uniform} Tax and Duin provide an analysis of the error of the \gls{svdd} algorithm.
@@ -18,12 +18,12 @@ Since in \gls{occ} situation typically there are (almost) no examples of outlier
 To minimize the error, calculated by the fractions $f_{T-}$ and $f_{O+}$, we should minimize the volume of the target data description (\ie the boundary of \gls{svdd}).
 This is because the fraction of accepted outliers $f_{O+}$ is an estimate of the volume of the target data description, with respect to the volume of the outlier distribution.
 Tax and Duin provide a method to optimize the parameters of the \gls{svdd} method, \ie the trade-off parameter $C$ and the \gls{rbf} kernel width $\sigma$.
-This optimization will result in the modification of the radius $R$ of Equation~\ref{eq:svdd_objective} and affects the Lagrangian inequality~(\ref{eq:svdd_inequality}).
+This optimization will result in the modification of the radius $R$ of \Cref{eq:svdd_objective} and affects the Lagrangian inequality~(\ref{eq:svdd_inequality}).
 
 Since in our method the parameters $C$ and $\sigma$ are kept constant, and thereby also the fraction of target objects being rejected, the only free parameter is the radius $R$.
 During the \gls{isvdd} algorithm the volume of the hypersphere is being minimized.
 This means that only the radius of the sphere will change during the algorithm.
-We will interpret changes in the radius $R$ with the same continuity assumptions as mentioned in Section~\ref{subsec:kernels}.
+We will interpret changes in the radius $R$ with the same continuity assumptions as mentioned in \Cref{subsec:kernels}.
 This means that when two objects (in this case radius sizes) are close to each other, their original objects are also close.
 In other words, when the underlying distribution of time series is changed, and thus the characteristics of the data objects changes, the corresponding radius $R$ will also change.
 Since in that case the data objects in the working set become more heterogeneous, the radius of the hypersphere will increase.

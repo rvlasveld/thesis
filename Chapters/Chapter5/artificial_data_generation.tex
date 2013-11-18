@@ -1,92 +1,92 @@
 % !TEX root = ../../main.tex
 \section{Artifical data generation}\label{sec:artificial_data_generation}
-\TODO{Use data from \cite{camci2010change,takeuchi2006unifying}}
-In this section we present three data sets as used by \cite{camci2010change,takeuchi2006unifying} to provide for a objetive performance comparison.
-
-Model:
-\begin{equation}
+In this section we present four data sets as used by \cite{camci2010change,takeuchi2006unifying} to provide for a objetive performance comparison.
+All the data sets are modeled by a second-order \gls{ar}-model as in \Cref{eq:artificial_data_sets_model}, where $\epsilon_t$ is a Gaussian distribution modeling the noise with mean $0$ and variance $\sigma^2 = 1$, $a_1 = 0.6$ and $a_2 = -0.5$.
+\begin{equation}\label{eq:artificial_data_sets_model}
   x_t = a_1 x_{t-1} + a_2 x_{t-2} + \epsilon_t,
 \end{equation}
-where $\epsilon_t$ is a Gaussian distribution, modeling the noise.
 The length of $x_t$ is $10000$ and change points are generated at each $y \times 10000^\text{th}$ data point, with $y = (1, 2, 3, \dots 9)$.
 
+Using this general \gls{ar}-model, we create four different data sets.
+Each data set is characterized by a change in mean, variance, or both of the Gaussian term $\epsilon_t$:
+\begin{enumerate}
+  \item \textbf{Fixed increasing mean:} at each change point $y$ the mean is increased with $\Delta(y) = 5$.
+  This set origins as the first data set of Camci~\cite{camci2010change}.
+  See \Cref{fig:camci_fixed_increasing_mean,fig:camci_fixed_increasing_mean_thresholds}.
+
+  \item \textbf{Reduced increasing mean:} at each change point $y$ the mean is increased with $\Delta(y) = 10 - y$.
+  This set origins as the first data set of Takeuchi \etal \cite{takeuchi2006unifying}.
+  See \Cref{fig:takeuchi_reduced_increasing_mean,fig:takeuchi_reduced_increasing_mean_thresholds}.
+
+  \item \textbf{Reduced increasing mean, increasing variance:} at each change point $y$ the mean is increased with $\Delta(y) = 10 - y$ and the standard deviation is of $\epsilon_t$ is $0.1 / (0.01 + (10000 - x)/1000)$.
+  This set origins as the second set of Camci~\cite{camci2010change}.
+  See \Cref{fig:camci_reduced_increasing_mean_increasing_variance,fig:camci_reduced_increasing_mean_increasing_variance_thresholds}
+
+  \item \textbf{Alternating variance:} at each change point $y$ the variance $\sigma^2$ is set to $9.0$ when $y$ is odd, and to $1.0$ otherwise.
+  This set origins as the thirds sets from Camci~\cite{camci2010change} and Takeuchi \etal \cite{takeuchi2006unifying}.
+  See \Cref{fig:camci_takeuchi_alternating_variance,fig:camci_takeuchi_alternating_variance_thresholds}.
+\end{enumerate}
+
+% =====
+
 \begin{figure}
 \centering
-  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_mean_takeuchi.eps}
-  \caption[Jumping mean Takeuchi, set 1]{Jumping mean takeuchi, set 1}
-  \label{fig:jumping_mean_takeuchi}
+  \includegraphics[width=1\textwidth]{./Figures/notes/camci_fixed_increasing_mean.eps}
+  \caption[Fixed increasing mean]{Fixed increasing mean}
+  \label{fig:camci_fixed_increasing_mean}
 \end{figure}
 
 \begin{figure}
 \centering
-  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_mean_takeuchi_thresholds.eps}
-  \caption[Jumping mean Takeuchi, set 1, thresholds]{Jumping mean takeuchi, set 1, thresholds}
+  \includegraphics[width=1\textwidth]{./Figures/notes/camci_fixed_increasing_mean_thresholds.eps}
+  \caption[Fixed increasing mean, thresholds]{Fixed increasing mean, thresholds}
+  \label{fig:camci_fixed_increasing_mean_thresholds}
 \end{figure}
 
-
-First Takeuchi, reduced jumping mean, Figure~\ref{fig:jumping_mean_takeuchi}:
-$\epsilon_t$ is Gaussian with mean $0$ and variance $\sigma^2 = 1$, $a_1 = 0.6$ and $a_2 = -0.5$.
+% =====
 
 \begin{figure}
 \centering
-  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_variance_mean_takeuchi.eps}
-  \caption[Jumping variance and mean Takeuchi, set 2]{Jumping variance and mean takeuchi, set 2}
-  \label{fig:jumping_variance_and_mean_takeuchi}
-\end{figure}
-
-\begin{figure}
-\centering
-  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_variance_mean_takeuchi_thresholds_log_scale.eps}
-  \caption[Jumping variance mean Takeuchi, set 2, thresholds]{Jumping variance and mean takeuchi, set 2, thresholds (log scale)}
-\end{figure}
-
-Second Takeuchi, jumping mean with $\Delta y = 1$ and $\sigma^2 = 0.1 / (0.01 + (10000 - x)/1000)$.
-Figure~\ref{fig:jumping_variance_and_mean_takeuchi}.
-
-\begin{figure}
-\centering
-  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_mean_camci.eps}
-  \caption[Jumping mean camci]{Jumping mean camci}
-  \label{fig:camci_mean_fixed}
-\end{figure}
-
-First Camci, fixed jumping mean.
-$\Delta y = 5$
-See Figure~\ref{fig:camci_mean_fixed}.
-
-
-\begin{figure}
-\centering
-  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_mean_camci_thresholds.eps}
-  \caption[Jumping mean camci thresholds]{Jumping mean camci, thresholds}
+  \includegraphics[width=1\textwidth]{./Figures/notes/takeuchi_reduced_increasing_mean.eps}
+  \caption[Reduced increasing mean]{Reduced increasing mean}
+  \label{fig:takeuchi_reduced_increasing_mean}
 \end{figure}
 
 \begin{figure}
 \centering
-  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_mean_camci_ratios_10.eps}
-  \caption[Jumping mean camci ratios]{Jumping mean camci ratios, last 10}
-  \label{fig:jumping_mean_ratios}
+  \includegraphics[width=1\textwidth]{./Figures/notes/takeuchi_reduced_increasing_mean_thresholds.eps}
+  \caption[Reduced increasing mean, thresholds]{Reduced increasing mean, thresholds}
+  \label{fig:takeuchi_reduced_increasing_mean_thresholds}
+\end{figure}
+
+% =====
+
+\begin{figure}
+\centering
+  \includegraphics[width=1\textwidth]{./Figures/notes/camci_reduced_increasing_mean_increasing_variance.eps}
+  \caption[Reduced increasing mean, increasing variance]{Reduced increasing mean, increasing variance.}
+  \label{fig:camci_reduced_increasing_mean_increasing_variance}
 \end{figure}
 
 \begin{figure}
 \centering
-  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_variance.eps}
-  \caption[Jumping variance]{Jumping variance, equal for Camci and Takeuchi, both set 3}
-  \label{fig:jumping_variance_camci_takeuchi}
+  \includegraphics[width=1\textwidth]{./Figures/notes/camci_reduced_increasing_mean_increasing_variance_thresholds.eps}
+  \caption[Reduced increasing mean, increasing variance, thresholds]{Reduced increasing mean, increasing variance, thresholds (log scale)}
+  \label{fig:camci_reduced_increasing_mean_increasing_variance_thresholds}
 \end{figure}
 
-Third Camci and Takeuchi, jumping variance.
-When $y$ is odd, variance $\sigma^2$ changes from $1.0$ to $9.0$, and when $y$ is even variance $\sigma^2$ changes from $9.0$ to $1.0$.
-See Figure~\ref{fig:jumping_variance_camci_takeuchi}.
+% =====
 
 \begin{figure}
 \centering
-  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_variance_thresholds.eps}
-  \caption[Jumping variance thresholds]{Jumping variance, thresholds}
+  \includegraphics[width=1\textwidth]{./Figures/notes/camci_takeuchi_alternating_variance.eps}
+  \caption[Alternating variance]{Alternating variance}
+  \label{fig:camci_takeuchi_alternating_variance}
 \end{figure}
 
 \begin{figure}
 \centering
-  \includegraphics[width=1\textwidth]{./Figures/notes/jumping_variance_ratios_10.eps}
-  \caption[Jumping variance ratios]{Jumping variance ratios, last 10}
+  \includegraphics[width=1\textwidth]{./Figures/notes/camci_takeuchi_alternating_variance_thresholds.eps}
+  \caption[Alternating variance, thresholds]{Alternating variance, thresholds}
+  \label{fig:camci_takeuchi_alternating_variance_thresholds}
 \end{figure}

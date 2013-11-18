@@ -21,7 +21,7 @@ Both the operations conclude with the recalculation  of $\mu$ and the weights $\
 These two operations are the basis for \gls{isvdd}.
 With respect to the timed index, new data objects are added to and old data objects are removed from the working set.
 
-The size of the initial window of data objects has a lower bound determined by the hyperparameter $C$ (Equation~\ref{eq:svdd_objective}).
+The size of the initial window of data objects has a lower bound determined by the hyperparameter $C$ (\Cref{eq:svdd_objective}).
 Because of the equality constraint $\sum_{i=1}^n a_i x_i = 1$ and the box constraint $0 \le x_i \le C$, the number of objects in the working set must be at least $\ceil{\frac{1}{C}}$.
 Thus the algorithm is initialized by selection the first $\ceil{\frac{1}{C}}$ objects for the working set.
 In every loop of the algorithm the number of elements added are at least equal to the number of elements removed.
@@ -32,4 +32,4 @@ An explanation for this is that \gls{isvdd} follows the changing data distributi
 Such changes are a drift in mean or increase in frequency.
 The \gls{isvdd} algorithm continuously re-models the \gls{svm} representation.
 This re-modeling of the \gls{svm} representation is beneficial for our purpose, since we are only interested in sudden changes between activities.
-The following section will discuss the features extracted from the constructed \gls{oc-svm} model at every loop-step of the algorithm, before Section~\ref{sec:method_change_detection} describes how these features are used to detect change.
+The following section will discuss the features extracted from the constructed \gls{oc-svm} model at every loop-step of the algorithm, before \Cref{sec:method_change_detection} describes how these features are used to detect change.

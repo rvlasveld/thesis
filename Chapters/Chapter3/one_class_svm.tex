@@ -8,12 +8,12 @@ We will first discuss the traditional two-class \gls{svm} before we consider the
 Consider a data set $\Omega = \{ (x_1, y_1),\allowbreak (x_2, y_2), \dots , (x_n, y_n) \}$; points $x_i \in \mathbb{R}^d$ in a (for instance two-dimensional) space where $x_i$ is the $i$-th input data point and $y_i \in \{-1, 1\}$ is the $i$-th output pattern, indicating the class membership.
 
 A \gls{svm} can create a boundary between linear-separable data points, making it a non-probabilistic binary linear classifier.
-More flexible non-linear boundaries can be obtained by the use of a non-linear function $\phi(x)$, as illustrated in Figure~\ref{fig:kernel_mapping}.
+More flexible non-linear boundaries can be obtained by the use of a non-linear function $\phi(x)$, as illustrated in \Cref{fig:kernel_mapping}.
 This function maps the input data from space $\mathcal{I}$ to a higher dimensional space $\mathcal{F}$.
 The \gls{svm} can create a linear separating hyperplane in the space $\mathcal{F}$ that separates the data points from the two classes.
 When the hyperplane is projected to the (lower) original input space $\mathcal{I}$ it creates a non-linear separating curve.
-This is illustrated in Figure~\ref{fig:svm_mapping_spaces}.
-The mapping and projection of data points can be efficient (and implicit) performed by using the kernel trick, which is discussed in Section~\ref{subsec:kernels}.
+This is illustrated in \Cref{fig:svm_mapping_spaces}.
+The mapping and projection of data points can be efficient (and implicit) performed by using the kernel trick, which is discussed in \Cref{subsec:kernels}.
 
 \begin{figure}
 \centering
@@ -32,7 +32,7 @@ The hyperplane that is created determines the \emph{margin} between the classes;
 In geometric sense, $w$ is the normal vector indication the direction of the hyperplane and $\frac{b}{\lVert{w}\rVert}$ determines the offset of the hyperplane to the origin.
 Since the distance between the two margins is equal to $\frac{2}{\lVert{w}\rVert}$, the maximum-margin hyperplane is found by minimizing $\lVert{w}\rVert$.
 The data points which lie on the margin are the \emph{support vectors}.
-This geometrical interpretation is illustrated in Figure~\ref{fig:svm_hyperplane}.
+This geometrical interpretation is illustrated in \Cref{fig:svm_hyperplane}.
 All data points for which $y_i = -1$ are on one side of the hyperplane and all other data points (for which $y_i = 1$) are on the other side.
 The minimal distance from a data point to the hyperplane is for both classes equal.
 This results in a \emph{maximal margin} between the two classes.
@@ -41,7 +41,7 @@ Thus, the \gls{svm} searches for a maximal separating hyperplane.
 \begin{figure}
 \centering
   \includegraphics[width=0.5\textwidth]{./Figures/chapter3/svm_mapping_spaces.pdf}
-  \caption[Mapping spaces in \gls{svm}]{The input vector $\vectorsym{x}$ from input space $\mathcal{I}$ is mapped by a non-linear function $\phi(\vectorsym{x})$ to a feature vector $\vectorsym{z}$ in the high dimensional feature space $\mathcal{F}$. The weights of $\vectorsym{w}$ create a linear separating hypeplace, which maps the high dimensional vector to the predicted outcome $\vectorsym{y}$. \TODO{Is this figure obsolete? Figure~\ref{fig:kernel_mapping} shows almost the same}}
+  \caption[Mapping spaces in \gls{svm}]{The input vector $\vectorsym{x}$ from input space $\mathcal{I}$ is mapped by a non-linear function $\phi(\vectorsym{x})$ to a feature vector $\vectorsym{z}$ in the high dimensional feature space $\mathcal{F}$. The weights of $\vectorsym{w}$ create a linear separating hypeplace, which maps the high dimensional vector to the predicted outcome $\vectorsym{y}$. \TODO{Is this figure obsolete? \Cref{fig:kernel_mapping} shows almost the same}}
   \label{fig:svm_mapping_spaces}
 \end{figure}
 
@@ -84,7 +84,7 @@ In the dual formulation the Lagrange multipliers $a_i >= 0$ are introduced and t
 \begin{equation}\label{eq:svm_lagrange}
   f(x) = \operatorname{sgn}( \sum_{i=1}^n \alpha_i y_i K(x, x_i) + b),
 \end{equation}
-where $K(x, x_i) = \phi(x)^T\phi(x_i)$ is the dot product of data objects in feature space $\mathcal{F}$ (which is further discussed in Section~\ref{subsec:kernels}).
+where $K(x, x_i) = \phi(x)^T\phi(x_i)$ is the dot product of data objects in feature space $\mathcal{F}$ (which is further discussed in \Cref{subsec:kernels}).
 Here every data point $\mathcal{I}$ for which $a_i > 0$ is weighted in the decision function and thus ``supports'' the classification machine: hence the name ``\acrlong{svm}''.
 Since it is shown that under certain circumstances \glspl{svm} show an equality to sparse representations \cite{girosi1998equivalence,smola1998connection}, there will often be relatively few Lagrange multipliers with a non-zero value.
 
@@ -102,7 +102,7 @@ The workings of the kernel matrix $K$ and the non-linear boundaries is discussed
 
 \subsection{Kernels}\label{subsec:kernels}
 In the previous section, the mapping function $\phi(x)$ and the kernel function $K$ were briefly mentioned.
-The decision function in Equation~\ref{eq:svm_lagrange} only relies on the dot products of mapped data points in the feature space $\mathcal{F}$ (\ie all pairwise distances between the data points in that space).
+The decision function in \Cref{eq:svm_lagrange} only relies on the dot products of mapped data points in the feature space $\mathcal{F}$ (\ie all pairwise distances between the data points in that space).
 It shows \cite{flach2012machine} that as long as any function has the same result, without an explicit mapping to the higher dimension $\mathcal{F}$, the dot products can be substituted by the kernel function $K$, as introduced by Aizerman~\etal \cite{aizerman1964theoretical} and applied to \glspl{svc} by Vapnik \cite{vapnik1998statistical}:
 \begin{equation}
   K(\vectorsym{x}, \vectorsym{x}') = (\vectorsym{z} \cdot \vectorsym{z}') = \phi(\vectorsym{x}) \cdot \phi(\vectorsym{x}')
@@ -132,7 +132,7 @@ This may give insights in why \glspl{svm} have been found to exhibit high genera
 
 The number of basis functions, the center parameters that correspond with support vectors, and the weights in the ouput layer are all automatically determined via the optimal hyperplane in features space $\mathcal{F}$ \cite{cherkassky2007learning}.
 The width parameter $\sigma$ is equal for all basis functions and is set a priori and determines the flexibility and complexity of the boundary.
-In Section~\ref{subsec:svm_model_parameters} this (hyper)parameter for a \gls{svm} is further discussed.
+In \Cref{subsec:svm_model_parameters} this (hyper)parameter for a \gls{svm} is further discussed.
 
 The mapping from input space $\mathcal{I}$ to $\mathcal{F}$ via $\phi(x)$ is subject to the continuity assumptions.
 This general assumption in pattern recogition state that two near objects in feature space should also resemble each other in real life \cite{tax2001one}.
@@ -170,13 +170,13 @@ The first of the \gls{oc-svm} methods we will discuss is often referred to as \g
 Instead of estimating the density function of an distribution $P$, it focuses on an easier problem: the algorithm find regions in the input where the ``probability density lives''.
 This results in a function such that most of the data is in the region where the function is nonzero.
 
-The constructed decision function $\mathcal{F}$ resembles the function discussed in Section~\ref{subsec:svm}.
+The constructed decision function $\mathcal{F}$ resembles the function discussed in \Cref{subsec:svm}.
 It returns the value $+1$ in a (possibly small) region capturing most of the data points, and $-1$ elsewhere.
 The method maps the data points from input space $\mathcal{I}$ to a feature space $\mathcal{F}$ (following classical \glspl{svm}).
 In that space $\mathcal{F}$ it separates the data points with maximal margin from the origin, with a hyperplane.
 For a new data points $x$, the function value $f(x)$ determines wheter the data point is part of the distribution (\ie the value is $+1$) or a novelty (\ie the value is $-1$).
 The hyperplane is represented by $g(x) = w \cdot \phi(x) + \rho = 0$ and the decision function is $f(x) = \operatorname{sgn}(g(x))$.
-This hyperplane and the separation from the origin is illustrated in Figure~\ref{fig:nu-svm}.
+This hyperplane and the separation from the origin is illustrated in \Cref{fig:nu-svm}.
 
 \begin{figure}
   \centering
@@ -205,7 +205,7 @@ The decision function in the dual formulation with Lagrange multipliers is denot
 f(x) = \operatorname{sgn}((w \cdot \phi(x_i)) - \rho) = \operatorname{sgn}( \sum_{i=1}^n \alpha_i K(x, x_i) - \rho)
 \end{equation}
 
-In the classical \gls{svm} objective function, as denoted in Equation~\ref{eq:svm_objective}, the parameter $C$ decided the smoothness of the boundary, with respect to the slack variables $\xi_i$.
+In the classical \gls{svm} objective function, as denoted in \Cref{eq:svm_objective}, the parameter $C$ decided the smoothness of the boundary, with respect to the slack variables $\xi_i$.
 In the formulation of \gls{nu-svm} the equivalent parameter is $\nu \in (0,1)$ (hence the name).
 It characterizes the solution in two ways:
 \begin{enumerate}
@@ -237,11 +237,11 @@ By allowing outliers using slacks variables, in the same manner as classical \gl
 The constructed hypersphere is characterized by a center $\mathbf{a}$ and a radius $R > 0$ as distance from the center to (any data point that is a \gls{sv} on) the boundary, for which the volume, and thus the radius $R$, will be minimized.
 The center $\mathbf{a}$ is a linear combination of of the support vectors.
 Like the classical \gls{svm} and \gls{svdd} it can be required that all the distances from the data points $x_i$ to the center $\mathbf{a}$ are strict less then $R$ (or equivalent measure, to create a hard margin) or soft margins are allowed by using slack variables $\xi_i$.
-In the case of a soft margin, the penalty is determined by $C$ and the minimization is expressed as Equation~\ref{eq:svdd_objective}.
-This principle is illustrated in the right image or Figure~\ref{fig:nu-vs-svdd}.
+In the case of a soft margin, the penalty is determined by $C$ and the minimization is expressed as \Cref{eq:svdd_objective}.
+This principle is illustrated in the right image or \Cref{fig:nu-vs-svdd}.
 Instead of a separating hyperplane, constructed by \gls{nu-svm} and illustrated on the left of the Figure, the \gls{svdd} creates a hypersphere (in the illustration a cricle) around the data points.
 By using kernel functions (\eg the \gls{rbf}) the hyperspheres in the high dimensional feature space $\mathcal{F}$ corresponds to a flexible and tight enclosing boundary in input space $\mathcal{I}$.
-Possible resulting closed boundaries are illustrated in Figure~\ref{fig:svdd-boundary}.
+Possible resulting closed boundaries are illustrated in \Cref{fig:svdd-boundary}.
 This enclosing boundary is obtained by minimizing the following error function $L$ which contains the volume of the hypersphere and the distance from the boundary to the outlier objects:
 \begin{equation}\label{eq:svdd_objective}
   L(R, \vectorsym{a}, \vectorsym{\xi}) = R^2 + C \sum_{i=1}^n \xi_i
@@ -268,7 +268,7 @@ In the dual Lagrangian formulation of this error function $L$ the multipliers $\
   \end{multlined}
 \end{equation}
 
-In the maximization of Equation~\ref{eq:svdd_lagrange} a large fraction of the multipliers $\alpha_i$ become zero and for a small fraction $\alpha_i > 0$.
+In the maximization of \Cref{eq:svdd_lagrange} a large fraction of the multipliers $\alpha_i$ become zero and for a small fraction $\alpha_i > 0$.
 This small fraction, for which $\alpha_i$ is non-zero, are called the \glspl{sv} and these objects lie on the boundary of the description.
 The center of the hypersphere only depends on this small number of \glspl{sv} and the objects for which $\alpha_i = 0$ can be disregarded from the solution.
 Testing the membership of a (new) object $\vectorsym{z}$ is done by determining if the distance to the center $\vectorsym{a}$ of the sphere is equal or smaller to the radius $R$:
@@ -282,11 +282,11 @@ Because the Gaussian \gls{rbf} often yields good (\ie tight) boundaries, this se
 \begin{equation}
   (\vectorsym{x} \cdot \vectorsym{y}) \rightarrow K(\vectorsym{x},\vectorsym{y}) = \operatorname{exp}\left(- \frac{\lVert \vectorsym{x} - \vectorsym{y} \rVert ^2}{\sigma^2}\right)
 \end{equation}
-Using this kernel function, the Lagrangian error function $L$ of Equation~\ref{eq:svdd_lagrange} changes to:
+Using this kernel function, the Lagrangian error function $L$ of \Cref{eq:svdd_lagrange} changes to:
 \begin{equation}\label{eq:svdd_lagrange_kernel}
   L = 1 - \sum_{i} \alpha_i^2 - \sum_{i \ne j} \alpha_i \alpha_j K(x_i, x_j)
 \end{equation}
-Using Equation~\ref{eq:svdd_test_object}, the following kernel formulation needs to hold for a new object $\vectorsym{z}$ to lie within the hypersphere:
+Using \Cref{eq:svdd_test_object}, the following kernel formulation needs to hold for a new object $\vectorsym{z}$ to lie within the hypersphere:
 \begin{equation}\label{eq:svdd_inequality}
   \sum_{i} \alpha_i K(\vectorsym{z}, x_i) \le \frac{1}{2} \left( 1 - R + \sum_{i,j} \alpha_i \alpha_j K(x_i, x_j) \right)
 \end{equation}
@@ -305,7 +305,7 @@ Using Equation~\ref{eq:svdd_test_object}, the following kernel formulation needs
   \label{fig:svdd-boundary-sigma}
 \end{figure}
 
-\TODO{Use Figure~\ref{fig:svdd-boundary} or~\ref{fig:svdd-boundary-sigma}?}
+\TODO{Use \Cref{fig:svdd-boundary} or~\ref{fig:svdd-boundary-sigma}?}
 
 \TODO{Note that \gls{svdd} and \gls{nu-svm} have identical solutions when data is preprocessed to have unit form (in the case of \gls{nu-svm}) \cite{tax2002uniform}. and the \gls{rbf} kernel is used. Page 234 of \cite{scholkopf2002learning}.}
 
@@ -320,7 +320,7 @@ Using Equation~\ref{eq:svdd_test_object}, the following kernel formulation needs
 \end{enumerate}
 
 In case of a \gls{rbf} kernel, the width parameter $\sigma$ determines the flexibility and complexity of the boundary.
-The value of this parameter greatly determines the outcomes of the algorithm (\eg \gls{svdd}) as illustrated in Figure~\ref{fig:svdd-boundary}.
+The value of this parameter greatly determines the outcomes of the algorithm (\eg \gls{svdd}) as illustrated in \Cref{fig:svdd-boundary}.
 With a small value for the kernel width $\sigma$, each data point will tend to be used as a support vector (for almost all $\alpha_i > 0$) and the \gls{svdd} solution resembles a Parzen density estimation.
 For large values of $\sigma$, the solution will resemble the original hypersphere solution is obtained (in contrast with a tight boundary around the data).
 With a large value for the width $\sigma$, the boudary approximates the spherical boundary.
