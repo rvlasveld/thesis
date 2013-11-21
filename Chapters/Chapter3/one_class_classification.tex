@@ -1,7 +1,15 @@
 % !TEX root = ../../main.tex
 \section{One-Class Classification}\label{sec:one_class_classification}
+As discussed in the previous section, change detection in time series can be implemented using outlier, or novelty, detection.
+To regard a data point as an outlier, there must be a model of the normal time series data and a (dis)similiarity measure defined over the model and data objects.
+When a data point differs enough from the created model, it can be labeled as an outlier.
+The class of \gls{occ} algorithms is especially designed for that purpose.
+The algorithms build up a model of the data, assuming only normal data objects are available (or a very limited amount of example outlier data objects).
+This differs from classical classification algorithms, which commonly rely of both positive and negative examples.
 
-\TODO{bridge that explains why \gls{occ} is interesting, relating it to outlier/change detection}
+In \Cref{subsec:occ-problem-formulation} the problem formulation of \gls{occ} methods is explained.
+In \cref{subsec:occ-methods} an overview of \gls{occ} methods is given.
+The following section will discuss one specific set of methods, the \gls{oc-svm} which use \glspl{svm} to model the normal training data.
 
 \subsection{Problem formulation}\label{subsec:occ-problem-formulation}
 \TODO{Introduce problem of \gls{occ}. Relate to two-class classification.}
