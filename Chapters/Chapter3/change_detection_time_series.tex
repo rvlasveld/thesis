@@ -1,8 +1,9 @@
 % !TEX root = ../../main.tex
 \section{Change Detection in Time Series}\label{sec:change_detection_time_series}
-*** The section should relate the problem of outlier detection to change detection.\\
+\TODO{Write section introduction} \\
+\emph{The section should relate the problem of outlier detection to change detection.
 It should transform the traditional problem formulation to that of time series data.
-Build to one-class classification, which can be used for outlier detection. ***
+Build to one-class classification, which can be used for outlier detection}
 
 \subsection{Relation to outlier detection}
 The problems of outlier and novelty detection, segmentation, and change detection are closely related.
@@ -17,8 +18,6 @@ The problem of change detection is then reduced to outlier detection over that a
 The implementation by Camci \cite{camci2010change}, \gls{svcpd}, implements outlier detection with the \gls{svdd} algorithm to detect changes in mean and variance.
 
 \subsection{Problem formulation}\label{subsec:change_detection_problem_formulation}
-\TODO{Give the problem of change definition. Follow definition of Camci \cite{camci2010change}}
-
 \TODO{Note: the following block is copied from~\ref{sec:method_change_indication}} \\
 The problem of change point detection can be formulated using different type of models, as discussed in~\ref{subsec:segmentation}.
 The methods by Takeuchi and Yamanishi \cite{takeuchi2006unifying} and Camci \cite{camci2010change} use the following formulation for change detection, which we will also use for our problem formulation.
