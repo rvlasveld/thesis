@@ -12,8 +12,6 @@ In \cref{subsec:occ-methods} an overview of \gls{occ} methods is given.
 The following section will discuss one specific set of methods, the \gls{oc-svm} which use \glspl{svm} to model the normal training data.
 
 \subsection{Problem formulation}\label{subsec:occ-problem-formulation}
-\TODO{Introduce problem of \gls{occ}. Relate to two-class classification.}
-
 The problem of \gls{occ} is closely related to the (traditional) two-class classification situation\footnote{Two-class problems are considered as to be the basic problem, since multi-class classification problems can be decomposed into multiple two-class problems \cite{fukunaga1990introduction}.}.
 In the case of traditional classification algorithms, the problem is to classify an unknown object to one of the pre-defined categories.
 Every object $i$ is represented as a vector $\vectorsym{x}_i = (x_{i,1},\dots,x_{i,d}), x_{i,j} \in \mathbb{R}$ with $d$ real-valued measurements.
@@ -51,9 +49,8 @@ A second application is for the problem as described above, in which only data f
 When this problems originates from \eg a monitoring process, the \gls{occ} is able to recognize abnormal system states, without the need to create (or simulate) faulty states beforehand.
 The final possible application given by Tax \cite{tax2001one} is the comparison of two data sets.
 By constructing a \gls{occ}-classifier using a training data set, one can compare that set to a new data set.
-This will result in a similarity-measure.
-It is easy to see here a relation with similiary measures over \glspl{pdf} and the \gls{kl} divergence. \\
-\TODO{Add reference to~\ref{subsec:change_detection_problem_formulation} which also mentions \gls{kl} divergence?}
+This will result in a similarity-measure expressed in the properties of outliers.
+This measure is related to other similarity measures, such as \gls{pdf} estimation and the \gls{kl} divergence as discussed in \Cref{subsec:change_detection_problem_formulation}.
 
 \subsection{One-Class Classification methods}\label{subsec:occ-methods}
 The methods and algorithms used for the \gls{occ}-problem can be organized into three categories \cite{tax2001one,noumir2012simple}, visually represented in \Cref{fig:occ-methods}.
