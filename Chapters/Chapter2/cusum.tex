@@ -28,8 +28,7 @@ Others apply the method the problems in which the change of variance is under co
 Among others are there the centered version of the cumulative sums, introduced by Brown, Durbin and Evans \cite{brown1975techniques} and the \gls{mosum} of squares by \cite{hsu2007mosum}.
 
 The method of Incl\'{a}n and Tiao \cite{inclan1994use} builds on the centered version of \gls{cusum} \cite{brown1975techniques} to detect changes in variance.
-Using the \gls{icss} algorithm they are able to find multiple change points in a reflective manner.
-\TODO{Explain ``reflective'', or use term as batch, post-processing etc.}
+Using the batch \gls{icss} algorithm they are able to find multiple change points, offline while post-processing the data.
 Let $C_k = \sum_{i=1}^k \alpha_t^2$ be the cumulative sum of squares for a series of uncorrelated random variables $\{\alpha_t\}$ of length $T$.
 The centered (and normalized) sum of squares is defined as
 \begin{equation}

@@ -29,6 +29,32 @@ Two \acrlong{svm}-based methods, \gls{nu-svm} and \gls{svdd}, are further disuss
 For the application to the problem of \acrlong{har}, the characteristics of the collected sensor data is discussed in~\ref{sec:sensor_data_characteristics}.
 Finally a theoretic set of quality metrics is discussed in \Cref{sec:quality_metrics}.
 
+\TODO{Give this a nice place in this chapter somewhere, on model building}
+Segmentation methods can roughly be categorized in three methods in the way the data is processed, as discussed by Avci \etal \cite{avci2010activity}:
+\begin{itemize}
+  \item \textbf{Top-down} methods iteratively divide the signal in segments by splitting at the best location.
+  The algorithm starts with two segments and completes when a certain condition is met, such as when an error value or number of segments $k$ is reached.
+  These methods process the data points recursively, which results in a complexity of $O(n^2k)$.
+  \item \textbf{Bottom-up} methods are the natural complement to top-down methods.
+  They start with creating $n/2$ segments and iteratively join adjacent segments while the value of a cost function for that operation is below a certain value.
+  Given the average segment length $L$, the complexity of this method is $O(nL)$.
+  \item \textbf{Sliding-window} methods are simple and intuitive for online segmenting purposes.
+  It starts with a small initial subsequence of the time series.
+  New data points are joined in the segment until the fit-error is above a threshold.
+  Since the data is only processed very locally, these methods can yield in poor results \cite{keogh2001online}.
+  The complexity is equal to the bottom-up approach, $O(nL)$, where $L$ is the average segment length.
+  \item \textbf{\acrlong{swab}}, as introduced by Keogh \etal \cite{keogh2001online}, joins the ability of the sliding window mechanism to process time series online and the bottom-up approach the create superior segments in terms of fit-error.
+  The algorithm processes the data in two stages.
+  The first stage is to join new data points in the current segment created by a sliding window, and pass this to a buffer with space for a few segments.
+  The buffer then processes the data Bottom-up and returns the first (left-most) segment as final segment.
+  Because this second stage retains some (semi-)global view of the data, the results are comparative with normal Bottom-up.
+  It is stated by Keogh \etal that the complexity of \gls{swab} is a small constant factor worse than that of regular Bottom-up.
+\end{itemize}
+It is clear that for the application of this research sliding-window and preferably \gls{swab}-based algorithms should be considered. \\
+--- end ---
+
+\TODO{Put somewhere difference and emphasis of online vs. offline/batch/post-processing}
+
 \input{./Chapters/Chapter3/change_detection_time_series}
 \input{./Chapters/Chapter3/one_class_classification}
 \input{./Chapters/Chapter3/one_class_svm}
