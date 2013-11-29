@@ -35,7 +35,7 @@ Segmentation methods can roughly be categorized in three methods in the way the 
   \item \textbf{Top-down} methods iteratively divide the signal in segments by splitting at the best location.
   The algorithm starts with two segments and completes when a certain condition is met, such as when an error value or number of segments $k$ is reached.
   These methods process the data points recursively, which results in a complexity of $O(n^2k)$.
-  \item \textbf{Bottom-up} methods are the natural complement to top-down methods.
+  \item \textbf{Bottom-up} methods are the natural complement to top-down methods.g
   They start with creating $n/2$ segments and iteratively join adjacent segments while the value of a cost function for that operation is below a certain value.
   Given the average segment length $L$, the complexity of this method is $O(nL)$.
   \item \textbf{Sliding-window} methods are simple and intuitive for online segmenting purposes.
