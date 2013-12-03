@@ -1,5 +1,5 @@
 % !TEX root = ../../main.tex
-\section{Temporal Segmentation}\label{sec:temporal_segmentation}
+\section{Temporal Segmentation}\label{sec:literature_review_temporal_segmentation}
 
 \TODO{Is there any research of temporal segmentation on accelerometer/inertia signals? Note if there is/isnt}
 
@@ -38,7 +38,7 @@ Other methods have been proposed, such as an adaptive threshold based on the sig
 The latter of these methods is able to process the accelerometer values directly, although better results are obtained when features of the signal are processed, as done in the former method.
 Here the signal energy, mean and standard deviation are used to segment activities and by adding all the axial time series together, the Signal-To-Noise ration is increased, resulting in a robuster method.
 
-The method of Guenterberg \etal extracts features from the raw sensor signal to base the segmentation on other properties than the pure values.
+The method of Guenterberg \etal \cite{guenterberg2009automatic} extracts features from the raw sensor signal to base the segmentation on other properties than the pure values.
 The method of Bernecker \etal \cite{bernecker2012activity} uses other statistical properties, namely autocorrelation, to distinguish periodic from non-periodic segments.
 Using the \gls{swab} method the self-similarity of a one-dimensional signal is obtained.
 The authors claim that only a slight modification is needed to perform the method on multi-dimensional data.
@@ -113,6 +113,51 @@ Field of computer vision: \cite{zhou2008aligned}, \cite{li2007segmentation}.
 
 % ``Segmenting motion capture data into distinct behaviors'' \cite{barbivc2004segmenting}. 270, 2004 \\
 
+
+\subsection{CUSUM}\label{subsec:literature_review_temporal_segmentation_cusum}
+
+\TODO{Link this subsection with previous and next}
+% Papers:
+% \begin{itemize}
+%   \item Use of Cumulative Sums of Squares for Retrospective Detection of Changes of Variance, 1994, 162 refs \cite{inclan1994use} \\
+%   Implemented this algorithm.
+%   \item An adaptive CUSUM-based test for signal change detection, 2006, 15 refs. \cite{alippi2006adaptive}
+%   \item The MOSUM of squares test for monitoring variance changes \cite{hsu2007mosum}
+% \end{itemize}
+
+\emph{Notes:}
+Non-Bayesian change detection algorithm (\ie no prior distribution believe available for the change time).
+The \gls{cusum} method is developed by Page \cite{page1954continuous} for the application of statistical quality control (it is also known as a control chart).
+Primary for detection of mean shift.
+The \gls{mosum} of squares test for monitoring variance changes \cite{hsu2007mosum}.
+Use of Cumulative Sums of Squares for Retrospective Detection of Changes of Variance \cite{inclan1994use}
+
+An often used approach in the statistical framework of change detection is the \gls{cusum} as introduced by Page \cite{page1954continuous}.
+Originally used for quality control in production environments, its main function is to detect change in the mean of measurements and has been applied to this problem \cite{basseville1993detection}.
+It is a non-Bayesian method and thus makes no assumptions, in the form of prior belief distributions, for the change points.
+Many extensions to this method have been proposed.
+Some focus on the change in mean, such the method of Alippi and Roveri \cite{alippi2006adaptive}.
+Others apply the method the problems in which the change of variance is under consideration.
+Among others are there the centered version of the cumulative sums, introduced by Brown, Durbin and Evans \cite{brown1975techniques} and the \gls{mosum} of squares by \cite{hsu2007mosum}.
+
+The method of Incl\'{a}n and Tiao \cite{inclan1994use} builds on the centered version of \gls{cusum} \cite{brown1975techniques} to detect changes in variance.
+Using the batch \gls{icss} algorithm they are able to find multiple change points, offline while post-processing the data.
+Let $C_k = \sum_{i=1}^k \alpha_t^2$ be the cumulative sum of squares for a series of uncorrelated random variables $\{\alpha_t\}$ of length $T$.
+The centered (and normalized) sum of squares is defined as
+\begin{equation}
+  \begin{aligned}
+  D_k = \frac{C_k}{C_T} - \frac{k}{T}, & & k = 1, \dots, T, & & \text{with } D_0 = D_T = 0.
+  \end{aligned}
+\end{equation}
+For a series with homogeneous variance, the value of $D_k$ will oscillate around $0$.
+In case of a sudden change, the value will increase and exceed some predefined boundary with high probability.
+By using an iterative algorithm, the method is able to minimize the masking effect of successive change points.
+
+One of the motivations for the \gls{icss} algorithm was the heavy computational burden involved with Bayesian methods, which need to calculate the posterior odds for the log-likelihood ratio testing.
+The \gls{icss} algorithm avoids applying a function at all possible locations, due to the iterative search.
+The authors recommend the algorithm for analysis of long sequences.
+
+
 \subsection{Change detection}\label{subsec:change_detection}
 \TODO{change order of this and temporal segmentation sections? So first change, then segmentation?} \\
 Whereas the above mentioned researches focus on \emph{segmentation}, many have focused on \emph{change detection}.
@@ -130,63 +175,23 @@ The proposal of \cite{cheng2009efficient} extends on the \gls{cusum}-based metho
 
 \TODO{move CUSUM based techniques to this subsection}
 
+\subsection{Novelty and Outlier detection}\label{subsec:novelty_and_outlier_detection}
+In the case of time series data, many approaches rely on the detection of outlier, or novel, data objects.
+An increase in outlier data objects indicates a higher probability of change, as discussed by Takeuchi and Yamanischi~\cite{takeuchi2006unifying}.
+The concepts of novelty detection and outlier detection are closely related and often used interchangeable.
 
---- Change detection ---
+The algorithm by Ma and Perkins~\cite{markou2003novelty} uses \gls{svr} to model a series of past observations.
+Using the regression, a matching function $V(t_0)$ is constructed which uses the residual value of $t_0$ to create an outlier (out-of-class) confidence value.
+The method defines novel \emph{events} as a series of observations for which the outlier confidence is high enough.
+In an alternative approach by the same authors~\cite{ma2003time} a classification method, in contrast with regression, is used to detect outlier observations.
+The latter approach uses the \gls{nu-svm} algorithm by Sch\"olkopf \etal \cite{scholkopf1999support}, which is further discussed in \Cref{sec:literature_review_svm}
 
-``A unifying framework for detecting outliers and change points from time series'' \cite{takeuchi2006unifying}. 87, 2006 \\
-
-% ``Bayesian online changepoint detection'' \cite{adams2007bayesian}. 85, 2007 \\
-
-% ``An adaptive cusum-based test for signal change detection'' \cite{alippi2006adaptive}. 18, 2006 \\
-
-% ``An efficient algorithm for estimating a change-point'' \cite{cheng2009efficient}. 5, 2009 \\
-
-% ``The marginalized likelihood ratio test for detecting abrupt changes'' \cite{gustafsson1996marginalized}. 80, 1996 \\
-
-% ``The MOSUM of squares test for monitoring variance changes'' \cite{hsu2007mosum}. 4, 2007 \\
-
-% ``Use of cumulative sums of squares for retrospective detection of changes of variance'' \cite{inclan1994use}. 643, 1994 \\
-
-% ``Change-point detection in time-series data by direct density-ratio estimation'' \cite{kawahara2009change}. 52, 2009 \\
-``Sequential change-point detection based on direct density-ratio estimation'' \cite{kawahara2012sequential}. 22, 2012 \\
-% ``Change-point detection in time-series data by relative density-ratio estimation'' \cite{liu2013change}. 11, 2013 \\
-
-``Change point detection in time series data using support vectors'' \cite{camci2010change}. 3, 2010 \\
-
-\subsection{Novelty detection}\label{subsec:novelty_detection}
-
---- Novelty detection ---
-
-``Online novelty detection on temporal sequences'' \cite{ma2003online}. 146, 2003 \\
-``Time-series novelty detection using one-class support vector machines'' \cite{ma2003time}. 78, 2003 \\
-
-``Novelty detection: a review—part 1: statistical approaches'' \cite{markou2003novelty}. 697, 2003 \\
-
-``Support Vector Method for Novelty Detection'' \cite{scholkopf1999support}. 337, 1999 \\
-
-\subsection{Outlier detection}\label{subsec:outlier_detection}
-
---- Outlier detection ---
-``A unifying framework for detecting outliers and change points from time series'' \cite{takeuchi2006unifying}. 87, 2006 \\
-
-``Outliers in statistical data'' \cite{barnett1994outliers} (book). 3745, 1994 \\
-
-``A survey of outlier detection methodologies'' \cite{hodge2004survey}. 791, 2004 \\
-
-``Local outlier detection reconsidered: a generalized view on locality with applications to spatial, video, and network outlier detection'' \cite{schubert2012local}. 2, 2012 \\
-
-
-% --- SVMs ---
-
-% ``Change point detection in time series data using support vectors'' \cite{camci2010change}. 3, 2010 \\
-
-% ``Time-series novelty detection using one-class support vector machines'' \cite{ma2003time}. 78, 2003 \\
-
-% ``Support vector domain description'' \cite{tax1999support}. 907, 1999
-% ``Support vector data description applied to machine vibration analysis'' \cite{tax1999supportdata}. 76, 1999 \\
-
-% ``Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine'' \cite{anguita2012human}. 13, 2012 \\
-
-% ``Support vector machines in remote sensing: A review'' \cite{mountrakis2011support}. 150, 2011 \\
-
-% ``Sensor-based abnormal human-activity detection'' \cite{yin2008sensor}. 74, 2008 (builds one-class SVM of all normal traces) \\
+A extensive overview of novelty detection based on statistical models is given by Markou and Singh~\cite{markou2003novelty}.
+In the second part of their review~\cite{markou2003novelty-neural}, novelty detection by a variety of neural networks is discussed.
+The survey by Hodge and Austin~\cite{hodge2004survey} distinguishes between three types of outlier detection: \begin{inparaenum}[1)]
+    \item unsupervised,
+    \item supervised, and
+    \item semi-supervised learning.
+  \end{inparaenum}
+As we will see in \Cref{sec:one_class_classification}, in this research we are interested in methods from Type 3, from which \gls{occ} is a member.
+More theoretical background and foundation on outliers in statistical data can be found in \cite{barnett1994outliers}.
