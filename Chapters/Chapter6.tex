@@ -20,13 +20,15 @@
   \item Relate back to filter vs. wrapper methods - give results with different methods?
 \end{itemize}
 
-\section{Common datasets}
-\begin{itemize}
-  \item WISDM: niet handig, want on-aangesloten segmenten \cite{kwapisz2011activity}.
-  \item UCI HARD: zie WISDM, \cite{anguita2012human}.
-\end{itemize}
+This chapter discusses the real-world data sets used for this research.
+In \Cref{sec:data_sets} we discuss earlier used data sets and argue that these are inappropriate for our research.
+It is followed by an overview of the setup we have created to record continuous data sets from an uncontrolled environment, both in- and outdoor.
+The activities performed are discussed in \Cref{sec:data_gathering}.
+As discussed in \Cref{Chapter4}, the algorithm is subject to user parameters.
+In \Cref{sec:real_world_parameters} the effect and ranges of the parameters on the real world data sets are discussed.
+Finally, the performance of the algorithm is discussed in \Cref{sec:real_world_performance}.
 
+\input{./Chapters/Chapter6/data_sets}
 \input{./Chapters/Chapter6/data_gathering}
-
-\section{Parameters}
-\TODO{Describe how all the parameters are set, for the SVM methods and change-indication methods. Kernel type, width, ν/C values etc.}
+\input{./Chapters/Chapter6/parameters}
+\input{./Chapters/Chapter6/performance}
