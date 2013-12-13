@@ -18,10 +18,9 @@ The mapping and projection of data points can be efficient (and implicit) perfor
 \begin{figure}
 \centering
   \includegraphics[width=0.8\textwidth]{./Figures/chapter3/svm_kernel_mapping.png}
-  \caption[Kernel mapping]{The non-linear boundary in the input space $\mathcal{I}$ (left) is transformed to a linear boundary in the feature space $\mathcal{F}$ (right) by mapping the data points with the function $\phi$. The kernel trick uses a function $K$ which performs an implicit mapping. Image from Wikipedia.org\footnotemark}
+  \caption[Kernel mapping]{The non-linear boundary in the input space $\mathcal{I}$ (left) is transformed to a linear boundary in the feature space $\mathcal{F}$ (right) by mapping the data points with the function $\phi$. The kernel trick uses a function $K$ which performs an implicit mapping. Image from Wikipedia.org}
   \label{fig:kernel_mapping}
 \end{figure}
-\footnotetext{\url{http://en.wikipedia.org/wiki/File:Kernel_Machine.png}}
 
 The separating hyperplane is represented by
 \begin{equation}
@@ -236,7 +235,7 @@ By allowing outliers using slacks variables, in the same manner as classical \gl
 
 The constructed hypersphere is characterized by a center $\mathbf{a}$ and a radius $R > 0$ as distance from the center to (any data point that is a \gls{sv} on) the boundary, for which the volume, and thus the radius $R$, will be minimized.
 The center $\mathbf{a}$ is a linear combination of of the support vectors.
-Like the classical \gls{svm} and \gls{svdd} it can be required that all the distances from the data points $x_i$ to the center $\mathbf{a}$ are strict less then $R$ (or equivalent measure, to create a hard margin) or soft margins are allowed by using slack variables $\xi_i$.
+Like the classical \gls{svm} and \gls{svdd} it can be required that all the distances from the data points $x_i$ to the center $\mathbf{a}$ are strict less than $R$ (or equivalent measure, to create a hard margin) or soft margins are allowed by using slack variables $\xi_i$.
 In the case of a soft margin, the penalty is determined by $C$ and the minimization is expressed as \Cref{eq:svdd_objective}.
 This principle is illustrated in the right image or \Cref{fig:nu-vs-svdd}.
 Instead of a separating hyperplane, constructed by \gls{nu-svm} and illustrated on the left of the Figure, the \gls{svdd} creates a hypersphere (in the illustration a cricle) around the data points.

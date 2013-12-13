@@ -62,7 +62,7 @@ In order to get good generalization results with these methods, the dimensionali
 This can cause a large bias on the data.
 When a good probability model is assumed, these methods work very well, since when one threshold is optimized, a minimum volume is automatically found for the given probability density model \cite{tax2001one}.
 
-Boundary methods are based on Vapnik's principle\footnote{With a limited amount of data available, on should avoid solving a more general problem as an intermediate step to solve the original problem \cite{vapnik1998statistical}.} which imply in this case that estimating the complete data density for a \gls{occ} may be too complex, in case one is only interested in the closed boundary.
+Boundary methods are based on Vapnik's principle\footnote{With a limited amount of data available, one should avoid solving a more general problem as an intermediate step to solve the original problem \cite{vapnik1998statistical}.} which imply in this case that estimating the complete data density for a \gls{occ} may be too complex, in case one is only interested in the closed boundary.
 Examples of methods that focus on the boundary (a direct threshold) of the training data distribution are K-centers, Nearest-neighborhood and \gls{svdd} or a combination of those methods \cite{hempstalk2008one}.
 Especially the latter has a strong bias towards minimal volume solutions.
 These type of methods are sensitive to scaling of features, since they rely on a well-defined distance measure.
