@@ -16,53 +16,7 @@ The plots of \Cref{fig:data_gathering_run_1_rot,fig:data_gathering_run_1_acc,fig
 For Subject $2$ the plots are visible in \Cref{fig:data_gathering_run_2_rot,fig:data_gathering_run_2_acc,fig:data_gathering_run_2_mag}.
 The recorded metrics are from the accelerometer, rotational and magnetometer sensors.
 The solid black lines indicate manually annoted change points, the dashes lines indicate the closest discovered change point.
-A still from the video recording, showing Subject $2$ performing a (sprinting) run segment, is in \Cref{fig:data_gathering_still_1_sprint}.
-
-\TODO{Add found change points to plots}
-
-%---- Run 1: walk-run-roemer
-\begin{figure}
-\centering
-  \includegraphics[width=1\textwidth]{./Figures/chapter6/data_collection/run-1-walk-run-roemer/data_plot_rot_annotated.eps}
-  \caption[R1: rotation]{Run 1: Walk-run-roemer, rotation}
-  \label{fig:data_gathering_run_1_rot}
-\end{figure}
-
-\begin{figure}
-\centering
-  \includegraphics[width=1\textwidth]{./Figures/chapter6/data_collection/run-1-walk-run-roemer/data_plot_mag_annotated.eps}
-  \caption[R1: mag]{Run 1: Walk-run-roemer, Mag}
-  \label{fig:data_gathering_run_1_mag}
-\end{figure}
-
-\begin{figure}
-\centering
-  \includegraphics[width=1\textwidth]{./Figures/chapter6/data_collection/run-1-walk-run-roemer/data_plot_acc_annotated.eps}
-  \caption[R1: accelerometer]{Run 1: Walk-run-roemer, accelerometer}
-  \label{fig:data_gathering_run_1_acc}
-\end{figure}
-
-%---- Run 2: walk-run-jos
-\begin{figure}
-\centering
-  \includegraphics[width=1\textwidth]{./Figures/chapter6/data_collection/run-2-walk-run-jos/data_plot_rot_annotated.eps}
-  \caption[R2: rotation]{Run 2: Walk-run-jos, rotation}
-  \label{fig:data_gathering_run_2_rot}
-\end{figure}
-
-\begin{figure}
-\centering
-  \includegraphics[width=1\textwidth]{./Figures/chapter6/data_collection/run-2-walk-run-jos/data_plot_mag_annotated.eps}
-  \caption[R2: mag]{Run 2: Walk-run-jos, Mag}
-  \label{fig:data_gathering_run_2_mag}
-\end{figure}
-
-\begin{figure}
-\centering
-  \includegraphics[width=1\textwidth]{./Figures/chapter6/data_collection/run-2-walk-run-jos/data_plot_acc_annotated.eps}
-  \caption[R2: accelerometer]{Run 2: Walk-run-jos, accelerometer}
-  \label{fig:data_gathering_run_2_acc}
-\end{figure}
+A still from the video recording, showing Subject $2$ performing a (sprinting) run segment, is in \Cref{fig:stills_subject_2_sprinting}.
 
 \subsection{Outdoor straight lines results}
 \TODO{For each data set: discovered timepoint with acc, mag, rot, and all combined. Use closest change point}
@@ -130,8 +84,29 @@ Furthermore, the segments are performed in a circular manner.
 \eg the running activities are performed around a fountain with an estimated diameter of 10 meters.
 The plots of the recordings of Subject, for the accelerometer, rotation, and magnetometer are shown in...
 \TODO{Add plots}
-For Subject $2$ the still of the video recordings are in \Cref{fig:data_gathering_still_1_still_walk_to_run,fig:data_gathering_still_1_running,fig:data_gathering_still_1_running_2,fig:data_gathering_still_1_walk}.
-The stills for Subject $1$ are in \Cref{fig:data_gathering_still_2_run,fig:data_gathering_still_2_walk}.
+For Subject~$2$ the still of the video recordings are in the upper row of \Cref{fig:stills_subject_1_and_2}, for Subject~$1$ in the lower row.
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{1\textwidth}
+    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-1-walk-run-roemer/data_plot_acc_annotated.eps}
+    \caption{Accelerometer}
+    \label{fig:recording_subject_1_run_1_accelerometer}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{1\textwidth}
+    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-1-walk-run-roemer/data_plot_rot_annotated.eps}
+    \caption{Rotation}
+    \label{fig:recording_subject_1_run_1_rotation}
+  \end{subfigure} \\
+
+  \begin{subfigure}[b]{1\textwidth}
+    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-1-walk-run-roemer/data_plot_mag_annotated.eps}
+    \caption{Magnetic Field}
+    \label{fig:recording_subject_1_run_1_magnetic}
+  \end{subfigure} \\
+  \caption[Plots]{Annotated plots of a full recording performed by Subject~$2$. The vertical lines are manually determined change points. The label above each segment indicates the current performed activity.}\label{fig:plots_subject_1}
+\end{figure}
 
 
 \begin{figure}
@@ -171,16 +146,16 @@ The stills for Subject $1$ are in \Cref{fig:data_gathering_still_2_run,fig:data_
     \caption{Sprintng}
     \label{fig:stills_subject_2_sprinting}
   \end{subfigure}
-  \caption[Stills subject 2]{Stills of video recordings during performing of the outdoor activities of walking and running. \Cref{fig:stills_subject_2_change_point} shows the change point between the two activities. \Cref{fig:stills_subject_1_running_clockwise} shows the running in clockwise motion.}\label{fig:stills_subject_2}
+  \caption[Stills subject 2]{Stills of video recordings during performing of the outdoor activities of walking and running. \Cref{fig:stills_subject_2_change_point} shows the change point between the two activities. \Cref{fig:stills_subject_1_running_clockwise} shows the running in clockwise motion.}\label{fig:stills_subject_1_and_2}
 \end{figure}
 
 
 \subsection{Indoor stairs}\label{subsec:indoor_stairs}
 The final series of activities recorded consist of walking up and down the stairs, indoor.
 The stairs are shaped in an semi-circular form, with a small vertical segment on each floor.
-The still of \Cref{fig:data_gathering_still_3_descending} illustrates the circular shape of the stairs.
-In \Cref{fig:data_gathering_still_3_ascending} the small flat segment is visible.
-Between the stairs the subject walked in a hallway with a $180^{\circ}$ counter-clockwise turn, as shown in \Cref{fig:data_gathering_still_3_walk}.
+The still of \Cref{fig:stills_subject_3_downstairs} illustrates the circular shape of the stairs.
+In \Cref{fig:stills_subject_3_upstairs} the small flat segment is visible.
+Between the stairs the subject walked in a hallway with a $180^{\circ}$ counter-clockwise turn, as shown in \Cref{fig:stills_subject_3_walking}.
 The recorded sensor data of the performed activities are visible in the plots of \Cref{fig:data_gathering_run_3_rot,fig:data_gathering_run_3_mag,fig:data_gathering_run_3_acc}.
 
 \begin{figure}
