@@ -1,12 +1,12 @@
 % !TEX root = ../../main.tex
-\section{Change Detection in Time Series}\label{sec:change_detection_time_series}
-\TODO{Write section introduction} \\
-\emph{The section should relate the problem of outlier detection to change detection.
-It should transform the traditional problem formulation to that of time series data.
-Build to one-class classification, which can be used for outlier detection}
+\section{Problem Formulation Change Detection}\label{sec:change_detection_time_series}
+% \TODO{Write section introduction} \\
+% \emph{The section should relate the problem of outlier detection to change detection.
+% It should transform the traditional problem formulation to that of time series data.
+% Build to one-class classification, which can be used for outlier detection}
 
-\subsection{Relation to outlier detection}
-The problems of outlier and novelty detection, segmentation, and change detection are closely related.
+% \subsection{Relation to outlier detection}
+The problems of outlier and novelty detection, segmentation, and change detection in time series data are closely related.
 The terminology depends on the field of application, but there are subtle differences.
 The problem of outlier detection is concerned with finding data objects in a data set which have small resemblance with the majority of the data objects.
 These objects can be regarded as erroneous measurements.
@@ -17,7 +17,7 @@ The second stage runs on that new created time series and calculates a average o
 The problem of change detection is then reduced to outlier detection over that average-scored time series.
 The implementation by Camci \cite{camci2010change}, \gls{svcpd}, implements outlier detection with the \gls{svdd} algorithm to detect changes in mean and variance.
 
-\subsection{Problem formulation}\label{subsec:change_detection_problem_formulation}
+% \subsection{Problem formulation}\label{subsec:change_detection_problem_formulation}
 The problem of change point detection can be formulated using different type of models, as discussed in~\ref{subsec:segmentation}.
 The methods by Takeuchi and Yamanishi \cite{takeuchi2006unifying} and Camci \cite{camci2010change} use the following formulation for change detection, which we will also use for our problem formulation.
 The algorithm searches for sudden changes in the time series data.
@@ -33,13 +33,10 @@ This problem is the motivation for Camci \cite{camci2010change} to create the \g
 
 The definition of change point being sudden changes in the time series data is in line with the search of changes in activities.
 Since we are only interested in different activities (which are represented by sudden changes), slight changes within an activity are not of interest.
-\Cref{sec:sensor_data_characteristics} discusses the representation of activities and changes between them in the data in more detail.
 
-\TODO{add more formal definition or analysis of change detection}
+% -- Literature --
 
--- Literature --
-
-``Online segmentation of time series based on polynomial least-squares approximations'', \cite{fuchs2010online}. 25, 2010 \\
+% ``Online segmentation of time series based on polynomial least-squares approximations'', \cite{fuchs2010online}. 25, 2010 \\
 
 % \subsection{General framework for outlier detection}
 % In \cite{schubert2012local} a general framework for outlier detection is proposed.

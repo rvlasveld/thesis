@@ -1,12 +1,11 @@
 % !TEX root = ../../main.tex
 \section{One-Class Classification}\label{sec:one_class_classification}
-\TODO{Add ref to \cite{hodge2004survey}, which states 3 types of outlier detection. It puts \gls{occ} as of Type 3: \textbf{semi-supervised recognition or detection}}
-
 As discussed in the previous section, change detection in time series can be implemented using outlier, or novelty, detection.
 To regard a data point as an outlier, there must be a model of the normal time series data and a (dis)similiarity measure defined over the model and data objects.
 When a data point differs enough from the created model, it can be labeled as an outlier.
 The class of \gls{occ} algorithms is especially designed for that purpose.
 The algorithms build up a model of the data, assuming only normal data objects are available (or a very limited amount of example outlier data objects).
+This is also known as novelty detection or semi-supervised detection and is of Type 3 in the system by Hodge and Austin~\cite{hodge2004survey}.
 This differs from classical classification algorithms, which commonly rely of both positive and negative examples.
 
 In \Cref{subsec:occ-problem-formulation} the problem formulation of \gls{occ} methods is explained.
@@ -52,7 +51,7 @@ When this problems originates from \eg a monitoring process, the \gls{occ} is ab
 The final possible application given by Tax \cite{tax2001one} is the comparison of two data sets.
 By constructing a \gls{occ}-classifier using a training data set, one can compare that set to a new data set.
 This will result in a similarity-measure expressed in the properties of outliers.
-This measure is related to other similarity measures, such as \gls{pdf} estimation and the \gls{kl} divergence as discussed in \Cref{subsec:change_detection_problem_formulation}.
+This measure is related to other similarity measures, such as \gls{pdf} estimation and the \gls{kl} divergence as discussed in \Cref{subsec:change_detection_time_series}.
 
 \subsection{One-Class Classification methods}\label{subsec:occ-methods}
 The methods and algorithms used for the \gls{occ}-problem can be organized into three categories \cite{tax2001one,noumir2012simple}, visually represented in \Cref{fig:occ-methods}.
@@ -87,8 +86,7 @@ It shows succesful applications for, amonst others, problems in the field of Han
 As discussed in \Cref{sec:change_detection_time_series}, this can be used for change detection in time series data.
 
 In this Section we have discussed the problem of \gls{occ} and different kind of implementations.
-An often used implementation is the \gls{svm}-based method \cite{noumir2012simple}, since is shows good performance in comparitive researches.
-\TODO{Add refs for good results of OC-SVM}
+An often used implementation is the \gls{svm}-based method \cite{noumir2012simple}, since is shows good performance in comparitive researches \cite{khan2010survey,smola1998connection}.
 In the following section (\ref{sec:one_class_svm}) two implementations of \gls{oc-svm} will be discussed, the \gls{svdd} method of Tax and Duin \cite{tax1999support} and the \gls{nu-svm}-algoritm by Sch\"olkopf.
 
 % -- Literature --

@@ -25,7 +25,7 @@ The method exploits fixed-point arithmetic to create a hardware-friendly algorit
 With the same concepts as \gls{nu-svm}, the \gls{svdd} method by Tax and Duin \cite{tax1999support,tax2004support} uses a separating hypersphere (in contrast with a hyperplane) to characterize the data.
 The data points that lie outside of the created hypersphere are considered to be outliers, which number is a pre-determined fraction of the total number of data points.
 
-The method by Yin and Yang \cite{yin2008sensor} uses the \gls{svdd} method in the first phase of a two-phase algorithm to filter commonly available normal activities.
+The method by Yin \etal \cite{yin2008sensor} uses the \gls{svdd} method in the first phase of a two-phase algorithm to filter commonly available normal activities.
 The \gls{svcpd} method of Camci \cite{camci2010change} uses \gls{svdd} applies it to time-series data.
 By using an \gls{oc-svm} the method is able to detect changes in mean variance.
 Especially the detection of variance \emph{decrease} is an improvement over other methods that rely in the \gls{kl} divergence, since these are unable to detect decreases in variance \cite{takeuchi2006unifying}.

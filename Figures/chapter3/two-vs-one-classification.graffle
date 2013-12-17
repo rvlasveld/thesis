@@ -1870,6 +1870,10 @@
 					<key>r</key>
 					<string>0.48935</string>
 				</dict>
+				<key>Font</key>
+				<string>TimesNewRomanPS-ItalicMT</string>
+				<key>Size</key>
+				<real>12</real>
 			</dict>
 			<key>ID</key>
 			<integer>158</integer>
@@ -3145,13 +3149,20 @@
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{177.5, 77}, {6, 14}}</string>
+			<string>{{177.5, 77}, {6, 15}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FitText</key>
 			<string>YES</string>
 			<key>Flow</key>
 			<string>Resize</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>TimesNewRomanPS-ItalicMT</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>101</integer>
 			<key>Shape</key>
@@ -3180,11 +3191,11 @@
 				<integer>0</integer>
 				<key>Text</key>
 				<string>{\rtf1\ansi\ansicpg1252\cocoartf1265
-\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+\cocoascreenfonts1{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;}
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 y}</string>
+\f0\i\fs24 \cf0 y}</string>
 				<key>VerticalPad</key>
 				<integer>0</integer>
 			</dict>
@@ -3193,13 +3204,20 @@
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{345.74999999999989, 238.91665840148801}, {6, 14}}</string>
+			<string>{{345.74999999999989, 238.91665840148801}, {6, 15}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FitText</key>
 			<string>YES</string>
 			<key>Flow</key>
 			<string>Resize</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>TimesNewRomanPS-ItalicMT</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>100</integer>
 			<key>Shape</key>
@@ -3228,11 +3246,11 @@
 				<integer>0</integer>
 				<key>Text</key>
 				<string>{\rtf1\ansi\ansicpg1252\cocoartf1265
-\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+\cocoascreenfonts1{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;}
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 x}</string>
+\f0\i\fs24 \cf0 x}</string>
 				<key>VerticalPad</key>
 				<integer>0</integer>
 			</dict>
@@ -3368,7 +3386,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2013-10-23 08:54:48 +0000</string>
+	<string>2013-12-17 09:15:02 +0000</string>
 	<key>Modifier</key>
 	<string>Roemer Vlasveld</string>
 	<key>NotesVisible</key>
@@ -3463,7 +3481,7 @@
 		<key>SidebarWidth</key>
 		<integer>120</integer>
 		<key>VisibleRegion</key>
-		<string>{{189.5, 72.25}, {187.25, 211.25}}</string>
+		<string>{{167, 62.25}, {187.25, 211.25}}</string>
 		<key>Zoom</key>
 		<real>4</real>
 		<key>ZoomValues</key>

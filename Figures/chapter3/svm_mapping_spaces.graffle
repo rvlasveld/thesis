@@ -61,6 +61,13 @@
 		<dict>
 			<key>Class</key>
 			<string>LineGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>TimesNewRomanPS-ItalicMT</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>Head</key>
 			<dict>
 				<key>ID</key>
@@ -70,8 +77,8 @@
 			<integer>95</integer>
 			<key>Points</key>
 			<array>
-				<string>{275.50008221283429, 97.999949781243217}</string>
-				<string>{308.67442323989985, 97.999871382762379}</string>
+				<string>{294.60713985981783, 98.000000692579945}</string>
+				<string>{340.49998474414792, 98.000000692579945}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -88,14 +95,21 @@
 			<key>Tail</key>
 			<dict>
 				<key>ID</key>
-				<integer>91</integer>
+				<integer>104</integer>
 			</dict>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{309.17442321777344, 86}, {42.5, 24}}</string>
+			<string>{{340.99998474121094, 85.999992370605469}, {42.5, 24}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>TimesNewRomanPS-ItalicMT</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>94</integer>
 			<key>Shape</key>
@@ -124,30 +138,39 @@
 			<dict>
 				<key>Text</key>
 				<string>{\rtf1\ansi\ansicpg1252\cocoartf1265
-\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+\cocoascreenfonts1{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;\f1\ftech\fcharset77 Symbol;}
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\i\b\fs24 \cf0 y}</string>
+\f0\i\fs24 \cf0 y 
+\f1\i0 \uc0\u8712 
+\f0\i  I}</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{199.04752489924434, 91.000009924293636}, {8, 14}}</string>
+			<string>{{174.21106348346834, 89.487212772767435}, {36.5, 17}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FitText</key>
-			<string>YES</string>
+			<string>Vertical</string>
 			<key>Flow</key>
 			<string>Resize</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>TimesNewRomanPS-ItalicMT</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
-			<integer>93</integer>
+			<integer>107</integer>
 			<key>Line</key>
 			<dict>
 				<key>ID</key>
 				<integer>92</integer>
 				<key>Position</key>
-				<real>0.4603157639503479</real>
+				<real>0.41441443562507629</real>
 				<key>RotationType</key>
 				<integer>0</integer>
 			</dict>
@@ -172,31 +195,38 @@
 				<integer>0</integer>
 				<key>Text</key>
 				<string>{\rtf1\ansi\ansicpg1252\cocoartf1265
-\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+\cocoascreenfonts1{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;\f1\ftech\fcharset77 Symbol;}
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\i\b\fs24 \cf0 Z}</string>
+\f0\i\fs24 \cf0 z 
+\f1\i0 \uc0\u8712 
+\f0\i  F}</string>
 				<key>VerticalPad</key>
 				<integer>0</integer>
 			</dict>
-			<key>Wrap</key>
-			<string>NO</string>
 		</dict>
 		<dict>
 			<key>Class</key>
 			<string>LineGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>TimesNewRomanPS-ItalicMT</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>Head</key>
 			<dict>
 				<key>ID</key>
-				<integer>91</integer>
+				<integer>104</integer>
 			</dict>
 			<key>ID</key>
 			<integer>92</integer>
 			<key>Points</key>
 			<array>
-				<string>{177.50000000000006, 98.000009924293636}</string>
-				<string>{232.99999999999997, 98.000009924293636}</string>
+				<string>{150.25000000000006, 97.995713109604296}</string>
+				<string>{252.10712623596191, 97.975201428286937}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -213,16 +243,23 @@
 			<key>Tail</key>
 			<dict>
 				<key>ID</key>
-				<integer>89</integer>
+				<integer>105</integer>
 			</dict>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{233, 72.03936767578125}, {42.5, 51.9212646484375}}</string>
+			<string>{{252.10712623596191, 72.039360046386719}, {42.5, 51.9212646484375}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>TimesNewRomanPS-ItalicMT</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
-			<integer>91</integer>
+			<integer>104</integer>
 			<key>Shape</key>
 			<string>HorizontalTriangle</string>
 			<key>Style</key>
@@ -265,13 +302,11 @@
 			<dict>
 				<key>Text</key>
 				<string>{\rtf1\ansi\ansicpg1252\cocoartf1265
-\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+\cocoascreenfonts1{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;}
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\i\b\fs24 \cf0 w 
-\i0\b0\fs22 \cf0 \'b7 
-\i\b\fs24 \cf0 z}</string>
+\f0\i\fs24 \cf0 w \'b7 z}</string>
 				<key>VerticalPad</key>
 				<integer>0</integer>
 			</dict>
@@ -279,17 +314,24 @@
 		<dict>
 			<key>Class</key>
 			<string>LineGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>TimesNewRomanPS-ItalicMT</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>Head</key>
 			<dict>
 				<key>ID</key>
-				<integer>89</integer>
+				<integer>105</integer>
 			</dict>
 			<key>ID</key>
 			<integer>90</integer>
 			<key>Points</key>
 			<array>
-				<string>{97.499999999999986, 98}</string>
-				<string>{135, 98}</string>
+				<string>{60.249629813295378, 97.86802030338022}</string>
+				<string>{107.75, 97.579798292186638}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -311,11 +353,18 @@
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{135, 72.039367675781278}, {42.500000000000057, 51.921264648437443}}</string>
+			<string>{{107.75, 72.039360046386747}, {42.500000000000057, 51.921264648437443}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>TimesNewRomanPS-ItalicMT</string>
+				<key>Size</key>
+				<real>11</real>
+			</dict>
 			<key>ID</key>
-			<integer>89</integer>
+			<integer>105</integer>
 			<key>Shape</key>
 			<string>Bezier</string>
 			<key>ShapeData</key>
@@ -382,21 +431,27 @@
 				<integer>0</integer>
 				<key>Text</key>
 				<string>{\rtf1\ansi\ansicpg1252\cocoartf1265
-\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+\cocoascreenfonts1{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;\f1\fswiss\fcharset0 Helvetica;}
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural
 
-\f0\fs22 \cf0  \uc0\u966 
-\fs24 \cf0 (
-\i\b x
-\i0\b0 )}</string>
+\f0\i\fs22 \cf0  
+\f1\i0\fs20 \uc0\u966 
+\f0\i\fs22 (x)}</string>
 			</dict>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{54.5, 86}, {42.5, 24}}</string>
+			<string>{{17.25, 85.999992370605469}, {42.5, 24}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
+			<key>FontInfo</key>
+			<dict>
+				<key>Font</key>
+				<string>TimesNewRomanPS-ItalicMT</string>
+				<key>Size</key>
+				<real>12</real>
+			</dict>
 			<key>ID</key>
 			<integer>87</integer>
 			<key>Shape</key>
@@ -425,11 +480,13 @@
 			<dict>
 				<key>Text</key>
 				<string>{\rtf1\ansi\ansicpg1252\cocoartf1265
-\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+\cocoascreenfonts1{\fonttbl\f0\froman\fcharset0 TimesNewRomanPSMT;\f1\ftech\fcharset77 Symbol;}
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\i\b\fs24 \cf0 X}</string>
+\f0\i\fs24 \cf0 x 
+\f1\i0 \uc0\u8712  
+\f0\i I}</string>
 			</dict>
 		</dict>
 	</array>
@@ -480,7 +537,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2013-10-25 12:28:32 +0000</string>
+	<string>2013-12-17 09:49:55 +0000</string>
 	<key>Modifier</key>
 	<string>Roemer Vlasveld</string>
 	<key>NotesVisible</key>
@@ -575,7 +632,7 @@
 		<key>SidebarWidth</key>
 		<integer>120</integer>
 		<key>VisibleRegion</key>
-		<string>{{12, 0.5}, {386.25, 221.25}}</string>
+		<string>{{5.75, 5.5}, {386.25, 221.25}}</string>
 		<key>Zoom</key>
 		<real>4</real>
 		<key>ZoomValues</key>

@@ -7,32 +7,12 @@
 
 \lhead{Chapter 3. \emph{Change detection by Support Vector Machines}} % This is for the header on each page - perhaps a shortened title
 
-%----------------------------------------------------------------------------------------
-\section{Outline}
-\emph{Not intented for the reader.}
-\begin{itemize}
-  \item Content follows blogpost, but more formal
-  \item Explain the connection between change detection and \{outlier detection, density estimation, \etc\}
-  \item Explain change detection in relation with ``M-Estimators''.
-  \item Explain why and how SVM can be used for outlier detection, and thus for change detection in time series
-  \item Explain options when using SVM, such as RBF kernel
-  \item Relate characteristics of (accelerometer) data to the used (RBF?) kernel
-  \item Define some quality metrics --> this should be in a different chapter (About experiments)
-  \item Note: try to avoid the perspective of \emph{density estimation}. Instead: \emph{data description} or \emph{boundary description}.
-\end{itemize}
-
-This chapter discusses the concepts and algorithms that will be used as a basis for the proposed method, as discussed in \Cref{Chapter4}.
-The first sections formulates the problem of change detection and relates it to outlier and novelty detection.
-It transforms the traditional problem to change detection for times series data.
-In \Cref{sec:one_class_classification} the problem of \acrlong{occ} is discussed and shows a number of implementations.
-Two \acrlong{svm}-based methods, \gls{nu-svm} and \gls{svdd}, are further disussed in \Cref{sec:one_class_svm}.
-For the application to the problem of \acrlong{har}, the characteristics of the collected sensor data is discussed in~\ref{sec:sensor_data_characteristics}.
-Finally a theoretic set of quality metrics is discussed in \Cref{sec:quality_metrics}.
-
-\TODO{Put somewhere difference and emphasis of online vs. offline/batch/post-processing}
+This chapter discusses the concepts and algorithms that will be used as a basis for the proposed method, as introduced in \Cref{Chapter4}.
+The first section formulates the problem of change detection and relates it to outlier and novelty detection.
+It transforms the traditional problem of outlier detection into change detection for times series data.
+In \Cref{sec:one_class_classification} the problem of \acrlong{occ} is explained and discusses a number of implementations.
+In the final sections of this chapter, \Cref{sec:one_class_svm}, two \gls{svm}-based \gls{occ} methods, \gls{nu-svm} and \gls{svdd}, and the influence of model parameters are further discussed in detail.
 
 \input{./Chapters/Chapter3/change_detection_time_series}
 \input{./Chapters/Chapter3/one_class_classification}
 \input{./Chapters/Chapter3/one_class_svm}
-\input{./Chapters/Chapter3/sensor_data_characteristics}
-\input{./Chapters/Chapter3/quality_metrics}

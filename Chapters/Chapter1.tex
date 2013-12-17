@@ -67,7 +67,8 @@ In the setup, as described in the previous section, we employ a model constructi
 For this model we will use an \acrlong{oc-svm} implementation: the \acrlong{svdd} algorithm by Tax~\cite{tax2001one}.
 In earlier research multi-class \glspl{svm} are used for direct classification of inertial sensor data \cite{he2008activity,mountrakis2011support,anguita2012human}.
 Others have used \gls{oc-svm} classifiers for novelty, or outlier, detection \cite{scholkopf1999support,camci2010change,li2003improving,ma2003time,tax1999support}.
-However, to our knowledge, \gls{oc-svm} methods have not yet been applied to inertial sensor time series data directly.
+The research by Yin \etal  \cite{yin2008sensor} creates a \gls{oc-svm} classifier to filter normal activity traces, using training data.
+However, to our knowledge, \gls{oc-svm} methods have not yet been applied to inertial sensor time series data directly to find changes in behavior and create a temporal segmentation.
 This algorithm transforms the time series data, which can be of any high dimension, to an higher dimensional feature space.
 When the data is assumed to be of the same class, it can be characterized by an enclosing boundary, in the shape of a hypersphere.
 Using this \gls{occ} method, we are able to test new data points of being a member of this class.
@@ -105,7 +106,7 @@ As a result from our proposed method and application to recorded real-world data
   \item \textbf{Continuous recorded human activity data:} the proposed method is applied to our own recorded human activity data.
   This data set can be grounded by using the video recordings of the subject while performing the activities.
   The data set, consisting of raw inertial sensor recordings, manual change point and activity labeling, and video recordings, are used for testing the method and are made publicly available \cite{vlasveld2013continuous}.
-  \item \textbf{Application of \gls{oc-svm} methods to inertial sensor data:} up to our knowledge, this thesis is the first application of \gls{oc-svm} methods, especially the \gls{svdd} method, to inertial sensor signals, such as accelerometer time series data.
+  \item \textbf{Application of \gls{oc-svm} methods to inertial sensor data:} to our best knowledge, this thesis is the first application of \gls{oc-svm} methods, especially the \gls{svdd} method, to inertial sensor signals in the context of creating a temporal segmentation.
   Furthermore, this thesis contributes to the small amount of research that has a temporal segmentation of inertial sensor data as its primary objective.
   \item \textbf{Adaptation of \acrshort{svcpd}:} we have adopted and slightly adapted the \acrshort{svcpd} method by Camci~\cite{camci2010change} in order to find change points in time series data.
   In our simplification we have not encountered noticeably decrease in performance.

@@ -1,6 +1,18 @@
 % !TEX root = ../../main.tex
 \section{One-Class Support Vector Machine}\label{sec:one_class_svm}
+In this section we will discuss the details of a \gls{svm} and \gls{oc-svm} implementations.
+The classical implementation of a \gls{svm} is to classify a dataset in two distinct classes.
+This is a common usecase, although sometimes there is no training data for both classes available.
+Still, one would like to classify new data points as regular, in-class, or out-of-class, \eg in the case of a novelty detection.
+With that problem only data examples from one class is available and the objective is to recognize new data points that are not part of that class.
+This unsupervised learning problem is closely related to density estimation.
+In that context, the problem can be the following.
+Given an underlying probabilty distribution $P$ the goal is to find a subset $S$ for which the probability that a data point from $P$ lies outside $S$ equals some predetermined value $\nu$ between $0$ and $1$ \cite{scholkopf1999support}.
 
+In the following of this section we will start with a discussion of traditional \glspl{svm}.
+In \Cref{subsec:kernels} we will show how kernels allow for non-linear decision functions.
+That is followed by two different implementations of \gls{oc-svm}: \gls{nu-svm} in \Cref{subsec:nu-svm} by Sch\"olkopf \etal \cite{scholkopf1999support}, which closely follows the above problem statement regarding density estimation, and \gls{svdd} by Tax and Duin \cite{tax1999support} in \Cref{subsec:oc-svm-svdd}.
+The final part of this section discusses the influende of model parameters on the performance of \glspl{svm}
 
 %--------------------------------------------
 \subsection{Support Vector Machine}\label{subsec:svm}
@@ -12,7 +24,10 @@ More flexible non-linear boundaries can be obtained by the use of a non-linear f
 This function maps the input data from space $\mathcal{I}$ to a higher dimensional space $\mathcal{F}$.
 The \gls{svm} can create a linear separating hyperplane in the space $\mathcal{F}$ that separates the data points from the two classes.
 When the hyperplane is projected to the (lower) original input space $\mathcal{I}$ it creates a non-linear separating curve.
-This is illustrated in \Cref{fig:svm_mapping_spaces}.
+A schematic overview of this process is illustrated in \Cref{fig:svm_mapping_spaces}.
+The original data points $x \in I$ are through $\phi(x)$ projected to the points $z \in F$.
+In that space the linear hyperplane is constructed by weights $w$.
+This results in a non-linear hyperplane $y$ in input space $I$.
 The mapping and projection of data points can be efficient (and implicit) performed by using the kernel trick, which is discussed in \Cref{subsec:kernels}.
 
 \begin{figure}
@@ -20,6 +35,13 @@ The mapping and projection of data points can be efficient (and implicit) perfor
   \includegraphics[width=0.8\textwidth]{./Figures/chapter3/svm_kernel_mapping.png}
   \caption[Kernel mapping]{The non-linear boundary in the input space $\mathcal{I}$ (left) is transformed to a linear boundary in the feature space $\mathcal{F}$ (right) by mapping the data points with the function $\phi$. The kernel trick uses a function $K$ which performs an implicit mapping. Image from Wikipedia.org}
   \label{fig:kernel_mapping}
+\end{figure}
+
+\begin{figure}
+\centering
+  \includegraphics[width=0.8\textwidth]{./Figures/chapter3/svm_mapping_spaces.pdf}
+  \caption[Mapping spaces in \gls{svm}]{The input vector $\vectorsym{x}$ from input space $\mathcal{I}$ is mapped by a non-linear function $\phi(\vectorsym{x})$ to a feature vector $\vectorsym{z}$ in the high dimensional feature space $\mathcal{F}$. The weights of $\vectorsym{w}$ create a linear separating hypeplace, which maps the high dimensional vector to the predicted outcome $\vectorsym{y}$.}
+  \label{fig:svm_mapping_spaces}
 \end{figure}
 
 The separating hyperplane is represented by
@@ -39,18 +61,10 @@ Thus, the \gls{svm} searches for a maximal separating hyperplane.
 
 \begin{figure}
 \centering
-  \includegraphics[width=0.5\textwidth]{./Figures/chapter3/svm_mapping_spaces.pdf}
-  \caption[Mapping spaces in \gls{svm}]{The input vector $\vectorsym{x}$ from input space $\mathcal{I}$ is mapped by a non-linear function $\phi(\vectorsym{x})$ to a feature vector $\vectorsym{z}$ in the high dimensional feature space $\mathcal{F}$. The weights of $\vectorsym{w}$ create a linear separating hypeplace, which maps the high dimensional vector to the predicted outcome $\vectorsym{y}$. \TODO{Is this figure obsolete? \Cref{fig:kernel_mapping} shows almost the same}}
-  \label{fig:svm_mapping_spaces}
-\end{figure}
-
-\begin{figure}
-\centering
   \includegraphics[width=0.5\textwidth]{./Figures/chapter3/svm_separating_plane_with_margin.png}
-  \caption[\gls{svm} and the separating hyperplane]{Illustration of the separating hyperplane of a \gls{svm}. Here $w$ is the normal vector for the separating hyperplane and the distance between the two margins is $\frac{2}{\lVert{w}\rVert}$. Image from Wikipedia.org\protect\footnote}
+  \caption[\gls{svm} and the separating hyperplane]{Illustration of the separating hyperplane of a \gls{svm}. Here $w$ is the normal vector for the separating hyperplane and the distance between the two margins is $\frac{2}{\lVert{w}\rVert}$. Image from Wikipedia.org}
   \label{fig:svm_hyperplane}
 \end{figure}
-\footnotetext{\url{http://en.wikipedia.org/wiki/File:Svm_max_sep_hyperplane_with_margin.png}}
 
 With every classification method there is a risk of overfitting.
 In that case the random error or noise of the data set is described instead of the underlying data.
@@ -66,13 +80,11 @@ The objective function for a \gls{svm} is the following minimization function:
   \begin{multlined}
   \mbox{ subject to: } \\*
   \begin{aligned}
-  y_i( w^T \phi(x_i) + b) \geq & 1 - \xi_i & \mbox{ for all } i = 1, \dots, n \\*
+  y_i( w^T \phi(x_i) + b) \geq \: & 1 - \xi_i & \mbox{ for all } i = 1, \dots, n \\*
    & \xi_i \geq 0 & \mbox{ for all } i = 1, \dots, n\\*
   \end{aligned}
   \end{multlined}
 \end{equation}
-
-\TODO{better format of above formulas. Check with notation and formulas of chapter 9 of \cite{cherkassky2007learning}.}
 
 This minimization problem can be solved (using \gls{qp}) and transformed to its (Lagrange) dual formulation.
 In the dual formulation the problem scales with the number of training examples $n$ instead of the dimensionality $d$ of the samples.
@@ -84,7 +96,7 @@ In the dual formulation the Lagrange multipliers $a_i >= 0$ are introduced and t
   f(x) = \operatorname{sgn}( \sum_{i=1}^n \alpha_i y_i K(x, x_i) + b),
 \end{equation}
 where $K(x, x_i) = \phi(x)^T\phi(x_i)$ is the dot product of data objects in feature space $\mathcal{F}$ (which is further discussed in \Cref{subsec:kernels}).
-Here every data point $\mathcal{I}$ for which $a_i > 0$ is weighted in the decision function and thus ``supports'' the classification machine: hence the name ``\acrlong{svm}''.
+Here every data point in $\mathcal{I}$ for which $a_i > 0$ is weighted in the decision function and thus ``supports'' the classification machine: hence the name ``\acrlong{svm}''.
 Since it is shown that under certain circumstances \glspl{svm} show an equality to sparse representations \cite{girosi1998equivalence,smola1998connection}, there will often be relatively few Lagrange multipliers with a non-zero value.
 
 Using this formulation two imporant properties arise \cite{flach2012machine}:
@@ -92,10 +104,9 @@ Using this formulation two imporant properties arise \cite{flach2012machine}:
   \item Searching for the maximum margin decision boundary is equivalent to searching for the support vectors; they are the training examples with non-zero Lagrange mulitpliers.
   \item The optimization problem is entirely defined by pairwise dot products between training examples: the entries of the kernel matrix $K$.
 \end{enumerate}
-The second property is what enables powerful adaption for support vector machines to learn non-linear decision boundaries.
+An effect of the first property, combined with the equality to sparse represenations, is that \glspl{svm} often have good results, even in the case of high dimensional data (also known as the curse of dimensionality) or limited training examples \cite{cherkassky2007learning}.
+The second property is what enables powerful adaption for \glspl{svm} to learn non-linear decision boundaries.
 The workings of the kernel matrix $K$ and the non-linear boundaries is discussed in the following section.
-
-\TODO{Add more on sparsity and good results, because of sparse representations, even in case of data of high dimensionality. e.g. \cite{cherkassky2007learning}.}
 
 %--------------------------------------------
 
@@ -138,33 +149,15 @@ This general assumption in pattern recogition state that two near objects in fea
 Thus, objects which are close in feature space should be close in the original input space.
 When this assumption would not hold, the example objects would be scatter through the feature space and finding a decision function becomes very complex.
 
--- Quotes and refs to use --x
+% -- Quotes and refs to use --x
 
-sparsity, \gls{rkhs}: \cite{girosi1998equivalence} \\
+% sparsity, \gls{rkhs}: \cite{girosi1998equivalence} \\
 
-Use Chapter 2 from ``Learning with kernels'', \cite{scholkopf2002learning}.
-
-%--------------------------------------------
-
-\subsection{One-Class Support Vector Machines}\label{subsec:one-class-svm}
-The classical implementation of a \gls{svm} is to classify a dataset in two distinct classes.
-This is a common usecase, although sometimes there is no training data for both classes available.
-Still, one would like to classify new data points as regular, or in-class, or out-of-class, \eg in the case of a novelty detection.
-With that problem only data from one class is available and the objective is to recognize new data points that are not part of that class.
-This unsupervised learning problem is closely related to density estimation.
-In that context, the problem can be the following.
-Given an underlying probabilty distribution $P$ the goal is to find a subset $S$ for which the probability that a data point from $P$ lies outside $S$ equals some predetermined value $\nu$ between $0$ and $1$ \cite{scholkopf1999support}.
-
-We will discuss two implementations of \glspl{oc-svm}.
-The first is the \gls{nu-svm} by Sch\"olkopf \etal \cite{scholkopf1999support} and closely follows the above problem statement regarding density estimation.
-The second, on which we will base our change detection method, is the \gls{svdd} by Tax and Duin \cite{tax1999support}.
-
-\TODO{Add something about robustness, discusses in section 9.2 from \cite{cherkassky2007learning,chen2004m}}
+% Use Chapter 2 from ``Learning with kernels'', \cite{scholkopf2002learning}.
 
 %--------------------------------------------
 
 \subsection{\acrlong{nu-svm}}\label{subsec:nu-svm}
-\TODO{Check notations with book of Scholkopf \cite{scholkopf2002learning}, chapter 8, page 227.} \\
 The first of the \gls{oc-svm} methods we will discuss is often referred to as \gls{nu-svm} and introduced by Sch\"olkopf \etal \cite{scholkopf1999support}.
 Instead of estimating the density function of an distribution $P$, it focuses on an easier problem: the algorithm find regions in the input where the ``probability density lives''.
 This results in a function such that most of the data is in the region where the function is nonzero.
@@ -193,7 +186,7 @@ The objective function to find the separating hyperplane is the following minimi
   \begin{multlined}
     \mbox{ subject to: } \\
     \begin{aligned}
-      (w \cdot \phi(x_i)) \geq & \rho - \xi_i & \mbox{ for all } i = 1, \dots, n \\
+      (w \cdot \phi(x_i)) \geq \: & \rho - \xi_i & \mbox{ for all } i = 1, \dots, n \\
       & \xi_i \geq 0 & \mbox{ for all } i = 1, \dots, n \\
     \end{aligned}
   \end{multlined}
@@ -228,15 +221,16 @@ By allowing outliers using slacks variables, in the same manner as classical \gl
 
 \begin{figure}
   \centering
-    \includegraphics[width=0.5\textwidth,keepaspectratio]{./Figures/chapter3/nu-vs-svdd.pdf}
+    \includegraphics[width=0.8\textwidth,keepaspectratio]{./Figures/chapter3/nu-vs-svdd.pdf}
   \caption[Difference \gls{nu-svm} and \gls{svdd}]{Graphical representation of the difference between \gls{nu-svm} (left) and \gls{svdd} (right). Note that for the sake of simplicity the kernel functions are not applied.}
   \label{fig:nu-vs-svdd}
 \end{figure}
 
 The constructed hypersphere is characterized by a center $\mathbf{a}$ and a radius $R > 0$ as distance from the center to (any data point that is a \gls{sv} on) the boundary, for which the volume, and thus the radius $R$, will be minimized.
 The center $\mathbf{a}$ is a linear combination of of the support vectors.
-Like the classical \gls{svm} and \gls{svdd} it can be required that all the distances from the data points $x_i$ to the center $\mathbf{a}$ are strict less than $R$ (or equivalent measure, to create a hard margin) or soft margins are allowed by using slack variables $\xi_i$.
-In the case of a soft margin, the penalty is determined by $C$ and the minimization is expressed as \Cref{eq:svdd_objective}.
+Like the classical \gls{svm} and \gls{svdd} it can be required that all the distances from the data points $x_i$ to the center $\mathbf{a}$ are strict less than $R$ (or equivalent measure).
+A soft margin can be allowed by using slack variables $\xi_i$.
+In that case, the penalty is determined by $C$ and the minimization is expressed as \Cref{eq:svdd_objective}.
 This principle is illustrated in the right image or \Cref{fig:nu-vs-svdd}.
 Instead of a separating hyperplane, constructed by \gls{nu-svm} and illustrated on the left of the Figure, the \gls{svdd} creates a hypersphere (in the illustration a cricle) around the data points.
 By using kernel functions (\eg the \gls{rbf}) the hyperspheres in the high dimensional feature space $\mathcal{F}$ corresponds to a flexible and tight enclosing boundary in input space $\mathcal{I}$.
@@ -249,7 +243,7 @@ This enclosing boundary is obtained by minimizing the following error function $
   \begin{multlined}
     \mbox{ subject to: } \\
     \begin{aligned}
-      \lVert x_i - \mathbf{a} \rVert ^ 2 \leq & R^2 + \xi_i & \mbox{ for all } i = 1, \dots, n \\
+      \lVert x_i - \mathbf{a} \rVert ^ 2 \leq \: & R^2 + \xi_i & \mbox{ for all } i = 1, \dots, n \\
       & \xi_i \geq 0 & \mbox{ for all } i = 1, \dots, n \\
     \end{aligned}
   \end{multlined}
@@ -262,7 +256,7 @@ In the dual Lagrangian formulation of this error function $L$ the multipliers $\
   \begin{multlined}
     \mbox{ subject to: } \\
     \begin{aligned}
-    0 \le \alpha_i \le C, \sum_{i} \alpha_i = 1
+    0 \le \alpha_i \le C, \: \sum_{i} \alpha_i = 1
     \end{aligned}
   \end{multlined}
 \end{equation}
@@ -274,8 +268,8 @@ Testing the membership of a (new) object $\vectorsym{z}$ is done by determining 
 \begin{equation}\label{eq:svdd_test_object}
   \lVert \vectorsym{z} - \vectorsym{a} \rVert ^2 = (\vectorsym{z} \cdot \vectorsym{z}) - 2 \sum_{i} \alpha_i(\vectorsym{z} \cdot \vectorsym{x}_i) + \sum_{i,j}(\vectorsym{x}_i \cdot \vectorsym{x}_j) \le R^2
 \end{equation}
-
-\TODO{Note of inner products and that it can be replaced by kernel functions. Good ref: page 4/158 from \cite{tax2002uniform} and \cite{tax1999support}.}
+As with \Cref{eq:svm_lagrange}, the solution of this equation only relies on dot products between the data points in $\vectorsym{x}$ and $\vectorsym{z}$.
+This means that the kernel projection and trick, as discussed in \Cref{subsec:kernels}, can be applied to \gls{svdd} as well \cite{tax1999support,tax2002uniform}.
 
 Because the Gaussian \gls{rbf} often yields good (\ie tight) boundaries, this set of kernels fuctions is commonly used:
 \begin{equation}
@@ -289,6 +283,7 @@ Using \Cref{eq:svdd_test_object}, the following kernel formulation needs to hold
 \begin{equation}\label{eq:svdd_inequality}
   \sum_{i} \alpha_i K(\vectorsym{z}, x_i) \le \frac{1}{2} \left( 1 - R + \sum_{i,j} \alpha_i \alpha_j K(x_i, x_j) \right)
 \end{equation}
+When the Gaussian \gls{rbf} kernel is applied, and in case the data is preprocessed to have unit length (for the \gls{nu-svm} solution), the two different \gls{oc-svm} implementations \gls{nu-svm} and \gls{svdd} are shown to have identical solutions \cite{tax2002uniform,scholkopf2002learning}
 
 \begin{figure}
   \centering
@@ -296,17 +291,6 @@ Using \Cref{eq:svdd_test_object}, the following kernel formulation needs to hold
   \caption[\gls{svdd} boundary]{The \gls{svdd} method trained on a banana-shaped data set with different sigma-values for the \gls{rbf} kernel. Solid circles are support vectors, the dashed line is the boundary. Image by Tax \cite{tax2001one}.}
   \label{fig:svdd-boundary}
 \end{figure}
-
-\begin{figure}
-  \centering
-    \includegraphics[width=0.8\textwidth,keepaspectratio]{./Figures/chapter3/svdd-parameter-sigma.pdf}
-  \caption[\gls{svdd} boundary]{The \gls{svdd} method trained on a banana-shaped data set with different $\sigma$-values for the \gls{rbf} kernel. Solid circles are support vectors, the dashed line is the boundary.}
-  \label{fig:svdd-boundary-sigma}
-\end{figure}
-
-\TODO{Use \Cref{fig:svdd-boundary} or~\ref{fig:svdd-boundary-sigma}?}
-
-\TODO{Note that \gls{svdd} and \gls{nu-svm} have identical solutions when data is preprocessed to have unit form (in the case of \gls{nu-svm}) \cite{tax2002uniform}. and the \gls{rbf} kernel is used. Page 234 of \cite{scholkopf2002learning}.}
 
 %--------------------------------------------
 
@@ -323,28 +307,37 @@ The value of this parameter greatly determines the outcomes of the algorithm (\e
 With a small value for the kernel width $\sigma$, each data point will tend to be used as a support vector (for almost all $\alpha_i > 0$) and the \gls{svdd} solution resembles a Parzen density estimation.
 For large values of $\sigma$, the solution will resemble the original hypersphere solution is obtained (in contrast with a tight boundary around the data).
 With a large value for the width $\sigma$, the boudary approximates the spherical boundary.
+The influence of the $\sigma$ parameter on the \gls{svdd} solution is illustrated in \Cref{fig:svdd-boundary-sigma}.
 
-\TODO{More on SVM parameters, \cite{cherkassky2007learning}, section 9.8, page 446}
+\begin{figure}
+  \centering
+    \includegraphics[width=0.8\textwidth,keepaspectratio]{./Figures/chapter3/svdd-parameter-sigma.pdf}
+  \caption[\gls{svdd} boundary]{The \gls{svdd} method trained on a banana-shaped data set with different $\sigma$-values for the \gls{rbf} kernel. Solid circles are support vectors, the dashed line is the boundary.}
+  \label{fig:svdd-boundary-sigma}
+\end{figure}
 
-\TODO{Analysis of C/$\nu$-parameter, which sets a lower bound for the fraction of support vectors and an uppor bound for samples that will be outliers. \cite{flach2012machine} section 9.8 and \cite{scholkopf2002learning} and other Sch\"olkopf material.}
+As discussed in \Cref{subsec:nu-svm}, the \gls{svm} parameter $C$ (or $\nu$ in case of \gls{nu-svm}) is of high influence on the ``smoothness'' of the decision function.
+It acts as an upper bound to the fraction of outliers and as a lower bound to the fraction of \glspl{sv}.
+A more detailed discussion of the influence of the \gls{svm} model parameters can be found in Section~9.8 of \cite{cherkassky2007learning} and Section~7.4 from \cite{flach2012machine}.
+A detailed discussion of the $\nu$ and kernel parameters can be found in \cite{scholkopf2002learning}.
 
-\TODO{Maybe add section about ``Change indication'' rather than ``detection''?}
+The following chapter will discuss our proposed method, which incorporates the \gls{svdd} algorithm.
+It relates the \gls{oc-svm} model constuction to outlier detection and eventually change detection, leading to finding a temporal segmentation of time series data.
 
--- Notes --
-\begin{itemize}
-  \item Low target rejection rate $f_{T-}$ and low outlier acceptance rate $f_{O+}$. When only target examples are present, the first one can be estimated by the number of support vectors that we obtain as a solution of Lagrangian~\ref{eq:svdd_lagrange_kernel}.
-\end{itemize}
+% -- Notes --
+% \begin{itemize}
+  % \item Low target rejection rate $f_{T-}$ and low outlier acceptance rate $f_{O+}$. When only target examples are present, the first one can be estimated by the number of support vectors that we obtain as a solution of Lagrangian~\ref{eq:svdd_lagrange_kernel}.
+% \end{itemize}
 
--- Literature --
+% -- Literature --
 
-\TODO{These papers need to be referenced and included}
 
-``A geometric approach to support vector machine (SVM) classification'' \cite{mavroforakis2006geometric}. 136, 2006 \\
+% ``A geometric approach to support vector machine (SVM) classification'' \cite{mavroforakis2006geometric}. 136, 2006 \\
 
-``Least squares one-class support vector machine'' \cite{choi2009least}. 27, 2009 \\
+% ``Least squares one-class support vector machine'' \cite{choi2009least}. 27, 2009 \\
 
-``On simple one-class classification methods'' \cite{noumir2012simple}. 2012  --> decouples radius and center optimization, gives fast approximations instead of precise results. \\
+% ``On simple one-class classification methods'' \cite{noumir2012simple}. 2012  --> decouples radius and center optimization, gives fast approximations instead of precise results. \\
 
-``Choosing a small width of the kernels leads to high generalization error as it effectively decouples the separate basis functions of the kernel expansion into very localized functions which is equivalent to memorizing the data, whereas a wide kernel tends to oversmooth.'' \cite{smola1998connection}. \\
+% ``Choosing a small width of the kernels leads to high generalization error as it effectively decouples the separate basis functions of the kernel expansion into very localized functions which is equivalent to memorizing the data, whereas a wide kernel tends to oversmooth.'' \cite{smola1998connection}. \\
 
-``For small values of $\sigma$ almost all $\alpha_i >0$ and the \gls{svdd} resembles a Parzen density estimation.'' \cite{tax2002uniform} page 4, \cite{tax1999support} page 4. \\
+% ``For small values of $\sigma$ almost all $\alpha_i >0$ and the \gls{svdd} resembles a Parzen density estimation.'' \cite{tax2002uniform} page 4, \cite{tax1999support} page 4. \\
