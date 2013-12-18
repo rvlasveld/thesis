@@ -60,7 +60,7 @@
 	<array>
 		<dict>
 			<key>Bounds</key>
-			<string>{{68.999992370605469, 268.5}, {65, 22}}</string>
+			<string>{{68.999992370605469, 268.5}, {148.75, 22}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FitText</key>
@@ -115,14 +115,14 @@
 {\colortbl;\red255\green255\blue255;\red195\green0\blue5;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\b\fs36 \cf2 Radius}</string>
+\f0\b\fs36 \cf2 Expected Radius}</string>
 				<key>VerticalPad</key>
 				<integer>0</integer>
 			</dict>
 		</dict>
 		<dict>
 			<key>Bounds</key>
-			<string>{{68.999992370605469, 124.25}, {65, 22}}</string>
+			<string>{{68.999992370605469, 160.25}, {144, 22}}</string>
 			<key>Class</key>
 			<string>ShapedGraphic</string>
 			<key>FitText</key>
@@ -177,7 +177,7 @@
 {\colortbl;\red255\green255\blue255;\red3\green87\blue180;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\b\fs36 \cf2 Signal}</string>
+\f0\b\fs36 \cf2 Time series data}</string>
 				<key>VerticalPad</key>
 				<integer>0</integer>
 			</dict>
@@ -3592,7 +3592,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2013-11-04 15:09:52 +0000</string>
+	<string>2013-12-18 14:59:05 +0000</string>
 	<key>Modifier</key>
 	<string>Roemer Vlasveld</string>
 	<key>NotesVisible</key>
@@ -3687,14 +3687,14 @@
 		<key>SidebarWidth</key>
 		<integer>120</integer>
 		<key>VisibleRegion</key>
-		<string>{{250.5, 94}, {386.25, 221.25}}</string>
+		<string>{{-214, -51}, {1545, 885}}</string>
 		<key>Zoom</key>
-		<real>4</real>
+		<real>1</real>
 		<key>ZoomValues</key>
 		<array>
 			<array>
 				<string>Canvas 1</string>
-				<real>4</real>
+				<real>1</real>
 				<real>2</real>
 			</array>
 		</array>

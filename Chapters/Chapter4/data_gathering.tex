@@ -1,7 +1,7 @@
 % !TEX root = ../../main.tex
 \section{Data Gathering}\label{sec:method_data_gathering}
 In this section we briefly discuss the different data gathering methods used for the change detection algorithms and experiments.
-\Cref{subsec:data_gathering_artificial} reviews the artificial data sets we will use.
+\Cref{subsec:data_gathering_artificial} discusses the artificial data sets we will use.
 In \Cref{subsec:data_gathering_real_world} an overview of the real-world data sets used is provided.
 Both sections refer to Chapters~\ref{Chapter5} and~\ref{Chapter6} for more details, respectively.
 
@@ -13,7 +13,7 @@ Both construct a collection of one-dimensional time series data according to a s
 \begin{equation}
   x_t = a_1 x_{t-1} + a_2 x_{t-2} + \epsilon_t.
 \end{equation}
-In the different data series the mean and variance of the Gaussian random variable $\epsilon_t$ differs and changes at pre-determined change points.
+Over the different data series the mean and variance of the Gaussian random variable $\epsilon_t$ differs and changes at pre-determined change points.
 Using this data set an objective quality measure over the change detection methods can be obtained and compared.
 All the used data sets are listed and analyzed in \Cref{Chapter5}.
 
@@ -22,7 +22,7 @@ All the used data sets are listed and analyzed in \Cref{Chapter5}.
 In the second type of data sets we apply our method of change detection and temporal segmentation to real-world data sets.
 For our setup we record the activities of humans performed both in- and outdoor in an uncontrolled environment.
 Activities performed include sitting, standing, walking, running in a straight and curved line, and walking up- and downstairs.
-Our method uses the signals from the accelerometer, gravity, and rotation sensors.
+Our method uses the signals from the accelerometer, magnetic field, and rotation sensors.
 These time series data are used to detect change points.
 A video recording from the performed activity is used to annotate the time series with real change points.
 The discovered change point are compared with these annotated change points to give a subjective quality measure.
@@ -31,7 +31,7 @@ In \Cref{Chapter6} we give a detailed analysis of the performed activities and t
 For the experiments we used a HTC Sensation XE smartphone as recording device.
 The activities were recorded using a free Android application \cite{sensorlogger}.
 This application was chosen for its convenient data format of the sensor recording and its regularity of the sampling interval.
-Table~\ref{tab:recorded_metrics} lists the recorded metrics.
+Table~\ref{tab:recorded_metrics} lists all the recorded metrics.
 For our expiments we used the data for the accelerometer, magnatief field and rotation.
 
 \begin{center}\begin{table}
@@ -39,25 +39,23 @@ For our expiments we used the data for the accelerometer, magnatief field and ro
     \hline
     Metric & Description & Units of measure & Typical range \\
     \hline \hline
-    Accelerometer & Acceleration force along each axis. & $m/s^2$ & $-20$ -- $20$ \\
+    Accelerometer & Acceleration force along each axis (including gravity). & $m/s^2$ & $-20$ -- $20$ \\
     \hline
-    Gravity & Force of gravity along each axi.s & $m/s^2$ & $-10$ -- $10$\\
+    Gravity & Force of gravity along each axis. & $m/s^2$ & $-10$ -- $10$\\
     \hline
-    Gyroscope & & $rad/s$ & $-15$ -- $15$\\
+    Gyroscope & Rate of rotationg around each axis. & $rad/s$ & $-15$ -- $15$\\
     \hline
     Light & Light sensitive sensor at the front of the phone. & & $0$ -- $10000$ \\
     \hline
-    Linear acceleration & & $m/s^2$ & $-20$ -- $20$ \\
+    Linear acceleration & Acceleration force along each axis (excluding gravity). & $m/s^2$ & $-20$ -- $20$ \\
     \hline
     Magnetic field & Geomagnetic field strength along each axis. & $\mu T$ & $-60$ -- $60$ \\
     \hline
-    Orientation & & & $-100$ -- $360$ \\
+    Orientation & Degrees of rotation around the three physical axis. & Degrees & $-100$ -- $360$ \\
     \hline
-    Rotation & & & $-1$ -- $1$\\
+    Rotation & Measre of rotation around the device's rotation axis. & Unitless & $-1$ -- $1$\\
     \hline
   \end{tabulary}
   \caption[Measured metrics]{Measured metrics. The set of axis is always the triple (x, y, z) direction.}
   \label{tab:recorded_metrics}
 \end{table}\end{center}
-
-\TODO{Complete \Cref{tab:recorded_metrics}}
