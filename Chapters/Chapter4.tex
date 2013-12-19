@@ -7,8 +7,6 @@
 
 \lhead{Chapter 4. \emph{Application to Human Activity Time Series Data}} % This is for the header on each page - perhaps a shortened title
 
-%----------------------------------------------------------------------------------------
-
 Ideen naam methode:
 \begin{itemize}
   \item Human Activity Support Vector Change Detection
@@ -20,40 +18,27 @@ Ideen naam methode:
   \item HATS-SVDD
 \end{itemize}
 
-\section{Experiment notes}
-\begin{itemize}
-  \item ICSS/CUSUM is goed in het vinden van variance changes. Niet goed in mean veranderingen.
-  \item geprobeerd direct model-reset te doen na change point, maar dan kan je achteraf niet meer verder analyseren.
-\end{itemize}
-
-
-\begin{description}
-  \item[Data gathering] Explain data gathering methods. Refer to chapter 5 and 6 for articifial and real-world details.
-  \item[Model construction] Explain SVDD model construction and updating.
-  \item[Model properties] Explain the SVDD properties that are used to calculate the change indication.
-  \item[Change detection] Explain the interpretation of the properties, the possible (modulair) methods to give change indication
-\end{description}
-
-
-\TODO{Write chapter introduction/outline. Give overview of method approach and refer to each section for details of that stage.}
-
-\TODO{Puts emphasis on two-stage framework by Takeuchi and Yamanishi \cite{takeuchi2006unifying}.}.
-
-\TODO{Put somewhere difference and emphasis of online vs. offline/batch/post-processing}
 
 \begin{figure}
   \centering
-    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{./Figures/chapter4/method_setup_short.pdf}
+    \includegraphics[width=\textwidth]{./Figures/chapter4/method_setup.pdf}
   \caption[Method setup]{Schematic overview of the change detection method. The first step is the data gathering, described in Section \ref{sec:method_data_gathering}. Ater the pre-processing, the data is used to construct a \gls{svdd} model, as described in Section \ref{sec:method_model_construction}. Section \ref{sec:method_model_features} describes which features of the model are used for the final change indication algorithm, discussed in Section \ref{sec:method_change_detection}.}
-  \label{fig:method_overview_short}
+  \label{fig:method_overview}
 \end{figure}
 
+This chapter will introduce our method and setup for the temporal segmentation of human activities, using an \gls{oc-svm} approach.
+The setup follows the structure as illustrated in \Cref{fig:method_overview} and further discussed in \Cref{sec:method_overview}.
+It starts with the data collection phase, in which we both use artificial and real-world data.
+The data sets are discussed in \Cref{sec:data_gathering}.
+After (optional) pre-processing, the \gls{svdd} algorithm is used to create a model representation, which is iteratively updated.
+In \Cref{sec:method_model_construction} this construction phase is discussed and shows the windowed approach.
+From this constructed model we can extract some features.
+In our case, we use the approximated radius $R$ of the hypersphere to detect changes.
+\Cref{sec:method_model_features} goes into detail about the rationale of using that feature.
+Finally, in \Cref{sec:change_detection_methods} we discuss two different, but simple, methods to detect changes in the time series data, based on the extracted radius $R$.
+
+\input{./Chapters/Chapter4/method_overview}
 \input{./Chapters/Chapter4/data_gathering}
 \input{./Chapters/Chapter4/model_construction}
 \input{./Chapters/Chapter4/model_features}
 \input{./Chapters/Chapter4/change_detection}
-
- % --- OLD ---
-% \input{./Chapters/Chapter4/change_indication}
-% \input{./Chapters/Chapter4/overview}
-

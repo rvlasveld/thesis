@@ -20,6 +20,13 @@ That is because the fraction of accepted outliers $f_{O+}$ is an estimate of the
 Tax and Duin provide a method to optimize the parameters of the \gls{svdd} method, \ie the trade-off parameter $C$ and the \gls{rbf} kernel width $\sigma$.
 This optimization will result in the modification of the radius $R$ of \Cref{eq:svdd_objective} and affects the Lagrangian inequality~(\ref{eq:svdd_inequality}).
 
+\begin{figure}
+  \centering
+    \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{./Figures/chapter4/expected_behaviour.pdf}
+  \caption[Expected radius behavior]{Expected behavior of the radius $R$ of the hypersphere. The upper part shows a typical sinusoidal time series signal. The lower graph visualizes an abstract expectation of the values of $R$. Five possible time windows are illustrated. The left, middle, and right windows cover an area of homogeneous signal. The expected value of $R$ is low. The other two windows cover a change entering and leaving the window, respectively. At these locations the radius $R$ is expected to increase temporarily.}
+  \label{fig:radius_expectation}
+\end{figure}
+
 Since in our method the parameters $C$ and $\sigma$ are kept constant, and thereby also the fraction of target objects being rejected, the only free parameter is the radius $R$.
 During the \gls{isvdd} algorithm the volume of the hypersphere is being minimized.
 This means that only the radius of the sphere will change during the analysis over the time series data.
@@ -28,6 +35,8 @@ This means that when two objects (in this case radius sizes) are close to each o
 In other words, when the underlying distribution of time series is changed, and thus the characteristics of the data objects changes, the corresponding radius $R$ will also change.
 Since in that case the data objects in the working set become more heterogeneous, the radius of the hypersphere will increase.
 When, instead, the data objects change from a heterogeneous set to a more homogeneous, we expect the radius to decrease in value, since the data objects are closer to each other in the feature space.
+This relation between the signal and expected radius $R$ is illustrated in \Cref{fig:radius_expectation}.
+It shows that in the two time windows that cover a heterogeneous set of data objects, the radius of the hypersphere is expected to be relatively high.
 
 With the \gls{isvdd} algorithm we have effectively implemented a form of dimensionality reduction by feature extraction, using the radius $R$.
 The following section discusses the algorithms which can be applied to the extracted radius $R$ as a volume estimate.
