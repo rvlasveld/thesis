@@ -7,7 +7,7 @@ All the data sets are modeled by a second-order \gls{ar}-model as in \Cref{eq:ar
 \end{equation}
 The length of $x_t$ is $10000$ and change points are generated at each $y \times 10000^\text{th}$ data point, with $y = (1, 2, 3, \dots 9)$.
 
-Using this general \gls{ar}-model, we create four different data sets.
+Using this general \gls{ar}-model, we create four different data sets, all visualized in \Cref{fig:plots_artificial_data_sets}.
 Each data set is characterized by a change in mean, variance, or both of the Gaussian term $\epsilon_t$:
 \begin{enumerate}
   \item \textbf{Fixed increasing mean:} at each change point $y$ the mean is increased with $\Delta(y) = 5$.
@@ -32,29 +32,61 @@ Each data set is characterized by a change in mean, variance, or both of the Gau
 \end{enumerate}
 
 \begin{figure}
-\centering
-  \includegraphics[width=1\textwidth]{./Figures/chapter5/set_1_data.eps}
-  \caption[Fixed increasing mean]{Data set 1, \emph{Fixed increasing mean}.}
-  \label{fig:camci_fixed_increasing_mean}
+  \centering
+  \begin{subfigure}[b]{1\textwidth}
+   \includegraphics[width=1\textwidth]{./Figures/chapter5/set_1_data.eps}
+   \caption[Fixed increasing mean]{Data set 1, \emph{Fixed increasing mean}.}
+   \label{fig:camci_fixed_increasing_mean}
+  \end{subfigure} \\
+
+  \begin{subfigure}[b]{1\textwidth}
+   \includegraphics[width=1\textwidth]{./Figures/chapter5/set_2_data.eps}
+   \caption[Reduced increasing mean]{Data set 2, \emph{Reduced increasing mean}.}
+   \label{fig:takeuchi_reduced_increasing_mean}
+  \end{subfigure} \\
+
+  \begin{subfigure}[b]{1\textwidth}
+    \includegraphics[width=1\textwidth]{./Figures/chapter5/set_3_data.eps}
+    \caption[Reduced increasing mean, increasing variance]{Data set 3, \emph{Reduced increasing mean, increasing variance}.}
+    \label{fig:camci_reduced_increasing_mean_increasing_variance}
+   \end{subfigure} \\
+
+  \begin{subfigure}[b]{1\textwidth}
+   \includegraphics[width=1\textwidth]{./Figures/chapter5/set_4_data.eps}
+   \caption[Alternating variance]{Data set 4, \emph{Alternating variance}.}
+   \label{fig:camci_takeuchi_alternating_variance}
+  \end{subfigure} \\
+
+  \caption[Artificial data sets]{Plots of the artificial data sets used.}
+  \label{fig:plots_artificial_data_sets}
 \end{figure}
 
-\begin{figure}
-\centering
-  \includegraphics[width=1\textwidth]{./Figures/chapter5/set_2_data.eps}
-  \caption[Reduced increasing mean]{Data set 2, \emph{Reduced increasing mean}.}
-  \label{fig:takeuchi_reduced_increasing_mean}
-\end{figure}
 
-\begin{figure}
-\centering
-  \includegraphics[width=1\textwidth]{./Figures/chapter5/set_3_data.eps}
-  \caption[Reduced increasing mean, increasing variance]{Data set 3, \emph{Reduced increasing mean, increasing variance}.}
-  \label{fig:camci_reduced_increasing_mean_increasing_variance}
-\end{figure}
 
-\begin{figure}
-\centering
-  \includegraphics[width=1\textwidth]{./Figures/chapter5/set_4_data.eps}
-  \caption[Alternating variance]{Data set 4, \emph{Alternating variance}.}
-  \label{fig:camci_takeuchi_alternating_variance}
-\end{figure}
+% \begin{figure}
+% \centering
+%   \includegraphics[width=1\textwidth]{./Figures/chapter5/set_1_data.eps}
+%   \caption[Fixed increasing mean]{Data set 1, \emph{Fixed increasing mean}.}
+%   \label{fig:camci_fixed_increasing_mean}
+% \end{figure}
+
+% \begin{figure}
+% \centering
+%   \includegraphics[width=1\textwidth]{./Figures/chapter5/set_2_data.eps}
+%   \caption[Reduced increasing mean]{Data set 2, \emph{Reduced increasing mean}.}
+%   \label{fig:takeuchi_reduced_increasing_mean}
+% \end{figure}
+
+% \begin{figure}
+% \centering
+%   \includegraphics[width=1\textwidth]{./Figures/chapter5/set_3_data.eps}
+%   \caption[Reduced increasing mean, increasing variance]{Data set 3, \emph{Reduced increasing mean, increasing variance}.}
+%   \label{fig:camci_reduced_increasing_mean_increasing_variance}
+% \end{figure}
+
+% \begin{figure}
+% \centering
+%   \includegraphics[width=1\textwidth]{./Figures/chapter5/set_4_data.eps}
+%   \caption[Alternating variance]{Data set 4, \emph{Alternating variance}.}
+%   \label{fig:camci_takeuchi_alternating_variance}
+% \end{figure}
