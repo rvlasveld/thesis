@@ -2,11 +2,12 @@
 \section{Data Sets}\label{sec:data_sets}
 In the previous chapter we have applied our method to the artificial data sets from \cite{camci2010change,takeuchi2006unifying}.
 In this chapter we apply the method to real-world data sets.
-The data sets are inertial sensor data recorded during human activities, such as walking, running, ascending and descending stairs, and standing still.
+The data sets come from inertial sensor data recorded during human activities, such as walking, running, ascending and descending stairs, and standing still.
 To compare our results with other research, we have tried to apply our method to two commonly used data sets.
 The first is the data from the \gls{wisdm} lab \cite{kwapisz2011activity}.
 As an excerpt from the data in \Cref{fig:wisdm_excerpt} shows, the activities are recorded non-continuous.
 Whilst this data set is convenient for activity classification, it does not allow for detection of change points.
+Even if the gap between the activities would be removed, the transition segments between activities would still be missing and thus the data set would not reflect continuous recordings.
 The other commonly used data set is the \gls{uci-har} from the Machine Learning Repository and originates from \cite{anguita2012human}.
 As shown in an except in \Cref{fig:uci_annotated}, the labeling to the data segments seems to be incorrect.
 Furthermore, it is not clear how the data is recorded and whether all activities are performed continuously.
@@ -26,25 +27,25 @@ Furthermore, it is not clear how the data is recorded and whether all activities
 \end{figure}
 
 Because of the above described shortcomings of commonly used data sets, we have decided to record activities by ourselves.
-The following characterizations were set for our data sets:
+The following characterization requirements were set for our data sets:
 \begin{enumerate}
-  \item The activities need to be performed and recorded in a continuous matter,
+  \item The activities need to be performed and recorded in a continuous manner,
   \item The environment should be natural and uncontrolled, both in- and outdoor,
-  \item There should be a clear annotation possible, as objective as possible,
-  \item The hardware and software should be widely available.
+  \item There data should be clearly annotated, as objective as possible,
+  \item The required hardware (and software) should be widely available.
 \end{enumerate}
 
-With these requirements in mind, we created the following setup.
-All activities were recorded by one smartphone in the right front pants pocket of the subject.
+With these requirements in mind, we have created the following setup.
+All activities were recorded by a smartphone in the right front pants pocket of the subject.
 The phones that were used are the \textsc{HTC Sensation XE} and \textsc{HTC Desire}, running the \textsc{Anroid} smartphone operating system.
 During the activities the intertial sensor data is recorded using a free application, \textsc{Sensor Logger}~\cite{sensorlogger}.
 This application records the sensor data to \textsc{CSV} files, which are then transformed to \textsc{MATLAB} compatible files.
-The constructed algorithm processes the data in an online matter (using only current and historic data).
-During the activities, the subject is recorded with a video recorder to enable manual labeling and determining the change points.
+The constructed algorithm processes the data in an online manner (using only current and historic data).
+During the activities, the subject is recorded with a video camera to enable manual labeling and determination of the change points.
 
-Using the video recordings, the data sets are manually annotated, as shown in \Cref{fig:data_gathering_run_1_rot}.
+Using the video recordings, the data sets are manually annotated, as shown in the plots of \Cref{fig:plots_subject_1,fig:plots_subject_3}.
 The graph displays from a single recording the rotational-axis values (see \Cref{tab:recorded_metrics} for explanation of the metrics), with manually annotated activities above the data.
-The manually determines change points are used to draw quality conclusion over the algorithms performance, by comparing it to the discovered change points.
+The manually determined change points are used to draw quality conclusion over the algorithm's performance, by comparing it to the discovered change points.
 All used data recordings, including the video material and manual labeling, are made available \cite{vlasveld2013continuous}.
 \TODO{Create web page with data sets}
 The following section discusses the performed activities during the recordings.

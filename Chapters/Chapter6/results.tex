@@ -1,0 +1,54 @@
+% !TEX root = ../../main.tex
+\section{Results}\label{sec:real_world_results}
+
+In the first paragraph we will explain that we use the same quality measures as used in \Cref{sec:artificial_data_quality_metrics} for objective tabular results.
+We further argue that more important is the subjective, visual, inspection of the discovered change points regarding the sensor data.
+To give both results, we will first give a table and box plot, like in \Cref{sec:artificial_data_results}.
+After that, we will show characterizing parts of the plots with annotated and discovered change points.
+
+\subsection{Objective measure}
+
+\TODO{Table of search run (in the columns) and for each run the ratio of False Alarm Rate, Average benefit (closest CP) and STD benefit. Like chapter 5.}
+
+\begin{table}
+  \centering
+  \begin{tabulary}{\textwidth}{|l|c|c|c|c|c|c|c|c|}
+    \cline{2-9}
+    \multicolumn{1}{l|}{} & Run 1 & Run 2 & Run 3 & Run 4 & Run 5 & Run 6 & Run 7 & Run 8 \\
+    \hline
+    Window length & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    \hline
+    Sigma of \gls{rbf} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    \hline
+    High threshold & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    \hline
+    Low threshold & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    \hline
+    Closeness & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    \hline
+    \hline
+    $\operatorname*{far}(Y)$ & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    \hline
+    $\operatorname*{Average\_delay}$ & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    \hline
+    STD Delay & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    \hline
+  \end{tabulary}
+  \caption[Results real world runs]{Parameter settings and results of the real-world data sets.}
+  \label{tab:results_real_world}
+\end{table}
+
+\TODO{Box plot of the runs, like in Chapter 5}
+
+Here comes a list of observations and conclusions on the performance:
+\begin{itemize}
+  \item \textbf{Perhaps something in bold:} here we list a funny observation.
+  \eg that when walking the circulair stairs it is harder to find the rotation on the flat surface.
+  \item Or just something else.
+\end{itemize}
+
+\subsection{Subjective measures}
+In this subsection we will provide a few plots with characterizing parts of the sensor data, annotated change points, and discovered change points.
+We use it to illustrate some aspects of the method, on which it performs well and where not.
+We do not provide all plots, because that would take up to much time.
+We do try to give a subjective conclusion about the performance, backed by the provided examples.

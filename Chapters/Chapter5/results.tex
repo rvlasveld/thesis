@@ -25,9 +25,9 @@ The data sets were processed with different window lengths and $\sigma$ value fo
     \hline
     $\operatorname*{far}(Y)$ & 0 & 0.1 & 0.1 & 0.1 \\
     \hline
-    $\operatorname*{Average\_benefit}$ & 2.27 & 6.18 & 0.64 & 15.36 \\
+    $\operatorname*{Average\_delay}$ & 2.27 & 6.18 & 0.64 & 15.36 \\
     \hline
-    Standard deviation benefit & 1.19 & 7.94 & 0.92 & 17.70 \\
+    Standard deviation Delay & 1.19 & 7.94 & 0.92 & 17.70 \\
     \hline
   \end{tabulary}
   \caption[Results artificial data sets]{Parameter settings and results of the artificial data sets.}
@@ -37,11 +37,13 @@ The data sets were processed with different window lengths and $\sigma$ value fo
 \begin{figure}
 \centering
   \includegraphics[width=1\textwidth]{./Figures/chapter5/boxplot_results_artificial_sets.eps}
-  \caption[Box plot results artificial data sets]{Box plot of the results for the artificial data sets, indicating the number of data points difference between the actual and detected change points.}
+  \caption[Box plot results artificial data sets]{Box plot of the results for the artificial data sets, indicating the number of data points between the actual and closest detected change points. A lower and more compact box plot is better.}
   \label{fig:boxplot_artificial_sets}
 \end{figure}
 
 To give a better impression of the spread of the accuracy of the detected change points, a box plot for each data set is displayed in \Cref{fig:boxplot_artificial_sets} and are the results are visualized in \Cref{fig:plots_results_artificial_data_sets}.
+This last figure shows the number of data points between each actual and closest detected change point.
+Using the box plot notation, we can visualize not only the average but also the spread of the delay.
 With each data set embodying different characteristics, different observations can be drawn from the data sets.
 In the references figures, the blue lines represent the radius of the constructed hypersphere.
 The vertical red lines are the discovered change points.
