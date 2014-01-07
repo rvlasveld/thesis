@@ -52,3 +52,72 @@ In this subsection we will provide a few plots with characterizing parts of the 
 We use it to illustrate some aspects of the method, on which it performs well and where not.
 We do not provide all plots, because that would take up to much time.
 We do try to give a subjective conclusion about the performance, backed by the provided examples.
+
+
+\subsection{Notes: remarks}
+Mergen van change points:\\
+
+Aanpak 1: Na ieder gevonden change point een bepaalde periode $s$ alle anderen negeren. Probleem: je hebt dan bijna altijd na $s$ sowieso een `gevonden' change point.\\
+Aanpak 2: Alle change points die binnen $s$ van elkaar zitten mergen. Probleem: naar voren of naar achteren doen? Als je een heel lang blok hebt met CPs dicht bij elkaar, met mogelijk `echte' CPs, dan worden die ook genegeerd. Mogelijke oplossing: gebruik van `zekerheid' over de gevonden CPs om te mergen.
+
+Het ghosting treedt vooral op aan het begin van iedere run, met het `kaliberen': het begin van de echte activiteit zit er te dicht op en wordt niet goed herkend.
+
+Run 1 - Roemer\\
+
+\begin{itemize}
+  \item Doordat de thresholds niet adaptief zijn, wordt de gevoeligheid voor de hele methode globaal gezet.
+  Dit zorgt dat ruwe overgangen gevonden worden, maar subtielere worden overgeslagen.
+  Bijvoorbeeld: op 14s zit een overgang van rennen naar lopen, maar die is niet zo groot. Deze wordt niet gevonden, tenzij de gevoeligheid veel hoger gaat, maar dan krijg je weer teveel false positives. De overgang vlak erna, op 17s, gaat weer van lopen naar rennen en die wordt wel gevonden.
+  \item Op 33s van rennen naar lopen wordt juist weer wel goed gevonden.
+  \item Doordat in de data soms wel veranderingen zitten (die niet direct duidelijk zijn uit de video beelden) en change points dichtbij gemerged worden, kan er soms een groot verschil ontstaan. Bv op 8s en 9s. De changes op 7s en 10s worden gemist.
+  \item De overgang van rennen naar sprint(?) op 31s wordt gemist.
+\end{itemize}
+
+Run 2 - Jos \\
+\begin{itemize}
+  \item Op 37s is een annotate van rennen naar lopen. De methode detecteert het bijna een seconde eerder. Als je naar de ruwe data kijkt zie je daar ook een verandering, dus nog voordat je het uit de video-beelden zou opmerken --> heel subjectief dus.
+  \item Zelfde `ghosting' probleem als hierboven: bij overgang van Still naar Pocket wordt niets gevonden, doordat in de periode ervoor veel changes zijn. De data in `Still' is heel homogeen, dus kleine veranderingen worden als changes gezien, en die zijn er alsnog veel. --> \textbf{Hoe heterogener de data, hoe robuster}.
+\end{itemize}
+
+Run 3 - Roemer, around the corner \\
+\begin{itemize}
+  \item Met acc, mag, rot data is 90 graden CCW niet goed te vinden. Met mag,rot data wel --> te veel data is ook niet goed.
+  \item Het enige punt, de draai, wordt met mag,rot goed gevonden. (geen plot of data, want verder niet interessant). Ook Walk-in-hand, pocket en Out-pocket worden erg nauwkeurig gevonden!
+\end{itemize}
+
+Run 4 - Roemer, fountain \\
+\begin{itemize}
+  \item Na 24s: van Rennen naar Lopen, worden meerdere change points gevonden. In de data zie je ook dat iedere stap een rustigere stap is, dus de gevoeligheid pakt dat op.
+  \item De draaien in het Rennen rond 12s en 16s worden wel gevonden (bij hoge gevoeligheid, met delay), maar die rond 21s niet. (acc, mag, rot). Met alleen Rot ook niet.
+  \item Correct number of change points found, but still 11 total difference. Would be better if benchmarking periods (still, shake) would not be present. (overall geldt dat ook).
+  \item
+\end{itemize}
+
+Run 5 - Jos, fountain \\
+\begin{itemize}
+  \item Bij Acc,Mag,Rot worden de Turn CW punten niet goed gevonden. Bij alleen Rot wel (niet allemaal, maar wel beter).
+  \item Om bij Acc,Mag,Rot de Turn te vinden is hoge gevoeligheid nodig, maar dat geeft hoge FAR.
+  \item
+\end{itemize}
+
+Run 6 - Roemer, fountain \\
+\begin{itemize}
+  \item Om de overgang van rennen naar lopen op 18s te vinden is relatief hoge Low-threshold nodig (dus: hoge gevoeligheid).
+  \item Bij hoge Low-Threshold wordt draai op 24s ook gevonden. Anders niet.
+  \item Stilstaan op 38s geeft hele veel ruis in `thresholding' property. --> overgang naar lopen 2 sec later wordt niet goed gevonden. Komt doordat hypersphere heel klein wordt, en dus veel outliers?
+  \item
+\end{itemize}
+
+Run 7 - Jos, fountain \\
+Camera was leeg, dus mislukte run
+
+Run 8 - Marc, indoor \\
+\begin{itemize}
+  \item Op 24s, van Walk naar Downstairs: door het ghosting effect is het moeilijk te pakken. Relatief hoge merging-tijd nodig, maar dat verwijderd deze, omdat het begin van lopen dicht zit op het begin van downstairs.
+  \item Op 37s zit CCW Turn: is te herkennen (met acc, mag, rot) maar hoge gevoeligheid nodig.
+  \item In tweede downstairs block (24s) en upstairs blocken (42s, 54s) worden halverwege ook changes gevonden (met acc, mag, rot). Ook met alleen Acc: zit ook echt verschil in de data
+  \item Met alleen Mag data heel veel changes: cirkel-vorm van trap zorgt voor constante verandering.
+  \item Overall: hoge FAR, door cirkelvorm trap (?)
+  \item Verschil tussen down/upstairs en lopen is niet zo groot. Typisch: 33/34s: herkenning van overgang duurt even een stap.
+  \item Vooral op einde, vanaf 66s (lopen naar stoel), heel veel False Positives. Veel verschillende activiteiten kort op elkaar.
+\end{itemize}
