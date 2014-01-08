@@ -37,11 +37,15 @@ The following characterization requirements were set for our data sets:
 
 With these requirements in mind, we have created the following setup.
 All activities were recorded by a smartphone in the right front pants pocket of the subject.
-The phones that were used are the \textsc{HTC Sensation XE} and \textsc{HTC Desire}, running the \textsc{Anroid} smartphone operating system.
+The phones that were used are the \textsc{HTC Sensation XE} and \textsc{HTC Desire}, running the \textsc{Android} smartphone operating system.
 During the activities the intertial sensor data is recorded using a free application, \textsc{Sensor Logger}~\cite{sensorlogger}.
 This application records the sensor data to \textsc{CSV} files, which are then transformed to \textsc{MATLAB} compatible files.
 The constructed algorithm processes the data in an online manner (using only current and historic data).
 During the activities, the subject is recorded with a video camera to enable manual labeling and determination of the change points.
+
+\TODO{Mentiod and ref dd\_tools, libsvm}
+
+dd\_tools: \cite{Ddtools2013} and PR tools: \cite{van2005classification}.
 
 Using the video recordings, the data sets are manually annotated, as shown in the plots of \Cref{fig:plots_subject_2,fig:plots_subject_3}.
 The graph displays from a single recording the rotational-axis values (see \Cref{tab:recorded_metrics} for explanation of the metrics), with manually annotated activities above the data.

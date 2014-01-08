@@ -1,6 +1,8 @@
 % !TEX root = ../../main.tex
 \section{Results}\label{sec:real_world_results}
 
+\TODO{Add notion of \textbf{empirical} results.}
+
 In the first paragraph we will explain that we use the same quality measures as used in \Cref{sec:artificial_data_quality_metrics} for objective tabular results.
 We further argue that more important is the subjective, visual, inspection of the discovered change points regarding the sensor data.
 To give both results, we will first give a table and box plot, like in \Cref{sec:artificial_data_results}.
@@ -38,7 +40,104 @@ After that, we will show characterizing parts of the plots with annotated and di
   \label{tab:results_real_world}
 \end{table}
 
-\TODO{Box plot of the runs, like in Chapter 5}
+Here something to refer to \Cref{fig:boxplot_real_world_runs}, about what it shows.
+
+\begin{figure}
+\centering
+  \includegraphics[width=1\textwidth]{./Figures/chapter6/data_collection/boxplot_results_real_world_runs.eps}
+  \caption[Box plot results real-world runs]{Box plot of the results for the real-world runs, indicating the number of data points between the actual and closest detected change points. A lower and more compact box plot is better.}
+  \label{fig:boxplot_real_world_runs}
+\end{figure}
+
+We will state observations and remarks from the results which present and applicable to all the runs.
+After that, we will discuss special observations for each run individually.
+
+\TODO{Uitleggen over sensitivity: we willen die zo laag mogelijk vanwege stabiliteit.}
+
+About the overall performance and results, we have the following observations:
+\begin{itemize}
+  \item \textbf{Merging:} in our method we use a \emph{closeness} time period $t_c$ (usually up to $0.5$ - $1.0$ seconds) to merge discovered change points that have a very small distance between them.
+  Multiple merging-strategies can be applied, and in our method we use the naive implementation by simply ignoring all the discovered change points that occur less than $t_c$ seconds after the previous change point.
+  This works well when there is a block of noisy data with a high amount of (falsely) discovered change points.
+  On the flip side, this method will ignore real new change points which occur during the noisy period.
+  This problem on itself can be formulated as a change detection problem.
+  \item \textbf{Masking:} Since the parameters for the detection method are set globally, it is difficult to discover all the change points (and only the change points) without a high \gls{far}.
+  If a change point is proceeded by a noisy block, then the real change point will be merged with the previous change points.
+  In an other case, where a change point is very clear represented in the data but the next, close by, other change point is more subtle, the latter change point is \emph{masked} by the former.
+  This masking effect is also discussed in \cite{inclan1994use}, where an iterated approach is applied.
+  \item \textbf{False heterogeneity:} For our video-data synchronization, we started and ended each recording with a few seconds in which the recording smartphone was kept still in the air.
+  During this period, the data variance, and thus the constructed hypersphere, becomes very small.
+  As a results, even small movements are considered to be changes and in the case of the mid-air still smartphone a lot of false change points are detected.
+  Due to the merging effect described above, the final real change point (often shaking the smartphone) is not discovered.
+  \item \textbf{Incorrect weighting:} In our analyses we have used the data from the accelerometer, magnetic field, and rotation sensors.
+  In the segments which embodied movement in a circular manner (such as walking around a corner on the street, as in run 3 \TODO{add ref to image}), the turn was not discovered.
+  Alternatively, when we only used the magnetic field and rotation sensors, the turn was correctly discovered.
+  Other transitions, such as from walking to running, are harder to discover without the (linear) accelerometer sensor data.
+\end{itemize}
+
+\TODO{Add positive remarks}
+
+When looking at the individual runs, we have the following observations for each run number:
+\begin{enumerate}
+  \item \textbf{Subject 2, straight}
+    \begin{itemize}
+      \item The first transition from running to walking, around $14s$ is harder to discover than the transition for the same activities around $33s$.
+      This shows is that in real-world applications there is a diversity between the same transitions and activities.
+      \item Around $8s$, $9s$, and $16s$ a few steps (while walking) are regarded as change points.
+      During the running segments from $17s$ and $28s$ there is a lower probability of change for each step.
+    \end{itemize}
+  \item \textbf{Subject 1, straight}
+    \begin{itemize}
+      \item Following the video recordings, we have annotated a change point from running to walking around $37s$.
+      Our method discovers a change point almost a second before.
+      In retrospect, we can see that the data distribution indeed changes from the discovered change point on.
+      This shows us two important principles.
+      The first is that the annotations are very subjective.
+      The second is that between different activities the transition period is longer than we would think.
+      Looking at the data, we can see that the body slows down, even before we visually notice it on the video recordings.
+    \end{itemize}
+  \item \textbf{Subject 2, corner}
+    \begin{itemize}
+      \item The $90^{\circ}$ counter-clockwise turn during the walking activity is hard to discover when the accelerometer sensor data is included.
+      When only the magnetic field and rotation sensors are used, the turn requires a lower sensitivity.
+      With only these two sensors all the other change points in this run are also successfully discovered.
+    \end{itemize}
+  \item \textbf{Subject 2, fountain}
+    \begin{itemize}
+      \item Like in the first run, the walking segment from $24s$ results in a change point for each step.
+      Further inspection of the data reveals that each step is indeed different from the other.
+      Due to the global parameter settings, the sensitivity is too high for this segment to recognize it as one.
+      \item During the circular run, from $12s$ till $24$, there are two change points discovered.
+      The difference for the rotational vectors need to accumulate to a certain value before they have enough influence to let the rotation be regarded as a change point.
+      \TODO{Beter formuleren}.
+    \end{itemize}
+  \item \textbf{Subject 1, fountain}
+    \begin{itemize}
+      \item As with the other runs, the accelerometer data makes it harder to detect turns.
+      It requires a higher sensitivity, which results in a higher \gls{far}.
+    \end{itemize}
+  \item \textbf{Subject 2, fountain 2}
+    \begin{itemize}
+      \item During the standing segment around $38s$ there are a lot of false positives.
+      It seems to be the \emph{false heterogeneity} problem described above.
+    \end{itemize}
+  \setcounter{enumi}{7}
+  \item \textbf{Subject 3, indoor stairs}
+    \begin{itemize}
+      \item The walking segment around $22s$, between two segments of walking downstairs, shows little difference in the data.
+      To recognize it as a change point a high sensitivity and low closeness time period $t_c$ is required.
+      \item During some segments (downstairs from $24s$, upstairs from $42s$ and $54s$) the method discovers more change points than our annotation.
+      A closer inspecting of the raw data reveals indeed changes in behavior.
+      To exclude these (semi) false positives, a better tuning of parameters is required.
+      \item Because of the circular shape of the stairs, the magnetic field sensors constantly differs.
+      Although our method is build to exclude slow shifting changes (because we are only interested in sudden changes), with our used window width it still eventually results in change points.
+      \item The difference between taking the stairs and walking is smaller than, \eg, walking and running.
+      The delay between these segments seems to be larger, as illustrated around $33s$.
+    \end{itemize}
+\end{enumerate}
+
+\TODO{Add suggestion for adaptive parameter tuning, locally determined}
+
 
 Here comes a list of observations and conclusions on the performance:
 \begin{itemize}
