@@ -1,81 +1,21 @@
 % !TEX root = ../../main.tex
 \section{Data Gathering}\label{sec:data_gathering}
-\TODO{Determine subjects:}
-\begin{enumerate}
-  \item Roemer?
-  \item Jos?
-  \item Marc
-\end{enumerate}
-For our data sets of real world activities we have sampled both in- and outdoor activities.
+For our data sets of real-world activities we have sampled both in- and outdoor activities.
 The subjects performing the activities are three males, of an age around 25.
-We have used two series of recordings.
-The first series consists of various outdoor recordings with segments of walking, running and standing.
-Some activities are performed in a straight line, whilst others are performed around corners or in a wide circular direction.
-The second series consists mainly of walking up and down the stairs, with small vertical parts between the segments.
-The stairs are all in a circular shape.
+We have used four types of recordings.
+The first type (Run 1 and Run 2) consists of various outdoor recordings with segments of walking, running and standing.
+For the second type (Run 4, 5, and 6) some of the same activities are performed in a straight line, whilst others are performed around corners or in a wide circular direction.
+The third type (Run 8) consists mainly of walking up and down circular shaped stairs, with small horizontal parts between the segments.
+The last type is for Run 3, in which we walked in a straight line, took a $90^{\circ}$ counter-clockwise turn (around the corner) and continued walking.
+A more detailed description of the performed activities follows.
 
 \subsection{Outdoor straight lines}\label{subsec:outdoor_straight}
-The first series of outdoor performed activities consist of walking and running segments in a straight line.
+The first series of outdoor performed activities consist of standing still, walking, and running segments in a straight line.
 Halfway the recording is a $180^{\circ}$ turn.
-The activities consist of standing still, walking and running (both jogging and sprinting).
-The plots of \Cref{fig:plots_subject_2} shows the recordings of Subject $2$.
+The plots of \Cref{fig:plots_subject_1} shows the recordings of Subject $1$.
 The recorded metrics originate from the accelerometer, rotational and magnetometer sensors.
-The solid black lines indicate manually annoted change points, the dashes lines indicate the closest discovered change point.
+The solid black lines indicate manually annotated change points.
 A still from the video recording, showing Subject $2$ performing a (sprinting) run segment, is in \Cref{fig:stills_subject_2_sprinting}.
-
-
-% \begin{center}\begin{table}
-%   \begin{tabulary}{\textwidth}{|l|c|c|}
-%     \hline
-%     \multicolumn{3}{|c|}{Subj 1, run 1} \\
-%     \hline \hline
-%     Act. & Ann. & Disc. \\
-%     \hline
-%     Still & 0 & *0* \\
-%     \hline
-%     Shake & 3.5 & *3.5* \\
-%     \hline
-%     Still & 4.2 & *4.2* \\
-%     \hline
-%     In pocket & 5.5 & *5.5* \\
-%     \hline
-%     Walk & 7 & *7* \\
-%     \hline
-%     Run & 10 & *10* \\
-%     \hline
-%     Walk & 14 & *14* \\
-%     \hline
-%     Run & 17.2 & *17.2* \\
-%     \hline
-%     Walk & 22.1 & *22.1* \\
-%     \hline
-%     Turn CCW & 23.5 & *23.5* \\
-%     \hline
-%     Walk & 24.2 & *24.2* \\
-%     \hline
-%     Run (sprint) & 28 & *28* \\
-%     \hline
-%     Run & 31 & *31* \\
-%     \hline
-%     Walk & 33 & *33* \\
-%     \hline
-%     Run & 35.5 & *35.5* \\
-%     \hline
-%     Walk & 39 & *39* \\
-%     \hline
-%     Out pocket & 41 & *41* \\
-%     \hline
-%     Still & 43 & *43* \\
-%     \hline
-%     \hline
-%     \multicolumn{2}{|l|}{Ratio Total CPs} & 3.2 \\
-%     \hline
-%     \multicolumn{2}{|l|}{Sum of differences} & 12.341 \\
-%     \hline
-%   \end{tabulary}
-%   \caption[Performed activities subject 1 run 1]{The outdoor series performed activities by subject 1, run 1.}
-%   \label{tab:outdoor_series}
-% \end{table}\end{center}
 
 % ===== OUTDOOR FREE ACTIVITIES ========
 \subsection{Outdoor free}\label{subsec:outdoor_free}
@@ -83,9 +23,8 @@ The second series of outdoor recordings consist of more free-form activities.
 The performed activities consist, as with the first set, of standing, walking, and running.
 Furthermore, the segments are performed in a circular manner.
 \eg the running activities are performed around a fountain with an estimated diameter of 10 meters.
-The plots of the recordings of Subject, for the accelerometer, rotation, and magnetometer are shown in...
-\TODO{Add plots}
-For Subject~$1$ the still of the video recordings are in the upper row of \Cref{fig:stills_subject_1_and_2}, for Subject~$2$ in the lower row.
+The plots of the recordings of Subject 2, for the accelerometer, rotation, and magnetometer are shown in \Cref{fig:plots_subject_2}.
+For Subject~$2$ the still of the video recordings are in the upper row of \Cref{fig:stills_subject_1_and_2}, for Subject~$1$ in the lower row.
 
 \begin{figure}
   \centering
@@ -106,9 +45,30 @@ For Subject~$1$ the still of the video recordings are in the upper row of \Cref{
     \caption{Magnetic Field}
     \label{fig:recording_subject_1_run_1_magnetic}
   \end{subfigure} \\
-  \caption[Plots]{Annotated plots of a full recording performed by Subject~$2$. The vertical lines are manually determined change points. The label above each segment indicates the current performed activity.}\label{fig:plots_subject_2}
+  \caption[Plots run 1]{Annotated plots of a full recording performed by Subject~$1$. The vertical lines are manually determined change points. The label above each segment indicates the current performed activity.}\label{fig:plots_subject_1}
 \end{figure}
 
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{1\textwidth}
+    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-5-run-fountain-jos/data_plot_acc_annotated.eps}
+    \caption{Accelerometer}
+    \label{fig:recording_subject_2_run_5_accelerometer}
+  \end{subfigure}
+
+  \begin{subfigure}[b]{1\textwidth}
+    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-5-run-fountain-jos/data_plot_rot_annotated.eps}
+    \caption{Rotation}
+    \label{fig:recording_subject_2_run_5_rotation}
+  \end{subfigure} \\
+
+  \begin{subfigure}[b]{1\textwidth}
+    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-5-run-fountain-jos/data_plot_mag_annotated.eps}
+    \caption{Magnetic Field}
+    \label{fig:recording_subject_2_run_5_magnetic}
+  \end{subfigure} \\
+  \caption[Plots run 5]{Annotated plots of a full recording performed by Subject~$2$. The vertical lines are manually determined change points. The label above each segment indicates the current performed activity.}\label{fig:plots_subject_2}
+\end{figure}
 
 \begin{figure}
   \centering
@@ -152,7 +112,7 @@ For Subject~$1$ the still of the video recordings are in the upper row of \Cref{
 
 \subsection{Indoor stairs}\label{subsec:indoor_stairs}
 The final series of activities recorded consist of walking up and down the stairs, indoor.
-The stairs are shaped in an semi-circular form, with a small vertical segment on each floor.
+The stairs are shaped in an semi-circular form, with a small horizontal segment on each floor.
 The still of \Cref{fig:stills_subject_3_downstairs} illustrates the circular shape of the stairs.
 In \Cref{fig:stills_subject_3_upstairs} the small flat segment is visible.
 Between the stairs the subject walked in a hallway with a $180^{\circ}$ counter-clockwise turn, as shown in \Cref{fig:stills_subject_3_walking}.

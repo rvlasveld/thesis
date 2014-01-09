@@ -28,15 +28,15 @@ A video recording from the performed activity is used to annotate the time serie
 The discovered change point are compared with these annotated change points to give a subjective quality measure.
 In \Cref{Chapter6} we give a detailed analysis of the performed activities and the recorded data sets.
 
-For the experiments we used a HTC Sensation XE smartphone as recording device.
-The activities were recorded using a free Android application \cite{sensorlogger}.
+For the experiments we used a smartphone with inertial sensors as recording device.
+The activities were recorded using a free \textsc{Android} application \cite{sensorlogger}.
 This application was chosen for its convenient data format of the sensor recording and its regularity of the sampling interval.
 Table~\ref{tab:recorded_metrics} lists all the recorded metrics.
 For our expiments we used the data for the accelerometer, magnatief field and rotation.
 
-\TODO{Mention (and ref) dd\_tools, libsvm, etc}
-
-\TODO{Check duplicate of \Cref{sec:data_sets}}
+We implemented our algorithm in \textsc{MATLAB}.
+For the \gls{svdd} model construction phase we used the \textsc{dd\_tools} library by Tax \cite{Ddtools2013}, which is dependend on the \textsc{PR\_tools} package, originating from \cite{van2005classification}.
+In an earlier attempt we used the a \textsc{LibSVM} \cite{chang2011libsvm} add-on for the \gls{svdd} algorithm \cite{changrevisit}, but we had troubles making that implementation work with our data.
 
 \begin{center}\begin{table}
   \begin{tabulary}{\textwidth}{|l|L|c|c|}

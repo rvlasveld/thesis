@@ -27,7 +27,7 @@ Furthermore, it is not clear how the data is recorded and whether all activities
 \end{figure}
 
 Because of the above described shortcomings of commonly used data sets, we have decided to record activities by ourselves.
-The following characterization requirements were set for our data sets:
+The following characterizing requirements were set for our data sets:
 \begin{enumerate}
   \item The activities need to be performed and recorded in a continuous manner,
   \item The environment should be natural and uncontrolled, both in- and outdoor,
@@ -36,20 +36,20 @@ The following characterization requirements were set for our data sets:
 \end{enumerate}
 
 With these requirements in mind, we have created the following setup.
-All activities were recorded by a smartphone in the right front pants pocket of the subject.
-The phones that were used are the \textsc{HTC Sensation XE} and \textsc{HTC Desire}, running the \textsc{Android} smartphone operating system.
+All activities were recorded by a smartphone worn on body in the right front pants pocket of the subject.
+The used phones are the \textsc{HTC Sensation XE} and \textsc{HTC Desire}, running the \textsc{Android} smartphone operating system.
 During the activities the intertial sensor data is recorded using a free application, \textsc{Sensor Logger}~\cite{sensorlogger}.
 This application records the sensor data to \textsc{CSV} files, which are then transformed to \textsc{MATLAB} compatible files.
 The constructed algorithm processes the data in an online manner (using only current and historic data).
+The \textsc{MATLAB} implementation uses the \gls{svdd} library \textsc{dd\_tools} by Tax \cite{Ddtools2013}.
 During the activities, the subject is recorded with a video camera to enable manual labeling and determination of the change points.
+As illustrated in the top row of \Cref{fig:stills_subject_1_and_2}, the manual labeling is an ambiguous task.
+In \Cref{fig:stills_subject_2_change_point} a transition between walking and running is shown.
+It is impossible to determine the exact location of the change point and thus objective quality measures (such as the delay) are of less importance.
 
-\TODO{Mentiod and ref dd\_tools, libsvm}
-
-dd\_tools: \cite{Ddtools2013} and PR tools: \cite{van2005classification}.
-
-Using the video recordings, the data sets are manually annotated, as shown in the plots of \Cref{fig:plots_subject_2,fig:plots_subject_3}.
-The graph displays from a single recording the rotational-axis values (see \Cref{tab:recorded_metrics} for explanation of the metrics), with manually annotated activities above the data.
+Using the video recordings, the data sets are manually annotated, as shown in the plots of \Cref{fig:plots_subject_1,fig:plots_subject_2,fig:plots_subject_3}.
+The graphs display each from a single recording the inertial sensor values (see \Cref{tab:recorded_metrics} for explanation of the metrics), with manually annotated activities above the data.
 The manually determined change points are used to draw quality conclusion over the algorithm's performance, by comparing it to the discovered change points.
-All used data recordings, including the video material and manual labeling, are made available \cite{vlasveld2013continuous}.
-\TODO{Create web page with data sets}
+All of the used data sets, including the video material and manual labeling, are made publicly available \cite{vlasveld2013continuous} for further research.
+\TODO{Publish web page with data sets}
 The following section discusses the performed activities during the recordings.

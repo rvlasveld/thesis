@@ -1,22 +1,24 @@
 % !TEX root = ../../main.tex
 \section{Results}\label{sec:real_world_results}
+In this section we will provide the results of our methods applied to the real-world data sets and discuss the quality of the solution.
+As stated above, we will use the objective quality metrics as used in \Cref{sec:artificial_data_quality_metrics}.
+That will be in the form of a tabular overview of the (manually set) best meta-parameters and results, expressed in \gls{far} and $\operatorname*{Average\_delay}$ (following \Cref{sec:artificial_data_results}).
+Furthermore, we will discuss the results from an empirical point of view, since the problem of finding change points in human activities is ambiguous.
+By stating our observations and remarks and providing fragments of visual results, we will discuss the characterizing strengths and weaknesses of our method.
 
-\TODO{Add notion of \textbf{empirical} results.}
-
-In the first paragraph we will explain that we use the same quality measures as used in \Cref{sec:artificial_data_quality_metrics} for objective tabular results.
-We further argue that more important is the subjective, visual, inspection of the discovered change points regarding the sensor data.
-To give both results, we will first give a table and box plot, like in \Cref{sec:artificial_data_results}.
-After that, we will show characterizing parts of the plots with annotated and discovered change points.
-
-\subsection{Objective measure}
-
-\TODO{Table of search run (in the columns) and for each run the ratio of False Alarm Rate, Average benefit (closest CP) and STD benefit. Like chapter 5.}
+\subsection{Objective metrics}
+The employed two-stage algorithm requires the setting of user defined parameters.
+In \Cref{tab:results_real_world} for each run the results are listed, together with the used parameters.
+We have used a window length of 50 frames, which represents around $1.16$ seconds of data (the frame-rate of the recordings is not fixed, and we apply a slight filtering).
+The other parameter values are the result of an educated guess and manual optimization.
+In general, a high value for the upper threshold and low value for the lower threshold indicates a robust method, since it indicates that change points are significantly different from homogeneous segments.
+The closeness time frame should be low, since that indicates there are few false positives.
 
 \begin{table}
   \centering
   \begin{tabulary}{\textwidth}{|l|c|c|c|c|c|c|c|}
     \cline{2-8}
-    \multicolumn{1}{l|}{} & Run 1 & Run 2 & Run 3 & Run 4 & Run 5 & Run 6 & Run 8 \\
+    \multicolumn{1}{l|}{} & Run 1 & Run 2 & Run 3 & Run 4 & Run 5 & Run 6 & Run 7 \\
     \hline
     Window length & 50 & 50 & 50 & 50 & 50 & 50 & 50 \\
     \hline
@@ -40,7 +42,9 @@ After that, we will show characterizing parts of the plots with annotated and di
   \label{tab:results_real_world}
 \end{table}
 
-Here something to refer to \Cref{fig:boxplot_real_world_runs}, about what it shows.
+To give a better impression on the quality of the $\operatorname*{Average\_delay}$, \Cref{fig:boxplot_real_world_runs} shows a box plot for each run.
+It shows the spread of the $\operatorname*{Average\_delay}$ in seconds over all the change points.
+A lower and more compact box plot is better.
 
 \begin{figure}
 \centering
@@ -49,12 +53,13 @@ Here something to refer to \Cref{fig:boxplot_real_world_runs}, about what it sho
   \label{fig:boxplot_real_world_runs}
 \end{figure}
 
-We will state observations and remarks from the results which present and applicable to all the runs.
-After that, we will discuss special observations for each run individually.
+\subsection{Subjective observations and remarks}
+Since the manual annotation of change points is ambiguous, the objective quality metrics can give a distorted view of the performance.
+To overcome this, we will state observations and remarks found after close (visual) inspection of the annotated and discovered change points.
+We will start with general observations applicable to all the runs and will continue with individual remarks for each run.
+Where possible, a graphical illustration will support our observations.
 
-\TODO{Uitleggen over sensitivity: we willen die zo laag mogelijk vanwege stabiliteit.}
-
-About the overall performance and results, we have the following observations:
+Considering the overall performance and results, we have the following observations:
 \begin{itemize}
   \item \textbf{Merging:} in our method we use a \emph{closeness} time period $t_c$ (usually up to $0.5$ - $1.0$ seconds) to merge discovered change points that have a very small distance between them.
   Multiple merging-strategies can be applied, and in our method we use the naive implementation by simply ignoring all the discovered change points that occur less than $t_c$ seconds after the previous change point.
@@ -70,7 +75,7 @@ About the overall performance and results, we have the following observations:
   As a results, even small movements are considered to be changes and in the case of the mid-air still smartphone a lot of false change points are detected.
   Due to the merging effect described above, the final real change point (often shaking the smartphone) is not discovered.
   \item \textbf{Incorrect weighting:} In our analyses we have used the data from the accelerometer, magnetic field, and rotation sensors.
-  In the segments which embodied movement in a circular manner (such as walking around a corner on the street, as in run 3 \TODO{add ref to image}), the turn was not discovered.
+  In the segments which embodied movement in a circular manner (such as walking and running around a fountain), the turn was not (or at a different time point) discovered.
   Alternatively, when we only used the magnetic field and rotation sensors, the turn was correctly discovered.
   Other transitions, such as from walking to running, are harder to discover without the (linear) accelerometer sensor data.
 \end{itemize}
@@ -79,14 +84,14 @@ About the overall performance and results, we have the following observations:
 
 When looking at the individual runs, we have the following observations for each run number:
 \begin{enumerate}
-  \item \textbf{Subject 2, straight}
+  \item \textbf{Subject 2, straight walk and run}
     \begin{itemize}
       \item The first transition from running to walking, around $14s$ is harder to discover than the transition for the same activities around $33s$.
       This shows is that in real-world applications there is a diversity between the same transitions and activities.
       \item Around $8s$, $9s$, and $16s$ a few steps (while walking) are regarded as change points.
       During the running segments from $17s$ and $28s$ there is a lower probability of change for each step.
     \end{itemize}
-  \item \textbf{Subject 1, straight}
+  \item \textbf{Subject 1, straight walk and run}
     \begin{itemize}
       \item Following the video recordings, we have annotated a change point from running to walking around $37s$.
       Our method discovers a change point almost a second before.
@@ -96,13 +101,13 @@ When looking at the individual runs, we have the following observations for each
       The second is that between different activities the transition period is longer than we would think.
       Looking at the data, we can see that the body slows down, even before we visually notice it on the video recordings.
     \end{itemize}
-  \item \textbf{Subject 2, corner}
+  \item \textbf{Subject 2, walk around corner}
     \begin{itemize}
       \item The $90^{\circ}$ counter-clockwise turn during the walking activity is hard to discover when the accelerometer sensor data is included.
       When only the magnetic field and rotation sensors are used, the turn requires a lower sensitivity.
       With only these two sensors all the other change points in this run are also successfully discovered.
     \end{itemize}
-  \item \textbf{Subject 2, fountain}
+  \item \textbf{Subject 2, walk and run around fountain}
     \begin{itemize}
       \item Like in the first run, the walking segment from $24s$ results in a change point for each step.
       Further inspection of the data reveals that each step is indeed different from the other.
@@ -111,17 +116,16 @@ When looking at the individual runs, we have the following observations for each
       The difference for the rotational vectors need to accumulate to a certain value before they have enough influence to let the rotation be regarded as a change point.
       \TODO{Beter formuleren}.
     \end{itemize}
-  \item \textbf{Subject 1, fountain}
+  \item \textbf{Subject 1, walk and run around fountain}
     \begin{itemize}
       \item As with the other runs, the accelerometer data makes it harder to detect turns.
       It requires a higher sensitivity, which results in a higher \gls{far}.
     \end{itemize}
-  \item \textbf{Subject 2, fountain 2}
+  \item \textbf{Subject 2, walk and run fountain 2}
     \begin{itemize}
       \item During the standing segment around $38s$ there are a lot of false positives.
       It seems to be the \emph{false heterogeneity} problem described above.
     \end{itemize}
-  \setcounter{enumi}{7}
   \item \textbf{Subject 3, indoor stairs}
     \begin{itemize}
       \item The walking segment around $22s$, between two segments of walking downstairs, shows little difference in the data.
@@ -136,87 +140,14 @@ When looking at the individual runs, we have the following observations for each
     \end{itemize}
 \end{enumerate}
 
-\TODO{Add suggestion for adaptive parameter tuning, locally determined}
+\TODO{Samenvatten observations en remarks, brugje naar possible improvements maken}
 
+\section{Possible improvements}\label{sec:possible_improvements}
+From the above section we can extract a few possible improvements for the algorithm.
+Most of the observations and remarks are due to a different required sensitivity for local segments of the run.
+Currently, our method employs a global setting for the thresholds.
+A possible improvement would be to use locally optimized parameters, although that would require an reflective data processing approach or more a priori about the data.
+With our approach, the lack of a priori knowledge about the data distribution is one of the design decisions.
 
-Here comes a list of observations and conclusions on the performance:
-\begin{itemize}
-  \item \textbf{Perhaps something in bold:} here we list a funny observation.
-  \eg that when walking the circulair stairs it is harder to find the rotation on the flat surface.
-  \item Or just something else.
-\end{itemize}
-
-\subsection{Subjective measures}
-In this subsection we will provide a few plots with characterizing parts of the sensor data, annotated change points, and discovered change points.
-We use it to illustrate some aspects of the method, on which it performs well and where not.
-We do not provide all plots, because that would take up to much time.
-We do try to give a subjective conclusion about the performance, backed by the provided examples.
-
-
-\subsection{Notes: remarks}
-Mergen van change points:\\
-
-Aanpak 1: Na ieder gevonden change point een bepaalde periode $s$ alle anderen negeren. Probleem: je hebt dan bijna altijd na $s$ sowieso een `gevonden' change point.\\
-Aanpak 2: Alle change points die binnen $s$ van elkaar zitten mergen. Probleem: naar voren of naar achteren doen? Als je een heel lang blok hebt met CPs dicht bij elkaar, met mogelijk `echte' CPs, dan worden die ook genegeerd. Mogelijke oplossing: gebruik van `zekerheid' over de gevonden CPs om te mergen.
-
-Het ghosting treedt vooral op aan het begin van iedere run, met het `kaliberen': het begin van de echte activiteit zit er te dicht op en wordt niet goed herkend.
-
-Run 1 - Roemer\\
-
-\begin{itemize}
-  \item Doordat de thresholds niet adaptief zijn, wordt de gevoeligheid voor de hele methode globaal gezet.
-  Dit zorgt dat ruwe overgangen gevonden worden, maar subtielere worden overgeslagen.
-  Bijvoorbeeld: op 14s zit een overgang van rennen naar lopen, maar die is niet zo groot. Deze wordt niet gevonden, tenzij de gevoeligheid veel hoger gaat, maar dan krijg je weer teveel false positives. De overgang vlak erna, op 17s, gaat weer van lopen naar rennen en die wordt wel gevonden.
-  \item Op 33s van rennen naar lopen wordt juist weer wel goed gevonden.
-  \item Doordat in de data soms wel veranderingen zitten (die niet direct duidelijk zijn uit de video beelden) en change points dichtbij gemerged worden, kan er soms een groot verschil ontstaan. Bv op 8s en 9s. De changes op 7s en 10s worden gemist.
-  \item De overgang van rennen naar sprint(?) op 31s wordt gemist.
-\end{itemize}
-
-Run 2 - Jos \\
-\begin{itemize}
-  \item Op 37s is een annotate van rennen naar lopen. De methode detecteert het bijna een seconde eerder. Als je naar de ruwe data kijkt zie je daar ook een verandering, dus nog voordat je het uit de video-beelden zou opmerken --> heel subjectief dus.
-  \item Zelfde `ghosting' probleem als hierboven: bij overgang van Still naar Pocket wordt niets gevonden, doordat in de periode ervoor veel changes zijn. De data in `Still' is heel homogeen, dus kleine veranderingen worden als changes gezien, en die zijn er alsnog veel. --> \textbf{Hoe heterogener de data, hoe robuster}.
-\end{itemize}
-
-Run 3 - Roemer, around the corner \\
-\begin{itemize}
-  \item Met acc, mag, rot data is 90 graden CCW niet goed te vinden. Met mag,rot data wel --> te veel data is ook niet goed.
-  \item Het enige punt, de draai, wordt met mag,rot goed gevonden. (geen plot of data, want verder niet interessant). Ook Walk-in-hand, pocket en Out-pocket worden erg nauwkeurig gevonden!
-\end{itemize}
-
-Run 4 - Roemer, fountain \\
-\begin{itemize}
-  \item Na 24s: van Rennen naar Lopen, worden meerdere change points gevonden. In de data zie je ook dat iedere stap een rustigere stap is, dus de gevoeligheid pakt dat op.
-  \item De draaien in het Rennen rond 12s en 16s worden wel gevonden (bij hoge gevoeligheid, met delay), maar die rond 21s niet. (acc, mag, rot). Met alleen Rot ook niet.
-  \item Correct number of change points found, but still 11 total difference. Would be better if benchmarking periods (still, shake) would not be present. (overall geldt dat ook).
-  \item
-\end{itemize}
-
-Run 5 - Jos, fountain \\
-\begin{itemize}
-  \item Bij Acc,Mag,Rot worden de Turn CW punten niet goed gevonden. Bij alleen Rot wel (niet allemaal, maar wel beter).
-  \item Om bij Acc,Mag,Rot de Turn te vinden is hoge gevoeligheid nodig, maar dat geeft hoge FAR.
-  \item
-\end{itemize}
-
-Run 6 - Roemer, fountain \\
-\begin{itemize}
-  \item Om de overgang van rennen naar lopen op 18s te vinden is relatief hoge Low-threshold nodig (dus: hoge gevoeligheid).
-  \item Bij hoge Low-Threshold wordt draai op 24s ook gevonden. Anders niet.
-  \item Stilstaan op 38s geeft hele veel ruis in `thresholding' property. --> overgang naar lopen 2 sec later wordt niet goed gevonden. Komt doordat hypersphere heel klein wordt, en dus veel outliers?
-  \item
-\end{itemize}
-
-Run 7 - Jos, fountain \\
-Camera was leeg, dus mislukte run
-
-Run 8 - Marc, indoor \\
-\begin{itemize}
-  \item Op 24s, van Walk naar Downstairs: door het ghosting effect is het moeilijk te pakken. Relatief hoge merging-tijd nodig, maar dat verwijderd deze, omdat het begin van lopen dicht zit op het begin van downstairs.
-  \item Op 37s zit CCW Turn: is te herkennen (met acc, mag, rot) maar hoge gevoeligheid nodig.
-  \item In tweede downstairs block (24s) en upstairs blocken (42s, 54s) worden halverwege ook changes gevonden (met acc, mag, rot). Ook met alleen Acc: zit ook echt verschil in de data
-  \item Met alleen Mag data heel veel changes: cirkel-vorm van trap zorgt voor constante verandering.
-  \item Overall: hoge FAR, door cirkelvorm trap (?)
-  \item Verschil tussen down/upstairs en lopen is niet zo groot. Typisch: 33/34s: herkenning van overgang duurt even een stap.
-  \item Vooral op einde, vanaf 66s (lopen naar stoel), heel veel False Positives. Veel verschillende activiteiten kort op elkaar.
-\end{itemize}
+Furthermore, we discovered that sometimes, especially with movements incorporating circular motions, the addition of (linear) accelerometer data makes the discovery of change points harder.
+In such cases, each of the inertial sensor data streams should be relatively weighted (\eg using the covariance) in order to signal an overall change when it only occurs in one of the streams.

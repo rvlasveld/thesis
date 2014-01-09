@@ -56,17 +56,18 @@ Break into sections further down.
 In this research we have applied \gls{occ} methods to accelerometer data, recorded during the performance of various human activities, in order to create a temporal segmentation of those recordings.
 The goal was to find the change points between activities, assuming that it will aid better understanding of the sensor values.
 To do so, we used the \gls{svdd} algorithm by Tax~\cite{tax1999support}, following the method of applying it to a sliding window of data, as done by Camci~\cite{camci2010change}.
-Instead of using both the information whether a new data point is an outlier and the radius of the hypersphere to indicate change, we only used on the latter model properties.
+Instead of using both the information whether a new data point is an outlier and the radius of the hypersphere to indicate change, we only used the latter model properties.
 The increase of the radius of the constructed hypersphere, which encloses the data objects and increases with heterogeneous segments of data, is extracted and used for indication of change.
 
 \TODO{Write overview of this chapter. \emph{In the following section we will...}}
 
 
 \section{What is done}
-The scope of this research was the temporal segmentation of recordings, obtained from human activities.
+The scope of this research was the temporal segmentation of recordings obtained from human activities.
 This was performed in the wider context of activity classification.
 Currently, many algorithms obtain an implicit segmentation as a side-effect of direct activity classification.
 In this research the primary goal was finding a temporal segmentation, which is assumed to be able to aid the classification step.
+This problem is reduced to finding change points in temporal data sets originating from inertial sensors.
 
 We have considered a range of segmentation methods, from which the method by Camci~\cite{camci2010change} showed potential.
 It is based on the detection of outliers in a time series data, assuming that an increase of outliers indicates a change in the underlying generating model.
@@ -74,19 +75,20 @@ For the detection of outliers it uses the \gls{svdd} method by Tax~\cite{tax1999
 It tests every new data point with the constructed model; whether the data point is in or outside the model, and whether the model increases or decreases in radius size.
 The constructed sliding-window algorithm, \gls{svcpd}, is applied to artificial Gaussian noise data.
 
-In this research we have applied the method by Camci~\cite{camci2010change} to inertial signals, recorded by smartphones.
+In this research we have applied the method by Camci~\cite{camci2010change} to data from inertial sensors, recorded by smartphones.
 We have used the accelerometer data for measurement of speed, the gyroscope data for measurement of rotation, and the magnetometer to measure the direction and orientation of the performed activities.
-The constructed method reduces this 9-dimensional signal to a single property, obtained from the constructed model, which can be interpreted to indicate change.
+The proposed method reduces this 9-dimensional signal to a single property, obtained from the constructed model, which can be interpreted to indicate change.
 
 The constructed model follows the implementation of Tax and Laskov~\cite{tax2003online} for an incremental version of \gls{svdd}, \gls{isvdd}.
-This algorithm constructs a \gls{oc-svm} model by processing the data over a sliding window.
-The model represents a hypersphere from which the radius size is abstracted.
+This algorithm creates a \gls{oc-svm} model by processing the data over a sliding window.
+The model represents a hypersphere from which the radius size is extracted.
 That property is of interest since the assumption is that a heterogeneous window of data will show an increase of radius, in relation to a homogeneous segment of data.
 The homogeneous segment of data will have a relatively small radius since the data points will be close together, resulting from the continuity assumptions.
 
-To test our approach, we have used the same data as used in the experiments from Camci~\cite{camci2010change} and Takeuchi and Yamanishi~\cite{takeuchi2006unifying}.
+To test our approach, we have used the same data as used in the experiments from Camci~\cite{camci2010change} and Takeuchi and Yamanishi~\cite{takeuchi2006unifying}, for which the results are comparable with the original research (see \Cref{sec:artificial_data_results}).
 Furthermore, since this research is focused around human activities, we have recorded and manually annotated in- and outdoor activities.
 The discovered change points were compared to the annotated change points, obtained from video recordings.
+The results where discussed in \Cref{sec:real_world_results}.
 In this research we found that other public available and wide used common data sets, such as the WISDM~\cite{kwapisz2011activity} and UCI HAR~\cite{anguita2012human}, were not useful for our purpose, since the activities are non-continuously recorded.
 
 
@@ -132,6 +134,7 @@ Furture research could focus on extracted features that aid the detection of cha
 
 \TODO{Add future research on \gls{oc-svm} applications.}
 
+\TODO{Improvements of our method, \Cref{sec:possible_improvements}}
 
 What has not been covered? What is worthwhile.
 Show that I am thinking ahead and know the field of study.
