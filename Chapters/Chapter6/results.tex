@@ -56,10 +56,24 @@ A lower and more compact box plot is better.
 \subsection{Subjective observations and remarks}
 Since the manual annotation of change points is ambiguous, the objective quality metrics can give a distorted view of the performance.
 To overcome this, we will state observations and remarks found after close (visual) inspection of the annotated and discovered change points.
+In \Cref{fig:plots_all_runs_results} all the results are plotted.
+The black solid lines indicate our manual determined change points.
+The dashed purple lines indicate the change points as discovered by our method.
 We will start with general observations applicable to all the runs and will continue with individual remarks for each run.
 Where possible, a graphical illustration will support our observations.
 
-Considering the overall performance and results, we have the following observations:
+Overall our impression is that the proposed method is fairly good at recognizing change points.
+Depending on the parameters for the sensitivity adjustment, almost all changes are discovered.
+With a high sensitivity it seems, initially, the method produces many false positives.
+After closer inspecting of the data, we can confirm there is a change in the data, although the performed activity stayed the same.
+This is also a weakness of the method: since the sensitivity is set globally, it can produce many semi-false positive change points for some segments of a run.
+
+An other positive observation is that the method often recognizes a change point \emph{before} our annotation.
+Again, after closer inspection we can see that the data changes shape and distribution before we annotated a change based on the video recordings.
+This effect can be observed in the case of a transition from running to walking; the last `steps' of running are already recognized of being different.
+As with the above behavior, this is subject to parameter settings.
+
+Considering the overall performance and results, we have the following observations of cases in which the method has problems with detecting change:
 \begin{itemize}
   \item \textbf{Merging:} in our method we use a \emph{closeness} time period $t_c$ (usually up to $0.5$ - $1.0$ seconds) to merge discovered change points that have a very small distance between them.
   Multiple merging-strategies can be applied, and in our method we use the naive implementation by simply ignoring all the discovered change points that occur less than $t_c$ seconds after the previous change point.
@@ -80,18 +94,16 @@ Considering the overall performance and results, we have the following observati
   Other transitions, such as from walking to running, are harder to discover without the (linear) accelerometer sensor data.
 \end{itemize}
 
-\TODO{Add positive remarks}
-
 When looking at the individual runs, we have the following observations for each run number:
 \begin{enumerate}
-  \item \textbf{Subject 2, straight walk and run}
+  \item \textbf{Subject 2, straight walk and run} \Cref{fig:data_with_cps_run_1}
     \begin{itemize}
       \item The first transition from running to walking, around $14s$ is harder to discover than the transition for the same activities around $33s$.
       This shows is that in real-world applications there is a diversity between the same transitions and activities.
       \item Around $8s$, $9s$, and $16s$ a few steps (while walking) are regarded as change points.
       During the running segments from $17s$ and $28s$ there is a lower probability of change for each step.
     \end{itemize}
-  \item \textbf{Subject 1, straight walk and run}
+  \item \textbf{Subject 1, straight walk and run} \Cref{fig:data_with_cps_run_2}
     \begin{itemize}
       \item Following the video recordings, we have annotated a change point from running to walking around $37s$.
       Our method discovers a change point almost a second before.
@@ -101,32 +113,33 @@ When looking at the individual runs, we have the following observations for each
       The second is that between different activities the transition period is longer than we would think.
       Looking at the data, we can see that the body slows down, even before we visually notice it on the video recordings.
     \end{itemize}
-  \item \textbf{Subject 2, walk around corner}
+  \item \textbf{Subject 2, walk around corner} \Cref{fig:data_with_cps_run_3}
     \begin{itemize}
       \item The $90^{\circ}$ counter-clockwise turn during the walking activity is hard to discover when the accelerometer sensor data is included.
       When only the magnetic field and rotation sensors are used, the turn requires a lower sensitivity.
       With only these two sensors all the other change points in this run are also successfully discovered.
     \end{itemize}
-  \item \textbf{Subject 2, walk and run around fountain}
+  \item \textbf{Subject 2, walk and run around fountain} \Cref{fig:data_with_cps_run_4}
     \begin{itemize}
       \item Like in the first run, the walking segment from $24s$ results in a change point for each step.
       Further inspection of the data reveals that each step is indeed different from the other.
       Due to the global parameter settings, the sensitivity is too high for this segment to recognize it as one.
+      It could also be that our used window-length is too small, to model a good representation of this segment.
       \item During the circular run, from $12s$ till $24$, there are two change points discovered.
       The difference for the rotational vectors need to accumulate to a certain value before they have enough influence to let the rotation be regarded as a change point.
-      \TODO{Beter formuleren}.
+
     \end{itemize}
-  \item \textbf{Subject 1, walk and run around fountain}
+  \item \textbf{Subject 1, walk and run around fountain} \Cref{fig:data_with_cps_run_5}
     \begin{itemize}
       \item As with the other runs, the accelerometer data makes it harder to detect turns.
       It requires a higher sensitivity, which results in a higher \gls{far}.
     \end{itemize}
-  \item \textbf{Subject 2, walk and run fountain 2}
+  \item \textbf{Subject 2, walk and run fountain 2} \Cref{fig:data_with_cps_run_6}
     \begin{itemize}
       \item During the standing segment around $38s$ there are a lot of false positives.
       It seems to be the \emph{false heterogeneity} problem described above.
     \end{itemize}
-  \item \textbf{Subject 3, indoor stairs}
+  \item \textbf{Subject 3, indoor stairs} \Cref{fig:data_with_cps_run_7}
     \begin{itemize}
       \item The walking segment around $22s$, between two segments of walking downstairs, shows little difference in the data.
       To recognize it as a change point a high sensitivity and low closeness time period $t_c$ is required.
@@ -140,7 +153,53 @@ When looking at the individual runs, we have the following observations for each
     \end{itemize}
 \end{enumerate}
 
-\TODO{Samenvatten observations en remarks, brugje naar possible improvements maken}
+\begin{figure}
+  \centering
+  \begin{subfigure}{1\textwidth}
+    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-1-walk-run-roemer/data_plot_acc_with_discovered_cps.eps}
+    \caption{Run 1}
+    \label{fig:data_with_cps_run_1}
+  \end{subfigure}
+
+  \begin{subfigure}{1\textwidth}
+    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-2-walk-run-jos/data_plot_acc_with_discovered_cps.eps}
+    \caption{Run 2}
+    \label{fig:data_with_cps_run_2}
+  \end{subfigure}
+
+  \begin{subfigure}{1\textwidth}
+    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-3-walk-turn-roemer/data_plot_acc_with_discovered_cps.eps}
+    \caption{Run 3}
+    \label{fig:data_with_cps_run_3}
+  \end{subfigure}
+
+  \begin{subfigure}{1\textwidth}
+    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-4-run-fountain-roemer/data_plot_acc_with_discovered_cps.eps}
+    \caption{Run 4}
+    \label{fig:data_with_cps_run_4}
+  \end{subfigure}
+
+  \begin{subfigure}{1\textwidth}
+    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-5-run-fountain-jos/data_plot_acc_with_discovered_cps.eps}
+    \caption{Run 5}
+    \label{fig:data_with_cps_run_5}
+  \end{subfigure}
+
+  \begin{subfigure}{1\textwidth}
+    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-6-walk-run-roemer/data_plot_acc_with_discovered_cps.eps}
+    \caption{Run 6}
+    \label{fig:data_with_cps_run_6}
+  \end{subfigure}
+
+  \begin{subfigure}{1\textwidth}
+    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/stairs-1-marc/data_plot_acc_with_discovered_cps.eps}
+    \caption{Run 7}
+    \label{fig:data_with_cps_run_7}
+  \end{subfigure}
+
+  \caption[Results run 1/8]{Annotated plots of all runs. The black vertical lines are manually determined change points, the purple dashes lines are the discovered change points. The label above each segment indicates the current performed activity.}\label{fig:plots_all_runs_results}
+\end{figure}
+
 
 \section{Possible improvements}\label{sec:possible_improvements}
 From the above section we can extract a few possible improvements for the algorithm.
