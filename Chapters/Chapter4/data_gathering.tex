@@ -39,6 +39,7 @@ For the \gls{svdd} model construction phase we used the \textsc{dd\_tools} libra
 In an earlier attempt we used the a \textsc{LibSVM} \cite{chang2011libsvm} add-on for the \gls{svdd} algorithm \cite{changrevisit}, but we had troubles making that implementation work with our data.
 
 \begin{center}\begin{table}
+  \caption[Measured metrics]{Measured metrics. The set of axis is always the triple (x, y, z) direction.}
   \begin{tabulary}{\textwidth}{|l|L|c|c|}
     \hline
     Metric & Description & Units of measure & Typical range \\
@@ -60,6 +61,6 @@ In an earlier attempt we used the a \textsc{LibSVM} \cite{chang2011libsvm} add-o
     Rotation & Measre of rotation around the device's rotation axis. & Unitless & $-1$ -- $1$\\
     \hline
   \end{tabulary}
-  \caption[Measured metrics]{Measured metrics. The set of axis is always the triple (x, y, z) direction.}
+
   \label{tab:recorded_metrics}
 \end{table}\end{center}
