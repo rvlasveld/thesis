@@ -9,7 +9,7 @@ Sch{\"o}lkopf \etal \cite{scholkopf1999support} applies Vapnik's principle, to n
 In the case of novelty detection, they argue there is no need for density estimation of the distribution.
 Simple algorithms estimate the density by considering how many data points fall in a region of interest.
 The \gls{nu-svm} method instead starts with the number of data points that should be within the region and estimates a region with that desired property.
-It builds on the method of Vapnik and Vladimir \cite{vapnik1963pattern}, which characterizes a set of data by separating it from the origin.
+It builds on the method of Vapnik and Vladimir \cite{vapnik1963pattern}, which characterizes a set of data points by separating it from the origin.
 The \gls{nu-svm} method adds the kernel method, allowing non-linear decision functions, and incorporates `softness' by the $\nu$-parameter.
 Whereas the method in \cite{vapnik1963pattern} focuses on two-class problems, the \gls{nu-svm} method introduces the method the one-class problems.
 
@@ -31,10 +31,8 @@ By using an \gls{oc-svm} the method is able to detect changes in mean variance.
 Especially the detection of variance \emph{decrease} is an improvement over other methods that rely in the \gls{kl} divergence, since these are unable to detect decreases in variance \cite{takeuchi2006unifying}.
 This main research subject of this thesis is to apply the method of Camci \cite{camci2010change} to sensor data (such as accelerometer time series) obtained by on-body smartphones.
 
-The inner workings of \glspl{oc-svm} are discussed in detail in \Cref{sec:one_class_svm}.
-
-\TODO{Add notion of `supervised' vs `unsupervised' learning. \gls{oc-svm} is unsupervised.}
-
+The following chapter discusses \gls{occ}, \gls{oc-svm}, and change detection through \gls{oc-svm} in detail.
+It will show that the used implementation of \gls{oc-svm} is an example of the Type 3 semi-supervised learning methods, in the system of Hodge and Austin~\cite{hodge2004survey}.
 
 % \section{Change-detection by Support Vector Machines}\label{svm}
 % \TODO{REMOVE THIS SECTION?}

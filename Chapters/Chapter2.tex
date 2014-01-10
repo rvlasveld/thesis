@@ -8,53 +8,68 @@
 \lhead{Chapter 2. \emph{Literature review}} % This is for the header on each page - perhaps a shortened title
 
 %----------------------------------------------------------------------------------------
-\section{Outline}
-\emph{Not intented for the reader.}
-\begin{itemize}
-  \item Literature review about Temporal Segmentation (previous draft was more about classification)
-  \item Consider methods for the context of filter-methods for classification
-  \item Take a loot at 3-4 different kind of methods for change detection:
-    \begin{itemize}
-      \item Introduction with a lot of techniques
-      \item Explain why look at a few
-      \item CUSUM - or other more traditional methods
-      \item Density-ratio estimation
-      \item Support Vector Machines (?) - if there are more sources about this
-      \item (Dimensionality reduction) --> probably not
-      \item \emph{Not to much attention to all techniques, focus is on SVM}
-    \end{itemize}
-  \item With each method, shortly look at characteristics, strengths and weaknesses and consider applicability to accelerometer sensor data
-\end{itemize}
+% \section{Outline}
+% \emph{Not intented for the reader.}
+% \begin{itemize}
+%   \item Literature review about Temporal Segmentation (previous draft was more about classification)
+%   \item Consider methods for the context of filter-methods for classification
+%   \item Take a loot at 3-4 different kind of methods for change detection:
+%     \begin{itemize}
+%       \item Introduction with a lot of techniques
+%       \item Explain why look at a few
+%       \item CUSUM - or other more traditional methods
+%       \item Density-ratio estimation
+%       \item Support Vector Machines (?) - if there are more sources about this
+%       \item (Dimensionality reduction) --> probably not
+%       \item \emph{Not to much attention to all techniques, focus is on SVM}
+%     \end{itemize}
+%   \item With each method, shortly look at characteristics, strengths and weaknesses and consider applicability to accelerometer sensor data
+% \end{itemize}
 
 
-\section{Statistical framework}\label{statistical-framework}
+% \section{Statistical framework}\label{statistical-framework}
 
 
--- Nieuwe indeling Chapter 2 --
+% -- Nieuwe indeling Chapter 2 --
 
-\begin{description}
-  \item[Intro/outline] Introduction and overview of this chapter. Put in the context of temporal classification.
-  \item[Temporal segmentation] Give overview of used temporal segmentation methods, move towards a split in model building/dimensionality reduction and change detection methods
-  \item[Dimensionality reduction] Explain that \gls{dr} can be useful in data processing. Name a few techniques, make bridge to \gls{oc-svm}.
-  \item[Change detection] Describe methods for \emph{direct} change detection. End with notion
-    \begin{description}
-      \item[Model fitting]
-      \item[Cusum]
-      \item[Density ratio]
-    \end{description}
-  \item[Support Vector Machine based methods]
+% \begin{description}
+%   \item[Intro/outline] Introduction and overview of this chapter. Put in the context of temporal classification.
+%   \item[Temporal segmentation] Give overview of used temporal segmentation methods, move towards a split in model building/dimensionality reduction and change detection methods
+%   \item[Dimensionality reduction] Explain that \gls{dr} can be useful in data processing. Name a few techniques, make bridge to \gls{oc-svm}.
+%   \item[Change detection] Describe methods for \emph{direct} change detection. End with notion
+%     \begin{description}
+%       \item[Model fitting]
+%       \item[Cusum]
+%       \item[Density ratio]
+%     \end{description}
+%   \item[Support Vector Machine based methods] test
 
-\end{description}
-\input{./Chapters/Chapter2/overview.tex}
+% \end{description}
+As described in \Cref{Chapter1}, the focus of this research is the application of temporal segmentation to accelerometer data.
+This is with the assumption that explicit temporal segmentation can aid the process of temporal classification.
+
+\TODO{Give examples of temporal classification techniques}
+
+In recent years a lot is research is performed in the classification of human activities, recorded by on-body sensors.
+Especially since smartphones with accelerometer sensors became more available, research has focused on recordings from these devices.
+
+\TODO{Include highlights from old-classification text}
+
+In the following of this chapter we will start with an overview of statistical models used in this field of study.
+That section will act as a starting point to look at the different types, applications and methods of temporal segmentation.
+The next section, \Cref{sec:literature_review_temporal_segmentation} follows the distinction made and looks at a collection of temporal segmentation and change detection methods.
+It will also relate the concept of \gls{occ} to temporal segmentation and change detection.
+The final section of this chapter, \Cref{sec:literature_review_svm}, will discuss a specific class of algorithms for \gls{occ}, namely the methods that use \glspl{svm} for the classification task.
+
 \input{./Chapters/Chapter2/statistical_models.tex}
 \input{./Chapters/Chapter2/temporal_segmentation.tex}
-\input{./Chapters/Chapter2/change_detection_methods.tex}
+% \input{./Chapters/Chapter2/change_detection_methods.tex}
 
--- OLD --
+% -- OLD --
 
 %----------------------------------------------------------------------------------------
 % CUSUM and GLR
-\input{./Chapters/Chapter2/cusum}
+% \input{./Chapters/Chapter2/cusum}
 
 %----------------------------------------------------------------------------------------
 % Density Ratio Estimation
