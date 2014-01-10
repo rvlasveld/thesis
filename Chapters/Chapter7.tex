@@ -7,60 +7,17 @@
 
 \lhead{Chapter 7. \emph{Conclusion}} % This is for the header on each page - perhaps a shortened title
 
-%----------------------------------------------------------------------------------------
-\section{Outline}
-\emph{Not intended for the reader.}
-\begin{itemize}
-  \item Tie together, integrate, synthesize all the issues from the chapters, reflecting on introductory thesis statements.
-  \item Provide answers to research questions
-  \item Highlight study limitations
-  \item Directions for further research.
-  \item Content: Summarize
-  \begin{itemize}
-    \item What have I researched
-    \item Main arguments
-    \item How researched
-    \item What discovered
-    \item What pre-existing views were challenged (?)
-  \end{itemize}
-  \item Overview of
-  \begin{itemize}
-    \item New knowledge
-    \item Significance of research
-    \item Limitations (data, concepts)
-    \item Speculations on implications of research
-    \item Further research and development, or: links with different fields, other methods applied to same data.
-  \end{itemize}
-  \item Must: make clear statement of my original contribution
-  \item Ideally:
-  \begin{itemize}
-    \item Shows links across key ideas spread in chapters
-    \item Show commitment and enthusiasm for research
-    \item Positive impression
-  \end{itemize}
-  \item Avoid:
-  \begin{itemize}
-    \item claim findings that have not been proven
-    \item introducing new data/concepts
-    \item Be self-critical, but dont put weaknesses or limitation in research
-    \item Too long/too short
-  \end{itemize}
-\end{itemize}
-
-
-Paragraph: into on conclusion; what have I researched and what is my contribution.
-Break into sections further down.
-
-===
-
 In this research we have applied \gls{occ} methods to accelerometer data, recorded during the performance of various human activities, in order to create a temporal segmentation of those recordings.
 The goal was to find the change points between activities, assuming that it will aid better understanding of the sensor values.
 To do so, we used the \gls{svdd} algorithm by Tax~\cite{tax1999support}, following the method of applying it to a sliding window of data, as done by Camci~\cite{camci2010change}.
 Instead of using both the information whether a new data point is an outlier and the radius of the hypersphere to indicate change, we only used the latter model properties.
 The increase of the radius of the constructed hypersphere, which encloses the data objects and increases with heterogeneous segments of data, is extracted and used for indication of change.
 
-\TODO{Write overview of this chapter. \emph{In the following section we will...}}
-
+In the following section we will further discuss the proposed method for temporal segmentation of inertial sensor signals from human activities.
+Our main findings and contributions are discussed in \Cref{sec:main_findings}.
+The limitations of our method and research is subject of \Cref{sec:limitations}.
+These two sections are followed by our suggestions for future research.
+\Cref{sec:final_remarks} is the final section of this thesis.
 
 \section{What is done}
 The scope of this research was the temporal segmentation of recordings obtained from human activities.
@@ -77,7 +34,7 @@ The constructed sliding-window algorithm, \gls{svcpd}, is applied to artificial 
 
 In this research we have applied the method by Camci~\cite{camci2010change} to data from inertial sensors, recorded by smartphones.
 We have used the accelerometer data for measurement of speed, the gyroscope data for measurement of rotation, and the magnetometer to measure the direction and orientation of the performed activities.
-The proposed method reduces this 9-dimensional signal to a single property, obtained from the constructed model, which can be interpreted to indicate change.
+The proposed method, as discussed in \Cref{Chapter4}, reduces this 9-dimensional signal to a single property, obtained from the constructed model, which can be interpreted to indicate change.
 
 The constructed model follows the implementation of Tax and Laskov~\cite{tax2003online} for an incremental version of \gls{svdd}, \gls{isvdd}.
 This algorithm creates a \gls{oc-svm} model by processing the data over a sliding window.
@@ -91,58 +48,75 @@ The discovered change points were compared to the annotated change points, obtai
 The results where discussed in \Cref{sec:real_world_results}.
 In this research we found that other public available and wide used common data sets, such as the WISDM~\cite{kwapisz2011activity} and UCI HAR~\cite{anguita2012human}, were not useful for our purpose, since the activities are non-continuously recorded.
 
-
-
-\TODO{In the above, refer to the corresponding chapters/sections.}
-
-\section{Main findings}
-What we have found, show links across chapters.
-
-For each finding a different paragraph.
-How did we arrive at this finding, and it challenges/improves on previous research.
-Not just a summary, but the effects and implications.
-
+\section{Main findings / Contributions}\label{sec:main_findings}
+\TODO{Vraag aan Anne: wat is een goede titel voor deze section? Of moeten we Findings en Contributions splitsen?}
 While temporal segmentation of time series data is not uncommon, the application to inertial signals is currently not under much research attention.
-It is applied in other contexts, such as motion tracking and first person vision sensing, the segmentation obtained from inertial signals is often the implicit result of classification.
+For other contexts it has been applied, such as motion tracking \cite{barbivc2004segmenting,li2007segmentation}.
+In the context of human activities the segmentation obtained from inertial sensor signals is often an implicit result of classification.
 
-\section{Contributions}
+In this research we have shown that it is possible to explicitly obtain a temporal segmentation, expressed as change points, of activities performed by humans.
+This was performed in a real-world setting, showing the robustness of the method for noisy data.
+Since manual labeling (the annotation of change points on the time series data) of human activities is ambiguous we have put emphasis on the subjective inspection of the results.
+The proposed method gives fairly good results, although parameter tuning is a subject of furter research.
 
+Our method is based on and a slightly simplification of the \gls{svcpd} by Camci~\cite{camci2010change}.
+We have tested our proposed method with the same artificial data and did not find a deterioration in the results.
 
-\section{Other research}
-Relate the finding with earlier research.
-Provide similarities and differences.
-Better/worse results?
+This research is, as far as we know, the first application of \gls{oc-svm} based methods to on-body worn inertial sensor signals, such as accelerometer data.
+Furthermore, it applies the algorithms, amongst others of Tax and Duin~\cite{tax1999support}, to real-world data.
+We have shown that the assumption of a change the performed activity results, due to a change in the data distribution, in an increase of the hypersphere's radius.
+This increase, and a similar decrease in the case of homogeneous activity distribution in the current window, can be used for an indication of change.
 
-\section{Limitations}
-Show what limitations were encountered or decided (data collection, scope).
-Note the focus of the limitations and how they worked together (to get positive note).
-This can create bridge to "future research".
+Finally, due to encountered problems with commonly used data sets \cite{kwapisz2011activity,anguita2012human}, we have recorded our real-world data sets by ourselves.
+We have recorded all the activities with a smartphone worn in the right front pocket of the subjects.
+Furthermore, we have recorded the performing subjects from the third person point of view with a video camera.
+This allows for better interpretation of the results.
+All the recorded data is made publicity available~\cite{vlasveld2013continuous}.
 
-\section{Future research}
+\TODO{Toevoegen: samenvatting van resultaten uit \Cref{Chapter6}: de subjectieve waarnemingen?}
+
+\section{Limitations}\label{sec:limitations}
+Our proposed method was constructed under the assumption that an explicit temporal segmentation of inertial sensor data can aid the process of activity classification.
+We have expressed the problem of temporal segmentation as finding change points in the time series data.
+Since this is the first application of \gls{oc-svm} based algorithms to real-world accelerometer data, we have limited ourselves to creating a first method.
+The (results of the) proposed method is subject to parameters, which we have set manually based on empirical results and experience.
+
+We have applied our method to real-world data, recorded in 7 runs.
+For a better and more robust analysis of the algorithm it can be applied to more real-world data.
+Although we have recorded and publicized our used data, application to other commonly used data sets would enable a fair comparison.
+Furthermore, since the manual annotation of change points is an ambiguous task, the results are very subjective.
+
+\section{Future research}\label{sec:further_research}
 The motivation for this research was, amonst others, the assumption that an explicit temporal segmentation of inertial signals can be used to obtain a better classification of the performed activities.
 There are two reasons for that.
 First, since the segmentation adds information about sequential data points (whether they belong to the same class), the a priori knowledge about the distribution changes.
 Second, the window of data used for model construction can be much larger (than the often used length of 1-3 seconds).
 This enables a better mathematical model to be constructed.
 A future research in this line of assumptions is to compare the performance of classification methods using this obtained temporal segmentation and those that do not.
+This would confirm of reject the assumption that a temporal segmentation enables a better classification.
+
+As discussed in the previous section, the parameters for our proposed method (such as the \gls{svdd} settings and \gls{rbf} width $\sigma$), are set manually and globally.
+For further research we advise to create an automated optimization method for the parameters.
+Furthermore, to overcome the \emph{masking} effect discussed in \Cref{sec:real_world_results}, a method which determines the parameters locally should obtain better results.
 
 Since the temporal segmentation of inertial signal is not yet a very active field of study, more studies can be performed to obtain it.
-In our approach we have used the raw data directly.
+In our approach we have used (all) the raw data directly.
 In the field of activity recognition many methods make use of pre-processing steps, from which one step often is feature extraction from the raw data.
 That, and other pre-processing steps, could be incorporated in the explicit temporal segmentation of inertial signals.
-Furture research could focus on extracted features that aid the detection of change points.
+Future research could focus on extracted features that aid the detection of change points.
 
-\TODO{Add future research on \gls{oc-svm} applications.}
+In that same line, we have encountered situations in which the exclusion of some sensors, \eg the accelerometer, yields better results.
+This occurs mainly in situations where a rotation is part of the change (\eg walking around a corner).
+Thus depending on the desired granularity of the segmentation, it can be beneficial to disregard some of the time series data.
+Determining (dynamically) which sensors should be, and which should not be, used in the model construction phase (known as \emph{feature selection}) could be a subject of further research.
 
-\TODO{Improvements of our method, \Cref{sec:possible_improvements}}
+Finally, the application of \gls{oc-svm} based methods to new types of data is an interesting subject for further research in itself.
+It creates a powerful non-linear classification solution and combined with optimization techniques can reduce problems of relatively high dimensionality to a single (or a few) dimensions.
 
-What has not been covered? What is worthwhile.
-Show that I am thinking ahead and know the field of study.
-
-
-
-\section{Final section}
-Reminding of original contribution and significance.
-This section is the overall conclusion and thus should be very concise and precise.
-
-\TODO{Formulate the research questions in the introduction of thesis, and in the chapters.}
+\section{Final words}\label{sec:final_remarks}
+In this research we have constructed a method to create a temporal segmentation of inertial sensor time series data, originating from performed human activities.
+To this end we have applied \gls{occ} and \gls{oc-svm} based method to our own recorded data sets.
+We followed the approach by Camci~\cite{camci2010change} and used the theory and implementation of \gls{svdd} by Tax~\cite{tax2001one,Ddtools2013}.
+Although the performance of the method heavily depends on user set parameters, the results are promising.
+We believe that the temporal segmentation of time series data can aid the process of activity classification, which is a logical follow-up on this research.
+\TODO{Hier nog meer samenvatten?}
