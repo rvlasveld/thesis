@@ -23,21 +23,21 @@
 % Two sections of a time series data can be generated with the same underlying pdf or each with a different.
 
 Many approaches to detect change points monitor the logarithm of the likelihood ratio between two consecutive intervals.
-A change is point is regarded to be the moment in time when the underlying probabisitic generation function changes.
+A change point is regarded to be the moment in time when the underlying probabilistic generation function changes.
 Some methods which rely on this are novelty detection, maximum-likelihood estimation and online learning of autoregressive models \cite{kawahara2009change}.
 A limitation of these methods is that they rely on pre-specified parametric models.
-Non-parametric models for density estimation have been proposed, but it is said to be a hard problem \cite{hardle2004nonparametric, sugiyama2012density}.
-A solutions to this is to estimate the \emph{ratio} of probabilities instead of the probabilities themselves.
+Nonparametric models, for which the number and nature of the parameters are undetermined, for density estimation have been proposed, but it is said to be a hard problem \cite{hardle2004nonparametric, sugiyama2012density}.
+A solution to this is to estimate the \emph{ratio} of probabilities instead of the probabilities themselves.
 One of the recent methods to achieve this is the \gls{kliep} by Sugiyama \etal \cite{sugiyama2008direct}.
 
-The method proposed by Kawahara and Sugiyama \cite{kawahara2009change} is composed of an online version of the \gls{kliep} algorithm.
+The method proposed by Kawahara and Sugiyama~\cite{kawahara2009change} is composed of an online version of the \gls{kliep} algorithm.
 The method also considers \emph{sequences} of samples (rather than samples directly) because the time series samples are generally not independent over time.
-An advantage over other non-parametric approaches, such as sequential one-class support vector machines, is that the model has an natural cross-validation procedure.
+An advantage over other nonparametric approaches, such as sequential one-class support vector machines, is that the model has a natural cross-validation procedure.
 This makes that the value of tuning parameters, such as the kernel bandwidth, can be objectively obtained.
 
 In their formulation change is detected by monitoring the logarithm of the likelihood ratio between the reference (past) and test (current) time intervals
 \begin{equation}
-  S = \sum_{i=1}^{n_\text{te}} \text{ln} \frac{p_{\text{te}}(\matrixsym{Y}_\text{te}(i))}{p_\text{rf}(\matrixsym{Y}_\text{te}(i))}
+  S = \sum_{i=1}^{n_\text{te}} \text{ln} \frac{p_{\text{te}}(\matrixsym{Y}_\text{te}(i)}{p_\text{rf}(\matrixsym{Y}_\text{te}(i))}
 \end{equation}
 Where $\matrixsym{Y}_\text{te}(i)$ is a sequence of samples from the test interval.
 A change is detected when $S > \mu$, for some predetermined threshold $\mu$.
@@ -55,4 +55,4 @@ Finally the logarithm of the likelihood ratio is evaluated.
 If it is above the threshold $\mu$ the current time is reported as a change point.
 
 Improvements in this line of research by Liu \etal \cite{liu2013change} has led the application of improved density-ratio estimation methods to the problem of change detection.
-Such an improvement is the Unconstrained Least-Squares Importance Fitting (uLSIF) method \cite{kanamori2009least} and an extension which possesses a superior non-parametric convergence property: Relative uLSIF (RuLSIF) \cite{yamada2013relative}.
+Such an improvement is the Unconstrained Least-Squares Importance Fitting (uLSIF) method \cite{kanamori2009least} and an extension which possesses a superior nonparametric convergence property: Relative uLSIF (RuLSIF) \cite{yamada2013relative}.

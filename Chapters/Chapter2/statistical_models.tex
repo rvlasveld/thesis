@@ -1,46 +1,46 @@
 % !TEX root = ../../main.tex
 \section{Statistical models}\label{sec:literature_review_statistical_models}
 Many applications require the detection of time points at which the underlying properties of a system change.
-Often this problem is formulated in a statistical framework, by inspecting the underlying data generating \gls{pdf} of the time series data.
+Often this problem is formulated in a statistical framework, by inspecting the \gls{pdf} of the time series data at specific time windows.
 A change point is then defined as a significant change in the properties of the \gls{pdf}, such as the mean and variance.
 
 The widely used \gls{cusum} method by Basseville \etal \cite{basseville1993detection} follows this approach.
-It originates from control methods for detection from benchmarks.
+It originates from quality control and benchmarking methods for manufacturing processes.
 This method, and some derivatives, are discussed and analyzed in \Cref{subsec:literature_review_temporal_segmentation_cusum}.
 
-Many methods rely on pre-specified parametric model assumptions and considers the data be independent over time, which makes it less flexible to real-world applications.
-The methods proposed by Kawahara \etal \cite{kawahara2009change} and Lui \etal \cite{liu2013change} try to overcome these problems by estimating the \emph{ratio} between the \glspl{pdf}, instead of estimating each \gls{pdf}.
+Many methods rely on pre-specified parametric model assumptions and consider the data to be independent over time, which makes it less flexible to real-world applications.
+The methods proposed by Kawahara \etal \cite{kawahara2009change} and Lui \etal \cite{liu2013change} try to overcome these problems by estimating the \emph{ratio} between the \glspl{pdf} of time windows, instead of estimating each \gls{pdf}.
 This approach is discussed and analyzed in \Cref{sec:density-ratio}.
 
 The density-estimation methods rely on the log-likelihood ratio between \glspl{pdf}.
 The method of Camci~\cite{camci2010change} follows an other approach within the statistical framework, by using a \gls{svm}.
 One problem it tries to overcome is the (claimed) weakness of many methods to detect a decrease in variance.
-The method represents the distribution over the data points as a hypersphere in a higher dimension using the kernel trick.
+The method represents the distribution over the data points as a hypersphere in a higher dimension.
 A change in the \gls{pdf} is represented by a change in the radius of this sphere.
 In \Cref{sec:literature_review_svm} more applications of the \gls{svm}-based methods are discussed.
 Since \gls{occ} and the \gls{oc-svm} method is central in our approach, \Cref{sec:one_class_classification,sec:one_class_svm} discuss these techniques in detail.
 
-In the search for the change in properties, temporal segmentation and change point detection methods can roughly be categorized in three methods in the way the data is processed, as discussed by Avci \etal \cite{avci2010activity}:
-\begin{itemize}
-  \item \textbf{Top-Down} methods iteratively divide the signal in segments by splitting at the best location.
+In the search for the change in properties, temporal segmentation and change point detection methods can roughly be categorized in four methods in the way the data is processed, as discussed by Avci \etal \cite{avci2010activity}:
+\begin{enumerate}
+  \item \textbf{Top-Down} methods iteratively divide the signal in segments by splitting at the most optimal location.
   The algorithm starts with two segments and completes when a certain condition is met, such as when an error value or number of segments $k$ is reached.
   % These methods process the data points recursively, which results in a complexity of $O(n^2k)$.
   \item \textbf{Bottom-Up} methods are the natural complement to top-down methods.
   They start with creating $n/2$ segments and iteratively join adjacent segments while the value of a cost function for that operation is below a certain value.
-  \item \textbf{Sliding-window} methods are simple and intuitive for online segmenting purposes.
+  \item \textbf{Sliding Window} methods are simple and intuitive for online segmentation.
   It starts with a small initial subsequence of the time series.
-  New data points are joined in the segment until the fit-error is above a threshold.
-  Since the data is only processed very locally, these methods can yield in poor results \cite{keogh2001online}.
-  \item \textbf{\acrlong{swab}}, as introduced by Keogh \etal \cite{keogh2001online}, combines the ability of the sliding window mechanism to process time series online and the bottom-up approach the create superior segments in terms of fit-error.
+  New data points are added to the current segment until the fit-error is above a threshold.
+  % Since the data is only processed very locally, these methods can yield in poor results \cite{keogh2001online}.
+  \item \textbf{\acrlong{swab}}, as introduced by Keogh \etal \cite{keogh2001online}, combines the ability of the sliding window mechanism to process time series online and the bottom-up approach to create superior segments in terms of fit-error.
   The algorithm processes the data in two stages.
   The first stage is to join new data points in the current segment created by a sliding window.
-  The second stage processes the data using Bottom-Up and return the first segment as the final result.
-  Since this second stage retains some (semi-)global view of the data, the results are comparative with normal Bottom-Up.
-\end{itemize}
-It is clear that for the application of this research sliding-window and preferably \gls{swab}-based algorithms should be considered.
-In the following we will dicuss classes of algorithms grouped by the type of decision function, assuming a \gls{swab}-based data processing order.
+  The second stage processes the data using Bottom-Up and returns the first segment as the final result.
+  Since this second stage retains some (semi-)global view of the data, the results are comparative with normal Bottom-Up while being able to process the data in an online manner.
+\end{enumerate}
+For the application of this research Sliding Window and preferably \gls{swab}-based algorithms will be considered.
+In the following sections we discuss classes of algorithms grouped by the type of decision function, assuming a \gls{swab}-based data processing order.
 
 % CUSUM
-A widely used class of methods is based on the \gls{cusum} approach by Basseville \etal \cite{basseville1993detection}.
-This approach originates from control methods for detection and faults and benchmarking.
-In \Cref{subsec:literature_review_temporal_segmentation_cusum} a further overview of this class of methods is discussed.
+% A widely used class of methods is based on the \gls{cusum} approach by Basseville \etal \cite{basseville1993detection}.
+% This approach originates from control methods for detection and faults and benchmarking.
+% In \Cref{subsec:literature_review_temporal_segmentation_cusum} a further overview of this class of methods is discussed.

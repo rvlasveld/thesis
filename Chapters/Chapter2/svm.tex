@@ -1,34 +1,36 @@
 % !TEX root = ../../main.tex
 \section{Support Vector Machines in Change Detection}\label{sec:literature_review_svm}
 
-Many proposals in the field of remote sensing and \gls{har} make use of \glspl{svm} as a (supervised) model learning method.
+Many proposals in the field of \gls{har} make use of \glspl{svm} as a (supervised) model learning method.
 An elaborate overview of applications is given in \cite{mountrakis2011support}.
 In this section we review methods of change detection based on the applications of \glspl{svm} as model construction method.
 A number of proposals have been made using this method.
 Sch{\"o}lkopf \etal \cite{scholkopf1999support} applies Vapnik's principle, to never solve a problem which is more general than the one that one is actually interested in, to novelty detection.
-In the case of novelty detection, they argue there is no need for density estimation of the distribution.
+In the case of novelty detection, they argue there is no need for a full density estimation of the distribution.
 Simple algorithms estimate the density by considering how many data points fall in a region of interest.
 The \gls{nu-svm} method instead starts with the number of data points that should be within the region and estimates a region with that desired property.
 It builds on the method of Vapnik and Vladimir \cite{vapnik1963pattern}, which characterizes a set of data points by separating it from the origin.
 The \gls{nu-svm} method adds the kernel method, allowing non-linear decision functions, and incorporates `softness' by the $\nu$-parameter.
-Whereas the method in \cite{vapnik1963pattern} focuses on two-class problems, the \gls{nu-svm} method introduces the method the one-class problems.
+Whereas the method in \cite{vapnik1963pattern} focuses on two-class problems, the \gls{nu-svm} method solves one-class problems.
 
 The method introduced by Ma and Perkins \cite{ma2003time} creates a \emph{projected phase} of a time series data, which is intuitively equal to applying a high-pass filter to the time series.
-The projected phase of the time series combines a history or data points to a vector, which are then classified by the \gls{nu-svm} method.
+The projected phase of the time series combines a history of data points to a vector, which are then classified by the \gls{nu-svm} method.
 The method is applied to a simple synthetic sinusoidal signal with small additional noise and a small segment with large additional noise.
 The algorithm is able to detect that segment, without false alarms.
 
 The algorithms of \glspl{svm} has been applied to the problem of \gls{har}, as by Anguita \etal \cite{anguita2012human}.
 In that research a multi-class classification problem is solved using \glspl{svm} and the One-Vs-All method.
-The method exploits fixed-point arithmetic to create a hardware-friendly algorithm, which can be executed on a smartphone.\footnote{Smartphones have limited resources and thus require energy-efficient algorithms. In \cite{anguita2007hardware} a Hardware-Friendly \gls{svm} is introduced. It uses less memory, processor time and power consumption, with a loss of precision.}
+The method exploits fixed-point arithmetic to create a hardware-friendly algorithm, which can be executed on a smartphone.\footnote{Smartphones have limited resources and thus require energy-efficient algorithms. Anguita \etal \cite{anguita2007hardware} introduce a Hardware-Friendly \gls{svm}. It uses less memory, processor time, and power consumption, with a loss of precision.}
 
 With the same concepts as \gls{nu-svm}, the \gls{svdd} method by Tax and Duin \cite{tax1999support,tax2004support} uses a separating hypersphere (in contrast with a hyperplane) to characterize the data.
 The data points that lie outside of the created hypersphere are considered to be outliers, which number is a pre-determined fraction of the total number of data points.
 
 The method by Yin \etal \cite{yin2008sensor} uses the \gls{svdd} method in the first phase of a two-phase algorithm to filter commonly available normal activities.
 The \gls{svcpd} method of Camci \cite{camci2010change} uses \gls{svdd} applies it to time-series data.
-By using an \gls{oc-svm} the method is able to detect changes in mean variance.
-Especially the detection of variance \emph{decrease} is an improvement over other methods that rely in the \gls{kl} divergence, since these are unable to detect decreases in variance \cite{takeuchi2006unifying}.
+By using an \gls{oc-svm} the method is able to detect changes in mean and variance.
+Especially the detection of variance \emph{decrease} is an improvement over other methods that
+%rely in the \gls{kl} divergence, since these
+are unable to detect decreases in variance \cite{takeuchi2006unifying}.
 This main research subject of this thesis is to apply the method of Camci \cite{camci2010change} to sensor data (such as accelerometer time series) obtained by on-body smartphones.
 
 The following chapter discusses \gls{occ}, \gls{oc-svm}, and change detection through \gls{oc-svm} in detail.
