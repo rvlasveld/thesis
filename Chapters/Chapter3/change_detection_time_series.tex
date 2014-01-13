@@ -1,5 +1,5 @@
 % !TEX root = ../../main.tex
-\section{Problem Formulation Change Detection}\label{sec:change_detection_time_series}
+\section{Problem Formulation of Change Detection}\label{sec:change_detection_time_series}
 % \TODO{Write section introduction} \\
 % \emph{The section should relate the problem of outlier detection to change detection.
 % It should transform the traditional problem formulation to that of time series data.
@@ -22,13 +22,13 @@ The problem of change point detection can be formulated using different type of 
 The methods by Takeuchi and Yamanishi \cite{takeuchi2006unifying} and Camci \cite{camci2010change} use the following formulation for change detection, which we will also use for our problem formulation.
 The algorithm searches for sudden changes in the time series data.
 In other words, slowly changing properties in the data are not considered to be changes.
-Considered a time series $x_1 x_1 \dots$, which is drawn from a stochastic process $p$.
-Each $x_t$ (t = 1, 2, \dots) is a $d$-dimensional real valued vector and $p$ a probability density function of the sequence $x_1 x_2 \dots$.
-Assume $p$ can be decomposed in two different \gls{iid} stationary stochastic processes $p^1$ and $p^2$ and are one-dimensional Gaussian density functions.
-For a time point $a$ data points for which $t < a$ are drawn from $p^1 = N(\mu_1, \sigma_1^2)$ and for $t \geq a$ from $p^2 = N(\mu_2, \sigma_a^2)$.
-If $p^1$ and $p^2$ are different, then the time point $t = a$ is a \emph{change point}.
-In \cite{takeuchi2006unifying} the similarity between the stochastic processes are expressed by the \gls{kl} divergence $D(p^2||p^1)$.
-It is observed that this measure is not able to detect a change by decrease in variance \cite{takeuchi2006unifying,camci2010change}.
+Considered a time series $x_1, x_2, \dots$, which is drawn from a stochastic process $p$.
+Each $x_t$ (t = 1, 2, \dots) is a $d$-dimensional real valued vector.
+Assume $p$ can be ``decomposed'' in two different \gls{iid} stationary one-dimensional Gaussian processes $p^{(1)}$ and $p^{(2)}$.
+For a time point $a$ data points for which $t < a$ are drawn from $p^{(1)} = N(\mu_1, \sigma_1^2)$ and for $t \geq a$ from $p^{(2)} = N(\mu_2, \sigma_2^2)$.
+If $p^{(1)}$ and $p^{(2)}$ are different, then the time point $t = a$ is a \emph{change point}.
+Takeuchi and Yamanishi~\cite{takeuchi2006unifying} expess the similarity between the stochastic processes with the \gls{kl} divergence $D(p^2||p^1)$.
+It is observed that their method is not able to detect a change by decrease in variance \cite{takeuchi2006unifying,camci2010change}.
 This problem is the motivation for Camci \cite{camci2010change} to create the \gls{svcpd} algorithm.
 
 The definition of change point being sudden changes in the time series data is in line with the search of changes in activities.

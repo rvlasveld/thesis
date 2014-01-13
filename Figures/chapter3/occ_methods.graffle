@@ -372,8 +372,8 @@
 			<integer>140</integer>
 			<key>Points</key>
 			<array>
-				<string>{279.33968466398318, 89.99999101601459}</string>
-				<string>{279.02504687526823, 142.50000898398542}</string>
+				<string>{279.339667871232, 89.99999101601459}</string>
+				<string>{279.02499712475861, 142.5000089839854}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -522,7 +522,7 @@
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 Density Estimators}</string>
+\f0\fs24 \cf0 Density Estimation}</string>
 			</dict>
 			<key>TextPlacement</key>
 			<integer>0</integer>
@@ -610,7 +610,7 @@
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2013-10-22 13:49:45 +0000</string>
+	<string>2014-01-13 14:44:03 +0000</string>
 	<key>Modifier</key>
 	<string>Roemer Vlasveld</string>
 	<key>NotesVisible</key>
