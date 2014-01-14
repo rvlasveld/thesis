@@ -1,30 +1,30 @@
 % !TEX root = ../../main.tex
 \section{Quality metrics}\label{sec:artificial_data_quality_metrics}
-For an objective measure of quality of the proposed method applied to the four aforementioned data sets, we employ two metrics, inspired by and slighty altered from Takeuchi and Yamanishi~\cite{takeuchi2006unifying}.
-The first metric is the $\operatorname*{average \_ delay}$, for which we first need to define the notion of $\operatorname*{delay}$ for each change:
+For an objective measure of quality of the proposed method applied to the four aforementioned data sets, we employ two metrics, inspired by and slightly altered from Takeuchi and Yamanishi~\cite{takeuchi2006unifying}.
+The first metric is the average delay $d_{avg}$, for which we first need to define the notion of delay $d$ for each change:
 \begin{equation}\label{eq:delay}
-  \operatorname*{delay}(y) = |t_y - t_y^*|,
+  d(y) = |t_y - t_y^*|,
 \end{equation}
 where $t_y$ is the time of the closest discovered change point and $t_y^*$ is the true change time.
-We can then define the $\operatorname*{average \_ delay}$ over all the discovered change points $Y$ as:
+We can then define the $d_{avg}$ over all the discovered change points $Y$ as:
 \begin{equation}\label{eq:average_delay}
-  \operatorname*{average \_ delay}(Y) = \frac{\sum_{y=1}^Y \operatorname*{delay}(y)}{Y}.
+  d_{avg}(Y) = \frac{\sum_{y=1}^Y d(y)}{Y}.
 \end{equation}
 Besides the delay, which should be low to indicate discovered change points near the actual change point, we need to penalize discovered change points which do not relate to a true change point.
-For this we use the \acrlong{far}, expressed as
+For this we use the \acrlong{far} $\gamma$, expressed as
 \begin{equation}\label{eq:false_alarm_rate}
-  \operatorname*{far}(Y) = \frac{Y_{\operatorname*{false}}}{Y}.
+  \gamma(Y) = \frac{Y_{\operatorname*{false}}}{Y}.
 \end{equation}
 
-For a high quality method the $\operatorname*{average\_delay}$ and the $\operatorname*{far}(Y)$ should both be low.
+For a high quality method the average delay $d_{avg}$ and \gls{far} $\gamma$ should both be low.
 In our results we will also list the parameters used, since these need to be user-defined and are part of the (manual) optimization process.
 The parameters are:
 \begin{itemize}
   \item \textbf{Window length}: The window length that is processed by the \gls{svdd} algorithm. This is the number of data points that are continuously modeled in the shape in a hypersphere.
-  \item \textbf{Sigma of \gls{rbf}}: The value of $\sigma$ for the \gls{rbf} kernel. The effect of this parameter is discussed in \Cref{subsec:svm_model_parameters}.
+  \item \textbf{Sigma of \gls{rbf}}: The value of $\sigma$ for the \gls{rbf} kernel. The effect of this parameter has been discussed in \Cref{subsec:svm_model_parameters}.
   \item \textbf{High threshold}: The $th_\text{high}$ threshold value for the \gls{rt} method described in \Cref{subsec:ratio_thresholding}. A higher value indicates a more precise and robust setting.
   \item \textbf{Low threshold}: The $th_\text{low}$ threshold value for the \gls{rt} method described in \Cref{subsec:ratio_thresholding}. A lower value indicates a more precise and robust setting.
   \item \textbf{Closeness}: In the post-processing phase the detected change points which are within a certain \emph{closeness} range will be merged together. This parameter indicates the minimal number of data points that change points must differ in order to be considered separate detections.
 \end{itemize}
-For all the sets we have used a value of $C = 0.1$, which indicated that $10\%$ of the data points are used as outliers.
+For all the sets we have used a value of $C = 0.1$, which indicates that $10\%$ of the data points were considered to be outliers.
 This is a normal setting for the \gls{svdd} method.

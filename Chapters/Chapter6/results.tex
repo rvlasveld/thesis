@@ -9,8 +9,8 @@ By stating our observations and remarks and providing fragments of visual result
 \subsection{Objective metrics}
 The employed two-stage algorithm requires the setting of user defined parameters.
 In \Cref{tab:results_real_world} for each run the results are listed, together with the used parameters.
-We have used a window length of 50 frames, which represents around $1.16$ seconds of data (the frame-rate of the recordings is not fixed, and we apply a slight filtering).
-The other parameter values are the result of an educated guess and manual optimization.
+We have used a window length of 50 frames, which represents around $1.16$ seconds of data (the frame-rate of the recordings is not fixed).
+The other parameter values, \ie the \gls{rbf} $\sigma$, high and low threshold and closeness factor, are the result of an educated guess and manual optimization.
 In general, a high value for the upper threshold and low value for the lower threshold indicates a robust method, since it indicates that change points are significantly different from homogeneous segments.
 The closeness time frame should be low, since that indicates there are few false positives.
 
@@ -54,10 +54,11 @@ A lower and more compact box plot is better.
 \end{figure}
 
 \subsection{Subjective observations and remarks}
-Since the manual annotation of change points is ambiguous, the objective quality metrics can give a distorted view of the performance.
+It can be ambiguous where to place the (manually annotated) change points, in the case of real world data.
+The objective quality measure can give a distorted view on the performance.
 To overcome this, we will state observations and remarks found after close (visual) inspection of the annotated and discovered change points.
 In \Cref{fig:plots_all_runs_results} all the results are plotted.
-The black solid lines indicate our manual determined change points.
+The black solid lines indicate our manually determined change points.
 The dashed purple lines indicate the change points as discovered by our method.
 We will start with general observations applicable to all the runs and will continue with individual remarks for each run.
 Where possible, a graphical illustration will support our observations.
@@ -65,7 +66,7 @@ Where possible, a graphical illustration will support our observations.
 Overall our impression is that the proposed method is fairly good at recognizing change points.
 Depending on the parameters for the sensitivity adjustment, almost all changes are discovered.
 With a high sensitivity it seems, initially, the method produces many false positives.
-After closer inspecting of the data, we can confirm there is a change in the data, although the performed activity stayed the same.
+After closer inspecting of the data, we can confirm that there is a change in the data, although the performed activity stayed the same.
 This is also a weakness of the method: since the sensitivity is set globally, it can produce many semi-false positive change points for some segments of a run.
 
 An other positive observation is that the method often recognizes a change point \emph{before} our annotation.
@@ -205,7 +206,7 @@ When looking at the individual runs, we have the following observations for each
 From the above section we can extract a few possible improvements for the algorithm.
 Most of the observations and remarks are due to a different required sensitivity for local segments of the run.
 Currently, our method employs a global setting for the thresholds.
-A possible improvement would be to use locally optimized parameters, although that would require an reflective data processing approach or more a priori about the data.
+A possible improvement would be to use locally optimized parameters, although that would require an reflective data processing approach or more a priori information about the data.
 With our approach, the lack of a priori knowledge about the data distribution is one of the design decisions.
 
 Furthermore, we discovered that sometimes, especially with movements incorporating circular motions, the addition of (linear) accelerometer data makes the discovery of change points harder.

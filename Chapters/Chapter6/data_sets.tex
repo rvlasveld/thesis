@@ -1,6 +1,6 @@
 % !TEX root = ../../main.tex
 \section{Data Sets}\label{sec:data_sets}
-In the previous chapter we have applied our method to the artificial data sets from \cite{camci2010change,takeuchi2006unifying}.
+In the previous chapter we have applied our method to the artificial data sets from Camci~\cite{camci2010change} and Takeuchi and Yamanishi~\cite{takeuchi2006unifying}.
 In this chapter we apply the method to real-world data sets.
 The data sets come from inertial sensor data recorded during human activities, such as walking, running, ascending and descending stairs, and standing still.
 To compare our results with other research, we have tried to apply our method to two commonly used data sets.
@@ -31,14 +31,14 @@ The following characterizing requirements were set for our data sets:
 \begin{enumerate}
   \item The activities need to be performed and recorded in a continuous manner,
   \item The environment should be natural and uncontrolled, both in- and outdoor,
-  \item There data should be clearly annotated, as objective as possible,
+  \item The data should be clearly annotated, as objective as possible,
   \item The required hardware (and software) should be widely available.
 \end{enumerate}
 
 With these requirements in mind, we have created the following setup.
 All activities were recorded by a smartphone worn on body in the right front pants pocket of the subject.
 The used phones are the \textsc{HTC Sensation XE} and \textsc{HTC Desire}, running the \textsc{Android} smartphone operating system.
-During the activities the intertial sensor data is recorded using a free application, \textsc{Sensor Logger}~\cite{sensorlogger}.
+During the activities the inertial sensor data is recorded using a free application, \textsc{Sensor Logger}~\cite{sensorlogger}.
 This application records the sensor data to \textsc{CSV} files, which are then transformed to \textsc{MATLAB} compatible files.
 The constructed algorithm processes the data in an online manner (using only current and historic data).
 The \textsc{MATLAB} implementation uses the \gls{svdd} library \textsc{dd\_tools} by Tax \cite{Ddtools2013}.

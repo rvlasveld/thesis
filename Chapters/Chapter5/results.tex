@@ -24,9 +24,9 @@ The data sets were processed with different window lengths and $\sigma$ value fo
     Closeness & 10 & 10 & 10 & 50 \\
     \hline
     \hline
-    $\operatorname*{far}(Y)$ & 0 & 0.1 & 0.1 & 0.1 \\
+    $\gamma(Y)$ & 0 & 0.1 & 0.1 & 0.1 \\
     \hline
-    $\operatorname*{Average\_delay}$ & 2.27 & 6.18 & 0.64 & 15.36 \\
+    $d_{avg}$ & 2.27 & 6.18 & 0.64 & 15.36 \\
     \hline
     Standard deviation Delay & 1.19 & 7.94 & 0.92 & 17.70 \\
     \hline
@@ -50,7 +50,7 @@ The vertical red lines are the discovered change points.
 For each data set the following is observed:
 \begin{enumerate}
   \item \textbf{Fixed increasing mean:} In \Cref{fig:camci_fixed_increasing_mean_thresholds} we see that each change point is almost equally fast and accurate detected.
-  This implies that the relative difference between the means of the Gaussian distribution has no effect on the detectability of the algorithm.
+  This implies that the relative difference between the means of the Gaussian distribution has little effect on the detectability of the algorithm.
   \item \textbf{Reduced increasing mean:} \Cref{fig:takeuchi_reduced_increasing_mean_thresholds} shows that the absolute difference between the means of the Gaussian distribution is a certain influence to the detectability.
   Although all change points are correctly detected (at the beginning of the series are two outliers), the change in radius becomes less significant at every change point.
   \item \textbf{Reduced increasing mean, increasing variance:} In \Cref{fig:camci_takeuchi_alternating_variance_thresholds} we see the same effect, in regard to the mean, as with the previous data set.
