@@ -7,13 +7,13 @@ Still, one would like to classify new data points as regular, in-class, or out-o
 With that problem only data examples from one class are available and the objective is to recognize new data points that are not part of that class.
 This unsupervised learning problem is closely related to density estimation.
 In that context, the problem can be the following.
-Assume an underlying probability distribution $P$ and a data point $\vectorsym{x}$ drawn from this distibution.
-The goal is to find a subset $S$ of the input space, such that the probability that $\vectorsym{x}$ lies outside of $S$ equals some predetermined value $\nu$ between $0$ and $1$ \cite{scholkopf1999support}.
+Assume an underlying probability distribution $P$ and a data point $\vectorsym{x}$ drawn from this distribution.
+The goal is to find a subset $S$ of the input space, such that the probability that $\vectorsym{x}$ lies inside of $S$ equals some predetermined value $\nu$ between $0$ and $1$ \cite{scholkopf1999support}.
 
 In the following of this section we will start with a discussion of traditional \glspl{svm}.
 In \Cref{subsec:kernels} we will show how kernels allow for non-linear decision functions.
 That is followed by two different implementations of \gls{oc-svm}: \gls{nu-svm} in \Cref{subsec:nu-svm} by Sch\"olkopf \etal \cite{scholkopf1999support}, which closely follows the above problem statement regarding density estimation, and \gls{svdd} by Tax and Duin \cite{tax1999support} in \Cref{subsec:oc-svm-svdd}.
-The final part of this section discusses the influende of model parameters on the performance of \glspl{svm}
+The final part of this section discusses the influence of model parameters on the performance of \glspl{svm}
 
 %--------------------------------------------
 \subsection{Support Vector Machine}\label{subsec:svm}
@@ -45,7 +45,7 @@ The mapping and projection of data points can be efficient (and implicit) perfor
   \includegraphics[width=0.8\textwidth]{./Figures/chapter3/svm_mapping_spaces.pdf}
   \caption[Mapping spaces in \gls{svm}]{Schematic visualization of the non-linear mapping of \glspl{svm}.
   The input vector $\vectorsym{x}$ from input space $\mathcal{I}$ is mapped by a non-linear function $\phi(\vectorsym{x})$ to a feature vector $\vectorsym{z}$ in the high dimensional feature space $\mathcal{F}$.
-  The weights of $\vectorsym{w}$ create a linear separating hypeplace, which maps the high dimensional vector to the predicted outcome $\vectorsym{y}$.}
+  The weights of $\vectorsym{w}$ create a linear separating hyperplane, which maps the high dimensional vector to the predicted outcome $\vectorsym{y}$.}
   \label{fig:svm_mapping_spaces}
 \end{figure}
 
@@ -124,7 +124,8 @@ It shows \cite{flach2012machine} that for any function $K$ that has the same res
 \begin{equation}
   K(\vectorsym{x}, \vectorsym{x}') = (\vectorsym{z} \cdot \vectorsym{z}') = \phi(\vectorsym{x}) \cdot \phi(\vectorsym{x}')
 \end{equation}
-where vectors $\vectorsym{z}$ and $\vectorsym{z}'$ are projections of data objects $\vectorsym{x}$ and $\vectorsym{x}'$ through $\phi(\vectorsym{x})$ on the features space $\mathcal{F}$ and the dot product kernel $K$ is determined by the sum
+where vectors $\vectorsym{z}$ and $\vectorsym{z}'$ are projections of data objects $\vectorsym{x}$ and $\vectorsym{x}'$ through $\phi(\vectorsym{x})$ on the features space $\mathcal{F}$.
+The dot product kernel $K$ is determined by the sum
 \begin{equation}
   K(\vectorsym{x}, \vectorsym{x}') = \sum_{j=1}^m g_j(\vectorsym{x}) g_j(\vectorsym{x}')
 \end{equation}
@@ -147,14 +148,14 @@ As Smola \etal \cite{smola1998connection} state, this Gaussian kernel yields goo
 As an explanation, they show a correspondence between learning \glspl{svm} with \gls{rbf} kernels and good regularization operators.
 This may give insights in why \glspl{svm} have been found to exhibit high generalization ability (by learning with few training objects).
 
-The number of basis functions, the center parameters that correspond with support vectors, and the weights in the ouput layer are all automatically determined via the optimal hyperplane in features space $\mathcal{F}$ \cite{cherkassky2007learning}.
+The number of basis functions, the center parameters that correspond with support vectors, and the weights in the output layer are all automatically determined via the optimal hyperplane in features space $\mathcal{F}$ \cite{cherkassky2007learning}.
 The width parameter $\sigma$ is equal for all basis functions and is set a priori and determines the flexibility and complexity of the boundary.
 In \Cref{subsec:svm_model_parameters} this (hyper)parameter for a \gls{svm} is further discussed.
 
-The mapping from input space $\mathcal{I}$ to $\mathcal{F}$ via $\phi(x)$ is subject to the continuity assumptions.
-This general assumption in pattern recogition state that two near objects in feature space should also resemble each other in real life \cite{tax2001one}.
+The mapping from input space $\mathcal{I}$ to $\mathcal{F}$ via $\phi(x)$ is subject to some continuity assumptions.
+This general assumption in pattern recognition, states that two near objects in feature space should also resemble each other in ``real life'' \cite{tax2001one}.
 Thus, objects which are close in feature space should be close in the original input space.
-When this assumption would not hold, the example objects would be scatter through the feature space and finding a decision function becomes very complex.
+When this assumption does not hold, the example objects would be scatter through the feature space and finding a decision function becomes very complex.
 
 % -- Quotes and refs to use --x
 
@@ -166,14 +167,18 @@ When this assumption would not hold, the example objects would be scatter throug
 
 \subsection{\acrlong{nu-svm}}\label{subsec:nu-svm}
 The first of the \gls{oc-svm} methods we will discuss is often referred to as \gls{nu-svm} and introduced by Sch\"olkopf \etal \cite{scholkopf1999support}.
-Instead of estimating the density function of an distribution $P$, it focuses on an easier problem: the algorithm find regions in the input where the ``probability density lives''.
+Instead of estimating the density function of an distribution $P$, it focuses on an easier problem: the algorithm finds regions in the input where the ``probability density lives''.
 This results in a function such that most of the data is in the region where the function is nonzero.
 
-The constructed decision function $\mathcal{F}$ resembles the function discussed in \Cref{subsec:svm}.
+The constructed decision function $f(x)$ resembles the function discussed in \Cref{subsec:svm}.
 It returns the value $+1$ in a (possibly small) region capturing most of the data points, and $-1$ elsewhere.
 The method maps the data points from input space $\mathcal{I}$ to a feature space $\mathcal{F}$ (following classical \glspl{svm}).
-In that space $\mathcal{F}$ it separates the data points with maximal margin from the origin, with a hyperplane.
-For a new data points $x$, the function value $f(x)$ determines wheter the data point is part of the distribution (\ie the value is $+1$) or a novelty (\ie the value is $-1$).
+In that space the data points are separated from the origin by a hyperplane, with maximal margin.
+Since the mapping to the feature space is based on dot products of the data points, outlier objects (which are dissimilar from the training set) will be closer to the origin.
+Thus, maximizing the distance from the hyperplane to the origin increases the discriminating ability of the decision function.
+Furthermore, it holds an intuitive relationship with the classical two-class \gls{svm}.
+
+For a new data points $x$, the function value $f(x)$ determines whether the data point is part of the distribution (\ie the value is $+1$) or a novelty (\ie the value is $-1$).
 The hyperplane is represented by $g(x) = w \cdot \phi(x) + \rho = 0$ and the decision function is $f(x) = \operatorname{sgn}(g(x))$.
 This hyperplane and the separation from the origin is illustrated in \Cref{fig:nu-svm}.
 
@@ -214,7 +219,8 @@ It characterizes the solution in two ways:
 When $\nu$ approaches $0$, the penalty factor for nonzero Lagrange multipliers ($\frac{1}{\nu n}$) becomes infinite, and thus the solution resembles a \emph{hard margin} boundary.
 
 This method creates a \emph{hyperplane}, characterized by $w$ and $\rho$, that separates the data with maximal margin from the origin in the feature space $\mathcal{F}$.
-In the following section we will discuss an alternative method, which uses an circumscribing \emph{hypersphere} to characterize the data (and the region of distribution $P$ where the density (or: support) lives).
+In the following section we will discuss an alternative method, which uses an circumscribing \emph{hypersphere} to characterize the training data.
+The region inside the hypersphere indicates the region $S$ where the probability that a data point drawn from $P$ is equal to $\nu$.
 
 
 %--------------------------------------------
@@ -234,12 +240,12 @@ By allowing outliers using slacks variables, in the same manner as classical \gl
 \end{figure}
 
 The constructed hypersphere is characterized by a center $\mathbf{a}$ and a radius $R > 0$ as distance from the center to (any data point that is a \gls{sv} on) the boundary, for which the volume, and thus the radius $R$, will be minimized.
-The center $\mathbf{a}$ is a linear combination of of the support vectors.
+The center $\mathbf{a}$ is a linear combination of the support vectors.
 Like the classical \gls{svm} and \gls{svdd} it can be required that all the distances from the data points $x_i$ to the center $\mathbf{a}$ are strict less than $R$ (or equivalent measure).
 A soft margin can be allowed by using slack variables $\xi_i$.
 In that case, the penalty is determined by $C$ and the minimization is expressed as \Cref{eq:svdd_objective}.
 This principle is illustrated in the right image or \Cref{fig:nu-vs-svdd}.
-Instead of a separating hyperplane, constructed by \gls{nu-svm} and illustrated on the left of the Figure, the \gls{svdd} creates a hypersphere (in the illustration a cricle) around the data points.
+Instead of a separating hyperplane, constructed by \gls{nu-svm} and illustrated on the left of the Figure, the \gls{svdd} creates a hypersphere (in the illustration a circle) around the data points.
 By using kernel functions (\eg the \gls{rbf}) the hyperspheres in the high dimensional feature space $\mathcal{F}$ corresponds to a flexible and tight enclosing boundary in input space $\mathcal{I}$.
 Possible resulting closed boundaries are illustrated in \Cref{fig:svdd-boundary}.
 This enclosing boundary is obtained by minimizing the following error function $L$ which contains the volume of the hypersphere and the distance from the boundary to the outlier objects:
@@ -278,7 +284,7 @@ Testing the membership of a (new) object $\vectorsym{z}$ is done by determining 
 As with \Cref{eq:svm_lagrange}, the solution of this equation only relies on dot products between the data points in $\vectorsym{x}$ and $\vectorsym{z}$.
 This means that the kernel projection and trick, as discussed in \Cref{subsec:kernels}, can be applied to \gls{svdd} as well \cite{tax1999support,tax2002uniform}.
 
-Because the Gaussian \gls{rbf} often yields good (\ie tight) boundaries, this set of kernels fuctions is commonly used:
+Because the Gaussian \gls{rbf} often yields good (\ie tight) boundaries, this set of kernels functions is commonly used:
 \begin{equation}
   (\vectorsym{x} \cdot \vectorsym{y}) \rightarrow K(\vectorsym{x},\vectorsym{y}) = \operatorname{exp}\left(- \frac{\lVert \vectorsym{x} - \vectorsym{y} \rVert ^2}{\sigma^2}\right)
 \end{equation}
@@ -302,7 +308,7 @@ When the Gaussian \gls{rbf} kernel is applied, and in case the data is preproces
 %--------------------------------------------
 
 \subsection{SVM model parameters}\label{subsec:svm_model_parameters}
-\gls{svm}-model selectiong and tuning depends on two type of parameters \cite{cherkassky2007learning}:
+\gls{svm}-model selecting and tuning depends on two type of parameters \cite{cherkassky2007learning}:
 \begin{enumerate}
   \item Parameters controlling the `margin' size,
   \item Model parameterization, \eg the kernel type and complexity parameters.
@@ -312,8 +318,8 @@ When the Gaussian \gls{rbf} kernel is applied, and in case the data is preproces
 In case of a \gls{rbf} kernel, the width parameter $\sigma$ determines the flexibility and complexity of the boundary.
 The value of this parameter greatly determines the outcomes of the algorithm (\eg \gls{svdd}) as illustrated in \Cref{fig:svdd-boundary}.
 With a small value for the kernel width $\sigma$, each data point will tend to be used as a support vector (for almost all $\alpha_i > 0$) and the \gls{svdd} solution resembles a Parzen density estimation.
-For large values of $\sigma$, the solution will resemble the original hypersphere solution is obtained (in contrast with a tight boundary around the data).
-With a large value for the width $\sigma$, the boudary approximates the spherical boundary.
+For large values of $\sigma$, the solution will resemble the original hypersphere solution (in contrast with a tight boundary around the data).
+With a large value for the width $\sigma$, the boundary approximates the spherical boundary.
 The influence of the $\sigma$ parameter on the \gls{svdd} solution is illustrated in \Cref{fig:svdd-boundary-sigma}.
 
 \begin{figure}
@@ -329,7 +335,7 @@ A more detailed discussion of the influence of the \gls{svm} model parameters ca
 A detailed discussion of the $\nu$ and kernel parameters can be found in \cite{scholkopf2002learning}.
 
 The following chapter will discuss our proposed method, which incorporates the \gls{svdd} algorithm.
-It relates the \gls{oc-svm} model constuction to outlier detection and eventually change detection, leading to finding a temporal segmentation of time series data.
+It relates the \gls{oc-svm} model construction to outlier detection and eventually change detection, leading to finding a temporal segmentation of time series data.
 
 % -- Notes --
 % \begin{itemize}
