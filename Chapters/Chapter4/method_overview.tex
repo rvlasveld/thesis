@@ -3,32 +3,33 @@
 The proposed method of this thesis follows the unifying framework as introduced by Takeuchi and Yamanishi \cite{takeuchi2006unifying} and an similar implementation by Camci \cite{camci2010change} with \glspl{svm}.
 The unifying framework relates the detection of outliers with change points and divides the whole process in two stages.
 The first stage determines the outliers in a time series by giving a score based on the deviation from a learned model, and thereby creates a new time series.
-The second stage runs on that new created time series and calculates a average over a window of the outlier scores.
+The second stage runs on that new created time series and calculates an average over a window of the outlier scores.
 The problem of change detection is then reduced to outlier detection over that average-scored time series.
 This method is named \gls{changeFinder} by the authors.
 The implementation by Camci, which uses \glspl{svm} to detect changes is named \acrlong{svcpd}.
 
-Whereas \gls{changeFinder} uses double probability estimation algorithm, our approach follows \gls{svcpd} by constructing a \gls{svm} over a sliding window.
+Whereas \gls{changeFinder} uses a two-stage probability based algorithm, our approach follows \gls{svcpd} by constructing an \gls{svm} over a sliding window.
 The \gls{svcpd} algorithm uses the location of new data points in the feature space $\mathcal{F}$ with respect to the hypersphere and the hypersphere's radius $R$ to determine whether the new data point represents a change point.
 Our approach is a slight simplification of the algorithm: we only use the updated model properties (\ie the radius $R$) to detect a change.
+The \gls{svcpd} also tests every new data point with the current modeled hypersphere, to indicate whether it is an outlier.
 This difference is further discussed and justified in \Cref{sec:method_change_detection}.
 
 This section gives a description of the method used for the experiments and change detection mechanism.
 First described is the method to process the gathered sensor data.
 A schematic overview is given in \Cref{fig:method_overview} and shows the steps of the method.
-A more detailed explanation of the ``Update model'' step follows.
+A more detailed explanation of the ``Update model'' step is given in the remainder of this section.
 
-As graphically represented in \Cref{fig:method_overview}, the change detection method starts by processing the data from sensor, such as the accelerometer, magnetic orientation and rotation metrics.
+As graphically represented in \Cref{fig:method_overview}, the change detection method starts by processing the data from sensor, such as the accelerometer, magnetic orientation, and rotation metrics.
 
 The first step is to process the raw streams of data originating from a multiple of sensors.
 The two processes applied are alignment and normalization.
 Due to noisy sampling, not all the timestamps in the data streams are sensed at the same timestamp.
 Since the \gls{svdd} method requires all the data stream at every timestamp and can not handle missing data on one of the timestamps, all the unique timestamps are filtered out.
-Whilst this results in an overall filtering effect, in practice between $1\%$ and $5\%$ of each data stream is disregarded.
+Whilst this results in an overall filtering effect, in practice between $1\%$ and $5\%$ of each data stream is discarded.
 The effect of this filtering is not significant and the data is not modified.
 
 Due to the nature of the sensor signals, a normalization step is required in order to set the weight for all the data streams equal.
-The range of the accelerometer signal typically spans $-20$ to $20$, the magnetic field from $-60$ to $60$ and the rotations range is from $-1$ to $1$.
+The range of the accelerometer signal typically spans $-20$ to $20~m/s^2$, the magnetic field from $-60$ to $60~\mu T$ and the rotations value range is from $-1$ to $1$.
 This means that a relative small change in the accelerometer stream could have a much larger impact on the model than the same (absolute) change in the rotation stream, whilst the latter has a larger relative impact.
 The normalization step ensures that all data is weighted equally and changes in the data are all proportional.
 
@@ -42,6 +43,6 @@ The \gls{isvdd} algorithm by Tax and Duin~\cite{tax2002uniform} is used for effi
 The model is (partially) reconstructed and new model properties, such as the radius of the hypersphere, is the result of this step \footnote{Other measures are also possible, for instance the distance from all the outliers to the boundary of the hypersphere or the number of outliers}.
 
 This final step of this method, step $5$, is the interpretation of the model properties.
-Many algorithms can be used for this process, all which take a one-dimensional time series as input and determine where change has occured.
+Many algorithms can be used for this process, all which take a one-dimensional time series as input and determine where change has occurred.
 In our setup we used the \gls{rt} and \gls{cusum} methods, to show the modularity of this step.
 This final step is further discussed in \Cref{sec:method_change_detection}.

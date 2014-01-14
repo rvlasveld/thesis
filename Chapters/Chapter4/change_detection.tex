@@ -3,20 +3,45 @@
 In the previous sections we have discussed what data is used for the model construction, and how that model is interpreted in the context of change detection.
 We have shown how the multi-dimensional signal is reduced to a single dimension time series data, based on the extracted radius $R$ from the constructed hypersphere.
 This metric is used to discover changes in the underlying data generation process.
-We argued that in the case of the data objects set becomes more heterogeneous, we expect an increase in the radius $R$.
-In the same manner we expect that when the change is in the oldest data objects of the working set the radius $R$ will decrease, since the data becomes more homogeneous.
+We argued that in the case the data objects set becomes more heterogeneous, we expect an increase in the radius $R$.
+In the same manner we expect that when the change is in the oldest data objects of the working set, the radius $R$ will decrease, since the data becomes more homogeneous.
 An abstract representation of these expectations is illustrated in \Cref{fig:radius_expectation}.
 
 In this section we discuss the methods applicable to the extracted radius $R$ of the hypersphere, in order to discover a change in the underlying distribution properties.
-This employs the second stage of our algorithm, analogue to the second stage of the unifying framework by Takeuchi and Yamanishi~\cite{takeuchi2006unifying}.
-It is also based on the \gls{svcpd} method by Camci~\cite{camci2010change}, although we have slightly simplified the algorithm.
+It is the second stage of our algorithm, analogue to the second stage of the unifying framework by Takeuchi and Yamanishi~\cite{takeuchi2006unifying}.
+It is also based on the \gls{svcpd} method by Camci~\cite{camci2010change}, although we have simplified the algorithm.
+
+\begin{table}
+\begin{center}
+  \caption[Proposed algorithm]{Algorithm of the proposed change detection method, using the Ratio-Thresholding method of \ref{subsec:ratio_thresholding} for change detection.}
+  \begin{tabular}{ l p{12cm} }
+    \hline
+    Step & Action \\
+    \hline
+    & \textbf{Input:} time series $\vectorsym{x}$, window size $n$ \\
+    & \textbf{Output:} collection of change points $\vectorsym{t}$ \\
+    1 & Start with $n$ data objects as working set and construct hypersphere \\
+    2 & Add next data object $x_t$ and drop first one \\
+    3 & Identify new hyper-sphere and its \emph{approximate radius} \\
+    4 & Calculate radius average of hyperspheres since last change point \\
+    5 & Calculate radius ratio $\hbar$. \newline
+    If $\hbar$ is  lower than ${th}_{low}$ or greater than ${th}_{high}$ then mark $t$ as change point in $\vectorsym{t}$ \\
+    6 & Continue from step 2, until no more data objects available \\
+    7 & Apply post-processing: merge close change points \\
+    \hline
+  \end{tabular}
+  \label{tab:algorithm_proposed_method}
+\end{center}
+\end{table}
+
+\TODO{Algoritme meer in pseudo-code zetten. Prominenter maken.}
 
 In the \gls{svcpd} the first step for a new data point $\vectorsym{z}$ is to check whether the data point lies within the enclosing (hyperspherical) boundary of the constructed model.
-This will label the new data point as an in- or outlier, realtive to the current data set.
+This will label the new data point as an in- or outlier, relative to the current data set.
 Depending on that outcome, the model is updated to include the new data point.
 The second step is to inspect the (changed) model properties, \ie the radius $R$.
 In our method we only employ the second step: the inspection of the radius $R$.
-We regard the first step (determine if $\vectorsym{z}$ is an outlier) to be superfluent: in case it is an outlier, the model update step will change the radius $R$ in order to let the boudary include the new data point $\vectorsym{z}$.
+We regard the first step (determine if $\vectorsym{z}$ is an outlier) to be superfluent: in case it is an outlier, the model update step will change the radius $R$ in order to let the boundary include the new data point $\vectorsym{z}$.
 Would the new data object $\vectorsym{z}$ be already an inlier, then the updated model would not have a significant change in radius $R$.
 Our algorithm is outlined in \Cref{tab:algorithm_proposed_method}.
 
@@ -29,39 +54,21 @@ The first is a family of methods based on the \gls{cusum} method.
 The second example is a ratio-based thresholding mechanism used by Camci~\cite{camci2010change}.
 We conclude this section by discussing some post-processing techniques we have used, to decrease the number of false positives.
 
-\begin{center}\begin{table}
-  \caption[Proposed algorithm]{Algorithm of the proposed change detection method, using the Ratio-Thresholding method of \ref{subsec:ratio_thresholding} for change detection.}
-  \begin{tabular}{ l p{12cm} }
-    \hline
-    Step & Action \\
-    \hline
-    1 & Start with $n$ data objects as working set and construct hypersphere \\
-    2 & Add next data object $x_t$ and drop first one \\
-    3 & Identify new hyper-sphere and its \emph{approximate radius} \\
-    4 & calculate radius average of hyperspheres since last change point \\
-    5 & calculate radius ratio $\hbar$. If lower than ${th}_{low}$ or greater than ${th}_{high}$ then mark $t$ as change point \\
-    6 & continue from step 2, until no more data objects available \\
-    7 & Apply post-processing: merge close change points \\
-    \hline
-  \end{tabular}
-  \label{tab:algorithm_proposed_method}
-\end{table}\end{center}
-
 \subsection{CUSUM based methods}
 Many of the simple change detection methods are based on \gls{cusum}, originally introduced by Page~\cite{page1954continuous}.
 Other variations and extensions of the method are proposed and used (\cite{inclan1994use,alippi2006adaptive,hsu2007mosum}).
 Here we will discuss the simple form, which only detects changes as an increase in value of the examples, in this case the radius $R$.
 The cumulative sum for all the values is calculated:
 \begin{equation}
-  S_n = \sum_{k=1}^n r_k
+  S_n = \sum_{k=0}^n R_k
 \end{equation}
 and a change is detected when the value of the cumulative sums minus the minimum encountered exceeds a predetermined threshold $h$:
 \begin{equation}
-  S_n - \operatorname*{min}_{0 \le i < n} S_i \ge h.
+  \left\{ S_n - \operatorname*{min}_{0 \le i < n} S_i \right\} \ge h.
 \end{equation}
 
 Extensions of the \gls{cusum} method have been proposed.
-Amongst others, extensions which extend its use to two-threshold methods, and methods appropiate for changes in mean or variance \cite{inclan1994use}.
+Amongst others, extensions which extend its use to two-threshold methods, and methods appropriate for changes in mean or variance \cite{inclan1994use}.
 Whilst adaptive methods have been proposed \cite{alippi2006adaptive}, most methods require manual determination of the threshold parameter $h$.
 
 \subsection{Ratio-thresholding}\label{subsec:ratio_thresholding}
@@ -79,8 +86,8 @@ When the new value of $\hbar_r$ is lower than the low threshold $th_\text{low}$,
 The same holds for a more heterogeneous set of data and an increase of $\hbar_r$ higher than $th_\text{high}$.
 This is illustrated in \Cref{fig:tresholding}.
 
-The appropriate values for the thresholds are highly depended on the characteristics of the data and the trade-off parameter $C$ (as discussed in \Cref{subsec:oc-svm-svdd}).
-This trade-off parameters regulates the fraction of data objects that will be rejected from the constructed model.
+The appropriate values for the thresholds strongly depend on the characteristics of the data and the parameter $C$ (as discussed in \Cref{subsec:oc-svm-svdd}).
+This trade-off parameter regulates the fraction of data objects that will be rejected from the constructed model.
 Since a high value of $C$ assigns a high penalty to outliers, data objects are more likely to be incorporated into the hypersphere by increasing the radius.
 For low values of $C$ the cost of rejecting data objects is, compared to the benefits of a smaller hypersphere, relatively low.
 This gives a relation between the parameters $C$, $th_\text{low}$, $th_\text{high}$, and the sensitivity of the radius ratio based thresholding method.
@@ -96,7 +103,7 @@ The correct values for the intended sensitivity need to be empirically determine
 \end{figure}
 
 \subsection{Post-processing}
-In our method we use the ratio based thresholding, since it is also used by Camci~\cite{camci2010change}.
+In our method we use the ratio based thresholding, also used by Camci~\cite{camci2010change}.
 From preliminary experiments we observed that a single change in the data can cause many detected change points, using the ratio based method.
 This phenomenon can be explained by the nature of the thresholding method.
 Since a single (high or low) threshold is set for ratio of the radii, high values are considered to be a change point before the highest point of the peak.

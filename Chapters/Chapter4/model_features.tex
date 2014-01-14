@@ -14,7 +14,7 @@ This error is based on
 \item the fraction $f_{T-}$ of target objects that is rejected, and
 \item the fraction $f_{O+}$ of outliers that is accepted.
 \end{inparaenum}
-Since in \gls{occ} situations typically there are (almost) no examples of outlier objects, Tax and Duin construct a method to generate outliers based on the assumption that the outliers are uniformly distributed around the target set.
+Since in \gls{occ} situations typically there are (almost) no examples of outlier objects, Tax and Duin construct a method to generate outliers based on the assumption that the the location of (potential) outliers are uniformly distributed around the target set.
 To minimize the error, calculated by the fractions $f_{T-}$ and $f_{O+}$, we should minimize the volume of the target data description (\ie the boundary of \gls{svdd}).
 That is because the fraction of accepted outliers $f_{O+}$ is an estimate of the volume of the target data description, with respect to the volume of the outlier distribution.
 Tax and Duin provide a method to optimize the parameters of the \gls{svdd} method, \ie the trade-off parameter $C$ and the \gls{rbf} kernel width $\sigma$.
@@ -23,17 +23,19 @@ This optimization will result in the modification of the radius $R$ of \Cref{eq:
 \begin{figure}
   \centering
     \includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{./Figures/chapter4/expected_behaviour.pdf}
-  \caption[Expected radius behavior]{Expected behavior of the radius $R$ of the hypersphere. The upper part shows a typical sinusoidal time series signal. The lower graph visualizes an abstract expectation of the values of $R$. Five possible time windows are illustrated. The left, middle, and right windows cover an area of homogeneous signal. The expected value of $R$ is low. The other two windows cover a change entering and leaving the window, respectively. At these locations the radius $R$ is expected to increase temporarily.}
+  \caption[Expected radius behavior]{Expected behavior of the radius $R$ of the hypersphere. The upper part shows a typical sinusoidal time series signal. The lower graph visualizes an abstract expectation of the values of $R$. Five possible time windows are illustrated. Windows $a$, $c$ and $e$ cover an area of homogeneous signal. The expected value of $R$ is low. The other two windows, $b$ and $d$ cover a change entering and leaving the window, respectively. At these locations the radius $R$ is expected to increase temporarily.}
   \label{fig:radius_expectation}
 \end{figure}
 
 Since in our method the parameters $C$ and $\sigma$ are kept constant, and thereby also the fraction of target objects being rejected, the only free parameter is the radius $R$.
-During the \gls{isvdd} algorithm the volume of the hypersphere is being minimized.
+During the \gls{isvdd} algorithm the volume of the hypersphere is minimized.
 This means that only the radius of the sphere will change during the analysis over the time series data.
 We will interpret changes in the radius $R$ with the same continuity assumptions as mentioned in \Cref{subsec:kernels}.
-This means that when two objects (in this case radius sizes) are close to each other, their original objects are also close.
-In other words, when the underlying distribution of time series is changed, and thus the characteristics of the data objects changes, the corresponding radius $R$ will also change.
-Since in that case the data objects in the working set become more heterogeneous, the radius of the hypersphere will increase.
+
+For instance, consider two hyperspheres that model two different, but partially overlapping, working sets of objects.
+If the radius size of these two hyperspheres are close to each other, that means the distribution of objects in the sets are also similar.
+In other words, if the distribution over objects in a working set changes, so does the characteristics of the set, and the radius $R$ of the hypersphere will also change.
+If in the case of a change in distribution the data objects in the working set become more heterogeneous, the radius of the hypersphere will increase.
 When, instead, the data objects change from a heterogeneous set to a more homogeneous, we expect the radius to decrease in value, since the data objects are closer to each other in the feature space.
 This relation between the signal and expected radius $R$ is illustrated in \Cref{fig:radius_expectation}.
 It shows that in the two time windows that cover a heterogeneous set of data objects, the radius of the hypersphere is expected to be relatively high.

@@ -1,7 +1,7 @@
 % !TEX root = ../../main.tex
 \section{One-Class Support Vector Machine}\label{sec:one_class_svm}
-In this section we will discuss the details of a \gls{svm} and \gls{oc-svm} implementations.
-The classical implementation of a \gls{svm} is to classify a dataset in two distinct classes.
+In this section we will discuss the details of an \gls{svm} and \gls{oc-svm} implementations.
+The classical implementation of an \gls{svm} is to classify a dataset in two distinct classes.
 This is a common use case, although sometimes there is no training data for both classes available.
 Still, one would like to classify new data points as regular, in-class, or out-of-class, \eg in the case of a novelty detection.
 With that problem only data examples from one class are available and the objective is to recognize new data points that are not part of that class.
@@ -20,7 +20,7 @@ The final part of this section discusses the influence of model parameters on th
 We will first discuss the traditional two-class \gls{svm} before we consider the one-class variant, as introduced by Cortes and Vapnik in \cite{cortes1995support}.
 Consider a labeled data set $\Omega = \{ (x_1, y_1),\allowbreak (x_2, y_2), \dots , (x_n, y_n) \}$; points $x_i \in \mathbb{I}$ in a (for instance two-dimensional) space where $x_i$ is the $i$-th input data point and $y_i \in \{-1, 1\}$ is the $i$-th output value, indicating the class membership.
 
-A \gls{svm} can create a boundary between linear-separable data points, making it a binary linear classifier.
+An \gls{svm} can create a boundary between linear-separable data points, making it a binary linear classifier.
 More flexible non-linear boundaries can be obtained by the use of a non-linear function $\phi(x)$, as illustrated in \Cref{fig:kernel_mapping}.
 This function maps the input data from space $\mathcal{I}$ to a higher dimensional space $\mathcal{F}$.
 The \gls{svm} can create a linear separating hyperplane in the space $\mathcal{F}$ that separates the data points from the two classes.
@@ -34,7 +34,7 @@ The mapping and projection of data points can be efficient (and implicit) perfor
 \begin{figure}
 \centering
   \includegraphics[width=0.8\textwidth]{./Figures/chapter3/svm_kernel_mapping.png}
-  \caption[Kernel mapping]{Visualization of a \gls{svm} in 2D.
+  \caption[Kernel mapping]{Visualization of an \gls{svm} in 2D.
   The non-linear boundary in the input space $\mathcal{I}$ (left) is transformed to a linear boundary in the feature space $\mathcal{F}$ (right) by mapping the data points with the function $\phi$.
   The kernel trick uses a function $K$ which performs an implicit mapping. Image from Wikipedia.org}
   \label{fig:kernel_mapping}
@@ -67,7 +67,7 @@ Thus, the \gls{svm} searches for a maximal separating hyperplane.
 \begin{figure}
 \centering
   \includegraphics[width=0.5\textwidth]{./Figures/chapter3/svm_separating_plane_with_margin.png}
-  \caption[\gls{svm} and the separating hyperplane]{Illustration of the separating hyperplane of a \gls{svm}.
+  \caption[\gls{svm} and the separating hyperplane]{Illustration of the separating hyperplane of an \gls{svm}.
   Here $w$ is the normal vector for the separating hyperplane and size of the margin is $\frac{2}{\lVert{w}\rVert}$.
   Image from Wikipedia.org}
   \label{fig:svm_hyperplane}
@@ -78,7 +78,7 @@ In that case the random error or noise of the data set is described instead of t
 The \gls{svm} classifier can use a \emph{soft margin} by allowing some data points to lie within the margin, instead of on the margin or farther away from the hyperplane.
 For this it introduces \emph{slack variables} $\xi_i$ for each data point and the constant $C > 0$ determines the trade-off between maximizing the margin and the number of data points within that margin (and thus the training errors).
 The slack variables are a generalization to minimize the \emph{sum of deviations}, rather than the \emph{number} of incorrect data points \cite{cherkassky2007learning}\footnote{if $\xi_i$ is chosen to be an indicator function, it still minimizes the \emph{number} of incorrect data points.}.
-The objective function for a \gls{svm} is the following minimization function:
+The objective function for an \gls{svm} is the following minimization function:
 
 \begin{equation}\label{eq:svm_objective}
   \operatorname*{min}_{w,\ b,\ \xi_i} \frac{ \lVert{w}\rVert^2 }{2} + C \sum_{i=1}^n \xi_i
@@ -150,7 +150,7 @@ This may give insights in why \glspl{svm} have been found to exhibit high genera
 
 The number of basis functions, the center parameters that correspond with support vectors, and the weights in the output layer are all automatically determined via the optimal hyperplane in features space $\mathcal{F}$ \cite{cherkassky2007learning}.
 The width parameter $\sigma$ is equal for all basis functions and is set a priori and determines the flexibility and complexity of the boundary.
-In \Cref{subsec:svm_model_parameters} this (hyper)parameter for a \gls{svm} is further discussed.
+In \Cref{subsec:svm_model_parameters} this (hyper)parameter for an \gls{svm} is further discussed.
 
 The mapping from input space $\mathcal{I}$ to $\mathcal{F}$ via $\phi(x)$ is subject to some continuity assumptions.
 This general assumption in pattern recognition, states that two near objects in feature space should also resemble each other in ``real life'' \cite{tax2001one}.
@@ -276,7 +276,7 @@ In the dual Lagrangian formulation of this error function $L$ the multipliers $\
 
 In the maximization of \Cref{eq:svdd_lagrange} a large fraction of the multipliers $\alpha_i$ become zero and for a small fraction $\alpha_i > 0$.
 This small fraction, for which $\alpha_i$ is non-zero, are called the \glspl{sv} and these objects lie on the boundary of the description.
-The center of the hypersphere only depends on this small number of \glspl{sv} and the objects for which $\alpha_i = 0$ can be disregarded from the solution.
+The center of the hypersphere only depends on this small number of \glspl{sv} and the objects for which $\alpha_i = 0$ can be discarded from the solution.
 Testing the membership of a (new) object $\vectorsym{z}$ is done by determining if the distance to the center $\vectorsym{a}$ of the sphere is equal or smaller to the radius $R$:
 \begin{equation}\label{eq:svdd_test_object}
   \lVert \vectorsym{z} - \vectorsym{a} \rVert ^2 = (\vectorsym{z} \cdot \vectorsym{z}) - 2 \sum_{i} \alpha_i(\vectorsym{z} \cdot \vectorsym{x}_i) + \sum_{i,j}(\vectorsym{x}_i \cdot \vectorsym{x}_j) \le R^2

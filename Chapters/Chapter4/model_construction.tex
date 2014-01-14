@@ -1,9 +1,9 @@
 % !TEX root = ../../main.tex
 \section{Model Construction: Incremental SVDD}\label{sec:method_model_construction}
-After the data is collected and pre-processed (or in the case of the artificial data sets: generated), we construct an online incremental sliding window algorithm.
+After the data is collected (or in the case of the artificial data sets: generated), we construct an online incremental sliding window algorithm.
 We follow the \gls{svcpd} method by Camci \cite{camci2010change} and the \gls{isvdd} implementation by Tax and Laskov \cite{tax2003online}.
 The latter algorithm combines the techniques of online, unsupervised, and incremental learning methods with the earlier introduced \gls{oc-svm} algorithm \gls{svdd}.
-The method is initialized with a fixed window length and then in every step a new data object is added to and the oldest data object is removed from the working set.
+The method is initialized with a fixed window length and then at every step a new data object is added to and the oldest data object is removed from this working set.
 The model construction phase can be regarded as the first stage of the unifying framework by Takeuchi and Yamanishi \cite{takeuchi2006unifying}.
 
 Using the following abstract form of the \gls{svm} optimization problem, the extension of the incremental \gls{svm} to the \gls{svdd} can be carried out:
@@ -20,7 +20,7 @@ When a data object $k$ added, its weight $x_k$ is initially set to $0$.
 In case of an object removal, the weight is forced to be $x_k=0$.
 Both the operations conclude with the recalculation  of $\mu$ and the weights $\vectorsym{x}$ for all the objects, in order to obtain the optimal solution for the enlarged or reduced data set.
 These two operations are the basis for \gls{isvdd}.
-With respect to the timed index, new data objects are added to and old data objects are removed from the working set.
+With the data points ordered by timestamp, new data objects are added to and old data objects are removed from the working set.
 
 The size of the initial window of data objects has a lower bound determined by the hyperparameter $C$ (\Cref{eq:svdd_objective}).
 Because of the equality constraint $\sum_{i=1}^n a_i x_i = 1$ and the box constraint $0 \le x_i \le C$, the number of objects in the working set must be at least $\ceil{\frac{1}{C}}$.
