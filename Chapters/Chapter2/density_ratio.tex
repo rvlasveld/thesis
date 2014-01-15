@@ -30,29 +30,14 @@ Nonparametric models, for which the number and nature of the parameters are unde
 A solution to this is to estimate the \emph{ratio} of probabilities instead of the probabilities themselves.
 One of the recent methods to achieve this is the \gls{kliep} by Sugiyama \etal \cite{sugiyama2008direct}.
 
-The method proposed by Kawahara and Sugiyama~\cite{kawahara2009change} is composed of an online version of the \gls{kliep} algorithm.
-The method also considers \emph{sequences} of samples (rather than samples directly) because the time series samples are generally not independent over time.
-An advantage over other nonparametric approaches, such as sequential one-class support vector machines, is that the model has a natural cross-validation procedure.
-This makes that the value of tuning parameters, such as the kernel bandwidth, can be objectively obtained.
+The proposed method by Kawahara and Sugiyama~\cite{kawahara2009change} uses an online version of the \gls{kliep} algorithm.
+It considers \emph{sequences} of samples (rather than samples directly) because the time series samples are generally not independent over time.
+The method detects change by monitoring the logarithm of the likelihood ratio between densities of reference (past) and test (current) time intervals.
+If it exceeds a predetermined threshold value, the beginning of the test interval is marked as a change point.
 
-In their formulation change is detected by monitoring the logarithm of the likelihood ratio between the reference (past) and test (current) time intervals
-\begin{equation}
-  S = \sum_{i=1}^{n_\text{te}} \text{ln} \frac{p_{\text{te}}(\matrixsym{Y}_\text{te}(i)}{p_\text{rf}(\matrixsym{Y}_\text{te}(i))}
-\end{equation}
-Where $\matrixsym{Y}_\text{te}(i)$ is a sequence of samples from the test interval.
-A change is detected when $S > \mu$, for some predetermined threshold $\mu$.
-The question is then how to calculate the density ratio
-\begin{equation}
-  w(\matrixsym{Y}) := \frac{p_\text{te}(\matrixsym{Y)})}{p_\text{rf}(\matrixsym{Y})}
-\end{equation}
-because this ratio is unknown and should be estimated.
-The naive approach is to estimate the ratio by taking the ratio of the estimated densities.
+Since the density ratio is unknown, it needs to be estimated.
+The naive approach is to estimate it using estimated densities of the two intervals.
 Since this is known to be a hard problem and sensitive for errors, the solution would be to estimate the ratio directly.
 
-The procedure of the method proposed by Kawahara and Sugiyama \cite{kawahara2009change} is to first apply the batch \gls{kliep} algorithm with model selection for initial parameter $\vectorsym{\alpha}$ and kernel width calculation.
-Then for every new sample the reference and test intervals are shifted and the calculated parameters $\vectorsym{\alpha}$ are updated.
-Finally the logarithm of the likelihood ratio is evaluated.
-If it is above the threshold $\mu$ the current time is reported as a change point.
-
-Improvements in this line of research by Liu \etal \cite{liu2013change} has led the application of improved density-ratio estimation methods to the problem of change detection.
-Such an improvement is the Unconstrained Least-Squares Importance Fitting (uLSIF) method \cite{kanamori2009least} and an extension which possesses a superior nonparametric convergence property: Relative uLSIF (RuLSIF) \cite{yamada2013relative}.
+The method by Liu \etal \cite{liu2013change} estimates the ratio of probabilities directly, instead of estimating the densities explicitly.
+Other methods using ratio-estimation are the Unconstrained Least-Squares Importance Fitting (uLSIF) method \cite{kanamori2009least}, and an extension which possesses a superior nonparametric convergence property: Relative uLSIF (RuLSIF) \cite{yamada2013relative}.

@@ -4,10 +4,10 @@
 Many proposals in the field of \gls{har} make use of \glspl{svm} as a (supervised) model learning method.
 An elaborate overview of applications is given in \cite{mountrakis2011support}.
 In this section we review methods of change detection based on the applications of \glspl{svm} as model construction method.
-A number of proposals have been made using this method.
-Sch{\"o}lkopf \etal \cite{scholkopf1999support} applies Vapnik's principle, to never solve a problem which is more general than the one that one is actually interested in, to novelty detection.
+% A number of proposals have been made using this method.
+Sch{\"o}lkopf \etal \cite{scholkopf1999support} applies Vapnik's principle never to solve a problem which is more general than the one that one is actually interested in.
 In the case of novelty detection, they argue there is no need for a full density estimation of the distribution.
-Simple algorithms estimate the density by considering how many data points fall in a region of interest.
+Some algorithms estimate the density by considering how many data points fall in a region of interest.
 The \gls{nu-svm} method instead starts with the number of data points that should be within the region and estimates a region with that desired property.
 It builds on the method of Vapnik and Vladimir \cite{vapnik1963pattern}, which characterizes a set of data points by separating it from the origin.
 The \gls{nu-svm} method adds the kernel method, allowing non-linear decision functions, and incorporates `softness' by the $\nu$-parameter.
