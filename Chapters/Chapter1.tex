@@ -12,14 +12,21 @@ Often time windows are used, which form short consecutive segments of data and a
 The constructed model is used to determine which (earlier learned) activity is performed.
 Besides the explicit classification of the data, an implicit obtained result is a segmentation of performed activities over time.
 
-In this thesis the goal is to find the temporal segmentation of time series data explicitly, prior to the classification of the activities.
+The goal of this thesis is to create an method for online temporal segmentation of time series data.
+This will be performed explicitly, prior to the classification of data segments to learned activities.
 
-This is done under the assumption that it could be beneficial for classification methods to possess this explicit segmentation, since the model construction phase can use more data than the time-windowed approach would allow.
+Our assumption is that a temporal segmentation of time series can be beneficial information for classification methods.
+Instead of using a fixed window approach, the classification methods can use a larger set of homogeneous data.
+Thereby, the methods have more information to create a solid model of the activities.
 
 To find a temporal segmentation, we rely on change detection in time series.
-In the context of this research, these time series consists of recordings from inertial sensors found in smartphones, such as the accelerometer signal, during the performance of human activities.
-We are interested in real-world data from both in- and outdoor activities in an uncontrolled environment and in a continuous manner.
-Although the number of performed activities will be limited, we assume the temporal segmentation must be more robust than in the case of data from a controlled environment.
+In the context of this research the time series consists of recordings from inertial sensors during the performance of human activities.
+The sensors, such as the accelerometer, are nowadays widely available in smartphones.
+We are interested in real-world data from both in- and outdoor activities in an unknown environment and in a continuous manner.
+
+Compared to recordings in a controlled laboratory environment, we expect the real-world data to be prone to unexpected characteristics.
+The constructed method must be robust in order to handle these.
+
 For the change detection algorithm we will use a special form of a \gls{svm}, the \gls{occ} based \gls{svdd}, as introduced by Tax~\cite{tax2001one}.
 This method models the data in the shape of a high-dimensional hypersphere.
 From this hypersphere the radius is extracted, which can be used as an indication of change and be processed by one-dimensional change detection algorithms.
@@ -28,12 +35,27 @@ When the performed activity changes, so will the data distribution and character
 This results in a change of the constructed model, especially in the radius of the hypersphere.
 Thus, a change in the radius indicates a changes in the performed activity.
 
-\section{Scope}
-The scope of this thesis is to find a temporal segmentation of time series data from inertial sensors embedded in smartphones, obtained during the performance of human activities.
-As mentioned above, the segmentation is often obtained as a by-product from direct windowed classification.
-Other approaches have a very rigid form of segmentation, \eg by limiting the number of possible segment types \cite{himberg2001time,chamroukhi2013joint}, or have applied it to different type of time series data \cite{li2007segmentation,fuchs2010online,guenterberg2009automatic}.
+The remainder of this introduction is organized as follows.
+In \Cref{sec:intro_scope} the scope of this thesis is discussed.
+A short discussing on the workings of an \acrlong{oc-svm} is provided in \Cref{sec:intro_ocsvm}.
+The data sets we have used in this work are discussed in \Cref{sec:intro_data_sets}.
+\Cref{sec:intro_contributions} gives a short overview of our contributions.
+Finally, \Cref{sec:intro_thesis_structure} outlines the structure of this thesis.
+
+\section{Scope}\label{sec:intro_scope}
+The scope of this thesis are segmentation methods of inertial sensor data in the field of machine learning.
+The type of data is inertial sensor time series, collected by on-body worn sensors as found in smartphones.
+These time series are recorded during the performance of real-world human activities.
+The setting of the activities are real-world unknown environments.
+
+As mentioned in the previous section, a segmentation is often obtained as a by-product from direct windowed classification.
+Other approaches have a very rigid form of segmentation, \eg by limiting the number of possible segment types \cite{himberg2001time,chamroukhi2013joint}, or have applied it to different type of time series data.
+In Fuchs \etal \cite{fuchs2010online} artificial sinusoidal data is processed.
+Li and Zheng \cite{li2007segmentation} use visual motion data streams to find patterns of activities.
+The method of Guenterberg \etal \cite{guenterberg2009automatic} is able to distinguish periods of rest and activity in inertial sensor data streams.
 Others have extracted features from windows of data which are used for the segmentation \cite{guo2012adaptive}.
 These activities include sitting, standing, walking, running, and ascending and descending staircases.
+
 The problem of finding a temporal segmentation can be seen as a sub-problem to the problem of Activity Classification.
 This relation is illustrated in \Cref{fig:thesis_goal}.
 The figure visualizes that we can apply classification on time series data.
@@ -51,9 +73,14 @@ Likewise, the previous and next segments (if present) should be generated by a d
 \end{figure}
 
 To find these segments of homogeneous data, we employ a model construction phase.
-The \gls{oc-svm} model transforms the data points to a high-dimensional hyperspherical shape from which we extract the radius as characterizing metric.
+The \acrlong{oc-svm} transforms the data to a higher dimensional space.
+Non-linear mapping functions are used to add flexibility to the classification decision boundary.
+In the higher dimensional space an enclosing boundary around the data points, in the shape of a hypersphere, is constructed.
+The size, expressed as the radius, of the hypersphere depends on the distribution of the data points in the model.
+We will use the radius of this hypersphere as a characterizing metric and base our change detection on it.
+
 The model processes the data in windows of fixed length.
-A change in data characteristics should then result in a change of the hypersphere's radius.
+A change in data distribution and characteristics should then result in a change of the hypersphere's radius.
 Such a (sudden) change in the radius thus reflects a change in the time series data.
 It indicates the end of the current and the beginning of a new segment.
 In \Cref{sec:literature_review_temporal_segmentation} a detailed overview of temporal segmentation methods is given.
@@ -61,7 +88,7 @@ Information about segments can be used in the classification phase of \gls{har}.
 Instead of using relatively small windows, it can apply classification to the full segments of data.
 The final result, which is outside the scope is this thesis, will be a full classification of activities over the time series data.
 
-\section{One-Class Support Vector Machines}
+\section{One-Class Support Vector Machines}\label{sec:intro_ocsvm}
 In the setup, as described in the previous section and visualized in \Cref{fig:thesis_goal}, we employ a model construction phase.
 For this model we will use an \acrlong{oc-svm} implementation: the \acrlong{svdd} algorithm by Tax~\cite{tax2001one}.
 In earlier research multi-class \glspl{svm} are used for direct classification of inertial sensor data \cite{he2008activity,mountrakis2011support,anguita2012human}.
@@ -83,7 +110,7 @@ Thus the \gls{oc-svm} method allows us to reduce a complex high-dimensional sign
 The reduced time series can be inspected by simpler change detection methods, in a number of ways.
 \Cref{Chapter3} will discuss the \gls{oc-svm} methods in detail and \Cref{Chapter4} elaborates on the overall change detection method.
 
-\section{Data sets}
+\section{Data sets}\label{sec:intro_data_sets}
 In recent research two data sets for \gls{har} have been made public.
 In order to benchmark our proposed method we applied our method to these data sets.
 However, it turned out the data sets were not appropriate for continuous temporal segmentation.
@@ -94,8 +121,7 @@ The \gls{uci-har} from \cite{anguita2012human} also lacks continuous recordings.
 Furthermore, it seems to have incorrect labels.
 Finally, for both data sets there are no visual images of the performed activities.
 So in case of ambiguity there is no ground truth to consult.
-To overcome these problems, we have created our own real-world data set.
-\TODO{Create name for our own data sets}
+To overcome these problems, we have created our own real-world data set: \acrlong{almende-data} \cite{vlasveld2014acras}.
 
 Our own data set is recorded by placing a smartphone with inertial sensors in the front right pants pocket of a subject.
 The subject was asked to perform common and simple activities in an uncontrolled environment, both in- and outdoors.
@@ -107,19 +133,19 @@ These artificial data sets are modeled to the sets used in \cite{camci2010change
 In \Cref{Chapter5} we discuss the artificial data sets and results in detail.
 The real-world recordings and results are discussed in \Cref{Chapter6}.
 
-\section{Contributions}
+\section{Contributions}\label{sec:intro_contributions}
 As a result from our proposed method and application to recorded real-world data sets, this thesis will provide the following contributions:
 \begin{enumerate}
   \item \textbf{Continuous recorded human activity data:} the proposed method is applied to our own recorded human activity data.
   This data set can be grounded by using the video recordings of the subject while performing the activities.
-  The data set, consisting of raw inertial sensor recordings, manual change point and activity labeling, and video recordings, is used for testing the method and is made available to the public \cite{vlasveld2013continuous}.
+  The data set, consisting of raw inertial sensor recordings, manual change point and activity labeling, and video recordings, is used for testing the method and is made available to the public \cite{vlasveld2014acras}.
   \item \textbf{Application of \gls{oc-svm} methods to inertial sensor data:} to the best of our knowledge, this thesis is the first application of \gls{oc-svm} methods, especially the \gls{svdd} method, to inertial sensor signals in the context of temporal segmentation.
   Furthermore, this thesis contributes to research that has temporal segmentation of inertial sensor data as its primary objective.
   \item \textbf{Adaptation of \acrshort{svcpd}:} we have adopted and simplified the \acrshort{svcpd} method by Camci~\cite{camci2010change} in order to find change points in time series data.
   In our simplification we have not encountered a noticeably decrease in performance.
 \end{enumerate}
 
-\section{Thesis structure}
+\section{Thesis structure}\label{sec:intro_thesis_structure}
 The structure of this thesis is as follows.
 In \Cref{Chapter2} a literature review is provided.
 We will look at the different interpretations and implementations for change, novelty, and outlier detection.
@@ -128,6 +154,6 @@ Previous work in the field of \gls{har} is discussed and we end with existing ap
 It relates the properties of the constructed \gls{oc-svm} models to change detection in time series data.
 That relation is applied to our problem formulation in \Cref{Chapter4}, where we construct our change detection method \TODO{add name}, based on the work of Camci~\cite{camci2010change}.
 In \Cref{Chapter5} we apply the method to artificial data and show the objective performance.
-In \Cref{Chapter6} the method is applied to our real-world data set \TODO{Add name}.
+In \Cref{Chapter6} the method is applied to our real-world \gls{almende-data} \cite{vlasveld2014acras}.
 In that chapter we show the ability of detecting change in \gls{har} data, recorded by inertial sensors.
 This thesis is concluded in \Cref{Chapter7}, in which we reflect on the performed research and state possibilities for feature research.
