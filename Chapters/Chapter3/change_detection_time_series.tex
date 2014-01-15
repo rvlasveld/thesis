@@ -25,8 +25,11 @@ In other words, slowly changing properties in the data are not considered to be 
 Considered a time series $x_1, x_2, \dots$, which is drawn from a stochastic process $p$.
 Each $x_t$ (t = 1, 2, \dots) is a $d$-dimensional real valued vector.
 Assume $p$ can be ``decomposed'' in two different \gls{iid} stationary one-dimensional Gaussian processes $p^{(1)}$ and $p^{(2)}$.
-For a time point $a$ data points for which $t < a$ are drawn from $p^{(1)} = N(\mu_1, \sigma_1^2)$ and for $t \geq a$ from $p^{(2)} = N(\mu_2, \sigma_2^2)$.
-If $p^{(1)}$ and $p^{(2)}$ are different, then the time point $t = a$ is a \emph{change point}.
+% For a time point $a$ the data points for which $t < a$ are drawn from $p^{(1)} = N(\mu_1, \sigma_1^2)$ and for $t \geq a$ from $p^{(2)} = N(\mu_2, \sigma_2^2)$.
+Consider a potential change point at time $a$.
+Data points $x_1, \dots, x_{a-1} \sim \mathcal{N}(\mu_1, \sigma_1^2) = p^{(1)}$ and $x_a, \dots, x_t \sim \mathcal{N}(\mu_2, \sigma_2^2 ) = p^{(2)}$.
+If $p^{(1)}$ and $p^{(2)}$ are different (enough), then the time point $t = a$ is marked as a change point.
+
 Takeuchi and Yamanishi~\cite{takeuchi2006unifying} expess the similarity between the stochastic processes with the \gls{kl} divergence $D(p^2||p^1)$.
 It is observed that their method is not able to detect a change by decrease in variance \cite{takeuchi2006unifying,camci2010change}.
 This problem is the motivation for Camci \cite{camci2010change} to create the \gls{svcpd} algorithm.

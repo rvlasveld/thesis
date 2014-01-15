@@ -93,18 +93,22 @@ The objective function for an \gls{svm} is the following minimization function:
   \end{multlined}
 \end{equation}
 
-This minimization problem can be solved (using \gls{qp}) and transformed to its (Lagrange) dual formulation.
-In the dual formulation the problem scales with the number of training examples $n$ instead of the dimensionality $d$ of the samples.
+This minimization problem can be solved using \gls{qp} and scales in the number of dimensions $d$, since $w \in \mathbb{R}^d$.
+In its dual formulation, as shown in \Cref{eq:svm_lagrange}, the non-negative Lagrange multipliers $\alpha_i$ are introduced.
+Using this formulation the problem scales in the number of data points $n$, since $\vectorsym{\alpha} \in \mathbb{R}^n$.
+% In the dual formulation the problem scales with the number of training examples $n$ instead of the dimensionality $d$ of the samples.
 Solving this problem directly in the high dimensional feature space $\mathcal{F}$ makes it intractable.
-The linear approximation function corresponds to the kernel function in the dual formulation.
-Solving this dual formulation is equivalent to solving the primal formulation \cite{cherkassky2007learning}.
-In the dual formulation the Lagrange multipliers $a_i >= 0$ are introduced and the decision function becomes:
+% The linear approximation function corresponds to the kernel function in the dual formulation.
+% Solving this dual formulation is equivalent to solving the primal formulation \cite{cherkassky2007learning}.
+It is shown that solving the dual formulation is equivalent to solving the primal form \cite{cherkassky2007learning}.
+% In the dual formulation the non-negative Lagrange multipliers $a_i$ are introduced and the decision function becomes:
+The linear classifier decision function in the dual form is optimized over $\alpha_i$:
 \begin{equation}\label{eq:svm_lagrange}
-  f(x) = \operatorname{sgn}( \sum_{i=1}^n \alpha_i y_i K(x, x_i) + b),
+  f(x) = \operatorname{sgn}( \sum_{i=1}^n \left\{ \alpha_i y_i K(x, x_i) + b \right\} ),
 \end{equation}
 where $K(x, x_i) = \phi(x)^T\phi(x_i)$ is the dot product of data objects in feature space $\mathcal{F}$ (which is further discussed in \Cref{subsec:kernels}).
 Here every data point in $\mathcal{I}$ for which $a_i > 0$ is weighted in the decision function and thus ``supports'' the classification machine: hence the name ``\acrlong{svm}''.
-Since it is shown that under certain circumstances \glspl{svm} show an equality to sparse representations \cite{girosi1998equivalence,smola1998connection}, there will often be relatively few Lagrange multipliers with a non-zero value.
+Since it is shown that under certain circumstances \glspl{svm} resembles sparse representations \cite{girosi1998equivalence,smola1998connection}, there will often be relatively few Lagrange multipliers with a non-zero value.
 
 Using this formulation two important properties arise \cite{flach2012machine}:
 \begin{enumerate}
@@ -120,36 +124,42 @@ The workings of the kernel matrix $K$ and the non-linear boundaries are discusse
 \subsection{Kernels}\label{subsec:kernels}
 In the previous section, the mapping function $\phi(x)$ and the kernel function $K$ were briefly mentioned.
 The decision function in \Cref{eq:svm_lagrange} only relies on the dot products of mapped data points in the feature space $\mathcal{F}$ (\ie all pairwise distances between the data points in that space).
-It shows \cite{flach2012machine} that for any function $K$ that has the same result in feature space $\mathcal{F}$, without an explicit mapping to the higher dimension $\mathcal{F}$, the dot products can be substituted by the kernel function $K$, as introduced by Aizerman~\etal \cite{aizerman1964theoretical} and applied to \glspl{svc} by Vapnik \cite{vapnik1998statistical}:
+It shows \cite{flach2012machine} that for any function $K$ that corresponds to a dot product in feature space $\mathcal{F}$, without an explicit mapping to the higher dimension $\mathcal{F}$, the dot products can be substituted by that kernel function $K$.
+This is introduced by Aizerman~\etal \cite{aizerman1964theoretical} and applied to \glspl{svc} by Vapnik~\cite{vapnik1998statistical}, known as the `kernel trick':
 \begin{equation}
   K(\vectorsym{x}, \vectorsym{x}') = (\vectorsym{z} \cdot \vectorsym{z}') = \phi(\vectorsym{x}) \cdot \phi(\vectorsym{x}')
 \end{equation}
 where vectors $\vectorsym{z}$ and $\vectorsym{z}'$ are projections of data objects $\vectorsym{x}$ and $\vectorsym{x}'$ through $\phi(\vectorsym{x})$ on the features space $\mathcal{F}$.
-The dot product kernel $K$ is determined by the sum
-\begin{equation}
-  K(\vectorsym{x}, \vectorsym{x}') = \sum_{j=1}^m g_j(\vectorsym{x}) g_j(\vectorsym{x}')
-\end{equation}
-of basis functions $g_j(\vectorsym{x})$.
+% The dot product $\phi(\vectorsym{x}) \cdot \phi(\vectorsym{x}')$ can be replaced by $K(\vectorsym{x}, \vectorsym{x}')$, which is known as the `kernel trick' and found by Vapnik~\cite{vapnik1998statistical}.
+% \begin{equation}
+  % K(\vectorsym{x}, \vectorsym{x}') = \sum_{j=1}^n g_j(\vectorsym{x}) g_j(\vectorsym{x}')
+  % K(\vectorsym{x}, \vectorsym{x}') = \sum_{j=1}^n k(\vectorsym{x}, \vectorsym{x}_j)
+% \end{equation}
+% of $n$ basis functions $k(\vectorsym{x}, \vectorsym{x}')$.
 Note that the evaluation of dot products in the feature space $\mathcal{F}$ between vectors is performed indirectly via the evaluation of the kernel $K$ between (support) vectors in the input space $\mathcal{I}$.
-This is known as the \emph{kernel trick} and gives the \gls{svm} the ability to create non-linear decision function without high computational complexity.
+% This is known as the \emph{kernel trick} and gives the \gls{svm} the ability to create non-linear decision function without high computational complexity.
+This is gives the \gls{svm} the ability to create non-linear decision function without high computational complexity.
 
 The kernel function $K$ can have different forms, such as linear, polynomial and sigmoidal but the most used (and flexible) form is the Gaussian \gls{rbf}.
-The basis functions have the form
+The inner product kernel with \gls{rbf} basis functions have the form
 \begin{equation}
-  g(x) = \operatorname*{sign} \left(  \sum_{i=1}^{n} \alpha_i \operatorname*{exp} \left\{ \frac{\rVert \vectorsym{x} - \vectorsym{x}_i \rVert ^2}{\sigma^2} \right\} \right),
+  % k(x, x') = \operatorname*{sign} \left(  \sum_{i=1}^{n} \alpha_i \operatorname*{exp} \left\{ \frac{\rVert \vectorsym{x}_j - \vectorsym{x} \rVert ^2}{\sigma^2} \right\} \right),
+  K(\vectorsym{x}, \vectorsym{x}') = \operatorname*{exp} \left\{ - \frac{\rVert \vectorsym{x} - \vectorsym{x}' \rVert ^2}{2 \sigma^2} \right\},
 \end{equation}
-where $\sigma$ defines the width and $\rVert \vectorsym{x} - \vectorsym{x}' \rVert ^2$ is the dissimilarity measure expressed as Euclidian distance.
-The inner product kernel $K$ then becomes
-\begin{equation}
-  K(\vectorsym{x}, \vectorsym{x}') = \operatorname*{exp} \left\{ - \frac{ \rVert \vectorsym{x} - \vectorsym{x}' \rVert ^2}{\sigma^2} \right\}.
-\end{equation}
+where $\sigma$ defines the Gaussian width and $\rVert \vectorsym{x} - \vectorsym{x}' \rVert ^2$ is the dissimilarity in Euclidean distance.
+% The inner product kernel $K$ then becomes
+% \begin{equation}
+  % K(\vectorsym{x}, \vectorsym{x}') = \operatorname*{exp} \left\{ - \frac{ \rVert \vectorsym{x} - \vectorsym{x}' \rVert ^2}{\sigma^2} \right\}.
+% \end{equation}
+
 The kernel $K$ maps input space $\mathcal{I}$ to the feature space $\mathcal{F}$ which is a \gls{rkhs} of (theoretically) infinite dimensions.
 As Smola \etal \cite{smola1998connection} state, this Gaussian kernel yields good performance, especially when no assumptions can be made about the data.
-As an explanation, they show a correspondence between learning \glspl{svm} with \gls{rbf} kernels and good regularization operators.
+As an explanation, they show a correspondence between learning \glspl{svm} with \gls{rbf} kernels and regularization operators.
 This may give insights in why \glspl{svm} have been found to exhibit high generalization ability (by learning with few training objects).
 
-The number of basis functions, the center parameters that correspond with support vectors, and the weights in the output layer are all automatically determined via the optimal hyperplane in features space $\mathcal{F}$ \cite{cherkassky2007learning}.
-The width parameter $\sigma$ is equal for all basis functions and is set a priori and determines the flexibility and complexity of the boundary.
+% The number of basis functions, the center parameters that correspond with support vectors, and the weights in the output layer are all automatically determined via the optimal hyperplane in features space $\mathcal{F}$ \cite{cherkassky2007learning}.
+% The center parameters that correspond with support vectors and the weights in the output layer are automatically determined via the optimal hyperplane in features space $\mathcal{F}$ \cite{cherkassky2007learning}.
+The width parameter $\sigma$ is equal for all kernel functions and is set a priori and determines the flexibility and complexity of the boundary.
 In \Cref{subsec:svm_model_parameters} this (hyper)parameter for an \gls{svm} is further discussed.
 
 The mapping from input space $\mathcal{I}$ to $\mathcal{F}$ via $\phi(x)$ is subject to some continuity assumptions.
@@ -239,7 +249,7 @@ By allowing outliers using slacks variables, in the same manner as classical \gl
   \label{fig:nu-vs-svdd}
 \end{figure}
 
-The constructed hypersphere is characterized by a center $\mathbf{a}$ and a radius $R > 0$ as distance from the center to (any data point that is a \gls{sv} on) the boundary, for which the volume, and thus the radius $R$, will be minimized.
+The constructed hypersphere is characterized by the center $\mathbf{a}$ and radius $R > 0$ as distance from the center to (any data point that is a \gls{sv} on) the boundary, for which the volume, and thus the radius $R$, will be minimized.
 The center $\mathbf{a}$ is a linear combination of the support vectors.
 Like the classical \gls{svm} and \gls{svdd} it can be required that all the distances from the data points $x_i$ to the center $\mathbf{a}$ are strict less than $R$ (or equivalent measure).
 A soft margin can be allowed by using slack variables $\xi_i$.
@@ -250,7 +260,7 @@ By using kernel functions (\eg the \gls{rbf}) the hyperspheres in the high dimen
 Possible resulting closed boundaries are illustrated in \Cref{fig:svdd-boundary}.
 This enclosing boundary is obtained by minimizing the following error function $L$ which contains the volume of the hypersphere and the distance from the boundary to the outlier objects:
 \begin{equation}\label{eq:svdd_objective}
-  L(R, \vectorsym{a}, \vectorsym{\xi}) = R^2 + C \sum_{i=1}^n \xi_i
+  L(R, \mathbf{a}, \vectorsym{\xi}) = R^2 + C \sum_{i=1}^n \xi_i
 \end{equation}
 \begin{equation}
   \begin{multlined}
@@ -274,12 +284,12 @@ In the dual Lagrangian formulation of this error function $L$ the multipliers $\
   \end{multlined}
 \end{equation}
 
-In the maximization of \Cref{eq:svdd_lagrange} a large fraction of the multipliers $\alpha_i$ become zero and for a small fraction $\alpha_i > 0$.
-This small fraction, for which $\alpha_i$ is non-zero, are called the \glspl{sv} and these objects lie on the boundary of the description.
+In the maximization of \Cref{eq:svdd_lagrange} a large fraction of the multipliers $\alpha_i$ become zero.
+The small fraction for which $\alpha_i > 0$ are called the \glspl{sv} and these objects lie on the boundary of the description.
 The center of the hypersphere only depends on this small number of \glspl{sv} and the objects for which $\alpha_i = 0$ can be discarded from the solution.
-Testing the membership of a (new) object $\vectorsym{z}$ is done by determining if the distance to the center $\vectorsym{a}$ of the sphere is equal or smaller to the radius $R$:
+Testing the membership of a (new) object $\vectorsym{z}$ is done by determining if the distance to the center $\mathbf{a}$ of the sphere is equal or smaller to the radius $R$:
 \begin{equation}\label{eq:svdd_test_object}
-  \lVert \vectorsym{z} - \vectorsym{a} \rVert ^2 = (\vectorsym{z} \cdot \vectorsym{z}) - 2 \sum_{i} \alpha_i(\vectorsym{z} \cdot \vectorsym{x}_i) + \sum_{i,j}(\vectorsym{x}_i \cdot \vectorsym{x}_j) \le R^2
+  \lVert \vectorsym{z} - \mathbf{a} \rVert ^2 = (\vectorsym{z} \cdot \vectorsym{z}) - 2 \sum_{i} \alpha_i(\vectorsym{z} \cdot \vectorsym{x}_i) + \sum_{i,j} \alpha_i \alpha_j (\vectorsym{x}_i \cdot \vectorsym{x}_j) \le R^2
 \end{equation}
 As with \Cref{eq:svm_lagrange}, the solution of this equation only relies on dot products between the data points in $\vectorsym{x}$ and $\vectorsym{z}$.
 This means that the kernel projection and trick, as discussed in \Cref{subsec:kernels}, can be applied to \gls{svdd} as well \cite{tax1999support,tax2002uniform}.
