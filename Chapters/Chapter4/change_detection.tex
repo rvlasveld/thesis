@@ -36,11 +36,43 @@ It is also based on the \gls{svcpd} method by Camci~\cite{camci2010change}, alth
 
 \TODO{Algoritme meer in pseudo-code zetten. Prominenter maken.}
 
+
+\begin{algorithm}
+\caption{\acrlong{ocs-hats} algorithm.}
+\label{alg:ocs-hats}
+\begin{algorithmic}[1]
+\Require time series $\vectorsym{x}$ and window size $n$
+\Ensure collection of change points $\vectorsym{cp}$
+
+\State $w \leftarrow \vectorsym{x}[1 \dots n-1]$ \Comment{Initialize working set}
+
+\While{$\vectorsym{x}_t$ is available}
+  \State $w[] \leftarrow \vectorsym{x}_t$ \Comment{Add new data to working set}
+
+  \State $s \leftarrow \operatorname*{SVDD}(\vectorsym{x})$ \Comment{Create hypersphere with SVDD method}
+  \State $r[] \leftarrow s.radius$ \Comment{Extract radius from hypersphere}
+
+  \State $r_{avg} \leftarrow \operatorname*{average}(r)$
+  \State $\hbar \leftarrow s.radius / r_{avg}$ \Comment{Radius ratio $\hbar$}
+
+  \If{ $\hbar$ \textless $th_{low}$ \textbf{or} $\hbar$ \textgreater $th_{high}$} \Comment{Compare $\hbar$ with thresholds}
+    \State $cp[] \leftarrow t$ \Comment{Mark $t$ as change point}
+  \EndIf
+
+  \State $w[0] \leftarrow []$ \Comment{Drop oldest data point from working set}
+\EndWhile
+
+\State $cp \leftarrow \operatorname*{merge}(cp)$ \Comment {Post-processing, change point merging}
+\end{algorithmic}
+\end{algorithm}
+
+\TODO{Make algorithm more readable}
+
 In the \gls{svcpd} the first step for a new data point $\vectorsym{z}$ is to check whether the data point lies within the enclosing (hyperspherical) boundary of the constructed model.
 This will label the new data point as an in- or outlier, relative to the current data set.
 Depending on that outcome, the model is updated to include the new data point.
 The second step is to inspect the (changed) model properties, \ie the radius $R$.
-In our method we only employ the second step: the inspection of the radius $R$.
+In \gls{ocs-hats} we only employ the second step: the inspection of the radius $R$.
 We regard the first step (determine if $\vectorsym{z}$ is an outlier) to be superfluent: in case it is an outlier, the model update step will change the radius $R$ in order to let the boundary include the new data point $\vectorsym{z}$.
 Would the new data object $\vectorsym{z}$ be already an inlier, then the updated model would not have a significant change in radius $R$.
 Our algorithm is outlined in \Cref{tab:algorithm_proposed_method}.
