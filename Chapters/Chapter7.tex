@@ -82,38 +82,39 @@ The (results of the) proposed method is subject to parameters, which we have set
 
 We have applied our method to real-world data, recorded in 7 runs.
 For a better and more robust analysis of the algorithm it can be applied to more real-world data.
-Although we have recorded and publicized our used data, application to other commonly used data sets would enable a fair comparison.
-Furthermore, since the manual annotation of change points is an ambiguous task, the results are very subjective.
+Although we have recorded and publicized our data, application to other commonly used data sets would enable a fair comparison.
+Furthermore, since the manual annotation of change points is an ambiguous task, the results remain subjective.
 
 \section{Future research}\label{sec:further_research}
-The motivation for this research was, amonst others, the assumption that an explicit temporal segmentation of inertial signals can be used to obtain a better classification of the performed activities.
+The motivation for this research was, amongst others, the assumption that an explicit temporal segmentation of inertial signals can be used to obtain a better classification of the performed activities.
 There are two reasons for that.
 First, since the segmentation adds information about sequential data points (whether they belong to the same class), the a priori knowledge about the distribution changes.
 Second, the window of data used for model construction can be much larger (than the often used length of 1-3 seconds).
 This enables a better mathematical model to be constructed.
-A future research in this line of assumptions is to compare the performance of classification methods using this obtained temporal segmentation and those that do not.
-This would confirm of reject the assumption that a temporal segmentation enables a better classification.
+In future research the performance of classification methods that use temporal segmentation can be compared with those that do not.
+This would confirm or reject the assumption that temporal segmentation enables better classification.
 
 As discussed in the previous section, the parameters for our proposed method (such as the \gls{svdd} settings and \gls{rbf} width $\sigma$), are set manually and globally.
 For further research we advise to create an automated optimization method for the parameters.
 Furthermore, to overcome the \emph{masking} effect discussed in \Cref{sec:real_world_results}, a method which determines the parameters locally should obtain better results.
 
-Since the temporal segmentation of inertial signal is not yet a very active field of study, more studies can be performed to obtain it.
-In our approach we have used (all) the raw data directly.
+Since temporal segmentation of inertial signal is not yet a very active field of study, more studies can be performed on this subject.
+In our approach we have used (all) the raw data directly, to create a method independent of the domain.
 In the field of activity recognition many methods make use of pre-processing steps, from which one step often is feature extraction from the raw data.
-That, and other pre-processing steps, could be incorporated in the explicit temporal segmentation of inertial signals.
-Future research could focus on extracted features that aid the detection of change points.
+That, and other pre-processing steps, could be incorporated in explicit temporal segmentation of inertial signals.
+Future research could focus on using those extracted features to aid the detection of change points.
 
-In that same line, we have encountered situations in which the exclusion of some sensors, \eg the accelerometer, yields better results.
+Similar, feature selection if often used to use only the best dimensions of a signal.
+We have encountered situations in which the exclusion of some sensors, \eg the accelerometer, yields better results.
 This occurs mainly in situations where a rotation is part of the change (\eg walking around a corner).
 Thus depending on the desired granularity of the segmentation, it can be beneficial to discard some of the time series data.
-Determining (dynamically) which sensors should be, and which should not be, used in the model construction phase (known as \emph{feature selection}) could be a subject of further research.
+Applying feature selection to the sensors to restrict the data used for model construction could be a subject of further research.
 
 Finally, the application of \gls{oc-svm} based methods to new types of data is an interesting subject for further research in itself.
 It creates a powerful non-linear classification solution and combined with optimization techniques can reduce problems of relatively high dimensionality to a single (or a few) dimensions.
 
 \section{Final words}\label{sec:final_remarks}
-In this research we have constructed a method to create a temporal segmentation of inertial sensor time series data, originating from performed human activities.
+In this research we have constructed a method to segment inertial sensor time series data, from performed human activities.
 To this end we have applied \gls{occ} and \gls{oc-svm} based method to our own recorded data sets.
 We followed the approach by Camci~\cite{camci2010change} and used the theory and implementation of \gls{svdd} by Tax~\cite{tax2001one,Ddtools2013}.
 Although the performance of the method heavily depends on user set parameters, the results are promising.
