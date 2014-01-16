@@ -11,63 +11,6 @@ In this section we discuss the methods applicable to the extracted radius $R$ of
 It is the second stage of our algorithm, analogue to the second stage of the unifying framework by Takeuchi and Yamanishi~\cite{takeuchi2006unifying}.
 It is also based on the \gls{svcpd} method by Camci~\cite{camci2010change}, although we have simplified the algorithm.
 
-\begin{table}
-\begin{center}
-  \caption[Proposed algorithm]{Algorithm of the proposed change detection method, using the Ratio-Thresholding method of \ref{subsec:ratio_thresholding} for change detection.}
-  \begin{tabular}{ l p{12cm} }
-    \hline
-    Step & Action \\
-    \hline
-    & \textbf{Input:} time series $\vectorsym{x}$, window size $n$ \\
-    & \textbf{Output:} collection of change points $\vectorsym{t}$ \\
-    1 & Start with $n$ data objects as working set and construct hypersphere \\
-    2 & Add next data object $x_t$ and drop first one \\
-    3 & Identify new hyper-sphere and its \emph{approximate radius} \\
-    4 & Calculate radius average of hyperspheres since last change point \\
-    5 & Calculate radius ratio $\hbar$. \newline
-    If $\hbar$ is  lower than ${th}_{low}$ or greater than ${th}_{high}$ then mark $t$ as change point in $\vectorsym{t}$ \\
-    6 & Continue from step 2, until no more data objects available \\
-    7 & Apply post-processing: merge close change points \\
-    \hline
-  \end{tabular}
-  \label{tab:algorithm_proposed_method}
-\end{center}
-\end{table}
-
-\TODO{Algoritme meer in pseudo-code zetten. Prominenter maken.}
-
-
-\begin{algorithm}
-\caption{\acrlong{ocs-hats} algorithm.}
-\label{alg:ocs-hats}
-\begin{algorithmic}[1]
-\Require time series $\vectorsym{x}$ and window size $n$
-\Ensure collection of change points $\vectorsym{cp}$
-
-\State $w \leftarrow \vectorsym{x}[1 \dots n-1]$ \Comment{Initialize working set}
-
-\While{$\vectorsym{x}_t$ is available}
-  \State $w[] \leftarrow \vectorsym{x}_t$ \Comment{Add new data to working set}
-
-  \State $s \leftarrow \operatorname*{SVDD}(\vectorsym{x})$ \Comment{Create hypersphere with SVDD method}
-  \State $r[] \leftarrow s.radius$ \Comment{Extract radius from hypersphere}
-
-  \State $r_{avg} \leftarrow \operatorname*{average}(r)$
-  \State $\hbar \leftarrow s.radius / r_{avg}$ \Comment{Radius ratio $\hbar$}
-
-  \If{ $\hbar$ \textless $th_{low}$ \textbf{or} $\hbar$ \textgreater $th_{high}$} \Comment{Compare $\hbar$ with thresholds}
-    \State $cp[] \leftarrow t$ \Comment{Mark $t$ as change point}
-  \EndIf
-
-  \State $w[0] \leftarrow []$ \Comment{Drop oldest data point from working set}
-\EndWhile
-
-\State $cp \leftarrow \operatorname*{merge}(cp)$ \Comment {Post-processing, change point merging}
-\end{algorithmic}
-\end{algorithm}
-
-\TODO{Make algorithm more readable}
-
 In the \gls{svcpd} the first step for a new data point $\vectorsym{z}$ is to check whether the data point lies within the enclosing (hyperspherical) boundary of the constructed model.
 This will label the new data point as an in- or outlier, relative to the current data set.
 Depending on that outcome, the model is updated to include the new data point.
@@ -75,7 +18,41 @@ The second step is to inspect the (changed) model properties, \ie the radius $R$
 In \gls{ocs-hats} we only employ the second step: the inspection of the radius $R$.
 We regard the first step (determine if $\vectorsym{z}$ is an outlier) to be superfluent: in case it is an outlier, the model update step will change the radius $R$ in order to let the boundary include the new data point $\vectorsym{z}$.
 Would the new data object $\vectorsym{z}$ be already an inlier, then the updated model would not have a significant change in radius $R$.
-Our algorithm is outlined in \Cref{tab:algorithm_proposed_method}.
+Our algorithm is outlined in \Cref{alg:ocs-hats}.
+
+\begin{algorithm}
+\caption{\acrlong{ocs-hats} algorithm.}
+\label{alg:ocs-hats}
+\begin{algorithmic}[1]
+\Require time series $X$, window size $n$, thresholds $th_{low}$ and $th_{high}$, proximity factor $p$
+\Ensure collection $change\_points$
+\item[]
+\State $change\_points \leftarrow$ empty collection
+\State $radii \leftarrow$ empty collection
+\State Initialize $w \leftarrow incremental\_svdd$ with first $n$ samples from $\vectorsym{x}$
+\item[]
+\While{ new sample $x$ from $X$ at time $t$}
+  \item[]
+  \State Add $x$ to $w$
+  \State $sphere \leftarrow update\_hypersphere(w)$
+  \State $radius \leftarrow extract\_radius(sphere)$
+  \State $radii[t] \leftarrow radius$
+  \item[]
+  \State $\hbar \leftarrow$ calculate ratio from previous average $radii$ and current $radius$
+  \item[]
+  \If{ $\hbar$ \textless \, $th_{low}$ \textbf{or} $\hbar$ \textgreater \, $th_{high}$} %\Comment{Compare $\hbar$ with thresholds}
+    \State Add current time $t$ to $change\_points$
+    \State Empty previous $radii$
+  \EndIf
+  \item[]
+  \State Remove oldest $x$ from $w$
+\EndWhile
+
+\item[]
+
+\State Merge $\vectorsym{cp}$ based on proximity $p$
+\end{algorithmic}
+\end{algorithm}
 
 The problem of change detection in complex multi-dimensional time series is now reduced to finding change in a one-dimensional time series.
 Besides the dimensionality reduction, the form of the signal is also simplified.
