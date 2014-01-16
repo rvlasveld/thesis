@@ -2,7 +2,7 @@
 \section{Results}\label{sec:artificial_data_results}
 The results of all the data sets are provided in \Cref{tab:results_artificial}, together with the used parameters.
 For each data set it shows the high and low thresholds used in the \gls{rt} based change detection method.
-During the post-processing all detected change points within a certain \emph{closeness} range are merged, for which the value differs per data set.
+During the post-processing all detected change points within a certain proximity $\delta$ are merged, for which the value differs per data set.
 The difference between the actual and final detected change points are expressed as an offset.
 The data sets were processed with different window lengths and $\sigma$ value for the \gls{rbf} kernel.
 
@@ -21,7 +21,7 @@ The data sets were processed with different window lengths and $\sigma$ value fo
     \hline
     Low threshold & 0.1 & 0.1 & 0.5 & 0.1 \\
     \hline
-    Closeness & 10 & 10 & 10 & 50 \\
+    $\delta$ & 10 & 10 & 10 & 50 \\
     \hline
     \hline
     $\gamma(Y)$ & 0 & 0.1 & 0.1 & 0.1 \\

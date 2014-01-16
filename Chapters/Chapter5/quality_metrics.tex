@@ -20,11 +20,15 @@ For a high quality method the average delay $d_{avg}$ and \gls{far} $\gamma$ sho
 In our results we will also list the parameters used, since these need to be user-defined and are part of the (manual) optimization process.
 The parameters are:
 \begin{itemize}
-  \item \textbf{Window length}: The window length that is processed by the \gls{svdd} algorithm. This is the number of data points that are continuously modeled in the shape in a hypersphere.
+  \item \textbf{Window length}: The window length that is processed by the \gls{svdd} algorithm.
+  This is the number of data points that are continuously modeled in the shape in a hypersphere.
   \item \textbf{Sigma of \gls{rbf}}: The value of $\sigma$ for the \gls{rbf} kernel. The effect of this parameter has been discussed in \Cref{subsec:svm_model_parameters}.
-  \item \textbf{High threshold}: The $th_\text{high}$ threshold value for the \gls{rt} method described in \Cref{subsec:ratio_thresholding}. A higher value indicates a more precise and robust setting.
-  \item \textbf{Low threshold}: The $th_\text{low}$ threshold value for the \gls{rt} method described in \Cref{subsec:ratio_thresholding}. A lower value indicates a more precise and robust setting.
-  \item \textbf{Closeness}: In the post-processing phase the detected change points which are within a certain \emph{closeness} range will be merged together. This parameter indicates the minimal number of data points that change points must differ in order to be considered separate detections.
+  \item \textbf{High threshold}: The $th_\text{high}$ threshold value for the \gls{rt} method described in \Cref{subsec:ratio_thresholding}.
+  A higher value indicates a more precise and robust setting.
+  \item \textbf{Low threshold}: The $th_\text{low}$ threshold value for the \gls{rt} method described in \Cref{subsec:ratio_thresholding}.
+  A lower value indicates a more precise and robust setting.
+  \item \textbf{Proximity}: In the post-processing phase the detected change points which are within a certain range $\delta$ will be merged.
+  This parameter indicates the minimal number of data points that change points must differ in order to be considered separate detections.
 \end{itemize}
 For all the sets we have used a value of $C = 0.1$, which indicates that $10\%$ of the data points were considered to be outliers.
 This is a normal setting for the \gls{svdd} method.

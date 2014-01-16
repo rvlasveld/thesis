@@ -10,9 +10,9 @@ By stating our observations and remarks and providing fragments of visual result
 The employed two-stage algorithm requires the setting of user defined parameters.
 In \Cref{tab:results_real_world} for each run the results are listed, together with the used parameters.
 We have used a window length of 50 frames, which represents around $1.16$ seconds of data (the frame-rate of the recordings is not fixed).
-The other parameter values, \ie the \gls{rbf} $\sigma$, high and low threshold and closeness factor, are the result of an educated guess and manual optimization.
+The other parameter values, \ie the \gls{rbf} $\sigma$, high and low threshold, and proximity parameter $\delta$, are the result of an educated guess and manual optimization.
 In general, a high value for the upper threshold and low value for the lower threshold indicates a robust method, since it indicates that change points are significantly different from homogeneous segments.
-The closeness time frame should be low, since that indicates there are few false positives.
+The proximity $\delta$ should be low, since that indicates there are few false positives.
 
 \begin{table}
   \centering
@@ -23,20 +23,20 @@ The closeness time frame should be low, since that indicates there are few false
     \hline
     Window length & 50 & 50 & 50 & 50 & 50 & 50 & 50 \\
     \hline
-    Sigma of \gls{rbf} & 13 & 13 & 13 & 13 & 13 & 13 & 4 \\
+    Sigma of \gls{rbf} & 13 & 13 & 13 & 13 & 13 & 4 & 13 \\
     \hline
-    High threshold & 1.2 & 1.5 & 1.3 & 1.1 & 1.3 & 1.2 & 1.7 \\
+    High threshold & 1.2 & 1.5 & 1.1 & 1.3 & 1.2 & 1.7 & 1.3 \\
     \hline
-    Low threshold & 0.8 & 0.8 & 0.6 & 0.7 & 0.7 & 0.8 & 0.6 \\
+    Low threshold & 0.8 & 0.8 & 0.7 & 0.7 & 0.8 & 0.6 & 0.6 \\
     \hline
-    Closeness (s) & 0.7 & 0.85 & 1 & 0.6 & 0.7 & 1 & 0.8 \\
+    $\delta$ (s) & 0.7 & 0.85 & 0.6 & 0.7 & 1 & 0.8 & 1 \\
     \hline
     \hline
-    $\gamma(Y)$ & 0.1 & 0.05 & 0 & 0 & 0.2 & 0 & 0.48 \\
+    $\gamma(Y)$ & 0.1 & 0.05 & 0 & 0.2 & 0 & 0.48 & 0 \\
     \hline
-    $d_{avg}$ & 0.52 & 0.83 & 0.47 & 0.92 & 1.26 & 1.05 & 0.92 \\
+    $d_{avg}$ & 0.52 & 0.83 & 0.92 & 1.26 & 1.05 & 0.92 & 0.47 \\
     \hline
-    $std(d_{avg})$ & 0.29 & 0.55 & 0.52 & 0.75 & 1.67 & 0.78 & 0.92 \\
+    $std(d_{avg})$ & 0.29 & 0.55 & 0.75 & 1.67 & 0.78 & 0.92 & 0.52 \\
     \hline
   \end{tabulary}
   \label{tab:results_real_world}
@@ -76,8 +76,8 @@ As with the above behavior, this is subject to parameter settings.
 
 Considering the overall performance and results, we have the following observations of cases in which the method has problems with detecting change:
 \begin{itemize}
-  \item \textbf{Merging:} in our method we use a \emph{closeness} time period $t_c$ (usually up to $0.5$ - $1.0$ seconds) to merge discovered change points that have a very small distance between them.
-  Multiple merging-strategies can be applied, and in our method we use the naive implementation by simply ignoring all the discovered change points that occur less than $t_c$ seconds after the previous change point.
+  \item \textbf{Merging:} in our method we use a proximity time period $\delta$ (usually up to $0.5$ - $1.0$ seconds) to merge discovered change points that have a very small distance between them.
+  Multiple merging-strategies can be applied, and in our method we use the naive implementation by simply ignoring all the discovered change points that occur less than $\delta$ seconds after the previous change point.
   This works well when there is a block of noisy data with a high amount of (falsely) discovered change points.
   On the flip side, this method will ignore real new change points which occur during the noisy period.
   This problem on itself can be formulated as a change detection problem.
@@ -114,13 +114,8 @@ When looking at the individual runs, we have the following observations for each
       The second is that between different activities the transition period is longer than we would think.
       Looking at the data, we can see that the body slows down, even before we visually notice it on the video recordings.
     \end{itemize}
-  \item \textbf{Subject 2, walk around corner} \Cref{fig:data_with_cps_run_3}
-    \begin{itemize}
-      \item The $90^{\circ}$ counter-clockwise turn during the walking activity is hard to discover when the accelerometer sensor data is included.
-      When only the magnetic field and rotation sensors are used, the turn requires a lower sensitivity.
-      With only these two sensors all the other change points in this run are also successfully discovered.
-    \end{itemize}
-  \item \textbf{Subject 2, walk and run around fountain} \Cref{fig:data_with_cps_run_4}
+
+  \item \textbf{Subject 2, walk and run around fountain} \Cref{fig:data_with_cps_run_3}
     \begin{itemize}
       \item Like in the first run, the walking segment from $24s$ results in a change point for each step.
       Further inspection of the data reveals that each step is indeed different from the other.
@@ -128,22 +123,21 @@ When looking at the individual runs, we have the following observations for each
       It could also be that our used window-length is too small, to model a good representation of this segment.
       \item During the circular run, from $12s$ till $24$, there are two change points discovered.
       The difference for the rotational vectors need to accumulate to a certain value before they have enough influence to let the rotation be regarded as a change point.
-
     \end{itemize}
-  \item \textbf{Subject 1, walk and run around fountain} \Cref{fig:data_with_cps_run_5}
+  \item \textbf{Subject 1, walk and run around fountain} \Cref{fig:data_with_cps_run_4}
     \begin{itemize}
       \item As with the other runs, the accelerometer data makes it harder to detect turns.
       It requires a higher sensitivity, which results in a higher \gls{far}.
     \end{itemize}
-  \item \textbf{Subject 2, walk and run fountain 2} \Cref{fig:data_with_cps_run_6}
+  \item \textbf{Subject 2, walk and run fountain 2} \Cref{fig:data_with_cps_run_5}
     \begin{itemize}
       \item During the standing segment around $38s$ there are a lot of false positives.
       It seems to be the \emph{false heterogeneity} problem described above.
     \end{itemize}
-  \item \textbf{Subject 3, indoor stairs} \Cref{fig:data_with_cps_run_7}
+  \item \textbf{Subject 3, indoor stairs} \Cref{fig:data_with_cps_run_6}
     \begin{itemize}
       \item The walking segment around $22s$, between two segments of walking downstairs, shows little difference in the data.
-      To recognize it as a change point a high sensitivity and low closeness time period $t_c$ is required.
+      To recognize it as a change point a high sensitivity and low proximity time period $\delta$ is required.
       \item During some segments (downstairs from $24s$, upstairs from $42s$ and $54s$) the method discovers more change points than our annotation.
       A closer inspecting of the raw data reveals indeed changes in behavior.
       To exclude these (semi) false positives, a better tuning of parameters is required.
@@ -151,6 +145,12 @@ When looking at the individual runs, we have the following observations for each
       Although our method is build to exclude slow shifting changes (because we are only interested in sudden changes), with our used window width it still eventually results in change points.
       \item The difference between taking the stairs and walking is smaller than, \eg, walking and running.
       The delay between these segments seems to be larger, as illustrated around $33s$.
+    \end{itemize}
+  \item \textbf{Subject 2, walk around corner} \Cref{fig:data_with_cps_run_7}
+    \begin{itemize}
+      \item The $90^{\circ}$ counter-clockwise turn during the walking activity is hard to discover when the accelerometer sensor data is included.
+      When only the magnetic field and rotation sensors are used, the turn requires a lower sensitivity.
+      With only these two sensors all the other change points in this run are also successfully discovered.
     \end{itemize}
 \end{enumerate}
 
@@ -169,31 +169,31 @@ When looking at the individual runs, we have the following observations for each
   \end{subfigure}
 
   \begin{subfigure}{1\textwidth}
-    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-3-walk-turn-roemer/data_plot_acc_with_discovered_cps.eps}
+    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-4-run-fountain-roemer/data_plot_acc_with_discovered_cps.eps}
     \caption{Run 3}
     \label{fig:data_with_cps_run_3}
   \end{subfigure}
 
   \begin{subfigure}{1\textwidth}
-    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-4-run-fountain-roemer/data_plot_acc_with_discovered_cps.eps}
+    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-5-run-fountain-jos/data_plot_acc_with_discovered_cps.eps}
     \caption{Run 4}
     \label{fig:data_with_cps_run_4}
   \end{subfigure}
 
   \begin{subfigure}{1\textwidth}
-    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-5-run-fountain-jos/data_plot_acc_with_discovered_cps.eps}
+    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-6-walk-run-roemer/data_plot_acc_with_discovered_cps.eps}
     \caption{Run 5}
     \label{fig:data_with_cps_run_5}
   \end{subfigure}
 
   \begin{subfigure}{1\textwidth}
-    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-6-walk-run-roemer/data_plot_acc_with_discovered_cps.eps}
+    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/stairs-1-marc/data_plot_acc_with_discovered_cps.eps}
     \caption{Run 6}
     \label{fig:data_with_cps_run_6}
   \end{subfigure}
 
   \begin{subfigure}{1\textwidth}
-    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/stairs-1-marc/data_plot_acc_with_discovered_cps.eps}
+    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-3-walk-turn-roemer/data_plot_acc_with_discovered_cps.eps}
     \caption{Run 7}
     \label{fig:data_with_cps_run_7}
   \end{subfigure}
