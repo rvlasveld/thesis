@@ -28,7 +28,7 @@ The data sets were processed with different window lengths and $\sigma$ value fo
     \hline
     $d_{avg}$ & 2.27 & 6.18 & 0.64 & 15.36 \\
     \hline
-    Standard deviation Delay & 1.19 & 7.94 & 0.92 & 17.70 \\
+    $std(d_{avg})$ & 1.19 & 7.94 & 0.92 & 17.70 \\
     \hline
   \end{tabulary}
   \label{tab:results_artificial}
@@ -45,8 +45,8 @@ To give a better impression of the spread of the accuracy of the detected change
 This last figure shows the number of data points between each actual and closest detected change point.
 Using the box plot notation, we can visualize not only the average but also the spread of the delay.
 With each data set embodying different characteristics, different observations can be drawn from the data sets.
-In the references figures, the blue lines represent the radius of the constructed hypersphere.
-The vertical red lines are the discovered change points.
+In the references figures, the solid blue line represent the radius of the constructed hypersphere.
+The vertical dashed and thick red lines are the discovered change points.
 For each data set the following is observed:
 \begin{enumerate}
   \item \textbf{Fixed increasing mean:} In \Cref{fig:camci_fixed_increasing_mean_thresholds} we see that each change point is almost equally fast and accurate detected.
@@ -87,6 +87,6 @@ For each data set the following is observed:
     \label{fig:camci_takeuchi_alternating_variance_thresholds}
   \end{subfigure} \\
 
-  \caption[Artificial data set results]{Hypersphere radius sizes for the four artificial data sets. The detected change points are displayed as red vertical bars.}
+  \caption[Artificial data set results]{Hypersphere radius sizes for the four artificial data sets. The detected change points are displayed as dashed thick red vertical bars.}
   \label{fig:plots_results_artificial_data_sets}
 \end{figure}

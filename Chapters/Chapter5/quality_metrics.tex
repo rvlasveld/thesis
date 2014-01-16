@@ -10,7 +10,7 @@ We can then define the $d_{avg}$ over all the discovered change points $Y$ as:
 \begin{equation}\label{eq:average_delay}
   d_{avg}(Y) = \frac{\sum_{y=1}^Y d(y)}{Y}.
 \end{equation}
-Besides the delay, which should be low to indicate discovered change points near the actual change point, we need to penalize discovered change points which do not relate to a true change point.
+Besides the delay, and the standard deviation $std(d_{avg})$ to measure the spread, which should be low to indicate discovered change points near the actual change point, we need to penalize discovered change points which do not relate to a true change point.
 For this we use the \acrlong{far} $\gamma$, expressed as
 \begin{equation}\label{eq:false_alarm_rate}
   \gamma(Y) = \frac{Y_{\operatorname*{false}}}{Y}.

@@ -2,7 +2,7 @@
 \section{Results}\label{sec:real_world_results}
 In this section we will provide the results of our methods \gls{ocs-hats} applied to the real-world data sets and discuss the quality of the solution.
 As stated above, we will use the objective quality metrics as used in \Cref{sec:artificial_data_quality_metrics}.
-That will be in the form of a tabular overview of the (manually set) best meta-parameters and results, expressed in \gls{far} and $\operatorname*{Average\_delay}$ (following \Cref{sec:artificial_data_results}).
+That will be in the form of a tabular overview of the (manually set) best meta-parameters and results, expressed in \gls{far} $\gamma$ and average delay $d_{avg}$ (following \Cref{sec:artificial_data_results}).
 Furthermore, we will discuss the results from an empirical point of view, since the problem of finding change points in human activities is ambiguous.
 By stating our observations and remarks and providing fragments of visual results, we will discuss the characterizing strengths and weaknesses of our method.
 
@@ -32,11 +32,11 @@ The closeness time frame should be low, since that indicates there are few false
     Closeness (s) & 0.7 & 0.85 & 1 & 0.6 & 0.7 & 1 & 0.8 \\
     \hline
     \hline
-    $\operatorname*{far}(Y)$ & 0.1 & 0.05 & 0 & 0 & 0.2 & 0 & 0.48 \\
+    $\gamma(Y)$ & 0.1 & 0.05 & 0 & 0 & 0.2 & 0 & 0.48 \\
     \hline
-    $\operatorname*{Average\_delay}$ & 0.52 & 0.83 & 0.47 & 0.92 & 1.26 & 1.05 & 0.92 \\
+    $d_{avg}$ & 0.52 & 0.83 & 0.47 & 0.92 & 1.26 & 1.05 & 0.92 \\
     \hline
-    STD Delay & 0.29 & 0.55 & 0.52 & 0.75 & 1.67 & 0.78 & 0.92 \\
+    $std(d_{avg})$ & 0.29 & 0.55 & 0.52 & 0.75 & 1.67 & 0.78 & 0.92 \\
     \hline
   \end{tabulary}
   \label{tab:results_real_world}
