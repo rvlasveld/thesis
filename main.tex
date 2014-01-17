@@ -211,10 +211,23 @@ Friedrich Nietzsche
 
 \abstract{\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
 
-The Thesis Abstract is written here (and usually kept to just this page). The page is kept centered vertically so can expand into the blank space above the title too\ldots
-}
+% The Thesis Abstract is written here (and usually kept to just this page). The page is kept centered vertically so can expand into the blank space above the title too\ldots
 
-\TODO{Write abstract}
+
+In this thesis we construct a method to create a temporal segmentation on time series data recorded during human activities by inertial sensors in smartphones.
+Our assumption is that information about changes between activities can aid activity classification methods, since it adds information about sequential data points.
+We explore current temporal segmentation methods and relate the problem to change detection.
+A change in the performed activity results in a change in the data distribution of a time window.
+Using a \acrlong{oc-svm} algorithm we model the data distribution in the shape of a high dimensional hypersphere.
+A change in the distribution can then be discovered by analyzing the radius of the hypersphere, which will increase in such events.
+
+We implement an algorithm to process real-world time series data and find changes in performed activities.
+The data needs to be recorded in a continuous nature, with the transition periods between activities present.
+Since common available data sets do not meet this requirement, we have recorded our own data set and made it publicly available.
+A ground truth is provided both as manually annotated change points and video recordings of the activities.
+
+The constructed method, \acrlong{ocs-hats}, is able to find changes between performed activities in an unknown environment.
+}
 
 \clearpage % Start a new page
 
@@ -224,11 +237,38 @@ The Thesis Abstract is written here (and usually kept to just this page). The pa
 
 \setstretch{1.3} % Reset the line-spacing to 1.3 for body text (if it has changed)
 
-\acknowledgements{\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
+\acknowledgements{\addtocontents{toc}{\vspace{0.8em}} % Add a gap in the Contents, for aesthetics
 
-The acknowledgements and the people to thank go here, don't forget to include your project advisor\ldots
+% The acknowledgements and the people to thank go here, don't forget to include your project advisor\ldots
+Writing a thesis is hard.
+It starts with the moment you are thinking about a subject and ends with the last part, where one should write the acknowledgments to any who deserves it and express thanks to those you owe it.
+Besides all the authors who went before me in this subject and inspired me to continue in their line of research, there are a few people who I would like to say thanks to explicitly.
+
+First, I am thankful for the attention from my supervisor at \textsc{Almende}, Anne van Rossum.
+We had great discussions, in which I often needed to convince him of my ideas, which helped me with finding a domain and problem for my research.
+I think it is great that \textsc{Almende} and \textsc{Sense} facilitate so much research for master students, in a very pleasant environment.
+Everybody contributes to a atmosphere of research on new possibilities and applications, heavily relying on artificial intelligence.
+
+Less frequent visited, but of no less importance, is my supervisor at the \textsc{Utrecht University}, Gerard Vreeswijk.
+During our meetings he gave me great advise and feedback on my writing skills and techniques.
+I am thankful for his feedback and guidance and allowing me to find a subject within my full interest.
+
+Full immersion in a subject can narrow the field of vision.
+Without reflecting on the subject from a small distance and a different point of view, the primary goals can easily become obfuscated.
+The (for both sides) explanatory conversations with, amongst others, my partner Inge Dalm, my parents, my brother Floris, my sister Esmee, their partners, my housemate Yvo Zollner, those who are gathered under the heading of Lemnisco, those who call themselves `Vlassies', those who enjoy golden liquids, and those who are fond of lunacy, helped me understand my research problem at different levels.
+
+Already mentioned, my parents (in the widest sense) have been of great support in any way.
+It is their encouragement to explore the world and question everything that has led me to my passion for computer science, artificial intelligence,  and machine learning.
+
+Finally, but certainly not least, I want to thank my partner Inge Dalm.
+Without her and the time together I could not have completed this thesis.
+I am very thankful for her and her vision on this matter.
+She encouraged me during the process and bared with me during the harder moments.
+
+With all the people mentioned above, and those who are not mentioned but know they should have, this research has become possible.
+Without them, writing a thesis is even harder.
 }
-\TODO{Write some nice stuff here}
+% \TODO{Write some nice stuff here}
 \clearpage % Start a new page
 
 %----------------------------------------------------------------------------------------
@@ -356,6 +396,7 @@ The acknowledgements and the people to thank go here, don't forget to include yo
 % Include the appendices of the thesis as separate files from the Appendices folder
 % Uncomment the lines as you write the Appendices
 
+\input{./Appendices/AppendixA-Results}
 % \input{./Appendices/AppendixA-Summaries}
 % \input{./Appendices/AppendixB-Camci}
 % \input{./Appendices/AppendixC}

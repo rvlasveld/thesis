@@ -3,64 +3,55 @@
 In this section we will provide the results of our methods \gls{ocs-hats} applied to the real-world data sets and discuss the quality of the solution.
 As stated above, we will use the objective quality metrics as used in \Cref{sec:artificial_data_quality_metrics}.
 That will be in the form of a tabular overview of the (manually set) best meta-parameters and results, expressed in \gls{far} $\gamma$ and average delay $d_{avg}$ (following \Cref{sec:artificial_data_results}).
-Furthermore, we will discuss the results from an empirical point of view, since the problem of finding change points in human activities is ambiguous.
-By stating our observations and remarks and providing fragments of visual results, we will discuss the characterizing strengths and weaknesses of our method.
+Furthermore, we have anaylized the results from an emperical point of view, since the problem of finding change points in human activities is ambiguous.
+For the sake of brevity we excluded those observations from this chapter and instead xthey can be found in \Cref{AppendixA}.
 
 \subsection{Objective metrics}
 The employed two-stage algorithm requires the setting of user defined parameters.
-In \Cref{tab:results_real_world} for each run the results are listed, together with the used parameters.
+In \Cref{tab:results_final_real_world} for each run the results are listed.
+The right-most column summarizes the overall performance by taking the average over all the runs.
 We have used a window length of 50 frames, which represents around $1.16$ seconds of data (the frame-rate of the recordings is not fixed).
 The other parameter values, \ie the \gls{rbf} $\sigma$, high and low threshold, and proximity parameter $\delta$, are the result of an educated guess and manual optimization.
 In general, a high value for the upper threshold and low value for the lower threshold indicates a robust method, since it indicates that change points are significantly different from homogeneous segments.
 The proximity $\delta$ should be low, since that indicates there are few false positives.
 
+To give a better impression on the quality of the $d_{avg}$, \Cref{fig:boxplot_final_real_world_runs} shows a box plot for each run.
+It shows the spread of the $d_{avg}$ in seconds over all the change points.
+A lower and more compact box plot is better.
+
 \begin{table}
   \centering
-  \caption[Results real world runs]{Parameter settings and results of the real-world data sets.}
-  \begin{tabulary}{\textwidth}{|l|c|c|c|c|c|c|c|}
-    \cline{2-8}
-    \multicolumn{1}{l|}{} & Run 1 & Run 2 & Run 3 & Run 4 & Run 5 & Run 6 & Run 7 \\
+  \caption[Results real world runs]{Results of the real-world data sets. The used parameters are: window length = $50$, $\sigma = 13$, $th_{high} = 1.2$, $th_{low} = 0.8$}
+  \begin{tabulary}{\textwidth}{|l|c|c|c|c|c|c|c||c|}
+    \cline{2-9}
+    \multicolumn{1}{l|}{} & Run 1 & Run 2 & Run 3 & Run 4 & Run 5 & Run 6 & Run 7 & Average \\
     \hline
-    Window length & 50 & 50 & 50 & 50 & 50 & 50 & 50 \\
+    $\gamma(Y)$ & 0.1 & 0.2 & 0.14 & 0.37 & 0.29 & 0.64 & 0.57 & 0.33 \\
     \hline
-    Sigma of \gls{rbf} & 13 & 13 & 13 & 13 & 13 & 4 & 13 \\
+    $d_{avg}$ & 0.52 & 0.85 & 0.93 & 0.54 & 0.69 & 0.51 & 0.32 & 0.62\\
     \hline
-    High threshold & 1.2 & 1.5 & 1.1 & 1.3 & 1.2 & 1.7 & 1.3 \\
-    \hline
-    Low threshold & 0.8 & 0.8 & 0.7 & 0.7 & 0.8 & 0.6 & 0.6 \\
-    \hline
-    $\delta$ (s) & 0.7 & 0.85 & 0.6 & 0.7 & 1 & 0.8 & 1 \\
-    \hline
-    \hline
-    $\gamma(Y)$ & 0.1 & 0.05 & 0 & 0.2 & 0 & 0.48 & 0 \\
-    \hline
-    $d_{avg}$ & 0.52 & 0.83 & 0.92 & 1.26 & 1.05 & 0.92 & 0.47 \\
-    \hline
-    $std(d_{avg})$ & 0.29 & 0.55 & 0.75 & 1.67 & 0.78 & 0.92 & 0.52 \\
+    $std(d_{avg})$ & 0.71 & 0.31 & 0.68 & 0.37 & 0.50 & 0.44 & 0.35 & 0.48 \\
     \hline
   \end{tabulary}
-  \label{tab:results_real_world}
+  \label{tab:results_final_real_world}
 \end{table}
-
-To give a better impression on the quality of the $\operatorname*{Average\_delay}$, \Cref{fig:boxplot_real_world_runs} shows a box plot for each run.
-It shows the spread of the $\operatorname*{Average\_delay}$ in seconds over all the change points.
-A lower and more compact box plot is better.
 
 \begin{figure}
 \centering
-  \includegraphics[width=1\textwidth]{./Figures/chapter6/data_collection/boxplot_results_real_world_runs.eps}
+  \includegraphics[width=1\textwidth]{./Figures/chapter6/data_collection/boxplot_final_runs.eps}
   \caption[Box plot results real-world runs]{Box plot of the results for the real-world runs, indicating the number of data points between the actual and closest detected change points. A lower and more compact box plot is better.}
-  \label{fig:boxplot_real_world_runs}
+  \label{fig:boxplot_final_real_world_runs}
 \end{figure}
 
-\subsection{Subjective observations and remarks}
+\subsection{Subjective observations and remarks}\label{subsec:subjective_results}
 It can be ambiguous where to place the (manually annotated) change points, in the case of real-world data.
 The objective quality measure can give a distorted view on the performance.
 To overcome this, we will state observations and remarks found after close (visual) inspection of the annotated and discovered change points.
 In \Cref{fig:plots_all_runs_results} all the results are plotted.
 The black solid lines indicate our manually determined change points.
 The dashed purple lines indicate the change points as discovered by our method.
-We will start with general observations applicable to all the runs and will continue with individual remarks for each run.
+We will start with general observations applicable to all the runs.
+A more detailed discussion for each run can be found in \Cref{AppendixA}.
 Where possible, a graphical illustration will support our observations.
 
 Overall our impression is that the proposed method is fairly good at recognizing change points.
@@ -95,112 +86,7 @@ Considering the overall performance and results, we have the following observati
   Other transitions, such as from walking to running, are harder to discover without the (linear) accelerometer sensor data.
 \end{itemize}
 
-When looking at the individual runs, we have the following observations for each run number:
-\begin{enumerate}
-  \item \textbf{Subject 2, straight walk and run} \Cref{fig:data_with_cps_run_1}
-    \begin{itemize}
-      \item The first transition from running to walking, around $14s$ is harder to discover than the transition for the same activities around $33s$.
-      This shows is that in real-world applications there is a diversity between the same transitions and activities.
-      \item Around $8s$, $9s$, and $16s$ a few steps (while walking) are regarded as change points.
-      During the running segments from $17s$ and $28s$ there is a lower probability of change for each step.
-    \end{itemize}
-  \item \textbf{Subject 1, straight walk and run} \Cref{fig:data_with_cps_run_2}
-    \begin{itemize}
-      \item Following the video recordings, we have annotated a change point from running to walking around $37s$.
-      Our method discovers a change point almost a second before.
-      In retrospect, we can see that the data distribution indeed changes from the discovered change point on.
-      This shows us two important principles.
-      The first is that the annotations are very subjective.
-      The second is that between different activities the transition period is longer than we would think.
-      Looking at the data, we can see that the body slows down, even before we visually notice it on the video recordings.
-    \end{itemize}
-
-  \item \textbf{Subject 2, walk and run around fountain} \Cref{fig:data_with_cps_run_3}
-    \begin{itemize}
-      \item Like in the first run, the walking segment from $24s$ results in a change point for each step.
-      Further inspection of the data reveals that each step is indeed different from the other.
-      Due to the global parameter settings, the sensitivity is too high for this segment to recognize it as one.
-      It could also be that our used window-length is too small, to model a good representation of this segment.
-      \item During the circular run, from $12s$ till $24$, there are two change points discovered.
-      The difference for the rotational vectors need to accumulate to a certain value before they have enough influence to let the rotation be regarded as a change point.
-    \end{itemize}
-  \item \textbf{Subject 1, walk and run around fountain} \Cref{fig:data_with_cps_run_4}
-    \begin{itemize}
-      \item As with the other runs, the accelerometer data makes it harder to detect turns.
-      It requires a higher sensitivity, which results in a higher \gls{far}.
-    \end{itemize}
-  \item \textbf{Subject 2, walk and run fountain 2} \Cref{fig:data_with_cps_run_5}
-    \begin{itemize}
-      \item During the standing segment around $38s$ there are a lot of false positives.
-      It seems to be the \emph{false heterogeneity} problem described above.
-    \end{itemize}
-  \item \textbf{Subject 3, indoor stairs} \Cref{fig:data_with_cps_run_6}
-    \begin{itemize}
-      \item The walking segment around $22s$, between two segments of walking downstairs, shows little difference in the data.
-      To recognize it as a change point a high sensitivity and low proximity time period $\delta$ is required.
-      \item During some segments (downstairs from $24s$, upstairs from $42s$ and $54s$) the method discovers more change points than our annotation.
-      A closer inspecting of the raw data reveals indeed changes in behavior.
-      To exclude these (semi) false positives, a better tuning of parameters is required.
-      \item Because of the circular shape of the stairs, the magnetic field sensors constantly differs.
-      Although our method is build to exclude slow shifting changes (because we are only interested in sudden changes), with our used window width it still eventually results in change points.
-      \item The difference between taking the stairs and walking is smaller than, \eg, walking and running.
-      The delay between these segments seems to be larger, as illustrated around $33s$.
-    \end{itemize}
-  \item \textbf{Subject 2, walk around corner} \Cref{fig:data_with_cps_run_7}
-    \begin{itemize}
-      \item The $90^{\circ}$ counter-clockwise turn during the walking activity is hard to discover when the accelerometer sensor data is included.
-      When only the magnetic field and rotation sensors are used, the turn requires a lower sensitivity.
-      With only these two sensors all the other change points in this run are also successfully discovered.
-    \end{itemize}
-\end{enumerate}
-
-\begin{figure}
-  \centering
-  \begin{subfigure}{1\textwidth}
-    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-1-walk-run-roemer/data_plot_acc_with_discovered_cps.eps}
-    \caption{Run 1}
-    \label{fig:data_with_cps_run_1}
-  \end{subfigure}
-
-  \begin{subfigure}{1\textwidth}
-    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-2-walk-run-jos/data_plot_acc_with_discovered_cps.eps}
-    \caption{Run 2}
-    \label{fig:data_with_cps_run_2}
-  \end{subfigure}
-
-  \begin{subfigure}{1\textwidth}
-    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-4-run-fountain-roemer/data_plot_acc_with_discovered_cps.eps}
-    \caption{Run 3}
-    \label{fig:data_with_cps_run_3}
-  \end{subfigure}
-
-  \begin{subfigure}{1\textwidth}
-    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-5-run-fountain-jos/data_plot_acc_with_discovered_cps.eps}
-    \caption{Run 4}
-    \label{fig:data_with_cps_run_4}
-  \end{subfigure}
-
-  \begin{subfigure}{1\textwidth}
-    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-6-walk-run-roemer/data_plot_acc_with_discovered_cps.eps}
-    \caption{Run 5}
-    \label{fig:data_with_cps_run_5}
-  \end{subfigure}
-
-  \begin{subfigure}{1\textwidth}
-    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/stairs-1-marc/data_plot_acc_with_discovered_cps.eps}
-    \caption{Run 6}
-    \label{fig:data_with_cps_run_6}
-  \end{subfigure}
-
-  \begin{subfigure}{1\textwidth}
-    \includegraphics[width=\textwidth]{./Figures/chapter6/data_collection/run-3-walk-turn-roemer/data_plot_acc_with_discovered_cps.eps}
-    \caption{Run 7}
-    \label{fig:data_with_cps_run_7}
-  \end{subfigure}
-
-  \caption[Results run 1/8]{Annotated plots of all runs. The black vertical lines are manually determined change points, the purple dashes lines are the discovered change points. The label above each segment indicates the current performed activity.}\label{fig:plots_all_runs_results}
-\end{figure}
-
+An more elaborate discussion with observations and remarks is provided in \Cref{AppendixA}.
 
 \section{Possible improvements}\label{sec:possible_improvements}
 From the above section we can extract a few possible improvements for the algorithm.
