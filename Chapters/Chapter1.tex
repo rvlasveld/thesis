@@ -22,7 +22,7 @@ Thereby, the methods have more information to create a solid model of the activi
 To find a temporal segmentation, we rely on change detection in time series.
 In the context of this research the time series consists of recordings from inertial sensors during the performance of human activities.
 The sensors, such as the accelerometer, are nowadays widely available in smartphones.
-We are interested in real-world data from both in- and outdoor activities in an unknown environment and in a continuous manner.
+We are interested in real-world data from both in- and outdoor activities performed in a continuous manner.
 
 Compared to recordings in a controlled laboratory environment, we expect the real-world data to be prone to unexpected characteristics.
 The constructed method must be robust in order to handle these.
@@ -46,7 +46,7 @@ Finally, \Cref{sec:intro_thesis_structure} outlines the structure of this thesis
 The scope of this thesis are segmentation methods of inertial sensor data in the field of machine learning.
 The type of data is inertial sensor time series, collected by on-body worn sensors as found in smartphones.
 These time series are recorded during the performance of real-world human activities.
-The setting of the activities are real-world unknown environments.
+The setting of the activities are real-world environments, both in- and outdoor.
 
 As mentioned in the previous section, a segmentation is often obtained as a by-product from direct windowed classification.
 Other approaches have a very rigid form of segmentation, \eg by limiting the number of possible segment types \cite{himberg2001time,chamroukhi2013joint}, or have applied it to different type of time series data.
@@ -124,7 +124,7 @@ So in case of ambiguity there is no ground truth to consult.
 To overcome these problems, we have created our own real-world data set: \acrlong{almende-data} \cite{vlasveld2014acras}.
 
 Our own data set is recorded by placing a smartphone with inertial sensors in the front right pants pocket of a subject.
-The subject was asked to perform common and simple activities in an uncontrolled environment, both in- and outdoors.
+The subject was asked to perform common and simple activities in a natural environment, both in- and outdoors.
 During the performance the subjects were also recorded with a video camera from a third-person point of view.
 This allows us to create a ground truth for the temporal segmentation of performed activities.
 
