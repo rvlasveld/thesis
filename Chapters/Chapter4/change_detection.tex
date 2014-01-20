@@ -24,7 +24,7 @@ Our algorithm is outlined in \Cref{alg:ocs-hats}.
 \caption{\acrlong{ocs-hats} algorithm.}
 \label{alg:ocs-hats}
 \begin{algorithmic}[1]
-\Require time series $X$, window size $n$, thresholds $th_{low}$ and $th_{high}$, proximity factor $p$
+\Require time series $X$, window size $n$, thresholds $th_{low}$ and $th_{high}$, proximity factor $\delta$
 \Ensure collection $change\_points$
 \item[]
 \State $change\_points \leftarrow$ empty collection
@@ -50,7 +50,7 @@ Our algorithm is outlined in \Cref{alg:ocs-hats}.
 
 \item[]
 
-\State Merge $\vectorsym{cp}$ based on proximity $p$
+\State Merge $\vectorsym{cp}$ based on proximity $\delta$
 \end{algorithmic}
 \end{algorithm}
 

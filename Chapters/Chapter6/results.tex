@@ -3,8 +3,8 @@
 In this section we will provide the results of our methods \gls{ocs-hats} applied to the real-world data sets and discuss the quality of the solution.
 As stated above, we will use the objective quality metrics as used in \Cref{sec:artificial_data_quality_metrics}.
 That will be in the form of a tabular overview of the (manually set) best meta-parameters and results, expressed in \gls{far} $\gamma$ and average delay $d_{avg}$ (following \Cref{sec:artificial_data_results}).
-Furthermore, we have anaylized the results from an emperical point of view, since the problem of finding change points in human activities is ambiguous.
-For the sake of brevity we excluded those observations from this chapter and instead xthey can be found in \Cref{AppendixA}.
+Furthermore, we have analyzed the results from an empirical point of view, since the problem of finding change points in human activities is ambiguous.
+For the sake of brevity we excluded those observations from this chapter; they can be found in \Cref{AppendixA}.
 
 \subsection{Objective metrics}
 The employed two-stage algorithm requires the setting of user defined parameters.
@@ -21,7 +21,10 @@ A lower and more compact box plot is better.
 
 \begin{table}
   \centering
-  \caption[Results real world runs]{Results of the real-world data sets. The used parameters are: window length = $50$, $\sigma = 13$, $th_{high} = 1.2$, $th_{low} = 0.8$}
+  \caption[Results real world runs]{Results of the real-world data sets. The used parameters are: window length = $50$, $\sigma = 13$, $th_{high} = 1.2$, $th_{low} = 0.8$, $\delta = 0.7$.
+  The table shows the \gls{far} $\gamma$, average delay $d_{avg}$ and its spread, using the standard deviation.
+  Low values are better.
+  }
   \begin{tabulary}{\textwidth}{|l|c|c|c|c|c|c|c||c|}
     \cline{2-9}
     \multicolumn{1}{l|}{} & Run 1 & Run 2 & Run 3 & Run 4 & Run 5 & Run 6 & Run 7 & Average \\
