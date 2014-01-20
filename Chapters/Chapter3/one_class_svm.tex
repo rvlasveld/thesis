@@ -178,7 +178,7 @@ When this assumption does not hold, the example objects would be scatter through
 \subsection{\acrlong{nu-svm}}\label{subsec:nu-svm}
 The first of the \gls{oc-svm} methods we will discuss is often referred to as \gls{nu-svm} and introduced by Sch\"olkopf \etal \cite{scholkopf1999support}.
 Instead of estimating the density function of an distribution $P$, it focuses on an easier problem: the algorithm finds regions in the input where the ``probability density lives''.
-This results in a function such that most of the data is in the region where the function is nonzero.
+This results in a function such that most of the data is in the region where the function is non-zero.
 
 The constructed decision function $f(x)$ resembles the function discussed in \Cref{subsec:svm}.
 It returns the value $+1$ in a (possibly small) region capturing most of the data points, and $-1$ elsewhere.
@@ -224,9 +224,9 @@ In the formulation of \gls{nu-svm} the equivalent parameter is $\nu \in (0,1)$ (
 It characterizes the solution in two ways:
 \begin{enumerate}
   \item $\nu$ is an upper bound on the fraction of outliers, \ie training examples regarded as out-of-class.
-  \item $\nu$ is a lower bound on the fraction of \glspl{sv}, \ie training examples with a nonzero Lagrange multiplier $\alpha_i$.
+  \item $\nu$ is a lower bound on the fraction of \glspl{sv}, \ie training examples with a non-zero Lagrange multiplier $\alpha_i$.
 \end{enumerate}
-When $\nu$ approaches $0$, the penalty factor for nonzero Lagrange multipliers ($\frac{1}{\nu n}$) becomes infinite, and thus the solution resembles a \emph{hard margin} boundary.
+When $\nu$ approaches $0$, the penalty factor for non-zero Lagrange multipliers ($\frac{1}{\nu n}$) becomes infinite, and thus the solution resembles a \emph{hard margin} boundary.
 
 This method creates a \emph{hyperplane}, characterized by $w$ and $\rho$, that separates the data with maximal margin from the origin in the feature space $\mathcal{F}$.
 In the following section we will discuss an alternative method, which uses an circumscribing \emph{hypersphere} to characterize the training data.

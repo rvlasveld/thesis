@@ -26,7 +26,7 @@ Many approaches to detect change points monitor the logarithm of the likelihood 
 A change point is regarded to be the moment in time when the underlying probabilistic generation function changes.
 Some methods which rely on this are novelty detection, maximum-likelihood estimation and online learning of autoregressive models \cite{kawahara2009change}.
 A limitation of these methods is that they rely on pre-specified parametric models.
-Nonparametric models, for which the number and nature of the parameters are undetermined, for density estimation have been proposed, but it is said to be a hard problem \cite{hardle2004nonparametric, sugiyama2012density}.
+Non-parametric models, for which the number and nature of the parameters are undetermined, for density estimation have been proposed, but it is said to be a hard problem \cite{hardle2004nonparametric, sugiyama2012density}.
 A solution to this is to estimate the \emph{ratio} of probabilities instead of the probabilities themselves.
 One of the recent methods to achieve this is the \gls{kliep} by Sugiyama \etal \cite{sugiyama2008direct}.
 
@@ -40,4 +40,4 @@ The naive approach is to estimate it using estimated densities of the two interv
 Since this is known to be a hard problem and sensitive for errors, the solution would be to estimate the ratio directly.
 
 The method by Liu \etal \cite{liu2013change} estimates the ratio of probabilities directly, instead of estimating the densities explicitly.
-Other methods using ratio-estimation are the Unconstrained Least-Squares Importance Fitting (uLSIF) method \cite{kanamori2009least}, and an extension which possesses a superior nonparametric convergence property: Relative uLSIF (RuLSIF) \cite{yamada2013relative}.
+Other methods using ratio-estimation are the Unconstrained Least-Squares Importance Fitting (uLSIF) method \cite{kanamori2009least}, and an extension which possesses a superior non-parametric convergence property: Relative uLSIF (RuLSIF) \cite{yamada2013relative}.
