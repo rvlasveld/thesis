@@ -43,7 +43,7 @@ The mapping and projection of data points can be efficient (and implicit) perfor
 \begin{figure}
 \centering
   \includegraphics[width=0.8\textwidth]{./Figures/chapter3/svm_mapping_spaces.pdf}
-  \caption[Mapping spaces in \gls{svm}]{Schematic visualization of the non-linear mapping of \glspl{svm}.
+  \caption[Mapping spaces in Support Vector Machines]{Schematic visualization of the non-linear mapping of \glspl{svm}.
   The input vector $\vectorsym{x}$ from input space $\mathcal{I}$ is mapped by a non-linear function $\phi(\vectorsym{x})$ to a feature vector $\vectorsym{z}$ in the high dimensional feature space $\mathcal{F}$.
   The weights of $\vectorsym{w}$ create a linear separating hyperplane, which maps the high dimensional vector to the predicted outcome $\vectorsym{y}$.}
   \label{fig:svm_mapping_spaces}
@@ -67,7 +67,7 @@ Thus, the \gls{svm} searches for a maximal separating hyperplane.
 \begin{figure}
 \centering
   \includegraphics[width=0.5\textwidth]{./Figures/chapter3/svm_separating_plane_with_margin.png}
-  \caption[\gls{svm} and the separating hyperplane]{Illustration of the separating hyperplane of an \gls{svm}.
+  \caption[Support Vector Machines and the separating hyperplane]{Illustration of the separating hyperplane of an \gls{svm}.
   Here $w$ is the normal vector for the separating hyperplane and size of the margin is $\frac{2}{\lVert{w}\rVert}$.
   Image from Wikipedia.org}
   \label{fig:svm_hyperplane}
@@ -175,7 +175,7 @@ When this assumption does not hold, the example objects would be scatter through
 
 %--------------------------------------------
 
-\subsection{\acrlong{nu-svm}}\label{subsec:nu-svm}
+\subsection{\texorpdfstring{$\nu$-Support Vector Machine}{nu-Support Vector Machine}}\label{subsec:nu-svm}
 The first of the \gls{oc-svm} methods we will discuss is often referred to as \gls{nu-svm} and introduced by Sch\"olkopf \etal \cite{scholkopf1999support}.
 Instead of estimating the density function of an distribution $P$, it focuses on an easier problem: the algorithm finds regions in the input where the ``probability density lives''.
 This results in a function such that most of the data is in the region where the function is non-zero.
@@ -195,7 +195,7 @@ This hyperplane and the separation from the origin is illustrated in \Cref{fig:n
 \begin{figure}
   \centering
     \includegraphics[width=0.5\textwidth,keepaspectratio]{./Figures/chapter3/nu-svm.pdf}
-  \caption[\gls{nu-svm}]{Graphical representation of \gls{nu-svm}. The separating hyperplane $w \cdot \phi(x_i) + \rho = 0$ create a maximal margin, in the feature space, between the data points and the origin. Slack variables $\xi_i$ are used to create a soft margin.}
+  \caption[$\nu$-Support Vector Machine illustration]{Graphical representation of \gls{nu-svm}. The separating hyperplane $w \cdot \phi(x_i) + \rho = 0$ create a maximal margin, in the feature space, between the data points and the origin. Slack variables $\xi_i$ are used to create a soft margin.}
   \label{fig:nu-svm}
 \end{figure}
 
@@ -235,7 +235,7 @@ The region inside the hypersphere indicates the region $S$ where the probability
 
 %--------------------------------------------
 
-\subsection{\acrlong{svdd}}\label{subsec:oc-svm-svdd}
+\subsection{\texorpdfstring{\acrlong{svdd}}{SVDD}}\label{subsec:oc-svm-svdd}
 The method introduced by Tax and Duin \cite{tax1999support}, known as \acrlong{svdd}, follows a spherical instead of planar approach.
 The boundary, created in feature space $\mathcal{F}$, forms a hypersphere around the (high density region of the) data.
 The volume of this hypersphere is minimized to get the smallest enclosing boundary.
@@ -245,7 +245,7 @@ By allowing outliers using slacks variables, in the same manner as classical \gl
 \begin{figure}
   \centering
     \includegraphics[width=0.8\textwidth,keepaspectratio]{./Figures/chapter3/nu-vs-svdd.pdf}
-  \caption[Difference \gls{nu-svm} and \gls{svdd}]{Graphical representation of the difference between \gls{nu-svm} (left) and \gls{svdd} (right). Note that for the sake of simplicity the kernel functions are not applied.}
+  \caption[Relation between $\nu$-SVM and SVDD]{Graphical representation of the difference between \gls{nu-svm} (left) and \gls{svdd} (right). Note that for the sake of simplicity the kernel functions are not applied.}
   \label{fig:nu-vs-svdd}
 \end{figure}
 
@@ -311,7 +311,7 @@ When the Gaussian \gls{rbf} kernel is applied, and in case the data is preproces
 \begin{figure}
   \centering
     \includegraphics[width=0.5\textwidth,keepaspectratio]{./Figures/chapter3/svdd-boundary.pdf}
-  \caption[\gls{svdd} boundary]{The \gls{svdd} method trained on a banana-shaped data set with different sigma-values for the \gls{rbf} kernel. Solid circles are support vectors, the dashed line is the boundary. Image by Tax \cite{tax2001one}.}
+  \caption[SVDD boundary with sigma parameter]{The \gls{svdd} method trained on a banana-shaped data set with different sigma-values for the \gls{rbf} kernel. Solid circles are support vectors, the dashed line is the boundary. Image by Tax \cite{tax2001one}.}
   \label{fig:svdd-boundary}
 \end{figure}
 
@@ -335,7 +335,7 @@ The influence of the $\sigma$ parameter on the \gls{svdd} solution is illustrate
 \begin{figure}
   \centering
     \includegraphics[width=0.8\textwidth,keepaspectratio]{./Figures/chapter3/svdd-parameter-sigma.pdf}
-  \caption[\gls{svdd} boundary]{The \gls{svdd} method trained on a banana-shaped data set with different $\sigma$-values for the \gls{rbf} kernel. Solid circles are support vectors, the dashed line is the boundary.}
+  \caption[SVDD boundary with sigma parameter]{The \gls{svdd} method trained on a banana-shaped data set with different $\sigma$-values for the \gls{rbf} kernel. Solid circles are support vectors, the dashed line is the boundary.}
   \label{fig:svdd-boundary-sigma}
 \end{figure}
 

@@ -9,18 +9,18 @@
 
 This research has applied \gls{occ} methods to inertial sensor data, recorded during the performance of various human activities, in order to create a temporal segmentation of those recordings.
 The goal was to find the change points between activities, assuming that it will aid our understanding of the sensor values.
-To do so, we used the \gls{svdd} algorithm by Tax~\cite{tax1999support}, following the method of applying it to a sliding window of data, as done by Camci~\cite{camci2010change}.
+To do so, we used the \gls{svdd} algorithm by Tax~\cite{tax1999support} and applied it to a sliding window of data, as done by Camci~\cite{camci2010change}.
 From these methods we have created our own method \gls{ocs-hats} and made it publicly available \cite{vlasveld2014hats}, which is a slightly modified implementation of \gls{svcpd} by Camci~\cite{camci2010change} applied to \gls{har} data.
 % Instead of using both the information whether a new data point is an outlier and the radius of the hypersphere to indicate change, we only used the latter model properties.
 An increase of the radius of the constructed hypersphere, which encloses the data objects and increases with heterogeneous segments of data, is extracted and used for indication of change.
 
-In the following section we will further discuss the proposed method for temporal segmentation of inertial sensor signals from human activities.
+In \Cref{sec:proposed_method} we will further discuss the proposed method for temporal segmentation of inertial sensor signals from human activities.
 Our main findings and contributions are discussed in \Cref{sec:main_findings}.
 The limitations of our method and research is subject of \Cref{sec:limitations}.
 \Cref{sec:further_research} provides suggestions for future research.
 \Cref{sec:final_remarks} is the final section of this thesis.
 
-\section{What is done?}
+\section{Proposed method}\label{sec:proposed_method}
 The goal of this research was to find a temporal segmentation of recordings obtained from human activities.
 This was performed in the wider context of activity classification.
 Currently, many algorithms obtain an implicit segmentation as a side-effect of direct activity classification.
@@ -54,7 +54,7 @@ While temporal segmentation of time series data is not uncommon, the application
 For other contexts it has been applied, such as motion tracking \cite{barbivc2004segmenting,li2007segmentation}.
 In the context of human activities the segmentation obtained from inertial sensor signals is often an implicit result of classification.
 
-In this research we have shown that it is possible to explicitly obtain a temporal segmentation, expressed as change points, of activities performed by humans.
+We have shown that it is possible to explicitly obtain a temporal segmentation, expressed as change points, of activities performed by humans.
 This was performed in a real-world setting, showing the robustness of the method for noisy data.
 Since manual labeling (the annotation of change points on the time series data) of human activities is ambiguous we put emphasis on the qualitative inspection of the results.
 The proposed method gives fairly good results, although parameter tuning is a subject of further research.
@@ -64,19 +64,20 @@ The \textsc{Matlab} implementation is free to use for the public \cite{vlasveld2
 We have tested our proposed method with the same artificial data and did not find a deterioration in the results.
 Because of the noisy nature of the recorded activities and the ability to segment the time series, we have shown that \gls{ocs-hats} is a robust method for real-world applications.
 
-This research is, as far as we know, the first application of \gls{oc-svm} based methods to on-body worn inertial sensor signals, such as accelerometer data.
+The proposed method is, as far as we know, the first application of \gls{oc-svm} based methods to on-body worn inertial sensor signals, such as accelerometer data.
 Furthermore, it applies the algorithms, amongst others of Tax and Duin~\cite{tax1999support}, to real-world data.
 We have shown that the assumption of a change the performed activity results, due to a change in the data distribution, in an increase of the hypersphere's radius.
 This increase, and a similar decrease in the case of homogeneous activity distribution in the current window, can be used for an indication of change.
 
 The proposed \gls{ocs-hats} method processes the raw inertial sensor data, originating from sensors as accelerometers and magnetic field sensors.
-This in contrast with many other approaches that extract features in a pre-processing stage.
-The method processes the data in an online manner, which makes it suitable for applications that need direct segmentation of time series data.
+This contrasts with many other approaches that extract features in a pre-processing stage.
 
-Finally, due to encountered problems with commonly used data sets \cite{kwapisz2011activity,anguita2012human}, we have recorded our real-world data sets by ourselves.
-We have recorded all the activities with a smartphone worn in the right front pocket of the subjects.
-Furthermore, we have recorded the performing subjects from the third person point of view with a video camera.
-This allows for better interpretation of the results, since it provides a ground truth which can be consulted in case of ambiguity.
+Furthermore, because the it is an online method, it is suitable for applications that need direct segmentation of time series data.
+
+The commonly used data sets \cite{kwapisz2011activity,anguita2012human} are recorded in a non-continuous manner.
+The proposed method requires data streams of continuous activities.
+Annotating change points on this kind of time series can be ambigious, so we needed to have a ground truth.
+Because of these two shortcomings, we have recorded continuous real-world data sets, together with a third persion point of view video stream.
 All the recorded data is made publicly available as the \gls{almende-data} data set \cite{vlasveld2014acras}.
 Using our results as a benchmark, it is possible for others to use our data set and improve on it.
 
@@ -91,8 +92,8 @@ For a better and more robust analysis of the algorithm it can be applied to othe
 Although we have recorded and publicized our data, it would be nice if others also record continuous data sets with ground truth labeling, for fair comparison.
 However, due to the application domain and ambiguity, the results remain subjective.
 
-For the implementation of \gls{ocs-hats} we have created and used a \textsc{Matlab} application.
-Because of that, we can not make reliable claims on the speed and memory usage of the algorithm.
+We have impplemented \gls{ocs-hats} in \textsc{Matlab}.
+Because of that, we can not make reliable claims on the speed and memory usage of the algorithm on real-world devices such as smartphones.
 With the online nature and applications in mind and different targeted hardware platforms, this is something that could be of importance.
 
 \section{Future research}\label{sec:further_research}
