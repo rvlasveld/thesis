@@ -1,12 +1,12 @@
 % !TEX root = ../../main.tex
 \section{Results}\label{sec:real_world_results}
 In this section we will provide the results of our methods \gls{ocs-hats} applied to the real-world data sets and discuss the quality of the solution.
-As stated above, we will use the objective quality metrics as used in \Cref{sec:artificial_data_quality_metrics}.
+As stated above, we will use the quantitative quality metrics as used in \Cref{sec:artificial_data_quality_metrics}.
 That will be in the form of a tabular overview of the (manually set) best meta-parameters and results, expressed in \gls{far} $\gamma$ and average delay $d_{avg}$ (following \Cref{sec:artificial_data_results}).
 Furthermore, we have analyzed the results from an empirical point of view, since the problem of finding change points in human activities is ambiguous.
 For the sake of brevity we excluded those observations from this chapter; they can be found in \Cref{AppendixA}.
 
-\subsection{Objective metrics}
+\subsection{Quantitative metrics}
 The employed two-stage algorithm requires the setting of user defined parameters.
 In \Cref{tab:results_final_real_world} for each run the results are listed.
 The right-most column summarizes the overall performance by taking the average over all the runs.
@@ -46,9 +46,9 @@ A lower and more compact box plot is better.
   \label{fig:boxplot_final_real_world_runs}
 \end{figure}
 
-\subsection{Subjective observations and remarks}\label{subsec:subjective_results}
+\subsection{Qualitative observations and remarks}\label{subsec:subjective_results}
 It can be ambiguous where to place the (manually annotated) change points, in the case of real-world data.
-The objective quality measure can give a distorted view on the performance.
+The quantitative quality measure can give a distorted view on the performance.
 To overcome this, we will state observations and remarks found after close (visual) inspection of the annotated and discovered change points.
 In \Cref{fig:plots_all_runs_results} all the results are plotted.
 The black solid lines indicate our manually determined change points.

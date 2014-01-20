@@ -7,14 +7,14 @@ Both sections refer to Chapters~\ref{Chapter5} and~\ref{Chapter6} for more detai
 
 % ------
 \subsection{Artificial data}\label{subsec:data_gathering_artificial}
-In order to provide an objective comparison to other methods, we will use artificial data sets which are also used in the earlier work on which \gls{ocs-hats} is based.
+In order to provide an objective, quantitative, comparison to other methods, we will use artificial data sets which are also used in the earlier work on which \gls{ocs-hats} is based.
 These are the data sets used by Takeuchi and Yamanishi \cite{takeuchi2006unifying} and Camci \cite{camci2010change}.
 Both construct a collection of one-dimensional time series data according to a second order \gls{ar} model:
 \begin{equation}
   x_t = a_1 x_{t-1} + a_2 x_{t-2} + \epsilon_t.
 \end{equation}
 Over the different data series the mean and variance of the Gaussian random variable $\epsilon_t$ differs and changes at pre-determined change points.
-Using this data set an objective quality measure over the change detection methods can be obtained and compared.
+Using this data set an quantitative quality measure over the change detection methods can be obtained and compared.
 All the used data sets are listed and analyzed in \Cref{Chapter5}.
 
 % ------
@@ -25,7 +25,7 @@ Activities performed include sitting, standing, walking, running in a straight a
 \gls{ocs-hats} uses the signals from the accelerometer, magnetic field, and rotation sensors.
 These time series data are used to detect change points.
 A video recording from the performed activity is used to annotate the time series with real change points.
-The discovered change points are compared with these annotated change points to give a subjective quality measure.
+The discovered change points are compared with these annotated change points to give a qualitative quality measure.
 In \Cref{Chapter6} we give a detailed analysis of the performed activities and the recorded data sets.
 
 For the experiments we used a smartphone with inertial sensors as recording device.
